@@ -1,0 +1,80 @@
+/*
+** list.h for extlibc in /home/epitech/c/extlibc
+**
+** Made by claude ramseyer
+** Login   <ramsey_c@epitech.net>
+**
+** Started on  Mon Feb 27 10:00:00 2011 claude ramseyer
+** Last update Mon Feb 27 10:00:01 2011 claude ramseyer
+*/
+
+#ifndef __LIST_H__
+#define __LIST_H__
+
+#include <stdlib.h>
+
+typedef struct s_list_node {
+	void *data;
+	struct s_list_node *prev;
+	struct s_list_node *next;
+} t_list_node;
+
+typedef struct s_list {
+	unsigned int size;
+	t_list_node *head;
+	t_list_node *tail;
+} t_list;
+
+typedef struct s_list_iterator {
+	t_list *list;
+	t_list_node *node;
+	unsigned int pos;
+} t_list_iterator;
+
+typedef int (*fcmp)(void *, void *);
+typedef int (*fpred)(void *);
+typedef void (*feach)(void *);
+typedef void* (*ftrans)(void *);
+
+void _list_add_node(t_list *list, t_list_node *current, void *data);
+void _list_pop_node(t_list *list, t_list_node *node);
+
+t_list_node *list_create_node(void *data);
+t_list *list_create();
+t_list *list_init(t_list *list);
+
+void list_add_begin(t_list *list, void *data);
+void list_add_end(t_list *list, void *data);
+void list_add_at(t_list *list, unsigned int index, void *data);
+void list_add_to(t_list *list, fcmp cmp, void *data);
+
+void *list_get_begin(t_list *list);
+void *list_get_end(t_list *list);
+void *list_get_at(t_list *list, unsigned int index);
+void *list_get_to(t_list *list, fpred pred);
+
+void list_pop(t_list *list, void *data);
+void list_pop_begin(t_list *list);
+void list_pop_end(t_list *list);
+void list_pop_at(t_list *list, unsigned int index);
+void list_pop_to(t_list *list, fpred pred);
+
+int list_size(t_list *list);
+int list_empty(t_list *list);
+void list_clear(t_list *list);
+
+int list_count(t_list *list, fpred pred);
+void list_foreach(t_list *list, feach each);
+void list_transform(t_list *list, ftrans trans);
+t_list *list_filter(t_list *list, fpred pred);
+
+t_list_iterator *list_iterator_begin(t_list *list);
+t_list_iterator *list_iterator_end(t_list *list);
+int list_iterator_next(t_list_iterator *iter);
+int list_iterator_prev(t_list_iterator *iter);
+void list_iterator_add(t_list_iterator *iter, void *data);
+void *list_iterator_get(t_list_iterator *iter);
+void list_iterator_pop(t_list_iterator *iter);
+void list_iterator_destroy(t_list_iterator *iter);
+
+#endif

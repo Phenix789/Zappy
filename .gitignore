@@ -10,3 +10,11 @@
 *.lai
 *.la
 *.a
+
+# Temporary dir and file
+lib
+obj
+*~
+
+# Netbeans files
+nbproject
