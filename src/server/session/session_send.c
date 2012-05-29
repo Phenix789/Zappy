@@ -5,13 +5,16 @@
 ** Login   <kersuz_v@epitech.net>
 ** 
 ** Started on  Tue May 29 04:02:23 2012 vincent kersuzan
-** Last update Tue May 29 04:03:07 2012 vincent kersuzan
+** Last update Tue May 29 05:45:18 2012 vincent kersuzan
 */
 
 #include	"session.h"
 
 int	session_send(t_client *client, char *mask, ...)
 {
+  /*
+    envoie avec une fonction du client la string genere
+  */
   (void)client;
   (void)mask;
   return (0);
