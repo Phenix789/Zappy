@@ -5,12 +5,12 @@
 ** Login   <vezant_d@epitech.net>
 ** 
 ** Started on  Tue May 29 07:40:16 2012 damien vezant
-** Last update Tue May 29 08:16:53 2012 damien vezant
+** Last update Tue May 29 17:55:18 2012 damien vezant
 */
 
 #include	"game.h"
 
-void		player_forward(t_player *player)
+void		player_forward_cb(void *args, t_command *command)
 {
   if (player->orientation == NORTH)
     player->position.y -= 1;

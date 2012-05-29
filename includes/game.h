@@ -12,12 +12,15 @@
 # include	<string.h>
 # include	"map.h"
 
+# define	TEAM_NAME_SIZE	512
+
 /*
 ** start of globals
 */
 
 t_map		*team_map;
 t_map		*autoplay_team;
+t_ground	*ground;
 
 /*
 ** end of globals
@@ -71,24 +74,25 @@ typedef struct
   t_inventory	inventory;
   unsigned int	id;
   int		level;
+  int		life;
   int		current_delay;
 }		t_player;
 
 t_player	*player_new();
 void		player_delete(t_player *retiree);
 
-void		player_forward(t_player *player);
-void		player_right(t_player *player);
-void		player_left(t_player *player);
-/*char		*player_look(t_player *player);*/
-char		*player_inventory(t_player *player);
-void		player_take(t_item item, t_player *player);
-int		player_drop(t_item item, t_player *player);
-/*void		player_expulse(t_player *player);*/
-/*void		player_broadcast(char *message, t_player *player);*/
-void		player_incantation(t_player *player);
-void		player_fork(t_player *player);
-void		player_death(t_player *player);
+void		player_forward_cb(t_client *args, t_command *command);
+void		player_right_cb(t_client *args, t_command *command);
+void		player_left_cb(t_client *args, t_command *command);
+void		player_look_cb(t_client *args, t_command *command);
+void		player_inventory_cb(t_client *args, t_command *command);
+void		player_take_cb(t_client *args, t_command *command);
+void		player_drop_cb(t_client *args, t_command *command);
+void		player_expulse_cb(t_client *args, t_command *command);
+void		player_broadcast_cb(t_client *args, t_command *command);
+void		player_incantation_cb(t_client *args, t_command *command);
+void		player_fork_cb(t_client *args, t_command *command);
+void		player_death_cb(t_client *args, t_command *command);
 
 /*
 ** end of player module
@@ -100,8 +104,8 @@ void		player_death(t_player *player);
 
 typedef struct
 {
-  char		*name;
-  t_map		*player_map;
+  char		name[TEAM_NAME_SIZE + 1];
+  t_map		player_map;
   int		nb_players;
 }		t_team;
 
@@ -111,6 +115,29 @@ void		team_delete(char *name);
 
 /*
 ** end of team module
+*/
+
+/*
+** start of ground module
+*/
+
+typedef struct
+{
+  t_list	players;
+  t_pos		coord;
+  t_inventory	ressources;
+}		t_tile;
+
+typedef struct
+{
+  t_tile	*tiles;
+  t_pos		dimensions;
+}		t_ground;
+
+void		ground_init(int x, int y);
+
+/*
+** end of ground module
 */
 
 void		game_turn();
