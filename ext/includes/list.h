@@ -62,6 +62,7 @@ void list_pop_to(t_list *list, fpred pred);
 int list_size(t_list *list);
 int list_empty(t_list *list);
 void list_clear(t_list *list);
+void list_free(t_list *list);
 
 int list_count(t_list *list, fpred pred);
 void list_foreach(t_list *list, feach each);

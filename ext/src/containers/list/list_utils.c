@@ -25,3 +25,9 @@ void list_clear(t_list *list)
   while (list->size)
     list_pop_end(list);
 }
+
+void list_free(t_list *list)
+{
+  list_foreach(list, &free);
+  list_clear(list);
+}
