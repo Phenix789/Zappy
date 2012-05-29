@@ -5,7 +5,7 @@
 ## Login   <duval_q@epitech.net>
 ## 
 ## Started on  Tue Dec 20 09:40:56 2011 quentin duval
-## Last update Tue May 29 10:56:13 2012 quentin duval
+## Last update Tue May 29 12:06:57 2012 vincent kersuzan
 ##
 
 #########################
@@ -23,14 +23,29 @@ SUBMAKEPATH= ext
 ## where xxx is the binary name
 ##
 zappy_server_OBJ=	server/main.o \
-			server/net/network.o \
-			server/net/network_listen.o \
-			server/net/network_listen_to.o \
-			server/net/network_manage_socket.o \
-			server/net/network_socket.o \
-			server/net/network_socket_connect.o \
-			server/net/network_socket_rw.o \
-			server/net/network_private_access.o \
+			server/parser/parser.o \
+			server/parser/parser_get_int.o \
+			server/parser/parser_get_string.o \
+			server/parser/parser_is_match.o \
+			server/parser/parser_command_destroy.o \
+			server/parser/parser_count_arguments.o \
+			server/parser/parser_str_check_contain.o \
+			server/session/session_send.o \
+			server/session/session_register_in.o \
+			server/session/session_register_out.o \
+			server/session/session_treat_data.o \
+			server/session/session_create.o \
+			server/session/session_create.o \
+			server/session/session_destroy.o \
+			server/session/session_get_session.o
+			server/network/network.o \
+			server/network/network_listen.o \
+			server/network/network_listen_to.o \
+			server/network/network_manage_socket.o \
+			server/network/network_socket.o \
+			server/network/network_socket_connect.o \
+			server/network/network_socket_rw.o \
+			server/network/network_private_access.o \
 			server/clock/clock.o \
 			server/clock/clock_speed.o \
 			server/clock/clock_tick.o \
