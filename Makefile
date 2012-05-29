@@ -5,7 +5,7 @@
 ## Login   <duval_q@epitech.net>
 ## 
 ## Started on  Tue Dec 20 09:40:56 2011 quentin duval
-## Last update Tue May 29 11:05:30 2012 vincent kersuzan
+## Last update Tue May 29 12:06:57 2012 vincent kersuzan
 ##
 
 #########################
@@ -38,6 +38,18 @@ zappy_server_OBJ=	server/main.o \
 			server/session/session_create.o \
 			server/session/session_destroy.o \
 			server/session/session_get_session.o
+			server/network/network.o \
+			server/network/network_listen.o \
+			server/network/network_listen_to.o \
+			server/network/network_manage_socket.o \
+			server/network/network_socket.o \
+			server/network/network_socket_connect.o \
+			server/network/network_socket_rw.o \
+			server/network/network_private_access.o \
+			server/clock/clock.o \
+			server/clock/clock_speed.o \
+			server/clock/clock_tick.o \
+			server/clock/clock_turn.o
 
 zappy_gui_OBJ=		gui/main.o
 
@@ -98,6 +110,7 @@ LDFLAGS +=	-L $(LIB_DIR)
 
 ########build all project
 all:		$(SUBMAKEPATH)	$(NAME)
+
 
 $(SUBMAKEPATH):
 	@make -C $@

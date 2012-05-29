@@ -10,7 +10,7 @@
 
 DYNAMIC_LIB = libextlibc_dynamic.so
 STATIC_LIB = libextlibc_static.a
-HEADERS = list.h map.h errors.h
+HEADERS = list.h map.h errors.h logger.h
 
 CC = gcc
 RM = rm -rf
@@ -54,9 +54,15 @@ ERRORS_DIR = errors
 ERRORS_SRC = \
 	errors.c
 
+LOGGER_DIR = logger
+LOGGER_SRC = \
+	logger.c \
+	logger_msg.c
+
 ASRC += $(addprefix $(LIST_DIR)/, $(LIST_SRC))
 ASRC += $(addprefix $(MAP_DIR)/, $(MAP_SRC))
 ASRC += $(addprefix $(ERRORS_DIR)/, $(ERRORS_SRC))
+ASRC += $(addprefix $(LOGGER_DIR)/, $(LOGGER_SRC))
 
 SRC = $(addprefix $(SRC_DIR)/, $(ASRC))
 OBJ = $(addprefix $(OBJ_DIR)/, $(ASRC:.c=.o))

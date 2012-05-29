@@ -19,3 +19,9 @@ obj
 
 # Netbeans files
 nbproject
+/.deps/
+
+# Executable
+zappy_client
+zappy_gui
+zappy_server
