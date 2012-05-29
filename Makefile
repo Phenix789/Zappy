@@ -5,7 +5,7 @@
 ## Login   <duval_q@epitech.net>
 ## 
 ## Started on  Tue Dec 20 09:40:56 2011 quentin duval
-## Last update Tue May 29 03:18:58 2012 quentin duval
+## Last update Tue May 29 11:05:30 2012 vincent kersuzan
 ##
 
 #########################
@@ -22,7 +22,22 @@ SUBMAKEPATH= ext
 ## note : variable must be formed like xxx_OBJ
 ## where xxx is the binary name
 ##
-zappy_server_OBJ=	server/main.o
+zappy_server_OBJ=	server/main.o \
+			server/parser/parser.o \
+			server/parser/parser_get_int.o \
+			server/parser/parser_get_string.o \
+			server/parser/parser_is_match.o \
+			server/parser/parser_command_destroy.o \
+			server/parser/parser_count_arguments.o \
+			server/parser/parser_str_check_contain.o \
+			server/session/session_send.o \
+			server/session/session_register_in.o \
+			server/session/session_register_out.o \
+			server/session/session_treat_data.o \
+			server/session/session_create.o \
+			server/session/session_create.o \
+			server/session/session_destroy.o \
+			server/session/session_get_session.o
 
 zappy_gui_OBJ=		gui/main.o
 
@@ -33,7 +48,7 @@ zappy_client_OBJ=	client/main.o
 ## note: variabl must be formed like xxx_LIBS
 ## where xxx is the binary name
 ##
-zappy_server_LIBS=
+zappy_server_LIBS=	-lextlibc_static
 
 zappy_client_LIBS=
 
