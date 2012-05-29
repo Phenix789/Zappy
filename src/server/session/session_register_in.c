@@ -5,11 +5,12 @@
 ** Login   <kersuz_v@epitech.net>
 ** 
 ** Started on  Tue May 29 04:03:55 2012 vincent kersuzan
-** Last update Tue May 29 04:54:07 2012 vincent kersuzan
+** Last update Tue May 29 05:06:15 2012 vincent kersuzan
 */
 
 #include	<stdlib.h>
 #include	<string.h>
+#include	<stdio.h>
 
 #include	"session.h"
 
@@ -26,13 +27,13 @@ int			session_register_in(char *instruction,
       perror("malloc");
       return (-1);
     }
-  if (instruction_in->instruction = strdup(instruction) == NULL ||
-      instruction_in->mask = strdup(mask) == NULL)
+  if ((instruction_in->instruction = strdup(instruction)) == NULL ||
+      (instruction_in->mask = strdup(mask)) == NULL)
     {
       perror("strdup");
       return (-1);
     }
   instruction_in->cb = cb;
-  list_add_end(session->in, instruction_in);
+  list_add_end(&(session->in), instruction_in);
   return (0);
 }
