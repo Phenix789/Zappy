@@ -5,7 +5,7 @@
 ## Login   <duval_q@epitech.net>
 ## 
 ## Started on  Tue Dec 20 09:40:56 2011 quentin duval
-## Last update Tue May 29 02:17:55 2012 quentin duval
+## Last update Tue May 29 03:18:58 2012 quentin duval
 ##
 
 #########################
@@ -14,6 +14,8 @@
 
 ##binary name
 NAME =		zappy_server zappy_client zappy_gui
+
+SUBMAKEPATH= ext
 
 ##sources files
 ##
@@ -80,7 +82,10 @@ LDFLAGS +=	-L $(LIB_DIR)
 ########compilation flags end
 
 ########build all project
-all:             $(NAME)
+all:		$(SUBMAKEPATH)	$(NAME)
+
+$(SUBMAKEPATH):
+	@make -C $@
 
 ########multi-cible template
 define PROGRAM_template =
@@ -127,12 +132,14 @@ $(DEP_DIR)/%.d: $(SRC_DIR)/%.$(EXT)
 clean:		
 	@echo cleaning objects
 	@$(RM) $(ALL_OBJS)
+	@make clean -C $(SUBMAKEPATH)
 
 ########clean all build files
 fclean:		clean
 	@echo cleaning all
 	@$(RM) $(DEP)
 	@$(RM) $(NAME)
+	@make fclean -C $(SUBMAKEPATH)
 
 flush:	fclean
 	@echo clear folders
@@ -166,4 +173,4 @@ re:
 	@make -s all
 
 ########who is stupid?
-.PHONY:		all clean fclean re init erase
+.PHONY:		all clean fclean re init erase $(SUBMAKEPATH)
