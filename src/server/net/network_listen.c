@@ -5,10 +5,11 @@
 ** Login   <duval_q@epitech.net>
 ** 
 ** Started on  Tue May 29 04:54:49 2012 quentin duval
-** Last update Tue May 29 07:14:27 2012 quentin duval
+** Last update Tue May 29 08:29:35 2012 quentin duval
 */
 
 #include	"network.h"
+#include	"in_network.h"
 
 #ifdef	_WIN32
 
@@ -16,11 +17,13 @@
 # include	<sys/select.h>
 #endif
 
-void			setfd_list(t_list *list, fd_set *set)
+static void		setfd_list(t_list *list,
+				   fd_set *set,
+				   SOCKET (*extract)(void *))
 {
   t_list_iterator       *it;
   int			ret;
-  t_socket		*tmp;
+  void			*tmp;
   t_network		*network;
 
   network = get_network();
@@ -28,22 +31,44 @@ void			setfd_list(t_list *list, fd_set *set)
   while (ret != EXIT_FAILURE)
     {
       tmp = (t_socket*)list_iterator_get(it);
-      if (tmp->fd >= network->nfds)
-	network->nfds = tmp->fd;
-      FD_SET(tmp->fd, set);
+      if (extract(tmp) >= network->nfds)
+	network->nfds = extract(tmp);
+      FD_SET(extract(tmp), set);
       ret = list_iterator_next(it);
     }
   list_iterator_destroy(it);
 }
 
-void			setfd(fd_set *set)
+static void   		setfd(fd_set *set)
 {
   t_network		*network;
 
   network = get_network();
   FD_ZERO(set);
-  setfd_list(network->read, set);
-  setfd_list(network->listened, set);
+  setfd_list(network->read, set, &extract_from_socket);
+  setfd_list(network->listened, set, &extract_from_listener);
+}
+
+static void	find_speaker(fd_set *set,
+			     t_list *list,
+			     SOCKET (*extract)(void *),
+			     void (*execute)(void *))
+{
+  t_list_iterator       *it;
+  int                   ret;
+  void			*tmp;
+  t_network             *network;
+
+  network = get_network();
+  it = list_iterator_begin(list);
+  while (ret != EXIT_FAILURE)
+    {
+      tmp = list_iterator_get(it);
+      if (FD_ISSET(extract(tmp), set))
+	execute(tmp);
+      ret = list_iterator_next(it);
+    }
+  list_iterator_destroy(it);
 }
 
 int			network_listen()
@@ -56,8 +81,19 @@ int			network_listen()
   network = get_network();
   timeout.tv_sec = 0;
   timeout.tv_usec = network->usec_timeout;
-
+  setfd(&set);
   ret = (select(network->nfds, &set, NULL, NULL, &timeout));
+  if (ret > 0)
+    {
+      find_speaker(&set,
+		   network->read,
+		   &extract_from_socket,
+		   &execute_from_socket);
+      find_speaker(&set,
+                   network->read,
+                   &extract_from_listener,
+                   &execute_from_listener);
+    }
   network->nfds = 0;
   return (ret);
 }

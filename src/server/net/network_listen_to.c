@@ -5,7 +5,7 @@
 ** Login   <duval_q@epitech.net>
 ** 
 ** Started on  Tue May 29 04:30:59 2012 quentin duval
-** Last update Tue May 29 06:38:32 2012 quentin duval
+** Last update Tue May 29 08:06:44 2012 quentin duval
 */
 
 # include	"network.h"
@@ -28,6 +28,8 @@ bool		network_listen_to(t_socket *socket,
     return (false);
   listener->socket = socket;
   listener->create = create;
+  if (socket->fd > get_network()->nfds)
+    get_network()->nfds = socket->fd;
   list_add_begin(get_network()->listened, listener);
   return (true);
 }

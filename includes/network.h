@@ -1,43 +1,92 @@
-/**
- *
- *
- *
- */
+/*
+** network.h for zappy in /home/duval_q//Documents/projects/zappy/includes
+** 
+** Made by quentin duval
+** Login   <duval_q@epitech.net>
+** 
+** Started on  Tue May 29 04:02:57 2012 quentin duval
+** Last update Tue May 29 07:39:09 2012 quentin duval
+*/
 
-#ifndef __NETWORK_H__
-#define	__NETWORK_H__
+#ifndef		NETWORK_H_
+#define		NETWORK_H_
+
+# ifdef		_WIN32
+typedef int	socklen_t;
+# elif defined (linux)
+
+#  include	<unistd.h>
+#  include	<sys/types.h>
+#  include	<sys/socket.h>
+#  include	<netinet/in.h>
+#  include	<arpa/inet.h>
+#  include	<stdbool.h>
+typedef int			SOCKET;
+typedef struct sockaddr_in	SOCKADDR_IN;
+typedef struct sockaddr		SOCKADDR;
+static const int INVALID_SOCKET = -1;
+static const int SOCKET_ERROR	= -1;
+#  define closesocket(s)		close(s);
+# endif	/*	_WIN32	*/
+
+# include	"list.h"
+
+# define MAX_CO	255
+
+typedef struct s_socket t_socket;
+
+typedef void    (*t_nt_read_cb)(t_socket *, void *);
+typedef void    (*t_nt_create_cb)(t_socket *);
+
+struct s_socket
+{
+  SOCKET        fd;
+  SOCKADDR_IN   addr;
+  socklen_t     length;
+  t_nt_read_cb  read;
+  void          *param;
+};
+
+typedef struct		s_listener
+{
+  t_socket		*socket;
+  t_nt_create_cb	create;
+} t_listener;
 
 typedef struct s_network
 {
-
+  t_list	*listened;
+  t_list	*read;
+  int		nfds;
+  int		usec_timeout;
 } t_network;
 
-typedef struct s_socket
-{
+bool		network_create();
+bool		network_destroy();
 
-} t_socket;
+t_network	*get_network();
 
-typedef void (*ntcallback)(t_socket *, void *);
+bool		network_add_socket(t_socket *socket,
+				   t_nt_read_cb callback,
+				   void *param);
+bool		network_del_socket(t_socket *socket);
+int		network_listen();
+bool		network_listen_to(t_socket *socket,
+				  int port,
+				  t_nt_create_cb new_entry);
 
-bool network_create();
-bool network_destroy();
+void		network_set_sock_error_cb();
 
-bool network_add_socket(t_socket *socket, ntcallback callback, void * param);
-bool network_del_socket(t_socket *socket);
-int network_listen();
-bool network_listen_to(t_socket *socket, int port);
+t_socket	*socket_create();
+t_socket	*socket_init(t_socket *socket);
+void		free_socket(t_socket *socket);
+void		socket_close(t_socket *socket);
 
-void network_set_*();
+bool		socket_connect(t_socket *socket, char *ip, int port);
 
-t_socket * socket_create();
-t_socket * socket_init(t_socket * socket);
-void socket_close(t_socket * socket);
+int		socket_read(t_socket *soket, void *buffer, int size);
+int		socket_write(t_socket *socket, void *buffer, int size);
 
-bool socket_connect(t_socket *socket);
+void		socket_set_pleindetrucs();
 
-int socket_read(t_socket *soket, void *buffer, int size);
-int socket_write(t_socket *socket, void *buffer, int size);
-
-void socket_set_*();
-
-#endif
+#endif	/*	NETWORK_H_	*/
