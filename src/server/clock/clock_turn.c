@@ -5,7 +5,7 @@
 ** Login   <duval_q@epitech.net>
 ** 
 ** Started on  Tue May 29 10:22:12 2012 quentin duval
-** Last update Tue May 29 17:08:06 2012 quentin duval
+** Last update Tue May 29 11:50:03 2012 quentin duval
 */
 
 #include	"clock.h"
@@ -37,8 +37,7 @@ void		clock_turn_played()
   t_clock	*clock;
   unsigned long	time;
 
-  clock = get_clock();
-  clock->nb_cycle++;
+  clock->nb_turn++;
   clock = get_clock();
   time = get_tick() - clock->timer_begin;
   clock->timer_begin = get_tick() - (time % clock->cycle);
