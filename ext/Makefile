@@ -18,7 +18,7 @@ CP = cp
 
 INCLUDE_DIR = includes
 SRC_DIR	= src
-OBJ_DIR	= obj
+OBJ_DIR	= ../obj
 LIB_DIR	= .
 INSTALL_DIR = ../lib
 HEADER_DIR = ../includes
@@ -61,7 +61,7 @@ ASRC += $(addprefix $(ERRORS_DIR)/, $(ERRORS_SRC))
 SRC = $(addprefix $(SRC_DIR)/, $(ASRC))
 OBJ = $(addprefix $(OBJ_DIR)/, $(ASRC:.c=.o))
 
-all: $(DYNAMIC_LIB) $(STATIC_LIB) install fclean
+all: $(DYNAMIC_LIB) $(STATIC_LIB) install
 
 $(DYNAMIC_LIB):	$(OBJ)
 	$(CC) -o $(DYNAMIC_LIB) $(OBJ) $(LDFLAGS)
