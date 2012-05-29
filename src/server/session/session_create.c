@@ -5,12 +5,21 @@
 ** Login   <kersuz_v@epitech.net>
 ** 
 ** Started on  Tue May 29 04:07:25 2012 vincent kersuzan
-** Last update Tue May 29 04:07:59 2012 vincent kersuzan
+** Last update Tue May 29 04:33:52 2012 vincent kersuzan
 */
+
+#include	<stdlib.h>
+#include	<stdio.h>
 
 #include	"session.h"
 
-int	session_create(void)
+int		session_create(void)
 {
+  t_session	*session;
+
+  session = session_get_session();
+  list_init(&(session->in));
+  list_init(&(session->out));
   return (0);
 }
+
