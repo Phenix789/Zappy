@@ -5,7 +5,7 @@
 ## Login   <duval_q@epitech.net>
 ## 
 ## Started on  Tue Dec 20 09:40:56 2011 quentin duval
-## Last update Tue May 29 03:18:58 2012 quentin duval
+## Last update Tue May 29 10:56:13 2012 quentin duval
 ##
 
 #########################
@@ -22,7 +22,19 @@ SUBMAKEPATH= ext
 ## note : variable must be formed like xxx_OBJ
 ## where xxx is the binary name
 ##
-zappy_server_OBJ=	server/main.o
+zappy_server_OBJ=	server/main.o \
+			server/net/network.o \
+			server/net/network_listen.o \
+			server/net/network_listen_to.o \
+			server/net/network_manage_socket.o \
+			server/net/network_socket.o \
+			server/net/network_socket_connect.o \
+			server/net/network_socket_rw.o \
+			server/net/network_private_access.o \
+			server/clock/clock.o \
+			server/clock/clock_speed.o \
+			server/clock/clock_tick.o \
+			server/clock/clock_turn.o
 
 zappy_gui_OBJ=		gui/main.o
 
@@ -33,7 +45,7 @@ zappy_client_OBJ=	client/main.o
 ## note: variabl must be formed like xxx_LIBS
 ## where xxx is the binary name
 ##
-zappy_server_LIBS=
+zappy_server_LIBS=	-lextlibc_static
 
 zappy_client_LIBS=
 
@@ -83,6 +95,7 @@ LDFLAGS +=	-L $(LIB_DIR)
 
 ########build all project
 all:		$(SUBMAKEPATH)	$(NAME)
+
 
 $(SUBMAKEPATH):
 	@make -C $@
