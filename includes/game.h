@@ -41,10 +41,6 @@ typedef enum
     IT_FOOD
   }		t_item;
 
-/*
-** start of player module
-*/
-
 typedef struct
 {
   int		nb_players;
@@ -142,14 +138,6 @@ void		player_connect_nbr(t_client *client, bool error);
 
 void		player_death_cb(t_client *client, t_command *command);
 
-/*
-** end of player module
-*/
-
-/*
-** start of team module
-*/
-
 typedef struct
 {
   char		name[TEAM_NAME_SIZE + 1];
@@ -160,14 +148,6 @@ typedef struct
 t_team		*team_new(char *name);
 t_team		*team_get(char *name);
 void		team_delete(char *name);
-
-/*
-** end of team module
-*/
-
-/*
-** start of ground module
-*/
 
 typedef t_pos t_dim;
 
@@ -186,29 +166,9 @@ typedef struct
 
 void		world_init(int x, int y);
 
-/*
-** end of ground module
-*/
-
-/*
-** start of globals
-*/
-
-t_leveler	levelers[] = {{0, 0, 0, 0, 0, 0, 0},
-			      {1, 1, 0, 0, 0, 0, 0},
-			      {2, 1, 1, 1, 0, 0, 0},
-			      {2, 2, 0, 1, 0, 2, 0},
-			      {4, 1, 1, 2, 0, 1, 0},
-			      {4, 1, 2, 1, 3, 0, 0},
-			      {6, 1, 2, 3, 0, 1, 0},
-			      {6, 2, 2, 2, 2, 2, 1}};
-t_map		*team_map;
-t_map		*autoplay_team;
-t_world		game_world;
-
-/*
-** end of globals
-*/
+extern t_map	*team_map;
+extern t_map	autoplay_team;
+extern t_world	game_world;
 
 void		game_turn();
 void		game_init();
@@ -218,7 +178,5 @@ void		game_player_remove(char *team, t_player *player);
 
 void		game_autoplay_add_player(t_player *player);
 t_player	*game_autoplay_get_player(t_player *player);
-
-/*void		protocol_cb_*(t_client *client, t_command *command);*/
 
 #endif

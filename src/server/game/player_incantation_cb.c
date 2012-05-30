@@ -5,15 +5,23 @@
 ** Login   <vezant_d@epitech.net>
 ** 
 ** Started on  Wed May 30 17:55:25 2012 damien vezant
-** Last update Wed May 30 19:57:35 2012 damien vezant
+** Last update Wed May 30 22:04:39 2012 damien vezant
 */
 
-#include	"game.h"
+#include		"game.h"
 
-extern t_world	game_world;
-extern t_elever	*levelers;
+extern t_world		game_world;
 
-static t_player	*my_player;
+static t_player		*my_player;
+static t_leveler	levelers[] = {{0, 0, 0, 0, 0, 0, 0},
+				      {1, 1, 0, 0, 0, 0, 0},
+				      {2, 1, 1, 1, 0, 0, 0},
+				      {2, 2, 0, 1, 0, 2, 0},
+				      {4, 1, 1, 2, 0, 1, 0},
+				      {4, 1, 2, 1, 3, 0, 0},
+				      {6, 1, 2, 3, 0, 1, 0},
+				      {6, 2, 2, 2, 2, 2, 1}};
+
 
 static int	_check_level(t_player *dude)
 {

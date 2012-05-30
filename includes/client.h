@@ -5,7 +5,7 @@
 ** Login   <duval_q@epitech.net>
 ** 
 ** Started on  Wed May 30 21:54:04 2012 quentin duval
-** Last update Wed May 30 21:54:37 2012 quentin duval
+** Last update Wed May 30 22:19:24 2012 damien vezant
 */
 
 #ifndef __CLIENT_H__
@@ -19,6 +19,8 @@ typedef struct s_client t_client;
 #include	"network.h"
 
 #define CLIENT_MAX_ACTIONS 10
+
+typedef struct s_command t_command;
 
 typedef struct s_client_manager
 {
