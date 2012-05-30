@@ -8,12 +8,15 @@
 #define	__KERNEL_H__
 
 #include <stdbool.h>
+#include <sys/time.h>
 #include "list.h"
 
 #define KN_SV_NETWORK 0x01
 #define KN_SV_SESSION 0x2
 #define KN_SV_GAME 0x4
 #define KN_SV_INIT (KN_SV_NETWORK | KN_SV_SESSION | KN_SV_GAME)
+
+#define KN_TIMEOUT_NOEVENT NULL
 
 typedef struct s_kernel
 {
@@ -27,7 +30,7 @@ typedef void (*kn_wakeup_cb)(void *);
 
 typedef struct s_kernel_callback
 {
-	unsigned long turn;
+	struct timeval time;
 	kn_wakeup_cb callback;
 	void* param;
 } t_kernel_callback;
@@ -45,11 +48,11 @@ int kernel_add_team(char *team);
 int kernel_is_init();
 
 int kernel_run();
+void kernel_stop();
+struct timeval *kernel_next_event();
 
-bool kernel_register_wakeup(int nb_turn, kn_wakeup_cb callback, void *param);
+bool kernel_register_wakeup(int time, kn_wakeup_cb callback, void *param);
 int kernel_wakeup_insert(t_kernel_callback *first, t_kernel_callback *second);
 int kernel_wakeup();
-
-bool kernel_stop();
 
 #endif

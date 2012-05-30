@@ -11,18 +11,22 @@ int kernel_run()
   g_kernel->run = true;
   while (g_kernel->run)
     {
-      while (clock_turn_played())
-	{
-	  game_turn();
-	  kernel_wakeup();
-	  network_listen();
-	  clock_turn_played();
-	}
-      clock_wait();
+      if (network_listen(clock_get_timeout(kernel_next_event())))
+	kernel_wakeup();
     }
 }
 
 void kernel_stop()
 {
   g_kernel->run = false;
+}
+
+struct timeval *kernel_next_event()
+{
+  t_kernel_callback *wakeup;
+
+  wakeup = list_get_begin(&g_kernel->callbacks);
+  if (wakeup)
+    return &wakeup->time;
+  return KN_TIMEOUT_NOEVENT;
 }
