@@ -5,7 +5,7 @@
 ## Login   <duval_q@epitech.net>
 ## 
 ## Started on  Tue Dec 20 09:40:56 2011 quentin duval
-## Last update Tue May 29 12:06:57 2012 vincent kersuzan
+## Last update Wed May 30 16:27:57 2012 quentin duval
 ##
 
 #########################
@@ -37,7 +37,7 @@ zappy_server_OBJ=	server/main.o \
 			server/session/session_create.o \
 			server/session/session_create.o \
 			server/session/session_destroy.o \
-			server/session/session_get_session.o
+			server/session/session_get_session.o \
 			server/network/network.o \
 			server/network/network_listen.o \
 			server/network/network_listen_to.o \
