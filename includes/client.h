@@ -1,17 +1,22 @@
-/**
- *
- *
- *
- */
+/*
+** client.h for zappy in /home/duval_q//Documents/projects/zappy/includes
+** 
+** Made by quentin duval
+** Login   <duval_q@epitech.net>
+** 
+** Started on  Wed May 30 21:54:04 2012 quentin duval
+** Last update Wed May 30 21:54:37 2012 quentin duval
+*/
 
 #ifndef __CLIENT_H__
 #define	__CLIENT_H__
 
-<<<<<<< Updated upstream
 typedef struct s_client t_client;
 
 #include <stdbool.h>
 #include "list.h"
+#include	"game.h"
+#include	"network.h"
 
 #define CLIENT_MAX_ACTIONS 10
 
@@ -42,16 +47,6 @@ t_client *client_manager_retrieve_from_player(t_player *player);
 t_client *client_create(t_socket *socket);
 t_client *client_init(t_client *client, t_socket *socket);
 void client_destroy(t_client *client);
-=======
-typedef struct	s_client
-{
-  t_player	*player;
-}		t_client;
-/*
-t_client *client_create();
-t_client *client_init(t_client *client);
-void client_destroy();
->>>>>>> Stashed changes
 
 t_socket *client_get_socket(t_client *client);
 t_player *client_get_player(t_client *client);
