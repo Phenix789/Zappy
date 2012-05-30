@@ -5,7 +5,7 @@
 ## Login   <duval_q@epitech.net>
 ## 
 ## Started on  Tue Dec 20 09:40:56 2011 quentin duval
-## Last update Wed May 30 16:27:57 2012 quentin duval
+## Last update Wed May 30 19:46:37 2012 quentin duval
 ##
 
 #########################
@@ -47,9 +47,13 @@ zappy_server_OBJ=	server/main.o \
 			server/network/network_socket_rw.o \
 			server/network/network_private_access.o \
 			server/clock/clock.o \
-			server/clock/clock_speed.o \
-			server/clock/clock_tick.o \
-			server/clock/clock_turn.o
+			server/clock/clock_compare.o \
+			server/clock/clock_get_time.o \
+			server/clock/clock_get_timeout.o \
+			server/clock/clock_move_date.o\
+			server/clock/clock_set_time_to_current.o \
+			server/clock/clock_timeval_unit_convert.o \
+			server/clock/timeval_utils.o
 
 zappy_gui_OBJ=		gui/main.o
 

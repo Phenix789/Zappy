@@ -5,7 +5,7 @@
 ** Login   <duval_q@epitech.net>
 ** 
 ** Started on  Tue May 29 07:30:05 2012 quentin duval
-** Last update Tue May 29 07:38:08 2012 quentin duval
+** Last update Wed May 30 18:06:34 2012 quentin duval
 */
 
 #include	"network.h"

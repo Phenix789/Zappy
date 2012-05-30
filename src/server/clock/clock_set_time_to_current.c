@@ -5,7 +5,7 @@
 ** Login   <duval_q@epitech.net>
 ** 
 ** Started on  Tue May 29 10:18:09 2012 quentin duval
-** Last update Tue May 29 10:36:55 2012 quentin duval
+** Last update Wed May 30 19:38:35 2012 quentin duval
 */
 
 #include	<sys/time.h>
@@ -13,13 +13,7 @@
 
 #include	"clock.h"
 
-unsigned long		get_tick()
+void	clock_set_time_to_current(struct timeval *time)
 {
-  unsigned long int     tick;
-  struct timeval	timeval_tick;
-
-  gettimeofday(&timeval_tick, NULL);
-  tick = timeval_tick.tv_sec * 1000;
-  tick += timeval_tick.tv_usec / 1000;
-  return (tick);
+  gettimeofday(time , NULL);
 }
