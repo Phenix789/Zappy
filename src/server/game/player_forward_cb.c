@@ -5,7 +5,7 @@
 ** Login   <vezant_d@epitech.net>
 ** 
 ** Started on  Tue May 29 07:40:16 2012 damien vezant
-** Last update Wed May 30 13:57:29 2012 damien vezant
+** Last update Wed May 30 19:56:11 2012 damien vezant
 */
 
 #include	"game.h"
@@ -13,29 +13,40 @@
 extern t_tile	*world;
 extern t_world	game_world;
 
-void		player_forward_cb(t_client *client, t_command *command)
+static void	_forward_player(int x, int y, t_player *player)
 {
-  (void)command;
-  list_pop(world[client->player->position.x * client->player->position.y].players, client->player);
-  if (client->player->orientation == NORTH)
+  player->position.x += x;
+  player->position.y += y;
+  if (player->position.x > game_world.dimensions.x)
+    player->position.x = 0;
+  else if (player->position.x < 0)
+    player->position.x = game_world.dimensions.x;
+  else if (player->position.y > game_world.dimensions.y)
+    player->position.y = 0;
+  else if (player->position.y < 0)
+    player->position.y = game_world.dimensions.y;
+}
+
+void		player_forward_end_cb(t_client *client, int error)
+{
+  if (!error)
     {
-      if ((client->player->position.y -= 1) < 0)
-	client->player->position.y = game_world.dimensions.y;
+      list_pop(world[client->player->position.x * client->player->position.y].players, client->player);
+      if (client->player.orientation == NORTH)
+	_forward_player(0, -1, client->player);
+      else if (client->player.orientation == SOUTH)
+	_forward_player(0, 1, client->player);
+      else if (client->player.orientation == EAST)
+	_forward_player(1, 0, client->player);
+      else if (client->player.orientation == WEST)
+	_forward_player(-1, 0, client->player);
+      session_send(client, REP_OK);
     }
-  else if (client->player->orientation == EAST)
-    {
-      if ((client->player->position.x += 1) > game_world.dimensions.x)
-	client->player->position.x = 1;
-    }
-  else if (client->player->orientation == WEST)
-    {
-      if ((client->player->position.x -= 1) < 0)
-	client->player->position.x = game_world.dimensions.x;
-    }
-  else if (client->player->orientation == SOUTH)
-    {
-      if ((client->player->position.y += 1) > game_world.dimensions.y)
-	client->player->position.y = 0;
-    }
-  list_add_end(world[client->player->position.x * client->player->position.y].players, client->player);
+  else
+    session_send(client, REP_KO);
+}
+
+void		player_forward_start_cb(t_client *client, t_command *command)
+{
+  register_wakeup(DELAY_STANDARD, player_forward_end_cb, client);
 }

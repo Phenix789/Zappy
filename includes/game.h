@@ -7,92 +7,139 @@
 #ifndef		__GAME_H__
 # define	__GAME_H__
 
+# include	<stdbool.h>
 # include	<stdlib.h>
 # include	<stdio.h>
 # include	<string.h>
 # include	"map.h"
+# include	"session.h"
+# include	"kernel.h"
 
-# define	TEAM_NAME_SIZE	512
+# define	REP_OK		"ok"
+# define	REP_KO		"ko"
+# define	REP_VOIR	"%s"
+# define	REP_INVENTORY	"linemate %d, deraumere %d, sibur %d, mendiane %d, phiras %d, thystame %d, nourriture %d"
+# define	REP_INCANTATION	"elevation en cours niveau actuel : %d"
+# define	REP_CONNECT_NBR	"%d"
+# define	REP_DEATH	"-"
 
-/*
-** start of globals
-*/
+# define	TEAM_NAME_SIZE	32
 
-t_map		*team_map;
-t_map		*autoplay_team;
-t_ground	*ground;
-
-/*
-** end of globals
-*/
+# define	DELAY_STANDARD	7
+# define	DELAY_INCANT	300
+# define	DELAY_FORK	42
 
 typedef enum
   {
-    LINEMATE,
-    DERAUMERE,
-    SIBUR,
-    MENDIANE,
-    PHIRAS,
-    THYSTAME,
-    FOOD
+    IT_LINEMATE,
+    IT_DERAUMERE,
+    IT_SIBUR,
+    IT_MENDIANE,
+    IT_PHIRAS,
+    IT_THYSTAME,
+    IT_FOOD
   }		t_item;
 
 /*
 ** start of player module
 */
 
+typedef struct
+{
+  int		nb_players;
+  int		linemate;
+  int		deraumere;
+  int		sibur;
+  int		mendiane;
+  int		phiras;
+  int		thystame;
+}		t_leveler;
+
 typedef enum
   {
-    NORTH,
-    EAST,
-    SOUTH,
-    WEST
-  }	t_orientation;
+    OR_NORTH,
+    OR_EAST,
+    OR_SOUTH,
+    OR_WEST
+  }		t_orientation;
 
 typedef struct
 {
-  int	food;
-  int	linemate;
-  int	deraumere;
-  int	sibur;
-  int	mendiane;
-  int	phiras;
-  int	thystame;
-}	t_inventory;
+  int		linemate;
+  int		deraumere;
+  int		sibur;
+  int		mendiane;
+  int		phiras;
+  int		thystame;
+  int		food;
+}		t_inventory;
 
 typedef struct
 {
-  int	x;
-  int	y;
-}	t_pos;
+  int		x;
+  int		y;
+}		t_pos;
 
 typedef struct
 {
-  char		*team;
+  char		team[TEAM_NAME_SIZE + 1];
   t_orientation	orientation;
   t_pos		position;
   t_inventory	inventory;
   unsigned int	id;
   int		level;
   int		life;
-  int		current_delay;
 }		t_player;
 
 t_player	*player_new();
 void		player_delete(t_player *retiree);
 
-void		player_forward_cb(t_client *args, t_command *command);
-void		player_right_cb(t_client *args, t_command *command);
-void		player_left_cb(t_client *args, t_command *command);
-void		player_look_cb(t_client *args, t_command *command);
-void		player_inventory_cb(t_client *args, t_command *command);
-void		player_take_cb(t_client *args, t_command *command);
-void		player_drop_cb(t_client *args, t_command *command);
-void		player_expulse_cb(t_client *args, t_command *command);
-void		player_broadcast_cb(t_client *args, t_command *command);
-void		player_incantation_cb(t_client *args, t_command *command);
-void		player_fork_cb(t_client *args, t_command *command);
-void		player_death_cb(t_client *args, t_command *command);
+/* done */
+void		player_forward_start_cb(t_client *client, t_command *command);
+void		player_forward_end_cb(t_client *client, bool error);
+
+/* done */
+void		player_right_start_cb(t_client *client, t_command *command);
+void		player_right_end_cb(t_client *client, bool error);
+
+/* done */
+void		player_left_start_cb(t_client *client, t_command *command);
+void		player_left_end_cb(t_client *client, bool error);
+
+/* TODO !!! */
+void		player_look_start_cb(t_client *client, t_command *command);
+void		player_look_end_cb(t_client *client, bool error);
+
+/* done */
+void		player_inventory_start_cb(t_client *client, t_command *command);
+void		player_inventory_end_cb(t_client *client, bool error);
+
+/* done */
+void		player_take_start_cb(t_client *client, t_command *command);
+void		player_take_end_cb(t_client *client, bool error);
+
+/* done */
+void		player_drop_start_cb(t_client *client, t_command *command);
+void		player_drop_end_cb(t_client *client, bool error);
+
+/* done */
+void		player_expulse_start_cb(t_client *client, t_command *command);
+void		player_expulse_end_cb(t_client *client, bool error);
+
+/* TODO !!! */
+void		player_broadcast_start_cb(t_client *client, t_command *command);
+void		player_broadcast_end_cb(t_client *client, bool error);
+
+/* done */
+void		player_incantation_start_cb(t_client *client, t_command *command);
+void		player_incantation_end_cb(t_client *client, bool error);
+
+void		player_fork_start_cb(t_client *client, t_command *command);
+void		player_fork_end_cb(t_client *client, bool error);
+
+void		player_connect_nbr(t_client *client, bool error);
+
+void		player_death_cb(t_client *client, t_command *command);
 
 /*
 ** end of player module
@@ -121,6 +168,8 @@ void		team_delete(char *name);
 ** start of ground module
 */
 
+typedef t_pos t_dim;
+
 typedef struct
 {
   t_list	players;
@@ -130,14 +179,34 @@ typedef struct
 
 typedef struct
 {
-  t_tile	*tiles;
-  t_pos		dimensions;
-}		t_ground;
+  t_tile	*world;
+  t_dim		dimensions;
+}		t_world;
 
-void		ground_init(int x, int y);
+void		world_init(int x, int y);
 
 /*
 ** end of ground module
+*/
+
+/*
+** start of globals
+*/
+
+t_leveler	levelers[] = {{0, 0, 0, 0, 0, 0, 0},
+			      {1, 1, 0, 0, 0, 0, 0},
+			      {2, 1, 1, 1, 0, 0, 0},
+			      {2, 2, 0, 1, 0, 2, 0},
+			      {4, 1, 1, 2, 0, 1, 0},
+			      {4, 1, 2, 1, 3, 0, 0},
+			      {6, 1, 2, 3, 0, 1, 0},
+			      {6, 2, 2, 2, 2, 2, 1}};
+t_map		*team_map;
+t_map		*autoplay_team;
+t_world		game_world;
+
+/*
+** end of globals
 */
 
 void		game_turn();

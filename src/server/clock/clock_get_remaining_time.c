@@ -5,7 +5,7 @@
 ** Login   <duval_q@epitech.net>
 ** 
 ** Started on  Wed May 30 20:15:11 2012 quentin duval
-** Last update Wed May 30 20:20:15 2012 quentin duval
+** Last update Wed May 30 21:44:13 2012 damien vezant
 */
 
 #include	"clock.h"
@@ -14,12 +14,12 @@
 unsigned int    clock_get_remaining_time(struct timeval *time,
 					 unsigned int action_dur)
 {
-  t_clock               *clock;
+  /*t_clock               *clock;*/
   struct timeval        end_date;
   struct timeval        current_date;
   struct timeval	remaining;
 
-  clock = get_clock();
+  /*clock = get_clock();*/
   if (!time)
     return (0);
   timeval_copy(&end_date, time);

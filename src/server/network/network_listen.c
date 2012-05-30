@@ -5,7 +5,7 @@
 ** Login   <duval_q@epitech.net>
 ** 
 ** Started on  Tue May 29 04:54:49 2012 quentin duval
-** Last update Wed May 30 19:47:48 2012 quentin duval
+** Last update Wed May 30 21:43:45 2012 damien vezant
 */
 
 #include	"network.h"
@@ -57,9 +57,9 @@ static void	find_speaker(fd_set *set,
   t_list_iterator       *it;
   int                   ret;
   void			*tmp;
-  t_network             *network;
+  /*t_network             *network;*/
 
-  network = get_network();
+  /*network = get_network();*/
   it = list_iterator_begin(list);
   while (ret != EXIT_FAILURE)
     {

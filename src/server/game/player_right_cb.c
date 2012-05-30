@@ -5,16 +5,27 @@
 ** Login   <vezant_d@epitech.net>
 ** 
 ** Started on  Tue May 29 07:44:17 2012 damien vezant
-** Last update Wed May 30 14:03:07 2012 damien vezant
+** Last update Wed May 30 20:04:59 2012 damien vezant
 */
 
 #include	"game.h"
 
-void		player_right_cb(t_client *client, t_command *command)
+void		player_right_end_cb(t_client *client, int error)
+{
+  if (!error)
+    {
+      if (client->player->orientation != WEST)
+	++client->player->orientation;
+      else
+	client->player->orientation = NORTH;
+      session_send(client, REP_OK);
+    }
+  else
+    session_send(client, REP_KO);
+}
+
+void		player_right_start_cb(t_client *client, t_command *command)
 {
   (void)command;
-  if (client->player->orientation != WEST)
-    ++client->player->orientation;
-  else
-    client->player->orientation = NORTH;
+  register_wakeup(DELAY_STANDARD, player_right_end_cb, client);
 }
