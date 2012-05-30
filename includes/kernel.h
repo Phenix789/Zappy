@@ -7,6 +7,7 @@
 #ifndef __KERNEL_H__
 #define	__KERNEL_H__
 
+#include <stdbool.h>
 #include "list.h"
 
 #define KN_SV_NETWORK 0x01
@@ -16,6 +17,7 @@
 
 typedef struct s_kernel
 {
+	bool run;
 	int init;
 	t_list callbacks;
 	t_socket listener;
@@ -44,6 +46,10 @@ int kernel_is_init();
 
 int kernel_run();
 
-bool register_wakeup(int nb_turn, kn_wakeup_cb callback, void *param);
+bool kernel_register_wakeup(int nb_turn, kn_wakeup_cb callback, void *param);
+int kernel_wakeup_insert(t_kernel_callback *first, t_kernel_callback *second);
+int kernel_wakeup();
+
+bool kernel_stop();
 
 #endif
