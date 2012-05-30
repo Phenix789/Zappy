@@ -5,12 +5,13 @@
 ** Login   <kersuz_v@epitech.net>
 ** 
 ** Started on  Tue May 29 02:26:28 2012 vincent kersuzan
-** Last update Tue May 29 11:07:14 2012 vincent kersuzan
+** Last update Wed May 30 21:16:43 2012 vincent kersuzan
 */
 
 #ifndef		PARSER_H_
 # define	PARSER_H_
 
+# include	<stdio.h>
 # include	<stdbool.h>
 
 # include	"list.h"
@@ -21,6 +22,7 @@
 # define	PARSER_INT_VALUE	2
 # define	PARSER_BUFFER_SIZE	512
 # define	PARSER_NUM		"0123456789"
+# define	DEFAULT_SPLIT_CHARS	" "
 
 /*
 static const char	*parser_string_indicator = "%s";
@@ -43,6 +45,19 @@ typedef struct	s_command
   char		*original_str;
 }		t_command;
 
+typedef int (*t_f_arg_set)(int, char *, t_argument *);
+
+typedef struct	s_known_type
+{
+  char		*type_str;
+  int		type_int;
+  t_f_arg_set	argument_setter;
+}		t_known_type;
+
+/*
+** interface utilisation
+*/
+
 t_command	*parser_parse(char *data, char *mask);
 int		parser_get_int(t_command *command, unsigned int index);
 char		*parser_get_string(t_command *command, unsigned int index);
@@ -51,4 +66,34 @@ bool		parser_is_match(char *data, char *mask);
 int		parser_count_arguments(char *mask);
 bool		parser_str_check_contain(char *str, char *authorized);
 
+/*
+** fonctions a vocation interne
+*/
+
+//map
+t_known_type    *parser_find_known_type_from_str(char *type_int);
+t_known_type    *parser_find_known_type_from_int(int type_int);
+char		*parser_get_type_str(int type_int);
+int		parser_get_type_int(char *type_str);
+int		parser_find_elem_type(char *mask);
+t_f_arg_set	parser_get_argument_setter_int(int type_int);
+t_f_arg_set	parser_get_argument_setter_str(char *str);
+
+int		parser_argument_setter(int type, char *buffer,
+                                       t_argument *argument);
+int		parser_argument_setter_int(int type, char *buffer,
+                                   t_argument *argument);
+int		parser_argument_setter_str(int type, char *buffer,
+                                   t_argument *argument);
+int		parser_save_data(t_command *command, char *buffer,
+				 int type);
+
+char            *parser_find_key(char *mask); //retourne le split_str
+char		*parser_extract_elem(char *data, bool last_arg,
+				     char *split_str);
+t_command	*parser_command_create(char *original_str);
+/*
+char		*parser_extract_elem(char *data, int *data_index, 
+				     bool last_arg, char *split_chars); 
+*/
 #endif	/*	PARSER_H_	*/
