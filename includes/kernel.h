@@ -7,16 +7,19 @@
 #ifndef __KERNEL_H__
 #define	__KERNEL_H__
 
+#include <unistd.h>
 #include <stdbool.h>
 #include <sys/time.h>
 #include "list.h"
+#include "clock.h"
+#include "session.h"
+#include "network.h"
+#include "client.h"
 
 #define KN_SV_NETWORK 0x01
 #define KN_SV_SESSION 0x2
 #define KN_SV_GAME 0x4
 #define KN_SV_INIT (KN_SV_NETWORK | KN_SV_SESSION | KN_SV_GAME)
-
-#define KN_TIMEOUT_NOEVENT NULL
 
 typedef struct s_kernel
 {
@@ -26,11 +29,12 @@ typedef struct s_kernel
 	t_socket listener;
 } t_kernel;
 
-typedef void (*kn_wakeup_cb)(void *);
+typedef void (*kn_wakeup_cb)(t_client *, bool error);
 
 typedef struct s_kernel_callback
 {
-	struct timeval time;
+	struct timeval begin;
+	unsigned int time;
 	kn_wakeup_cb callback;
 	void* param;
 } t_kernel_callback;
@@ -49,9 +53,8 @@ int kernel_is_init();
 
 int kernel_run();
 void kernel_stop();
-struct timeval *kernel_next_event();
 
-bool kernel_register_wakeup(int time, kn_wakeup_cb callback, void *param);
+bool kernel_register_wakeup(unsigned int time, kn_wakeup_cb callback, void *param);
 int kernel_wakeup_insert(t_kernel_callback *first, t_kernel_callback *second);
 int kernel_wakeup();
 

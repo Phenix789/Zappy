@@ -1,5 +1,4 @@
 
-#include <unistd.h>
 #include "kernel.h"
 
 t_kernel *g_kernel = NULL;
