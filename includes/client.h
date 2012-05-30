@@ -7,12 +7,9 @@
 #ifndef __CLIENT_H__
 #define	__CLIENT_H__
 
+typedef struct s_client t_client;
+
 #include <stdbool.h>
-
-typedef struct s_socket t_socket;
-typedef struct s_player t_player;
-typedef struct s_command t_command;
-
 #include "list.h"
 
 #define CLIENT_MAX_ACTIONS 10
@@ -22,13 +19,13 @@ typedef struct s_client_manager
 	t_list clients;
 } t_client_manager;
 
-typedef struct s_client
+struct s_client
 {
 	t_socket *socket;
 	t_player *player;
 	t_list actions;
 	bool busy;
-} t_client;
+};
 
 /*client manager*/
 void client_manager_init();

@@ -7,9 +7,6 @@
 #ifndef __TOOLS_H__
 #define	__TOOLS_H__
 
-#include "list.h"
-#include "protocol.h"
-
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 #define IMPAIR(a) ((a) & 1)
