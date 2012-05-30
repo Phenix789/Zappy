@@ -5,7 +5,7 @@
 ** Login   <duval_q@epitech.net>
 ** 
 ** Started on  Tue May 29 10:04:53 2012 quentin duval
-** Last update Wed May 30 19:44:24 2012 quentin duval
+** Last update Wed May 30 20:19:28 2012 quentin duval
 */
 
 #ifndef __CLOCK_H__
@@ -34,5 +34,7 @@ void		clock_set_time_to_current(struct timeval *time);
 struct timeval	*clock_get_time();
 void		time_unit_to_timeval(struct timeval *time, unsigned int unit);
 unsigned int	timeval_to_time_unit(struct timeval *time);
+unsigned int	clock_get_remaining_time(struct timeval *time,
+					 unsigned int action_dur);
 
 #endif
