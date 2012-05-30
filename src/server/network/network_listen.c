@@ -5,7 +5,7 @@
 ** Login   <duval_q@epitech.net>
 ** 
 ** Started on  Tue May 29 04:54:49 2012 quentin duval
-** Last update Tue May 29 08:29:35 2012 quentin duval
+** Last update Wed May 30 19:47:48 2012 quentin duval
 */
 
 #include	"network.h"
@@ -71,18 +71,15 @@ static void	find_speaker(fd_set *set,
   list_iterator_destroy(it);
 }
 
-int			network_listen()
+int			network_listen(struct timeval *timeout)
 {
   fd_set		set;
-  struct timeval	timeout;
   t_network		*network;
   int			ret;
 
   network = get_network();
-  timeout.tv_sec = 0;
-  timeout.tv_usec = network->usec_timeout;
   setfd(&set);
-  ret = (select(network->nfds, &set, NULL, NULL, &timeout));
+  ret = (select(network->nfds, &set, NULL, NULL, timeout));
   if (ret > 0)
     {
       find_speaker(&set,

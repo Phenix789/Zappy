@@ -89,6 +89,7 @@ fclean:	clean
 	$(RM) $(OBJ_DIR)
 
 install:
+	@mkdir -p $(INSTALL_DIR)
 	$(CP) $(LIB_DIR)/$(DYNAMIC_LIB) $(INSTALL_DIR)/$(DYNAMIC_LIB)
 	$(CP) $(LIB_DIR)/$(STATIC_LIB) $(INSTALL_DIR)/$(STATIC_LIB)
 	$(CP) $(addprefix $(INCLUDE_DIR)/, $(HEADERS)) $(HEADER_DIR)/

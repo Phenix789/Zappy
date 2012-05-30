@@ -5,7 +5,7 @@
 ## Login   <duval_q@epitech.net>
 ## 
 ## Started on  Tue Dec 20 09:40:56 2011 quentin duval
-## Last update Tue May 29 12:06:57 2012 vincent kersuzan
+## Last update Wed May 30 20:19:18 2012 quentin duval
 ##
 
 #########################
@@ -37,7 +37,7 @@ zappy_server_OBJ=	server/main.o \
 			server/session/session_create.o \
 			server/session/session_create.o \
 			server/session/session_destroy.o \
-			server/session/session_get_session.o
+			server/session/session_get_session.o \
 			server/network/network.o \
 			server/network/network_listen.o \
 			server/network/network_listen_to.o \
@@ -47,9 +47,14 @@ zappy_server_OBJ=	server/main.o \
 			server/network/network_socket_rw.o \
 			server/network/network_private_access.o \
 			server/clock/clock.o \
-			server/clock/clock_speed.o \
-			server/clock/clock_tick.o \
-			server/clock/clock_turn.o
+			server/clock/clock_compare.o \
+			server/clock/clock_get_time.o \
+			server/clock/clock_get_timeout.o \
+			server/clock/clock_move_date.o\
+			server/clock/clock_set_time_to_current.o \
+			server/clock/clock_timeval_unit_convert.o \
+			server/clock/timeval_utils.o \
+			server/clock/clock_get_remaining_time.o
 
 zappy_gui_OBJ=		gui/main.o
 

@@ -1,38 +1,31 @@
 #ifndef __GUI_HPP_
 #define __GUI_HPP_
 
-#include <list>
-#include "map.hpp"
+#include <boost/thread.hpp>
+#include "data_thread.hpp"
 
-namespace gui
+struct thread_gui;
+
+namespace game
 {
-  class t_map
-  {
-  public:
-    map(unsigned int x, unsigned int y);
-    ~map();
-
-  public:
-    void	draw_map();
-    void	set_case_state(size_t x, size_t y, ress type);
-
-  private:
-    void	draw_background();
-    void	draw_gui();
-    void	draw_info();
-    void	draw_case();
-    void	draw_player();
-
-  private:
-    unsigned int		size_x;
-    unsigned int		size_y;
-    std::list<t_case>		_case;
-    std::list<t_players>	_players;
-
-  private:
-    map();
-  };
+  void		run_gui(data_thread &data);
+  thread_gui	*launch_gui(data_thread &data);
 };
+
+struct thread_gui
+{
+  thread_gui(data_thread &data) : _data(data) { }
+  void	operator()()
+  {
+    game::run_gui(this->_data);
+  }
+public:
+  data_thread	&_data;
+
+private:
+  thread_gui();
+};
+
 
 
 #endif /* __GUI_HPP_ */

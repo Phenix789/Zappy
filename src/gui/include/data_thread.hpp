@@ -4,26 +4,24 @@
 #include <list>
 #include <string>
 #include <boost/thread.hpp>
+#include "map.hpp"
 
-namespace gui
+class	data_thread
 {
-  class	data_thread
-  {
-  public:
-    data_thread();
-    ~data_thread();
+public:
+  data_thread();
+  ~data_thread();
 
-  public:
-    void	lock();
-    void	unlock();
-    bool	trylock();
+public:
+  void	lock();
+  void	unlock();
+  bool	trylock();
 
-  private:
-    boost::mutex		_mutex;
-    t_map			_map;
-    std::list<std::string>	_msg;
-    bool			_state_connection;
-  };
+public:
+  boost::mutex			_mutex;
+  game::map			_map;
+  std::list<std::string>	_msg;
+  bool				_state_connection;
 };
 
 #endif /* __DATA_THREAD_HPP_ */
