@@ -5,7 +5,7 @@
 ## Login   <frizac_b@epitech.net>
 ##
 ## Started on  Mon Feb  6 14:18:30 2012 Alexandre Frizac
-## Last update Wed May 30 20:40:01 2012 Alexandre Frizac
+## Last update Wed May 30 16:16:32 2012 Alexandre Frizac
 ##
 
 NAME		= a.out
@@ -17,15 +17,11 @@ SRC_DIR		= src
 CC		= g++
 CXXFLAGS	+= -I include
 CXXFLAGS	+= -Wall -Wextra -Wshadow -g
-LDFLAGS		+= -l boost_system -l boost_thread
+LDFLAGS		+= -l boost_system
 
 SRC	= $(addprefix src/, \
 		data_thread.cpp\
 		main.cpp \
-		map.cpp \
-		player.cpp \
-		gui.cpp\
-		network.cpp \
 		)
 OBJ	= $(addprefix $(OBJ_DIR)/, $(SRC:$(SRC_DIR)/%.cpp=%.o))
 

@@ -17,9 +17,9 @@ public:
   void	unlock();
   bool	trylock();
 
-public:
+private:
   boost::mutex			_mutex;
-  game::map			_map;
+  map::map			_map;
   std::list<std::string>	_msg;
   bool				_state_connection;
 };

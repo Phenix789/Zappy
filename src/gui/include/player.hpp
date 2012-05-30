@@ -3,31 +3,25 @@
 
 #include <list>
 
-namespace game
-{
-  enum	state
-    {
-      DEAD,
-      ALIVE,
-    };
-
-  class player
+enum	state
   {
-  public:
-    player(int x, int y, int number);
-    ~player();
-
-  public:
-    int			number;
-    int			pos_x;
-    int			pos_y;
-    // TODO LATER
-    //  int			level;
-    //  std::list<ress>	inventory;
-
-  private:
-    player();
+    DEAD,
+    ALIVE,
   };
-}
+
+class player
+{
+public:
+  player();
+  ~player();
+
+private:
+  int			number;
+  int			pos_x;
+  int			pos_y;
+  // TODO LATER
+  //  int			level;
+  //  std::list<ress>	inventory;
+};
 
 #endif /* __PLAYER_HPP_ */

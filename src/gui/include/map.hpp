@@ -1,11 +1,10 @@
 #ifndef __MAP_HPP_
 #define __MAP_HPP_
 
-#include <vector>
 #include <list>
 #include "player.hpp"
 
-namespace game
+namespace map
 {
   enum	ress
     {
@@ -18,26 +17,36 @@ namespace game
       FOOD = 64
     };
 
+  typedef struct	s_case
+  {
+    ress		obj;
+  }			t_case;
+
   class map
   {
   public:
-    map();
+    map(unsigned int x, unsigned int y);
     ~map();
 
   public:
-    void	add_ress(unsigned int x, unsigned int y, ress type);
-    void	rm_ress(unsigned int x, unsigned int y, ress type);
-    void	add_player(unsigned int x, unsigned int y, int num_pl);
-    void	rm_player(int num_pl);
-    void	setDim(unsigned int x, unsigned int y);
-    const std::vector<int>		getTile() const;
-    const std::list<game::player>	getPlayer() const;
+    void        draw_map();
+    void        set_case_state(size_t x, size_t y, ress type);
+
+  private:
+    void        draw_background();
+    void        draw_gui();
+    void        draw_info();
+    void        draw_case();
+    void        draw_player();
 
   private:
     unsigned int                size_x;
     unsigned int                size_y;
-    std::vector<int>		_case;
-    std::list<game::player>	_players;
+    std::list<t_case>           _case;
+    std::list<player>		  _players;
+
+  private:
+    map();
   };
 }
 
