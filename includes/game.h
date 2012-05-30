@@ -14,6 +14,7 @@
 # include	"map.h"
 # include	"session.h"
 # include	"kernel.h"
+# include	"parser.h"
 
 # define	REP_OK		"ok"
 # define	REP_KO		"ko"

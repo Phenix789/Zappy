@@ -29,11 +29,7 @@ typedef struct s_kernel
 	t_socket listener;
 } t_kernel;
 
-<<<<<<< Updated upstream
-typedef void (*kn_wakeup_cb)(t_client *, bool error);
-=======
 typedef void (*kn_wakeup_cb)(t_client *, bool);
->>>>>>> Stashed changes
 
 typedef struct s_kernel_callback
 {
@@ -58,12 +54,8 @@ int kernel_is_init();
 int kernel_run();
 void kernel_stop();
 
-<<<<<<< Updated upstream
 bool kernel_register_wakeup(unsigned int time, kn_wakeup_cb callback, void *param);
 int kernel_wakeup_insert(t_kernel_callback *first, t_kernel_callback *second);
 int kernel_wakeup();
-=======
-bool register_wakeup(int nb_turn, kn_wakeup_cb callback, t_client *client);
->>>>>>> Stashed changes
 
 #endif
