@@ -9,10 +9,12 @@
 */
 
 #include	"kernel.h"
+#include "logger.h"
 
-int	main()
+int	main(int argc, char **argv)
 {
-  kernel_init();
+  logger_init(LG_ALLLOG, "zappy.log", LG_VERBOSE);
+  kernel_init_with_argv(argc, argv);
   kernel_run();
   kernel_destroy();
   return (0);

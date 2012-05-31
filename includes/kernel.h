@@ -47,6 +47,7 @@ typedef struct s_kernel_callback
 t_kernel_callback *_kernel_create_callback(int turn, kn_wakeup_cb callback, void *param);
 
 void		kernel_init();
+bool		kernel_init_with_argv(int argc, char **argv);
 void		kernel_destroy();
 
 bool kernel_session_init(t_socket *listener, int port);
@@ -63,5 +64,8 @@ void kernel_stop();
 bool kernel_register_wakeup(unsigned int time, kn_wakeup_cb callback, void *param);
 int kernel_wakeup_insert(t_kernel_callback *first, t_kernel_callback *second);
 int kernel_wakeup();
+
+char *kernel_getopt(int argc, char **argv, char *flag, char *defaut);
+int kernel_getopt_int(int argc, char **argv, char *flag, int defaut);
 
 #endif

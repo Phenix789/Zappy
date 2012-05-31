@@ -22,6 +22,7 @@
 #define LG_DEBUG 0x8
 
 #define LG_LOG (LG_MESSAGE | LG_WARNING | LG_ERROR)
+#define LG_ALLLOG (LG_LOG | LG_DEBUG)
 #define LG_NOLOG 0
 
 #define LG_VERBOSE 1

@@ -9,36 +9,38 @@
 */
 
 #include	"kernel.h"
+#include "logger.h"
 
 t_kernel	*g_kernel = NULL;
 
 void		kernel_init()
 {
+  if (g_kernel != NULL)
+    return;
   if ((g_kernel = malloc(sizeof(t_kernel))) == NULL)
     return;
   list_init(&g_kernel->callbacks);
   socket_init(&g_kernel->listener);
   g_kernel->init = 0;
   g_kernel->run = false;
-/*
+  logger_message("Kernel init");
+}
 
-  if (!kernel_network_init(KN_DEFAULT_PORT))
-    printf("network init error\n");
-  else
-    printf("network initialisation complete\n");
-  if (!kernel_session_init())
-    printf("session manager init error\n");
-  else
-    printf("session initialisation complete\n");
-  if (!clock_create())
-    printf("clock init error\n");
-  else
-    printf("clock initialisation complete\n");
-  game_init();
-*/
+bool		kernel_init_with_argv(int argc, char **argv)
+{
+  kernel_init();
+  if (kernel_session_init(&g_kernel->listener, kernel_getopt_int(argc, argv, "-p", 3945)) ||
+	  kernel_client_init() ||
+	  kernel_game_init(kernel_getopt_int(argc, argv, "-x", 10), kernel_getopt_int(argc, argv, "-y", 10), kernel_getopt_int(argc, argv, "-c", 10)) ||
+	  kernel_client_init(kernel_getopt_int(argc, argv, "-t", 100)))
+    {
+      return true;
+    }
+  return false;
 }
 
 void		kernel_destroy()
 {
   list_free(&g_kernel->callbacks);
+  logger_message("Kernel destroy");
 }
