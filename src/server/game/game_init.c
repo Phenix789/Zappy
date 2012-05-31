@@ -12,8 +12,6 @@
 
 static void	_generate_tile(t_tile *tile)
 {
-  unsigned int	res;
-
   tile->ressources.food += rand() % 4;
   tile->ressources.linemate += rand() % 1;
   if ((rand() % 100) < 25)
