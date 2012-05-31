@@ -76,7 +76,17 @@ zappy_server_OBJ=	server/main.o \
 			server/game/player_right_cb.o \
 			server/game/player_take_cb.o \
 			server/game/team_delete.o \
-			server/game/team_new.o
+			server/game/team_new.o \
+			server/kernel/kernel.o \
+			server/kernel/kernel_init.o \
+			server/kernel/kernel_run.o \
+			server/kernel/kernel_wakeup.o \
+			server/client/client.o \
+			server/client/client_action.o \
+			server/client/client_get_set.o \
+			server/client/client_manager.o \
+			server/client/client_manager_handle.o \
+			server/client/client_manager_retrieve.o
 
 zappy_gui_OBJ=		gui/main.o
 

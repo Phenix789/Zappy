@@ -18,11 +18,11 @@ t_client *client_init(t_client *client, t_socket *socket)
   client->player = NULL;
   list_init(&client->actions);
   _client_manager_add(client);
-  network_add_socket(socket, &session_treat_data, client);
+  network_add_socket(socket, (t_nt_read_cb) &session_treat_data, client);
   return client;
 }
 
-t_client *client_destroy(t_client *client)
+void client_destroy(t_client *client)
 {
   list_free(&client->actions);
   _client_manager_remove(client);

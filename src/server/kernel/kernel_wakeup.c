@@ -44,9 +44,9 @@ int kernel_wakeup()
     {
       begin = wakeup->begin;
       clock_move_date(&begin, wakeup->time);
-      if (clock_compare(time, begin) <= 0)
+      if (clock_compare(time, &begin) <= 0)
 	{
-	  (*wakeup->callback)(wakeup->param);
+	  (*wakeup->callback)(wakeup->param, KN_ERROR_OK);
 	  free(wakeup);
 	  list_pop_begin(&g_kernel->callbacks);
 	  count++;

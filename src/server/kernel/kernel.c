@@ -5,7 +5,7 @@ t_kernel *g_kernel = NULL;
 
 t_kernel * kernel_create()
 {
-  if ((g_kernel = malloc(t_kernel)) == NULL)
+  if ((g_kernel = malloc(sizeof(t_kernel))) == NULL)
     return NULL;
   return kernel_init(g_kernel);
 }

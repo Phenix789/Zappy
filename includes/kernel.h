@@ -21,6 +21,8 @@
 #define KN_SV_GAME 0x4
 #define KN_SV_INIT (KN_SV_NETWORK | KN_SV_SESSION | KN_SV_GAME)
 
+#define KN_ERROR_OK 0
+
 typedef struct s_kernel
 {
 	bool run;
@@ -45,13 +47,13 @@ t_kernel * kernel_create();
 t_kernel * kernel_init(t_kernel *kernel);
 void kernel_destroy(t_kernel *);
 
-int kernel_network_init(int port);
-int kernel_session_init();
-int kernel_game_init(int x, int y, int time, int nb_per_team);
-int kernel_add_team(char *team);
-int kernel_is_init();
+bool kernel_network_init(int port);
+bool kernel_session_init();
+bool kernel_game_init(int x, int y, int time, int nb_per_team);
+bool kernel_add_team(char *team);
+bool kernel_is_init();
 
-int kernel_run();
+void kernel_run();
 void kernel_stop();
 
 bool kernel_register_wakeup(unsigned int time, kn_wakeup_cb callback, void *param);

@@ -1,11 +1,11 @@
 
 #include "client.h"
 
-extern t_client_manager *g_client_manager = NULL;
+t_client_manager *g_client_manager = NULL;
 
 void client_manager_init()
 {
-  if (!(g_client_manager = malloc(t_client_manager)))
+  if (!(g_client_manager = malloc(sizeof(t_client_manager))))
     return;
   list_init(&g_client_manager->clients);
 }

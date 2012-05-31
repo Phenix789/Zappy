@@ -18,11 +18,11 @@ static int _client_manager_cmp_socket(t_client *client)
 t_client *client_manager_retrieve_from_player(t_player* player)
 {
   cmp = player;
-  return list_get_to(&g_client_manager->clients, &_client_manager_cmp_player);
+  return list_get_to(&g_client_manager->clients, (fpred) &_client_manager_cmp_player);
 }
 
 t_client *client_manager_retrieve_from_socket(t_socket* socket)
 {
   cmp = socket;
-  return list_get_to(&g_client_manager->clients, &_client_manager_cmp_socket);
+  return list_get_to(&g_client_manager->clients, (fpred) &_client_manager_cmp_socket);
 }
