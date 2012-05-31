@@ -5,7 +5,7 @@
 ** Login   <duval_q@epitech.net>
 ** 
 ** Started on  Tue May 29 04:54:49 2012 quentin duval
-** Last update Thu May 31 22:03:47 2012 quentin duval
+** Last update Thu May 31 22:22:49 2012 quentin duval
 */
 
 #include	<stdio.h>
@@ -36,7 +36,7 @@ static void		setfd_list(t_list *list,
     {
       tmp = list_iterator_get(it);
       if (extract(tmp) >= network->nfds)
-	network->nfds = extract(tmp);
+	network->nfds = extract(tmp) + 1;
       FD_SET(extract(tmp), set);
       ret = list_iterator_next(it);
     }
@@ -63,6 +63,7 @@ static void	find_speaker(fd_set *set,
   void			*tmp;
 
   it = list_iterator_begin(list);
+  ret = (list_empty(list))?EXIT_FAILURE:EXIT_SUCCESS;
   while (ret != EXIT_FAILURE)
     {
       tmp = list_iterator_get(it);
