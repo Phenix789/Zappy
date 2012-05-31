@@ -5,13 +5,14 @@
 ** Login   <duval_q@epitech.net>
 ** 
 ** Started on  Tue May 29 04:54:49 2012 quentin duval
-** Last update Thu May 31 17:04:00 2012 quentin duval
+** Last update Thu May 31 22:03:47 2012 quentin duval
 */
 
 #include	<stdio.h>
 
 #include	"network.h"
 #include	"in_network.h"
+#include	"logger.h"
 
 #ifdef	_WIN32
 
@@ -81,11 +82,11 @@ int			network_listen(struct timeval *timeout)
   network = get_network();
   setfd(&set);
   if (timeout)
-    printf("waiting for next action in %lu:%lu\n",
+    logger_debug("[NETWORK] waiting for next action in %lu:%lu\n",
 	   timeout->tv_sec,
 	   timeout->tv_usec);
   else
-    printf("waiting for extern action. nothing planified\n");
+    logger_debug("[NETWORK] waiting for extern action. nothing planified\n");
   if ((ret = (select(network->nfds, &set, NULL, NULL, timeout))) > 0)
     {
       find_speaker(&set,

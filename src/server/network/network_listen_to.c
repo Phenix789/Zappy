@@ -5,12 +5,13 @@
 ** Login   <duval_q@epitech.net>
 ** 
 ** Started on  Tue May 29 04:30:59 2012 quentin duval
-** Last update Thu May 31 17:25:24 2012 quentin duval
+** Last update Thu May 31 22:05:07 2012 quentin duval
 */
 
 #include	<stdio.h>
 
-# include	"network.h"
+#include	"network.h"
+#include	"logger.h"
 
 bool		network_listen_to(t_socket *socket,
 				  int port,
@@ -35,6 +36,6 @@ bool		network_listen_to(t_socket *socket,
   if (socket->fd > get_network()->nfds)
     get_network()->nfds = socket->fd;
   list_add_begin(get_network()->listened, listener);
-  printf("server is now listening at new interface at port : %d\n", port);
+  logger_message("[NETWORK] server listening at port : %d", port);
   return (true);
 }
