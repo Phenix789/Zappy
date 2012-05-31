@@ -10,7 +10,6 @@
 
 #include	"game.h"
 
-extern t_tile	*world;
 extern t_world	game_world;
 
 static void	_forward_player(int x, int y, t_player *player)
@@ -31,7 +30,7 @@ void		player_forward_end_cb(t_client *client, int error)
 {
   if (!error)
     {
-      list_pop(&world[client->player->position.x * client->player->position.y].players, client->player);
+      list_pop(&game_world.world[client->player->position.x * client->player->position.y].players, client->player);
       if (client->player->orientation == OR_NORTH)
 	_forward_player(0, -1, client->player);
       else if (client->player->orientation == OR_SOUTH)
