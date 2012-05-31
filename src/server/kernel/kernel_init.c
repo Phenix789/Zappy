@@ -21,7 +21,7 @@ bool kernel_session_init(t_socket *listener, int port)
 {
   if (!kernel_is_init(KN_SV_SESSION))
     {
-      logger_message("Kernel session init on port : %i", port);
+      logger_message("[KERNEL] Kernel session init on port : %i", port);
       if (session_init(listener, port))
 	{
 	  g_kernel->init = g_kernel->init | KN_SV_SESSION;
@@ -35,7 +35,7 @@ bool kernel_client_init()
 {
   if (!kernel_is_init(KN_SV_CLIENT))
     {
-      logger_message("Kernel client init");
+      logger_message("[KERNEL] Kernel client init");
       client_manager_init();
       g_kernel->init = g_kernel->init | KN_SV_CLIENT;
       return true;
@@ -47,7 +47,7 @@ bool kernel_game_init(int x, int y, int nb_per_team)
 {
   if (!kernel_is_init(KN_SV_GAME))
     {
-      logger_message("Kernel game init with %i:%i and %i connection(s)", x, y, nb_per_team);
+      logger_message("[KERNEL] Kernel game init with %i:%i and %i connection(s)", x, y, nb_per_team);
       if (game_init(x, y, nb_per_team))
 	{
 	  g_kernel->init = g_kernel->init | KN_SV_GAME;
@@ -61,7 +61,7 @@ bool kernel_clock_init(int frequence)
 {
   if (!kernel_is_init(KN_SV_CLOCK))
     {
-      logger_message("Kernel clock init with frequency at %i");
+      logger_message("[KERNEL] Kernel clock init with frequency at %i", frequence);
       client_manager_init(frequence);
       g_kernel->init = g_kernel->init | KN_SV_CLOCK;
       return true;

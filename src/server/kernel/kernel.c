@@ -24,17 +24,18 @@ void		kernel_init()
   g_kernel->init = 0;
   g_kernel->run = false;
   kernel_signal();
-  logger_message("Kernel init");
+  logger_message("[KERNEL] Kernel init");
 }
 
 bool		kernel_init_with_argv(int argc, char **argv)
 {
   kernel_init();
-  if (kernel_session_init(&g_kernel->listener, kernel_getopt_int(argc, argv, "-p", 3945)) ||
-	  kernel_client_init() ||
-	  kernel_game_init(kernel_getopt_int(argc, argv, "-x", 10), kernel_getopt_int(argc, argv, "-y", 10), kernel_getopt_int(argc, argv, "-c", 10)) ||
-	  kernel_client_init(kernel_getopt_int(argc, argv, "-t", 100)))
+  if (kernel_session_init(&g_kernel->listener, kernel_getopt_int(argc, argv, "-p", 3945)) &&
+	  kernel_client_init() &&
+	  //kernel_game_init(kernel_getopt_int(argc, argv, "-x", 10), kernel_getopt_int(argc, argv, "-y", 10), kernel_getopt_int(argc, argv, "-c", 10)) &&
+	  kernel_clock_init(kernel_getopt_int(argc, argv, "-t", 100)))
     {
+      logger_error("[KERNEL] Kernel game not started!!");
       return true;
     }
   return false;
@@ -43,5 +44,5 @@ bool		kernel_init_with_argv(int argc, char **argv)
 void		kernel_destroy()
 {
   list_free(&g_kernel->callbacks);
-  logger_message("Kernel destroy");
+  logger_message("[KERNEL] Kernel destroy");
 }

@@ -14,8 +14,8 @@
 int	main(int argc, char **argv)
 {
   logger_init(LG_ALLLOG, "zappy.log", LG_VERBOSE);
-  kernel_init_with_argv(argc, argv);
-  kernel_run();
+  if (kernel_init_with_argv(argc, argv))
+    kernel_run();
   kernel_destroy();
   return (0);
 }
