@@ -27,6 +27,7 @@ int session_register_in(char *instruction,
   if ((instruction_in->instruction = strdup(instruction)) == NULL ||
       (instruction_in->mask = strdup(mask)) == NULL)
     return(-1);
+  instruction_in->length = strlen(instruction_in->instruction);
   instruction_in->cb = cb;
   list_add_end(&(session->in), instruction_in);
   return(0);

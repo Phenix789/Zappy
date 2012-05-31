@@ -45,6 +45,7 @@ zappy_server_OBJ=	server/main.o \
 			server/session/session_create.o \
 			server/session/session_destroy.o \
 			server/session/session_get_session.o \
+			server/session/session_retrieve.o \
 			server/network/network.o \
 			server/network/network_listen.o \
 			server/network/network_listen_to.o \
