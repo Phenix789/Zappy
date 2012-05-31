@@ -16,10 +16,17 @@ extern t_logger *g_logger;
 
 static int logger_write(int level, char *message, va_list *varg)
 {
+  char buffer[1024];
+
   if (!logger_is_init())
-    logger_init(LG_LOG, LOGGER_FILENAME);
+    logger_init(LG_LOG, LOGGER_FILENAME, LG_VERBOSE);
   if (logger_is_init() && g_logger->level & level)
-    return vfprintf(g_logger->file, message, *varg);
+    {
+      vsnprintf(buffer, 1024, message, *varg);
+      if (g_logger->verbose)
+	printf("%s\n", buffer);
+      return fprintf(g_logger->file, "%s\n", buffer);
+    }
   return -1;
 }
 

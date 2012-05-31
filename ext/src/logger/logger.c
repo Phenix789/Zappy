@@ -19,13 +19,14 @@
 
 t_logger *g_logger = NULL;
 
-int logger_init(int level, char *name)
+int logger_init(int level, char *name, int verbose)
 {
   logger_destroy();
   if ((g_logger = malloc(sizeof(t_logger))) == NULL)
     return EXIT_FAILURE;
   memset(g_logger, 0, sizeof(t_logger));
   g_logger->level = level;
+  g_logger->verbose = verbose;
   if (!name)
     name = LOGGER_FILENAME;
   strncpy(g_logger->name, name, LOGGER_FILENAME_SIZE);

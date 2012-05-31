@@ -12,5 +12,5 @@
 
 t_tile		*player_get_tile(t_player *player)
 {
-  return (&game_world->world[player->position.x * player->position.y]);
+  return (&g_game_world->world[player->position.x * player->position.y]);
 }

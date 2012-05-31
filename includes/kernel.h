@@ -16,12 +16,15 @@
 #include "network.h"
 #include "client.h"
 
-#define KN_SV_NETWORK 0x01
-#define KN_SV_SESSION 0x2
+#define KN_SV_SESSION 0x01
+#define KN_SV_CLIENT 0x2
 #define KN_SV_GAME 0x4
-#define KN_SV_INIT (KN_SV_NETWORK | KN_SV_SESSION | KN_SV_GAME)
+#define KN_SV_CLOCK 0x8
+#define KN_SV_INIT (KN_SV_SESSION | KN_SV_CLIENT | KN_SV_GAME | KN_SV_CLOCK)
 
 #define KN_ERROR_OK 0
+
+#define KN_DEFAULT_PORT 3945
 
 typedef struct s_kernel
 {
@@ -43,15 +46,17 @@ typedef struct s_kernel_callback
 
 t_kernel_callback *_kernel_create_callback(int turn, kn_wakeup_cb callback, void *param);
 
-t_kernel	*kernel_create();
 void		kernel_init();
+bool		kernel_init_with_argv(int argc, char **argv);
 void		kernel_destroy();
 
-bool kernel_network_init(int port);
-bool kernel_session_init();
-bool kernel_game_init(int x, int y, int time, int nb_per_team);
+bool kernel_session_init(t_socket *listener, int port);
+bool kernel_client_init();
+bool kernel_game_init(int x, int y, int nb_per_team);
+bool kernel_clock_init(int frequence);
+bool kernel_is_init(int service);
+
 bool kernel_add_team(char *team);
-bool kernel_is_init();
 
 void kernel_run();
 void kernel_stop();
@@ -59,5 +64,8 @@ void kernel_stop();
 bool kernel_register_wakeup(unsigned int time, kn_wakeup_cb callback, void *param);
 int kernel_wakeup_insert(t_kernel_callback *first, t_kernel_callback *second);
 int kernel_wakeup();
+
+char *kernel_getopt(int argc, char **argv, char *flag, char *defaut);
+int kernel_getopt_int(int argc, char **argv, char *flag, int defaut);
 
 #endif

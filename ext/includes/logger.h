@@ -22,17 +22,21 @@
 #define LG_DEBUG 0x8
 
 #define LG_LOG (LG_MESSAGE | LG_WARNING | LG_ERROR)
+#define LG_ALLLOG (LG_LOG | LG_DEBUG)
 #define LG_NOLOG 0
+
+#define LG_VERBOSE 1
 
 typedef struct s_logger
 {
 	FILE *file;
 	int level;
 	int init;
+	int verbose;
 	char name[LOGGER_FILENAME_SIZE + 1];
 } t_logger;
 
-int logger_init(int level, char *name);
+int logger_init(int level, char *name, int verbose);
 void logger_destroy();
 int logger_is_init();
 void logger_set_level(int level);

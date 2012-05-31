@@ -16,6 +16,7 @@ lib
 obj
 .deps
 *~
+*.log
 
 # Netbeans files
 nbproject

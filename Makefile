@@ -36,6 +36,7 @@ zappy_server_OBJ=	server/main.o \
                         server/parser/parser_command_create.o \
                         server/parser/parser_argument_setter.o \
                         server/parser/parser_save_data.o \
+			server/session/session_connect.o \
 			server/session/session_send.o \
 			server/session/session_register_in.o \
 			server/session/session_register_out.o \
@@ -63,6 +64,7 @@ zappy_server_OBJ=	server/main.o \
 			server/clock/clock_get_remaining_time.o \
 			server/game/game_autoplay_add_player.o \
 			server/game/game_autoplay_get_player.o \
+			server/game/game_create.o \
 			server/game/game_globals.o \
 			server/game/game_init.o \
 			server/game/game_player_add.o \
@@ -75,6 +77,7 @@ zappy_server_OBJ=	server/main.o \
 			server/game/player/player_expulse_cb.o \
 			server/game/player/player_fork_cb.o \
 			server/game/player/player_forward_cb.o \
+			server/game/player/player_get_tile.o \
 			server/game/player/player_incantation_cb.o \
 			server/game/player/player_inventory_cb.o \
 			server/game/player/player_left_cb.o \
@@ -87,6 +90,7 @@ zappy_server_OBJ=	server/main.o \
 			server/game/team/team_new.o \
 			server/kernel/kernel.o \
 			server/kernel/kernel_init.o \
+			server/kernel/kernel_opt.o \
 			server/kernel/kernel_run.o \
 			server/kernel/kernel_wakeup.o \
 			server/client/client.o \
