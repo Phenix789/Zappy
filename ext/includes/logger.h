@@ -48,4 +48,6 @@ int logger_warning(char *message, ...);
 int logger_error(char *message, ...);
 int logger_debug(char *message, ...);
 
+int logger_verbose(char *message, ...);
+
 #endif
