@@ -1,9 +1,9 @@
 /*
 ** parser.h for zappy in /home/kersuz_v//Zappy/includes
-** 
+**
 ** Made by vincent kersuzan
 ** Login   <kersuz_v@epitech.net>
-** 
+**
 ** Started on  Tue May 29 02:26:28 2012 vincent kersuzan
 ** Last update Thu May 31 01:24:04 2012 vincent kersuzan
 */
@@ -11,7 +11,12 @@
 #ifndef		PARSER_H_
 # define	PARSER_H_
 
+<<<<<<< HEAD
 # include	<stdio.h>
+=======
+typedef struct s_command t_command;
+
+>>>>>>> 55e189f77038b8139073b0b1bf912d1d41f2b82b
 # include	<stdbool.h>
 
 # include	"list.h"
@@ -38,12 +43,12 @@ typedef struct	s_argument
   void		*data;
 }		t_argument;
 
-typedef struct	s_command
+struct	s_command
 {
   char		*instruction;
   t_list	arguments;
   char		*original_str;
-}		t_command;
+};
 
 typedef int (*t_f_arg_set)(int, char *, t_argument *);
 

@@ -1,15 +1,17 @@
 /*
 ** network.h for zappy in /home/duval_q//Documents/projects/zappy/includes
-** 
+**
 ** Made by quentin duval
 ** Login   <duval_q@epitech.net>
-** 
+**
 ** Started on  Tue May 29 04:02:57 2012 quentin duval
-** Last update Tue May 29 07:39:09 2012 quentin duval
+** Last update Wed May 30 19:48:34 2012 quentin duval
 */
 
 #ifndef		NETWORK_H_
 #define		NETWORK_H_
+
+typedef struct s_socket t_socket;
 
 # ifdef		_WIN32
 typedef int	socklen_t;
@@ -21,6 +23,7 @@ typedef int	socklen_t;
 #  include	<netinet/in.h>
 #  include	<arpa/inet.h>
 #  include	<stdbool.h>
+#  include	<sys/time.h>
 typedef int			SOCKET;
 typedef struct sockaddr_in	SOCKADDR_IN;
 typedef struct sockaddr		SOCKADDR;
@@ -32,8 +35,6 @@ static const int SOCKET_ERROR	= -1;
 # include	"list.h"
 
 # define MAX_CO	255
-
-typedef struct s_socket t_socket;
 
 typedef void    (*t_nt_read_cb)(t_socket *, void *);
 typedef void    (*t_nt_create_cb)(t_socket *);
@@ -70,7 +71,7 @@ bool		network_add_socket(t_socket *socket,
 				   t_nt_read_cb callback,
 				   void *param);
 bool		network_del_socket(t_socket *socket);
-int		network_listen();
+int		network_listen(struct timeval *timeout);
 bool		network_listen_to(t_socket *socket,
 				  int port,
 				  t_nt_create_cb new_entry);

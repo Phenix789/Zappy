@@ -1,11 +1,14 @@
 ##
 ## Makefile for project_boot in /home/duval_q//Documents/project_reference
-## 
+##
 ## Made by quentin duval
 ## Login   <duval_q@epitech.net>
-## 
+##
 ## Started on  Tue Dec 20 09:40:56 2011 quentin duval
+<<<<<<< HEAD
 ## Last update Thu May 31 02:59:25 2012 vincent kersuzan
+=======
+>>>>>>> 55e189f77038b8139073b0b1bf912d1d41f2b82b
 ##
 
 #########################
@@ -54,9 +57,47 @@ zappy_server_OBJ=	server/main.o \
 			server/network/network_socket_rw.o \
 			server/network/network_private_access.o \
 			server/clock/clock.o \
-			server/clock/clock_speed.o \
-			server/clock/clock_tick.o \
-			server/clock/clock_turn.o
+			server/clock/clock_compare.o \
+			server/clock/clock_get_time.o \
+			server/clock/clock_get_timeout.o \
+			server/clock/clock_move_date.o\
+			server/clock/clock_set_time_to_current.o \
+			server/clock/clock_timeval_unit_convert.o \
+			server/clock/timeval_utils.o \
+			server/clock/clock_get_remaining_time.o \
+			server/game/game_autoplay_add_player.o \
+			server/game/game_autoplay_get_player.o \
+			server/game/game_globals.o \
+			server/game/game_init.o \
+			server/game/game_player_add.o \
+			server/game/game_player_remove.o \
+			server/game/game_turn.o \
+			server/game/ground_init.o \
+			server/game/player_death.o \
+			server/game/player_delete.o \
+			server/game/player_drop_cb.o \
+			server/game/player_expulse_cb.o \
+			server/game/player_fork_cb.o \
+			server/game/player_forward_cb.o \
+			server/game/player_incantation_cb.o \
+			server/game/player_inventory_cb.o \
+			server/game/player_left_cb.o \
+			server/game/player_look_cb.o \
+			server/game/player_new.o \
+			server/game/player_right_cb.o \
+			server/game/player_take_cb.o \
+			server/game/team_delete.o \
+			server/game/team_new.o \
+			server/kernel/kernel.o \
+			server/kernel/kernel_init.o \
+			server/kernel/kernel_run.o \
+			server/kernel/kernel_wakeup.o \
+			server/client/client.o \
+			server/client/client_action.o \
+			server/client/client_get_set.o \
+			server/client/client_manager.o \
+			server/client/client_manager_handle.o \
+			server/client/client_manager_retrieve.o
 
 zappy_gui_OBJ=		gui/main.o
 
@@ -82,7 +123,7 @@ LDFLAGS =
 ##control vars
 DEBUG="yes"
 
-##langage specs (tested for :ccp and c)                                             
+##langage specs (tested for :ccp and c)
 EXT=c
 ########end user part
 
@@ -102,7 +143,7 @@ SRC_DIR =       src
 OBJ_DIR =       obj
 DEP_DIR =       .deps
 DOC_DIR =	doc
-########end project folders 
+########end project folders
 
 ########compilation flags
 CXXFLAGS +=     -Werror -Wall -Wextra
@@ -164,7 +205,7 @@ $(DEP_DIR)/%.d: $(SRC_DIR)/%.$(EXT)
 
 
 ########clean objects
-clean:		
+clean:
 	@echo cleaning objects
 	@$(RM) $(ALL_OBJS)
 	@make clean -C $(SUBMAKEPATH)

@@ -5,31 +5,36 @@
 ** Login   <duval_q@epitech.net>
 ** 
 ** Started on  Tue May 29 10:04:53 2012 quentin duval
-** Last update Tue May 29 10:34:11 2012 quentin duval
+** Last update Wed May 30 20:19:28 2012 quentin duval
 */
 
 #ifndef __CLOCK_H__
 #define	__CLOCK_H__
 
+#include	<sys/time.h>
+
 typedef	struct	s_clock
 {
-  unsigned long	timer_begin;
-  unsigned int	speed;
-  unsigned int	cycle;
-  unsigned long	nb_cycle;
+  struct timeval	timeout;
+  struct timeval	begin;
+  struct timeval	current;
+  unsigned int		frequency;
 } t_clock;
 
 t_clock		*clock_create();
 void		clock_init(t_clock *);
 void		clock_destroy();
-void		clock_set_speed(int speed);
 t_clock		*get_clock();
 
-unsigned long	get_tick();
-
-int		clock_turn_to_play();
-void		clock_turn_played();
-void		clock_wait();
-unsigned long	clock_turn();
+void		clock_set_frequency(unsigned int freq);
+void		clock_move_date(struct timeval *time, unsigned int next);
+struct timeval	*clock_get_timeout(struct timeval *start, unsigned int time);
+int		clock_compare(struct timeval *time1, struct timeval *time2);
+void		clock_set_time_to_current(struct timeval *time);
+struct timeval	*clock_get_time();
+void		time_unit_to_timeval(struct timeval *time, unsigned int unit);
+unsigned int	timeval_to_time_unit(struct timeval *time);
+unsigned int	clock_get_remaining_time(struct timeval *time,
+					 unsigned int action_dur);
 
 #endif

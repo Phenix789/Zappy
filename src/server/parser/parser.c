@@ -5,7 +5,7 @@
 ** Login   <kersuz_v@epitech.net>
 ** 
 ** Started on  Tue May 29 05:47:12 2012 vincent kersuzan
-** Last update Thu May 31 02:57:42 2012 vincent kersuzan
+** Last update Thu May 31 02:59:45 2012 vincent kersuzan
 */
 
 #include	<string.h>
@@ -27,7 +27,7 @@ static t_command	*parser_error_leaving(t_command *command,
     free(buf1);
   if (buf2)
     free(buf2);
--  return (NULL);
+  return (NULL);
 }
 
 t_command	*parser_parse(char *data, char *mask)
