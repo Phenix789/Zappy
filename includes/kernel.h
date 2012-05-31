@@ -43,9 +43,9 @@ typedef struct s_kernel_callback
 
 t_kernel_callback *_kernel_create_callback(int turn, kn_wakeup_cb callback, void *param);
 
-t_kernel * kernel_create();
-t_kernel * kernel_init(t_kernel *kernel);
-void kernel_destroy(t_kernel *);
+t_kernel	*kernel_create();
+void		kernel_init();
+void		kernel_destroy();
 
 bool kernel_network_init(int port);
 bool kernel_session_init();
