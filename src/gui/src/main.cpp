@@ -5,11 +5,13 @@
 ** Login   <duval_q@epitech.net>
 **
 ** Started on  Tue May 29 02:23:59 2012 quentin duval
-// Last update Thu May 31 18:04:11 2012 Alexandre Frizac
+// Last update Thu May 31 18:44:00 2012 Alexandre Frizac
 */
 
 #include "gui.hpp"
 #include "network.hpp"
+
+#include <unistd.h>
 
 int	main_gui(const std::string host, const std::string port)
 {
