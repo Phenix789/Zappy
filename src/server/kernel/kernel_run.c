@@ -1,5 +1,6 @@
 
 #include "kernel.h"
+#include "logger.h"
 
 extern t_kernel *g_kernel;
 
@@ -9,8 +10,12 @@ void kernel_run()
   int count;
 
   if (!kernel_is_init(KN_SV_INIT))
-    return;
+    {
+      logger_warning("[run] Kernel is not initialised");
+      return;
+    }
   g_kernel->run = true;
+  logger_message("[run] Kernel start");
   while (g_kernel->run)
     {
       first = list_get_begin(&g_kernel->callbacks);
@@ -21,6 +26,7 @@ void kernel_run()
       if (!count)
 	kernel_wakeup();
     }
+  logger_message("[run] Kernel stop");
 }
 
 void kernel_stop()

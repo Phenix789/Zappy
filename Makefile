@@ -90,6 +90,7 @@ zappy_server_OBJ=	server/main.o \
 			server/game/team/team_new.o \
 			server/kernel/kernel.o \
 			server/kernel/kernel_init.o \
+			server/kernel/kernel_opt.o \
 			server/kernel/kernel_run.o \
 			server/kernel/kernel_wakeup.o \
 			server/client/client.o \
