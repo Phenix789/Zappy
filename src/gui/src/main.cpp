@@ -5,7 +5,7 @@
 ** Login   <duval_q@epitech.net>
 **
 ** Started on  Tue May 29 02:23:59 2012 quentin duval
-// Last update Fri Jun  1 00:10:59 2012 Alexandre Frizac
+// Last update Fri Jun  1 01:01:34 2012 Alexandre Frizac
 */
 
 #include "network.hpp"
@@ -22,10 +22,10 @@ int	main_gui(const std::string host, const std::string port)
       std::cout << "Erreur Network : Impossible de se connecter" << std::endl;
       return (EXIT_FAILURE);
     }
-  if (init_data(data, sock) == false)
+  if (game::network_init_data(data, sock) == false)
     return (EXIT_FAILURE);
   //  game::launch_gui(data);
-  return (network_loop(data, sock));
+  return (game::network_loop(data, sock));
 }
 
 

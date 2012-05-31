@@ -28,7 +28,7 @@ network::network(const std::string &host, const std::string &port) : sockfd(-1)
 network::~network()
 {
   if (this->sockfd != -1)
-    close(this->sockfd);
+    this->disconnect();
 }
 
 ssize_t	network::read(std::string &output)
@@ -72,7 +72,14 @@ bool	network::read_ready()
   this->timeout.tv_usec = 50000;
   select(this->sockfd + 1, &fd, NULL, NULL, &(this->timeout));
   if (FD_ISSET(this->sockfd, &fd))
-    return (true);
+    {
+      if (recv(this->sockfd, this->buffer, 511, MSG_PEEK) <= 0)
+	{
+	  this->disconnect();
+	  return (false);
+	}
+      return (true);
+    }
   return (false);
 }
 

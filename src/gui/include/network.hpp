@@ -29,7 +29,12 @@ private:
 };
 
 class data_thread;
-bool          init_data(data_thread &data, network &sock);
-int           network_loop(data_thread &data, network &sock);
+namespace game
+{
+  bool		network_init_data(data_thread &data, network &sock);
+  int		network_loop(data_thread &data, network &sock);
+  void		network_fill_buffer(std::string &str, network &sock);
+  void		send_to_server(data_thread &data, network &sock);
+};
 
 #endif /* __NETWORK_HPP_ */
