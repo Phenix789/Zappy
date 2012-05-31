@@ -5,7 +5,7 @@
 ** Login   <duval_q@epitech.net>
 ** 
 ** Started on  Tue May 29 07:15:26 2012 quentin duval
-** Last update Tue May 29 07:36:24 2012 quentin duval
+** Last update Thu May 31 17:18:51 2012 quentin duval
 */
 
 #include	"network.h"
@@ -27,6 +27,7 @@ t_socket	*socket_init(t_socket *sock)
       free(sock);
       return (NULL);
     }
+  sock->length = sizeof(sock->addr);
   return (sock);
 }
 

@@ -5,8 +5,10 @@
 ** Login   <duval_q@epitech.net>
 ** 
 ** Started on  Tue May 29 04:54:49 2012 quentin duval
-** Last update Wed May 30 21:43:45 2012 damien vezant
+** Last update Thu May 31 17:04:00 2012 quentin duval
 */
+
+#include	<stdio.h>
 
 #include	"network.h"
 #include	"in_network.h"
@@ -28,9 +30,10 @@ static void		setfd_list(t_list *list,
 
   network = get_network();
   it = list_iterator_begin(list);
+  ret = (list_empty(list))?EXIT_FAILURE:EXIT_SUCCESS;
   while (ret != EXIT_FAILURE)
     {
-      tmp = (t_socket*)list_iterator_get(it);
+      tmp = list_iterator_get(it);
       if (extract(tmp) >= network->nfds)
 	network->nfds = extract(tmp);
       FD_SET(extract(tmp), set);
@@ -57,9 +60,7 @@ static void	find_speaker(fd_set *set,
   t_list_iterator       *it;
   int                   ret;
   void			*tmp;
-  /*t_network             *network;*/
 
-  /*network = get_network();*/
   it = list_iterator_begin(list);
   while (ret != EXIT_FAILURE)
     {
@@ -79,8 +80,13 @@ int			network_listen(struct timeval *timeout)
 
   network = get_network();
   setfd(&set);
-  ret = (select(network->nfds, &set, NULL, NULL, timeout));
-  if (ret > 0)
+  if (timeout)
+    printf("waiting for next action in %lu:%lu\n",
+	   timeout->tv_sec,
+	   timeout->tv_usec);
+  else
+    printf("waiting for extern action. nothing planified\n");
+  if ((ret = (select(network->nfds, &set, NULL, NULL, timeout))) > 0)
     {
       find_speaker(&set,
 		   network->read,

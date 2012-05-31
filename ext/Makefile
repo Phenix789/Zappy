@@ -5,7 +5,7 @@
 ## Login   <ramsey_c@epitech.net>
 ##
 ## Started on  Mon Feb 27 10:00:00 2011 claude ramseyer
-## Last update mon Feb 27 10:00:01 2011 claude ramseyer
+## Last update Thu May 31 16:51:08 2012 quentin duval
 ##
 
 DYNAMIC_LIB = libextlibc_dynamic.so
@@ -23,7 +23,7 @@ LIB_DIR	= .
 INSTALL_DIR = ../lib
 HEADER_DIR = ../includes
 
-NAZI = -W -Wall -Werror -Wextra
+NAZI = -W -Wall -Werror -Wextra -g
 
 CFLAGS += -I$(INCLUDE_DIR)
 CFLAGS += -fPIC
