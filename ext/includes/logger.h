@@ -27,6 +27,8 @@
 
 #define LG_VERBOSE 1
 
+#define LG_GET_MSGLVL(lvl) (lvl & LG_MESSAGE ? "message" : (lvl  & LG_WARNING ? "warning" : (lvl & LG_ERROR ? "error" : "debug")))
+
 typedef struct s_logger
 {
 	FILE *file;
