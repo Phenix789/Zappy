@@ -20,6 +20,7 @@ void		kernel_init()
   socket_init(&g_kernel->listener);
   g_kernel->init = 0;
   g_kernel->run = false;
+/*
 
   if (!kernel_network_init(KN_DEFAULT_PORT))
     printf("network init error\n");
@@ -34,6 +35,7 @@ void		kernel_init()
   else
     printf("clock initialisation complete\n");
   game_init();
+*/
 }
 
 void		kernel_destroy()

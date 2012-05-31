@@ -13,14 +13,13 @@
 int		game_create(int x, int y, int nb_per_team)
 {
   int		bufflen;
-  int		idx;
 
   srand(getpid() * time(NULL));
   bufflen = x * y;
-  if ((game_world = calloc(1, sizeof(t_world))) == NULL)
+  if ((g_game_world = calloc(1, sizeof(t_world))) == NULL)
     return (-1);
-  game_world->dimensions.x = x;
-  game_world->dimensions.y = y;
-  game_world->connect_nbr = nb_per_team;
+  g_game_world->dimensions.x = x;
+  g_game_world->dimensions.y = y;
+  g_game_world->connect_nbr = nb_per_team;
   return (0);
 }

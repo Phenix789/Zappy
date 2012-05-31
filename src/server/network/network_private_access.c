@@ -1,9 +1,9 @@
 /*
 ** network_private_fd_read.c for zappy in /home/duval_q//Documents/projects/zappy/src/server/net
-** 
+**
 ** Made by quentin duval
 ** Login   <duval_q@epitech.net>
-** 
+**
 ** Started on  Tue May 29 08:03:53 2012 quentin duval
 ** Last update Thu May 31 18:51:04 2012 quentin duval
 */
@@ -27,9 +27,9 @@ void			execute_from_listener(void *data)
     return;
   sock->length = sizeof(sock->addr);
   listener = (t_listener*)data;
-  if ((sock->fd = accept(listener->socket, &sock->addr, &sock->length) < 0)
+  if ((sock->fd = accept(listener->socket->fd, (SOCKADDR *) &sock->addr, &sock->length) < 0))
       return;
-  listener->create(sock->socket);
+  (*listener->create)(sock);
 }
 
 SOCKET		extract_from_socket(void *data)
