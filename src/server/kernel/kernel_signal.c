@@ -13,6 +13,7 @@ void kernel_signal()
 
 void kernel_signal_handle(int sig)
 {
+  logger_error("[KERNEL] Signal catched %i", sig);
   kernel_destroy();
   signal(sig, NULL);
   kill(getpid(), sig);
