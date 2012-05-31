@@ -5,7 +5,7 @@
 ** Login   <duval_q@epitech.net>
 ** 
 ** Started on  Tue May 29 08:03:53 2012 quentin duval
-** Last update Tue May 29 08:29:53 2012 quentin duval
+** Last update Thu May 31 18:51:04 2012 quentin duval
 */
 
 #include	"in_network.h"
@@ -18,12 +18,18 @@ void		execute_from_socket(void *data)
   socket->read(socket, socket->param);
 }
 
-void		execute_from_listener(void *data)
+void			execute_from_listener(void *data)
 {
   t_listener            *listener;
+  t_socket		*sock;
 
+  if (!(sock = malloc(sizeof(*sock))))
+    return;
+  sock->length = sizeof(sock->addr);
   listener = (t_listener*)data;
-  listener->create(listener->socket);
+  if ((sock->fd = accept(listener->socket, &sock->addr, &sock->length) < 0)
+      return;
+  listener->create(sock->socket);
 }
 
 SOCKET		extract_from_socket(void *data)
