@@ -18,7 +18,7 @@ void	session_treat_data(t_socket *socket, t_client *client)
 
   memset(buffer, 0, 1024 + 1);
   socket_read(socket, buffer, 1024);
-  logger_verbose("Message recieve : %s", buffer);
+  logger_verbose("Message receive : %s", buffer);
   /*
     appelle le parser pour verifier que c est possible ou non
     recupere une liste d instruction
