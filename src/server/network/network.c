@@ -5,20 +5,23 @@
 ** Login   <duval_q@epitech.net>
 ** 
 ** Started on  Tue May 29 03:54:36 2012 quentin duval
-** Last update Tue May 29 07:10:23 2012 quentin duval
+** Last update Thu May 31 18:29:04 2012 quentin duval
 */
 
 #include		"network.h"
 
 static t_network	*g_network;
 
-static	void		network_init()
+bool			network_init()
 {
   t_network		*network;
 
+  if (network_create() == false)
+    return (false);
   network = get_network();
   network->nfds = 0;
   network->usec_timeout = 0;
+  return (true);
 }
 
 bool			network_create()
@@ -32,7 +35,6 @@ bool			network_create()
   if (!(network->read = list_create()))
     return (false);
   g_network = network;
-  network_init();
   return (true);
 }
 
