@@ -5,7 +5,7 @@
 ** Login   <kersuz_v@epitech.net>
 **
 ** Started on  Tue May 29 03:43:20 2012 vincent kersuzan
-** Last update Thu May 31 18:39:16 2012 quentin duval
+** Last update Thu May 31 22:01:25 2012 quentin duval
 */
 
 #ifndef		SESSION_H_
@@ -42,8 +42,8 @@ int	session_send(t_client *client, char *mask, ...);
 int	session_register_in(char *instruction, char *mask, t_se_execute_cb cb);
 int	session_register_out(int instruction, char *mask);
 void	session_treat_data(t_socket *socket, t_client *client);
-int	session_create(void);
-int		session_init(t_socket *listen, int port);
+bool	session_create(void);
+bool	session_init(t_socket *listen, int port);
 int	session_destroy(void);
 t_session	*session_get_session(void);
 

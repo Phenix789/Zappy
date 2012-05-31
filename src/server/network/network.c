@@ -5,36 +5,41 @@
 ** Login   <duval_q@epitech.net>
 ** 
 ** Started on  Tue May 29 03:54:36 2012 quentin duval
-** Last update Thu May 31 18:29:04 2012 quentin duval
+** Last update Thu May 31 21:59:02 2012 quentin duval
 */
 
 #include		"network.h"
+#include		"logger.h"
 
-static t_network	*g_network;
+static t_network	*g_network = NULL;
 
 bool			network_init()
 {
   t_network		*network;
 
+  logger_message("[NETWORK] starting network service");
   if (network_create() == false)
     return (false);
   network = get_network();
   network->nfds = 0;
   network->usec_timeout = 0;
+  logger_message("[NETWORK] service started");
   return (true);
 }
 
 bool			network_create()
 {
-  t_network		*network;
-
-  if (!(network = malloc(sizeof(t_network))))
+  logger_debug("[NETWORK] beginning allocation");
+  if (!(g_network = malloc(sizeof(*g_network))))
     return (false);
-  if (!(network->listened = list_create()))
+  logger_debug("[NETWORK] allocation of main object... ok");
+  if (!(g_network->listened = list_create()))
     return (false);
-  if (!(network->read = list_create()))
+  logger_debug("[NETWORK] allocation of listening list... ok");
+  if (!(g_network->read = list_create()))
     return (false);
-  g_network = network;
+  logger_debug("[NETWORK] allocation of reading list... ok");
+  logger_debug("[NETWORK] allocation complete");
   return (true);
 }
 
@@ -52,5 +57,7 @@ bool			network_destroy()
 
 t_network		*get_network()
 {
+  if (!g_network)
+    logger_error("[NETWORK] network not initialised");
   return (g_network);
 }
