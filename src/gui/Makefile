@@ -5,7 +5,7 @@
 ## Login   <frizac_b@epitech.net>
 ##
 ## Started on  Mon Feb  6 14:18:30 2012 Alexandre Frizac
-## Last update Thu May 31 21:57:59 2012 Alexandre Frizac
+## Last update Thu May 31 23:44:57 2012 Alexandre Frizac
 ##
 
 NAME		= a.out
@@ -21,6 +21,7 @@ LDFLAGS		+= -l boost_system -l boost_thread
 LDFLAGS		+= -l sfml-system -l sfml-window
 
 SRC	= $(addprefix src/, \
+		class/network.cpp\
 		class/data_thread.cpp\
 		class/map.cpp \
 		class/player.cpp \

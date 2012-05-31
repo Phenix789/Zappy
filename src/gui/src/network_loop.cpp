@@ -2,23 +2,25 @@
 #include "gui.hpp"
 #include "game.hpp"
 
-bool	init_data(data_thread &data, boost::asio::ip::tcp::iostream &sock)
+bool	init_data(data_thread &data, network &sock)
 {
   data.map.setDim(10, 10);
 
   return (true);
 }
 
-int	network_loop(data_thread &data, boost::asio::ip::tcp::iostream &sock)
-{
-  std::string   buffer;
+#include <iostream>
 
-  while (sock)
+int	network_loop(data_thread &data, network &sock)
+{
+  std::string	buffer;
+
+  while (sock.is_connect())
     {
-      getline(sock, buffer);
-      sock << "GRAPHIC\n" << std::flush;
-      std::cout << buffer << std::endl;
+      if (sock.read_ready())
+	if (sock.read(buffer) > 0 && buffer.size() > 0)
+	  std::cout << buffer << std::endl;
     }
-  sock.close();
+  sock.disconnect();
   return (EXIT_SUCCESS);
 }
