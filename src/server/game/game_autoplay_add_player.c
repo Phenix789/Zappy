@@ -10,9 +10,7 @@
 
 #include	"game.h"
 
-extern t_map	autoplay_team;
-
 void		game_autoplay_add_player(t_player *player)
 {
-  map_add(&autoplay_team, &(player->id), player);
+  map_add(&g_autoplay_team, &(player->id), player);
 }
