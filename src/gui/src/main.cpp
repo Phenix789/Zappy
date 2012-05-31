@@ -5,40 +5,27 @@
 ** Login   <duval_q@epitech.net>
 **
 ** Started on  Tue May 29 02:23:59 2012 quentin duval
-// Last update Thu May 31 18:44:00 2012 Alexandre Frizac
+// Last update Thu May 31 22:05:29 2012 Alexandre Frizac
 */
 
-#include "gui.hpp"
 #include "network.hpp"
-
-#include <unistd.h>
+#include "gui.hpp"
+#include "game.hpp"
 
 int	main_gui(const std::string host, const std::string port)
 {
-  data_thread	data;
-  network	sock(host, port);
+  data_thread				data;
+  boost::asio::ip::tcp::iostream	sock(host, port);
 
   if (!sock)
     {
       std::cout << "Erreur Network : Impossible de se connecter" << std::endl;
       return (EXIT_FAILURE);
     }
-  /*
-  if (init_data(data) == false)
+  if (init_data(data, sock) == false)
     return (EXIT_FAILURE);
   game::launch_gui(data);
-  return (boucle_network(data));
-  */
-  std::string	buffer;
-  //  while (sock)
-  {
-    buffer.clear();
-    getline(sock, buffer);
-    sock << "GRAPHIC\n" << std::flush;
-    std::cout << buffer << std::endl;
-  }
-  sock.close();
-  return (EXIT_SUCCESS);
+  return (network_loop(data, sock));
 }
 
 

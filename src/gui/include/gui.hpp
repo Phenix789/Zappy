@@ -4,14 +4,7 @@
 #include <boost/thread.hpp>
 #include "data_thread.hpp"
 #include "Igui.hpp"
-
-struct thread_gui;
-
-namespace game
-{
-  void		run_gui(data_thread &data);
-  thread_gui	*launch_gui(data_thread &data);
-};
+#include "game.hpp"
 
 struct thread_gui
 {

@@ -2,15 +2,9 @@
 #define __NETWORK_HPP_
 
 #include <boost/asio.hpp>
+#include "data_thread.hpp"
 
-class network : public boost::asio::ip::tcp::iostream
-{
-public:
-  network(const std::string &host, const std::string &port);
-  ~network();
-
-private:
-  network();
-};
+bool          init_data(data_thread &data, boost::asio::ip::tcp::iostream &sock);
+int           network_loop(data_thread &data, boost::asio::ip::tcp::iostream &sock);
 
 #endif /* __NETWORK_HPP_ */
