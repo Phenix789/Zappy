@@ -48,6 +48,20 @@ void map_set(t_map *map, void *key, void *value)
     }
 }
 
+void *map_get(t_map *map, void *key)
+{
+  t_list_node *node;
+
+  node = map->l_head;
+  while (node)
+    {
+      if ((*map->cmp)(M_KEY(node), key))
+	return M_VALUE(node);
+      node = node->next;
+    }
+  return NULL;
+}
+
 void map_pop(t_map *map, void *key)
 {
   t_list_node *node;
