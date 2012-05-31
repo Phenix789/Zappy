@@ -10,12 +10,10 @@
 
 #include	"game.h"
 
-extern t_map	*team_map;
-
 void		game_player_remove(char *team, t_player *player)
 {
   t_team	*tmp;
 
-  if ((tmp = map_get(team_map, team)) != NULL)
+  if ((tmp = map_get(&team_map, team)) != NULL)
     map_pop(&tmp->player_map, &player->id);
 }

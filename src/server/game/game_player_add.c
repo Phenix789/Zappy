@@ -14,6 +14,6 @@ void		game_player_add(char *team, t_player *player)
 {
   t_team	*tmp;
 
-  if ((tmp = map_get(team_map, team)) != NULL)
+  if ((tmp = map_get(&team_map, team)) != NULL)
     map_add(&tmp->player_map, &player->id, player);
 }

@@ -10,8 +10,11 @@
 
 #include	"game.h"
 
+extern t_map	team_map;
+extern t_map	autoplay_team;
+extern t_world	game_world;
+
 void		game_init()
 {
-  team_map = map_create(NULL);
-  autoplay_team = map_create(NULL);
+  
 }

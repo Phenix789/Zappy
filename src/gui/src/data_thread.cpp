@@ -20,5 +20,5 @@ void	data_thread::unlock()
 
 bool	data_thread::trylock()
 {
-  return (this->_mutex.trylock());
+  return (this->_mutex.try_lock());
 }

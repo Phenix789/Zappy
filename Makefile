@@ -68,22 +68,23 @@ zappy_server_OBJ=	server/main.o \
 			server/game/game_player_add.o \
 			server/game/game_player_remove.o \
 			server/game/game_turn.o \
-			server/game/ground_init.o \
-			server/game/player_death.o \
-			server/game/player_delete.o \
-			server/game/player_drop_cb.o \
-			server/game/player_expulse_cb.o \
-			server/game/player_fork_cb.o \
-			server/game/player_forward_cb.o \
-			server/game/player_incantation_cb.o \
-			server/game/player_inventory_cb.o \
-			server/game/player_left_cb.o \
-			server/game/player_look_cb.o \
-			server/game/player_new.o \
-			server/game/player_right_cb.o \
-			server/game/player_take_cb.o \
-			server/game/team_delete.o \
-			server/game/team_new.o \
+			server/game/game_init.o \
+			server/game/player/player_death.o \
+			server/game/player/player_delete.o \
+			server/game/player/player_drop_cb.o \
+			server/game/player/player_expulse_cb.o \
+			server/game/player/player_fork_cb.o \
+			server/game/player/player_forward_cb.o \
+			server/game/player/player_incantation_cb.o \
+			server/game/player/player_inventory_cb.o \
+			server/game/player/player_left_cb.o \
+			server/game/player/player_look_cb.o \
+			server/game/player/player_new.o \
+			server/game/player/player_right_cb.o \
+			server/game/player/player_take_cb.o \
+			server/game/player/player_connect_nbr_cb.o \
+			server/game/team/team_delete.o \
+			server/game/team/team_new.o \
 			server/kernel/kernel.o \
 			server/kernel/kernel_init.o \
 			server/kernel/kernel_run.o \

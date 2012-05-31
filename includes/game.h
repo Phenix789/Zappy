@@ -79,7 +79,7 @@ typedef struct
   int		y;
 }		t_pos;
 
-struct s_player
+typedef struct	s_player
 {
   char		team[TEAM_NAME_SIZE + 1];
   t_orientation	orientation;
@@ -88,51 +88,44 @@ struct s_player
   unsigned int	id;
   int		level;
   int		life;
-};
+}		t_player;
 
 t_player	*player_new();
 void		player_delete(t_player *retiree);
 
-/* done */
 void		player_forward_start_cb(t_client *client, t_command *command);
 void		player_forward_end_cb(t_client *client, int error);
 
-/* done */
 void		player_right_start_cb(t_client *client, t_command *command);
 void		player_right_end_cb(t_client *client, int error);
 
-/* done */
 void		player_left_start_cb(t_client *client, t_command *command);
 void		player_left_end_cb(t_client *client, int error);
 
-/* TODO !!! */
+/* TODO */
 void		player_look_start_cb(t_client *client, t_command *command);
 void		player_look_end_cb(t_client *client, int error);
 
-/* done */
 void		player_inventory_start_cb(t_client *client, t_command *command);
 void		player_inventory_end_cb(t_client *client, int error);
 
-/* done */
 void		player_take_start_cb(t_client *client, t_command *command);
 void		player_take_end_cb(t_client *client, int error);
 
-/* done */
 void		player_drop_start_cb(t_client *client, t_command *command);
 void		player_drop_end_cb(t_client *client, int error);
 
-/* done */
 void		player_expulse_start_cb(t_client *client, t_command *command);
 void		player_expulse_end_cb(t_client *client, int error);
 
-/* TODO !!! */
+/* TODO */
 void		player_broadcast_start_cb(t_client *client, t_command *command);
 void		player_broadcast_end_cb(t_client *client, int error);
 
-/* done */
 void		player_incantation_start_cb(t_client *client, t_command *command);
 void		player_incantation_end_cb(t_client *client, int error);
 
+/* TODO */
 void		player_fork_start_cb(t_client *client, t_command *command);
 void		player_fork_end_cb(t_client *client, int error);
 
@@ -153,7 +146,7 @@ void		team_delete(char *name);
 
 typedef t_pos t_dim;
 
-typedef struct
+typedef struct	s_tile
 {
   t_list	players;
   t_pos		coord;
@@ -164,13 +157,16 @@ typedef struct
 {
   t_tile	*world;
   t_dim		dimensions;
+  int		connect_nbr;
 }		t_world;
 
 void		world_init(int x, int y);
 
-extern t_map	*team_map;
-extern t_map	*autoplay_team;
+extern t_map	team_map;
+extern t_map	autoplay_team;
 extern t_world	game_world;
+
+t_tile		*player_get_tile(t_player *player);
 
 void		game_turn();
 void		game_init();
