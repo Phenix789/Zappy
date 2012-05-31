@@ -5,6 +5,10 @@
 ## Login   <duval_q@epitech.net>
 ##
 ## Started on  Tue Dec 20 09:40:56 2011 quentin duval
+<<<<<<< HEAD
+## Last update Thu May 31 02:59:25 2012 vincent kersuzan
+=======
+>>>>>>> 55e189f77038b8139073b0b1bf912d1d41f2b82b
 ##
 
 #########################
@@ -23,12 +27,19 @@ SUBMAKEPATH= ext
 ##
 zappy_server_OBJ=	server/main.o \
 			server/parser/parser.o \
-			server/parser/parser_get_int.o \
-			server/parser/parser_get_string.o \
-			server/parser/parser_is_match.o \
-			server/parser/parser_command_destroy.o \
-			server/parser/parser_count_arguments.o \
-			server/parser/parser_str_check_contain.o \
+                        server/parser/parser_get_int.o \
+                        server/parser/parser_get_string.o \
+                        server/parser/parser_is_match.o \
+                        server/parser/parser_command_destroy.o \
+                        server/parser/parser_count_arguments.o \
+                        server/parser/parser_str_check_contain.o \
+                        server/parser/parser_find_key.o \
+                        server/parser/parser_type_map.o \
+                        server/parser/parser_get_from_map.o \
+                        server/parser/parser_extract_elem.o \
+                        server/parser/parser_command_create.o \
+                        server/parser/parser_argument_setter.o \
+                        server/parser/parser_save_data.o \
 			server/session/session_send.o \
 			server/session/session_register_in.o \
 			server/session/session_register_out.o \
