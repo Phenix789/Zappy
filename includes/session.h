@@ -5,7 +5,7 @@
 ** Login   <kersuz_v@epitech.net>
 ** 
 ** Started on  Tue May 29 03:43:20 2012 vincent kersuzan
-** Last update Tue May 29 04:53:22 2012 vincent kersuzan
+** Last update Thu May 31 18:39:16 2012 quentin duval
 */
 
 #ifndef		SESSION_H_
@@ -14,6 +14,7 @@
 # include	"client.h"
 # include	"list.h"
 # include	"parser.h"
+# include	"network.h"
 
 typedef void	(*t_se_execute_cb) (void *, t_command *);
 
@@ -36,6 +37,7 @@ typedef struct	s_session
   t_list	out;
 }		t_session;
 
+void	session_connect(t_socket *new_sock);
 int	session_send(t_client *client, char *mask, ...);
 int	session_register_in(char *instruction, char *mask, t_se_execute_cb cb);
 int	session_register_out(int instruction, char *mask);
