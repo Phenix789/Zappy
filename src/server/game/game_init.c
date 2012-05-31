@@ -31,25 +31,24 @@ static void	_generate_tile(t_tile *tile)
     tile->ressources.thystame += 1;
 }
 
-void		game_init()
+int		game_init(int x, int y, int nb_per_team)
 {
-  int		x;
-  int		y;
   int		idx;
   int		idy;
 
-  x = game_world->dimensions.x;
-  y = game_world->dimensions.y;
+  if (game_create(x, y, nb_per_team) == -1)
+    return (0);
   idx = 0;
   idy = 0;
   while (idy < y)
   {
     while (idx < x)
     {
-      _generate_tile(&game_world->world[x * y]);
-      ++x;
+      _generate_tile(&g_game_world->world[x * y]);
+      ++idx;
     }
     x = 0;
-    ++y;
+    ++idy;
   }
+  return (1);
 }

@@ -10,7 +10,7 @@
 
 #include	"game.h"
 
-int		game_create(int x, int y, int connect_nbr)
+int		game_create(int x, int y, int nb_per_team)
 {
   int		bufflen;
   int		idx;
@@ -21,6 +21,6 @@ int		game_create(int x, int y, int connect_nbr)
     return (-1);
   game_world->dimensions.x = x;
   game_world->dimensions.y = y;
-  game_world->connect_nbr = connect_nbr;
+  game_world->connect_nbr = nb_per_team;
   return (0);
 }
