@@ -162,15 +162,15 @@ typedef struct
   t_inventory	item_count;
 }		t_world;
 
-extern t_map	team_map;
-extern t_map	autoplay_team;
-extern t_world	*game_world;
+extern t_map	g_team_map;
+extern t_map	g_autoplay_team;
+extern t_world	*g_game_world;
 
 t_tile		*player_get_tile(t_player *player);
 
 void		game_turn();
-int		game_create(int x, int y, int connect_nbr);
-void		game_init();
+int		game_create(int x, int y, int nb_per_team);
+int		game_init(int x, int y, int nb_per_team);
 
 void		game_player_add(char *team, t_player *player);
 void		game_player_remove(char *team, t_player *player);

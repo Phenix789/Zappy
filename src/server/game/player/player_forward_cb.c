@@ -14,14 +14,14 @@ static void	_forward_player(int x, int y, t_player *player)
 {
   player->position.x += x;
   player->position.y += y;
-  if (player->position.x > game_world->dimensions.x)
+  if (player->position.x >= g_game_world->dimensions.x)
     player->position.x = 0;
   else if (player->position.x < 0)
-    player->position.x = game_world->dimensions.x - 1;
-  else if (player->position.y > game_world->dimensions.y)
+    player->position.x = g_game_world->dimensions.x - 1;
+  else if (player->position.y >= g_game_world->dimensions.y)
     player->position.y = 0;
   else if (player->position.y < 0)
-    player->position.y = game_world->dimensions.y - 1;
+    player->position.y = g_game_world->dimensions.y - 1;
 }
 
 void		player_forward_end_cb(t_client *client, int error)

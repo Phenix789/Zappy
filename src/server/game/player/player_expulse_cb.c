@@ -16,21 +16,21 @@ static void	forward(t_player *player)
   if (player->orientation == OR_NORTH)
     {
       if ((player->position.y -= 1) < 0)
-        player->position.y = game_world->dimensions.y - 1;
+        player->position.y = g_game_world->dimensions.y - 1;
     }
   else if (player->orientation == OR_EAST)
     {
-      if ((player->position.x += 1) > game_world->dimensions.x)
+      if ((player->position.x += 1) >= g_game_world->dimensions.x)
         player->position.x = 1;
     }
   else if (player->orientation == OR_WEST)
     {
       if ((player->position.x -= 1) < 0)
-        player->position.x = game_world->dimensions.x - 1;
+        player->position.x = g_game_world->dimensions.x - 1;
     }
   else if (player->orientation == OR_SOUTH)
     {
-      if ((player->position.y += 1) > game_world->dimensions.y)
+      if ((player->position.y += 1) >= g_game_world->dimensions.y)
         player->position.y = 0;
     }
   list_add_end(&player_get_tile(player)->players, player);

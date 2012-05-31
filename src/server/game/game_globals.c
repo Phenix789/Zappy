@@ -10,6 +10,6 @@
 
 #include	"game.h"
 
-t_map           team_map;
-t_map           autoplay_team;
-t_world         *game_world;
+t_map           g_team_map;
+t_map           g_autoplay_team;
+t_world         *g_game_world;
