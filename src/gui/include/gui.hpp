@@ -3,6 +3,7 @@
 
 #include <boost/thread.hpp>
 #include "data_thread.hpp"
+#include "Igui.hpp"
 
 struct thread_gui;
 
@@ -26,6 +27,6 @@ private:
   thread_gui();
 };
 
-
+extern "C" Igui *create(const game::map &map);
 
 #endif /* __GUI_HPP_ */

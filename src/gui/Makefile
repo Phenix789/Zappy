@@ -5,7 +5,7 @@
 ## Login   <frizac_b@epitech.net>
 ##
 ## Started on  Mon Feb  6 14:18:30 2012 Alexandre Frizac
-## Last update Thu May 31 18:04:43 2012 Alexandre Frizac
+## Last update Thu May 31 18:35:07 2012 Alexandre Frizac
 ##
 
 NAME		= a.out
@@ -18,12 +18,15 @@ CC		= g++
 CXXFLAGS	+= -I include
 CXXFLAGS	+= -Wall -Wextra -Wshadow -g
 LDFLAGS		+= -l boost_system -l boost_thread
+LDFLAGS		+= -l sfml-system -l sfml-window
 
 SRC	= $(addprefix src/, \
 		class/data_thread.cpp\
 		class/map.cpp \
 		class/player.cpp \
 		class/network.cpp \
+		class/sfml.cpp \
+		class/dynlib.cpp \
 		gui.cpp\
 		launcher.cpp\
 		main.cpp\

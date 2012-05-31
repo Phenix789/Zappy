@@ -5,7 +5,7 @@
 ** Login   <duval_q@epitech.net>
 **
 ** Started on  Tue May 29 04:02:57 2012 quentin duval
-** Last update Wed May 30 19:48:34 2012 quentin duval
+** Last update Thu May 31 18:30:18 2012 quentin duval
 */
 
 #ifndef		NETWORK_H_
@@ -63,6 +63,7 @@ typedef struct s_network
 } t_network;
 
 bool		network_create();
+bool		network_init();
 bool		network_destroy();
 
 t_network	*get_network();
