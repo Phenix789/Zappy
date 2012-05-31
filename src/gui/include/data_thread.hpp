@@ -19,9 +19,9 @@ public:
 
 public:
   boost::mutex			_mutex;
-  game::map			_map;
-  std::list<std::string>	_msg;
-  bool				_state_connection;
+  game::map			map;
+  std::list<std::string>	msg;
+  bool				state_connection;
 };
 
 #endif /* __DATA_THREAD_HPP_ */

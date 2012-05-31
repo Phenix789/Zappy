@@ -1,6 +1,6 @@
 #include "data_thread.hpp"
 
-data_thread::data_thread() : _state_connection(false)
+data_thread::data_thread() : state_connection(false)
 {
 }
 
