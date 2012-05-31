@@ -13,6 +13,7 @@ typedef struct s_player t_player;
 # include	<stdlib.h>
 # include	<stdio.h>
 # include	<string.h>
+# include	<time.h>
 # include	"map.h"
 # include	"session.h"
 # include	"kernel.h"
@@ -158,17 +159,17 @@ typedef struct
   t_tile	*world;
   t_dim		dimensions;
   int		connect_nbr;
+  t_inventory	item_count;
 }		t_world;
-
-void		world_init(int x, int y);
 
 extern t_map	team_map;
 extern t_map	autoplay_team;
-extern t_world	game_world;
+extern t_world	*game_world;
 
 t_tile		*player_get_tile(t_player *player);
 
 void		game_turn();
+int		game_create(int x, int y, int connect_nbr);
 void		game_init();
 
 void		game_player_add(char *team, t_player *player);

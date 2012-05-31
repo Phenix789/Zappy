@@ -12,4 +12,4 @@
 
 t_map           team_map;
 t_map           autoplay_team;
-t_world         game_world;
+t_world         *game_world;
