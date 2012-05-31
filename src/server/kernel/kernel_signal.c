@@ -15,5 +15,5 @@ void kernel_signal_handle(int sig)
 {
   kernel_destroy();
   signal(sig, NULL);
-  kill(sig);
+  kill(getpid(), sig);
 }
