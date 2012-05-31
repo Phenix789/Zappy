@@ -14,11 +14,11 @@
 
 char		*parser_find_key(char *mask)
 {
-  int           i;
+//   int           i;
   int           mask_index;
   int		type;
 
-  i = 0;
+//   i = 0;
   mask_index = 0;
   while ((type = parser_find_elem_type(&mask[mask_index]) < 0) &&
 	 mask[mask_index])
