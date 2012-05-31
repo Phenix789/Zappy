@@ -10,7 +10,7 @@
 
 #include	"game.h"
 
-extern t_map	team_map;
+extern t_map	g_team_map;
 
 static void	_clean_pair(void *first, void *second)
 {
@@ -22,7 +22,7 @@ void		team_delete(char *name)
 {
   t_team	*tmp;
 
-  tmp = map_get(&team_map, name);
+  tmp = map_get(&g_team_map, name);
   map_foreach(&tmp->player_map, _clean_pair);
   map_clear(&tmp->player_map);
   free(tmp->name);

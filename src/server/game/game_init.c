@@ -14,20 +14,17 @@ static void	_generate_tile(t_tile *tile)
 {
   unsigned int	res;
 
-  res = rand() % 100;
-  if (res < 40)
-    tile->ressources.food += 1;
-  else if (res < 65)
-    tile->ressources.linemate += 1;
-  else if (res < 75)
+  tile->ressources.food += rand() % 4;
+  tile->ressources.linemate += rand() % 1;
+  if ((rand() % 100) < 25)
     tile->ressources.deraumere += 1;
-  else if (res < 85)
+  else if ((rand() % 100) < 20)
     tile->ressources.sibur += 1;
-  else if (res < 90)
+  else if ((rand() % 100) < 15)
     tile->ressources.mendiane += 1;
-  else if (res < 95)
+  else if ((rand() % 100) < 10)
     tile->ressources.phiras += 1;
-  else
+  else if ((rand() % 100) < 5)
     tile->ressources.thystame += 1;
 }
 

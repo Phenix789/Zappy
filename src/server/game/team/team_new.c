@@ -10,7 +10,7 @@
 
 #include	"game.h"
 
-extern t_map	team_map;
+extern t_map	g_team_map;
 
 t_team		*team_new(char *name)
 {
@@ -19,6 +19,6 @@ t_team		*team_new(char *name)
   if ((new_team = calloc(1, sizeof(t_team))) == NULL)
     return (NULL);
   strcpy(new_team->name, name);
-  map_add(&team_map, new_team->name, new_team);
+  map_add(&g_team_map, new_team->name, new_team);
   return (new_team);
 }
