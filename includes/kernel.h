@@ -68,4 +68,7 @@ int kernel_wakeup();
 char *kernel_getopt(int argc, char **argv, char *flag, char *defaut);
 int kernel_getopt_int(int argc, char **argv, char *flag, int defaut);
 
+void kernel_signal();
+void kernel_signal_handle(int sig);
+
 #endif

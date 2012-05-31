@@ -47,7 +47,7 @@ bool kernel_game_init(int x, int y, int nb_per_team)
 {
   if (!kernel_is_init(KN_SV_GAME))
     {
-      logger_message("Kernel game init with %i:%i and %i connection", x, y, nb_per_team);
+      logger_message("Kernel game init with %i:%i and %i connection(s)", x, y, nb_per_team);
       if (game_init(x, y, nb_per_team))
 	{
 	  g_kernel->init = g_kernel->init | KN_SV_GAME;

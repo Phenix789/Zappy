@@ -23,6 +23,7 @@ void		kernel_init()
   socket_init(&g_kernel->listener);
   g_kernel->init = 0;
   g_kernel->run = false;
+  kernel_signal();
   logger_message("Kernel init");
 }
 
