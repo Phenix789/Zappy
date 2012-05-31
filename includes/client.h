@@ -18,6 +18,7 @@ typedef struct s_client t_client;
 #include	"game.h"
 #include	"network.h"
 #include "parser.h"
+#include "logger.h"
 
 #define CLIENT_MAX_ACTIONS 10
 

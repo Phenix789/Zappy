@@ -9,9 +9,16 @@
 */
 
 #include	"session.h"
+#include "logger.h"
 
 void	session_treat_data(t_socket *socket, t_client *client)
 {
+  logger_error("[SESSION] Treat data not implemented");
+  char buffer[1024 + 1];
+
+  memset(buffer, 0, 1024 + 1);
+  socket_read(socket, buffer, 1024);
+  logger_verbose("Message recieve : %s", buffer);
   /*
     appelle le parser pour verifier que c est possible ou non
     recupere une liste d instruction

@@ -18,12 +18,12 @@
 
 bool		session_init(t_socket *listen, int port)
 {
-  logger_message("[SESSION] starting session service");
+  logger_message("[SESSION] Starting session service ...");
   if (session_create() == false
       || network_init() == false
       || network_listen_to(listen, port, &session_connect) == false)
     return (false);
-  logger_message("[SESSION] service started");
+  logger_message("[SESSION] Service started");
   return (true);
 }
 

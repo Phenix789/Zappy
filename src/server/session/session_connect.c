@@ -10,11 +10,14 @@
 
 #include	"session.h"
 #include	"client.h"
+#include "logger.h"
 
 void		session_connect(t_socket *new_sock)
 {
   t_client	*client;
 
+  logger_message("[SESSION] New client connected");
   client = client_create(new_sock);
   network_add_socket(new_sock, (t_nt_read_cb) &session_treat_data, client);
+  session_send(client, "BIENVENUE");
 }
