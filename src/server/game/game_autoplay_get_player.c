@@ -10,9 +10,7 @@
 
 #include	"game.h"
 
-extern t_map	autoplay_team;
-
 t_player	*game_autoplay_get_player(t_player *player)
 {
-  return (map_get(&autoplay_team, &player->id));
+  return (map_get(&g_autoplay_team, &player->id));
 }
