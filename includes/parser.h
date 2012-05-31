@@ -5,7 +5,7 @@
 ** Login   <kersuz_v@epitech.net>
 ** 
 ** Started on  Tue May 29 02:26:28 2012 vincent kersuzan
-** Last update Wed May 30 21:16:43 2012 vincent kersuzan
+** Last update Thu May 31 01:24:04 2012 vincent kersuzan
 */
 
 #ifndef		PARSER_H_
@@ -62,7 +62,7 @@ t_command	*parser_parse(char *data, char *mask);
 int		parser_get_int(t_command *command, unsigned int index);
 char		*parser_get_string(t_command *command, unsigned int index);
 void		parser_command_destroy(t_command *command);
-bool		parser_is_match(char *data, char *mask);
+bool		parser_is_match(char *data, char *mask);/**/
 int		parser_count_arguments(char *mask);
 bool		parser_str_check_contain(char *str, char *authorized);
 
@@ -92,8 +92,5 @@ char            *parser_find_key(char *mask); //retourne le split_str
 char		*parser_extract_elem(char *data, bool last_arg,
 				     char *split_str);
 t_command	*parser_command_create(char *original_str);
-/*
-char		*parser_extract_elem(char *data, int *data_index, 
-				     bool last_arg, char *split_chars); 
-*/
+
 #endif	/*	PARSER_H_	*/
