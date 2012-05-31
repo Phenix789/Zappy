@@ -1,9 +1,9 @@
 /*
 ** player_forward.c for zappy in /home/lukior/Zappy/src/game
-** 
+**
 ** Made by damien vezant
 ** Login   <vezant_d@epitech.net>
-** 
+**
 ** Started on  Tue May 29 07:40:16 2012 damien vezant
 ** Last update Wed May 30 22:08:54 2012 damien vezant
 */
@@ -31,14 +31,14 @@ void		player_forward_end_cb(t_client *client, int error)
 {
   if (!error)
     {
-      list_pop(world[client->player->position.x * client->player->position.y].players, client->player);
-      if (client->player.orientation == NORTH)
+      list_pop(&world[client->player->position.x * client->player->position.y].players, client->player);
+      if (client->player->orientation == OR_NORTH)
 	_forward_player(0, -1, client->player);
-      else if (client->player.orientation == SOUTH)
+      else if (client->player->orientation == OR_SOUTH)
 	_forward_player(0, 1, client->player);
-      else if (client->player.orientation == EAST)
+      else if (client->player->orientation == OR_EAST)
 	_forward_player(1, 0, client->player);
-      else if (client->player.orientation == WEST)
+      else if (client->player->orientation == OR_WEST)
 	_forward_player(-1, 0, client->player);
       session_send(client, REP_OK);
     }
@@ -48,5 +48,6 @@ void		player_forward_end_cb(t_client *client, int error)
 
 void		player_forward_start_cb(t_client *client, t_command *command)
 {
-  register_wakeup(DELAY_STANDARD, player_forward_end_cb, client);
+  (void) command;
+  kernel_register_wakeup(DELAY_STANDARD, player_forward_end_cb, client);
 }

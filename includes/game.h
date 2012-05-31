@@ -7,6 +7,8 @@
 #ifndef		__GAME_H__
 # define	__GAME_H__
 
+typedef struct s_player t_player;
+
 # include	<stdbool.h>
 # include	<stdlib.h>
 # include	<stdio.h>
@@ -77,7 +79,7 @@ typedef struct
   int		y;
 }		t_pos;
 
-typedef struct
+struct s_player
 {
   char		team[TEAM_NAME_SIZE + 1];
   t_orientation	orientation;
@@ -86,55 +88,55 @@ typedef struct
   unsigned int	id;
   int		level;
   int		life;
-}		t_player;
+};
 
 t_player	*player_new();
 void		player_delete(t_player *retiree);
 
 /* done */
 void		player_forward_start_cb(t_client *client, t_command *command);
-void		player_forward_end_cb(t_client *client, bool error);
+void		player_forward_end_cb(t_client *client, int error);
 
 /* done */
 void		player_right_start_cb(t_client *client, t_command *command);
-void		player_right_end_cb(t_client *client, bool error);
+void		player_right_end_cb(t_client *client, int error);
 
 /* done */
 void		player_left_start_cb(t_client *client, t_command *command);
-void		player_left_end_cb(t_client *client, bool error);
+void		player_left_end_cb(t_client *client, int error);
 
 /* TODO !!! */
 void		player_look_start_cb(t_client *client, t_command *command);
-void		player_look_end_cb(t_client *client, bool error);
+void		player_look_end_cb(t_client *client, int error);
 
 /* done */
 void		player_inventory_start_cb(t_client *client, t_command *command);
-void		player_inventory_end_cb(t_client *client, bool error);
+void		player_inventory_end_cb(t_client *client, int error);
 
 /* done */
 void		player_take_start_cb(t_client *client, t_command *command);
-void		player_take_end_cb(t_client *client, bool error);
+void		player_take_end_cb(t_client *client, int error);
 
 /* done */
 void		player_drop_start_cb(t_client *client, t_command *command);
-void		player_drop_end_cb(t_client *client, bool error);
+void		player_drop_end_cb(t_client *client, int error);
 
 /* done */
 void		player_expulse_start_cb(t_client *client, t_command *command);
-void		player_expulse_end_cb(t_client *client, bool error);
+void		player_expulse_end_cb(t_client *client, int error);
 
 /* TODO !!! */
 void		player_broadcast_start_cb(t_client *client, t_command *command);
-void		player_broadcast_end_cb(t_client *client, bool error);
+void		player_broadcast_end_cb(t_client *client, int error);
 
 /* done */
 void		player_incantation_start_cb(t_client *client, t_command *command);
-void		player_incantation_end_cb(t_client *client, bool error);
+void		player_incantation_end_cb(t_client *client, int error);
 
 void		player_fork_start_cb(t_client *client, t_command *command);
-void		player_fork_end_cb(t_client *client, bool error);
+void		player_fork_end_cb(t_client *client, int error);
 
-void		player_connect_nbr(t_client *client, bool error);
+void		player_connect_nbr(t_client *client, int error);
 
 void		player_death_cb(t_client *client, t_command *command);
 
@@ -167,7 +169,7 @@ typedef struct
 void		world_init(int x, int y);
 
 extern t_map	*team_map;
-extern t_map	autoplay_team;
+extern t_map	*autoplay_team;
 extern t_world	game_world;
 
 void		game_turn();

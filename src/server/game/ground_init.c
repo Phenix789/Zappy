@@ -1,9 +1,9 @@
 /*
 ** ground_init.c for zappy in /home/lukior/Zappy/src/server/game
-** 
+**
 ** Made by damien vezant
 ** Login   <vezant_d@epitech.net>
-** 
+**
 ** Started on  Tue May 29 21:40:29 2012 damien vezant
 ** Last update Wed May 30 20:00:15 2012 damien vezant
 */
@@ -32,7 +32,7 @@ static void	generate_ressources(t_tile *tile)
     tile->ressources.thystame += 1;
 }
 
-int		world_init(int x, int y)
+void		world_init(int x, int y)
 {
   int		buff_len;
   int		i;
@@ -40,20 +40,19 @@ int		world_init(int x, int y)
   buff_len = x * y;
   i = 0;
   if ((game_world.world = calloc(1, buff_len * sizeof(t_tile))) == NULL)
-    return(-1);
+    return ;
   game_world.dimensions.x = 0;
-  game_world.diemnsions.y = 0;
+  game_world.dimensions.y = 0;
   while ( i < buff_len)
     {
       game_world.world[i].coord.x = game_world.dimensions.x++;
       game_world.world[i].coord.y = game_world.dimensions.y;
-      if (pos_x == x)
+      if (game_world.world[i].coord.x == x)
 	{
-	  pos_x = 0;
-	  pos_y++;
+	  game_world.world[i].coord.x = 0;
+	  game_world.world[i].coord.y++;
 	}
-      generate_ressources(&ground[i]);
+      generate_ressources(&game_world.world[i]);
       ++i;
     }
-  return (0);
 }

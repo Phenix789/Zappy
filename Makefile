@@ -1,9 +1,9 @@
 ##
 ## Makefile for project_boot in /home/duval_q//Documents/project_reference
-## 
+##
 ## Made by quentin duval
 ## Login   <duval_q@epitech.net>
-## 
+##
 ## Started on  Tue Dec 20 09:40:56 2011 quentin duval
 ##
 
@@ -55,7 +55,7 @@ zappy_server_OBJ=	server/main.o \
 			server/clock/timeval_utils.o \
 			server/clock/clock_get_remaining_time.o \
 			server/game/game_autoplay_add_player.o \
-			server/game/game_autoplay_git_player.o \
+			server/game/game_autoplay_get_player.o \
 			server/game/game_globals.o \
 			server/game/game_init.o \
 			server/game/game_player_add.o \
@@ -102,7 +102,7 @@ LDFLAGS =
 ##control vars
 DEBUG="yes"
 
-##langage specs (tested for :ccp and c)                                             
+##langage specs (tested for :ccp and c)
 EXT=c
 ########end user part
 
@@ -122,7 +122,7 @@ SRC_DIR =       src
 OBJ_DIR =       obj
 DEP_DIR =       .deps
 DOC_DIR =	doc
-########end project folders 
+########end project folders
 
 ########compilation flags
 CXXFLAGS +=     -Werror -Wall -Wextra
@@ -184,7 +184,7 @@ $(DEP_DIR)/%.d: $(SRC_DIR)/%.$(EXT)
 
 
 ########clean objects
-clean:		
+clean:
 	@echo cleaning objects
 	@$(RM) $(ALL_OBJS)
 	@make clean -C $(SUBMAKEPATH)

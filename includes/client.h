@@ -1,9 +1,9 @@
 /*
 ** client.h for zappy in /home/duval_q//Documents/projects/zappy/includes
-** 
+**
 ** Made by quentin duval
 ** Login   <duval_q@epitech.net>
-** 
+**
 ** Started on  Wed May 30 21:54:04 2012 quentin duval
 ** Last update Wed May 30 22:19:24 2012 damien vezant
 */
@@ -17,10 +17,9 @@ typedef struct s_client t_client;
 #include "list.h"
 #include	"game.h"
 #include	"network.h"
+#include "parser.h"
 
 #define CLIENT_MAX_ACTIONS 10
-
-typedef struct s_command t_command;
 
 typedef struct s_client_manager
 {

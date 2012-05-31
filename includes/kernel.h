@@ -29,7 +29,7 @@ typedef struct s_kernel
 	t_socket listener;
 } t_kernel;
 
-typedef void (*kn_wakeup_cb)(t_client *, bool);
+typedef void (*kn_wakeup_cb)(t_client *, int);
 
 typedef struct s_kernel_callback
 {
