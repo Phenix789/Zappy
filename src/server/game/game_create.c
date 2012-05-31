@@ -12,10 +12,7 @@
 
 int		game_create(int x, int y, int nb_per_team)
 {
-  int		bufflen;
-
   srand(getpid() * time(NULL));
-  bufflen = x * y;
   if ((g_game_world = calloc(1, sizeof(t_world))) == NULL)
     return (-1);
   g_game_world->dimensions.x = x;
