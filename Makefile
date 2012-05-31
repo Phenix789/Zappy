@@ -5,10 +5,6 @@
 ## Login   <duval_q@epitech.net>
 ##
 ## Started on  Tue Dec 20 09:40:56 2011 quentin duval
-<<<<<<< HEAD
-## Last update Thu May 31 02:59:25 2012 vincent kersuzan
-=======
->>>>>>> 55e189f77038b8139073b0b1bf912d1d41f2b82b
 ##
 
 #########################

@@ -5,18 +5,15 @@
 ** Login   <kersuz_v@epitech.net>
 **
 ** Started on  Tue May 29 02:26:28 2012 vincent kersuzan
-** Last update Thu May 31 01:24:04 2012 vincent kersuzan
+** Last update Thu May 31 03:05:42 2012 quentin duval
 */
 
 #ifndef		PARSER_H_
 # define	PARSER_H_
 
-<<<<<<< HEAD
-# include	<stdio.h>
-=======
 typedef struct s_command t_command;
 
->>>>>>> 55e189f77038b8139073b0b1bf912d1d41f2b82b
+#include	<stdio.h>
 # include	<stdbool.h>
 
 # include	"list.h"
