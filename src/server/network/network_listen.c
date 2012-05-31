@@ -5,7 +5,7 @@
 ** Login   <duval_q@epitech.net>
 ** 
 ** Started on  Tue May 29 04:54:49 2012 quentin duval
-** Last update Thu May 31 22:22:49 2012 quentin duval
+** Last update Thu May 31 22:50:54 2012 quentin duval
 */
 
 #include	<stdio.h>
@@ -64,11 +64,16 @@ static void	find_speaker(fd_set *set,
 
   it = list_iterator_begin(list);
   ret = (list_empty(list))?EXIT_FAILURE:EXIT_SUCCESS;
+  logger_verbose("[NETWORK] begin search %d", ret);
   while (ret != EXIT_FAILURE)
     {
       tmp = list_iterator_get(it);
+      logger_verbose("[NETWORK] search for fd %d messages", extract(tmp));
       if (FD_ISSET(extract(tmp), set))
-	execute(tmp);
+	{
+	  logger_verbose("[NETWORK] found speaking fd : %d", extract(tmp));
+	  execute(tmp);
+	}
       ret = list_iterator_next(it);
     }
   list_iterator_destroy(it);
@@ -95,7 +100,7 @@ int			network_listen(struct timeval *timeout)
 		   &extract_from_socket,
 		   &execute_from_socket);
       find_speaker(&set,
-                   network->read,
+                   network->listened,
                    &extract_from_listener,
                    &execute_from_listener);
     }
