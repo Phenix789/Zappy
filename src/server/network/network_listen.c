@@ -5,7 +5,7 @@
 ** Login   <duval_q@epitech.net>
 ** 
 ** Started on  Tue May 29 04:54:49 2012 quentin duval
-** Last update Thu May 31 22:50:54 2012 quentin duval
+** Last update Thu May 31 23:21:19 2012 quentin duval
 */
 
 #include	<stdio.h>
@@ -37,6 +37,7 @@ static void		setfd_list(t_list *list,
       tmp = list_iterator_get(it);
       if (extract(tmp) >= network->nfds)
 	network->nfds = extract(tmp) + 1;
+      logger_verbose("[NETWORK] adding fd %d", extract(tmp));
       FD_SET(extract(tmp), set);
       ret = list_iterator_next(it);
     }
