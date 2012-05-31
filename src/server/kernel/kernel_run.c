@@ -8,6 +8,8 @@ void kernel_run()
   t_kernel_callback *first;
   int count;
 
+  if (!kernel_is_init(KN_SV_INIT))
+    return;
   g_kernel->run = true;
   while (g_kernel->run)
     {

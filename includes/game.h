@@ -80,7 +80,7 @@ typedef struct
   int		y;
 }		t_pos;
 
-typedef struct	s_player
+struct	s_player
 {
   char		team[TEAM_NAME_SIZE + 1];
   t_orientation	orientation;
@@ -89,7 +89,7 @@ typedef struct	s_player
   unsigned int	id;
   int		level;
   int		life;
-}		t_player;
+};
 
 t_player	*player_new();
 void		player_delete(t_player *retiree);
