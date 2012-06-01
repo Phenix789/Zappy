@@ -171,6 +171,8 @@ t_tile		*player_get_tile(t_player *player);
 void		game_turn();
 int		game_create(int x, int y, int nb_per_team);
 int		game_init(int x, int y, int nb_per_team);
+void		game_destroy();
+void		game_world_dump();
 
 void		game_player_add(char *team, t_player *player);
 void		game_player_remove(char *team, t_player *player);
