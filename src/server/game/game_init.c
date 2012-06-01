@@ -5,7 +5,7 @@
 ** Login   <vezant_d@epitech.net>
 **
 ** Started on  Tue May 29 07:21:02 2012 damien vezant
-** Last update Tue May 29 07:22:05 2012 damien vezant
+** Last update Fri Jun  1 02:24:48 2012 quentin duval
 */
 
 #include	"game.h"

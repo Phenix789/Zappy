@@ -1,9 +1,9 @@
 /*
 ** parser_save_data.c for zappy in /home/kersuz_v//Zappy/src/server/parser
-** 
+**
 ** Made by vincent kersuzan
 ** Login   <kersuz_v@epitech.net>
-** 
+**
 ** Started on  Wed May 30 21:17:23 2012 vincent kersuzan
 ** Last update Thu May 31 17:28:11 2012 vincent kersuzan
 */
@@ -12,6 +12,7 @@
 #include	<stdlib.h>
 
 #include	"parser.h"
+#include "logger.h"
 
 static int	error_leaving_int(void *buf1, void *buf2,
 				  char *errno_msg, char *error_msg)
@@ -23,7 +24,7 @@ static int	error_leaving_int(void *buf1, void *buf2,
   if (errno_msg)
     perror(errno_msg);
   if (error_msg)
-    fprintf(stderr, error_msg);
+    logger_error(error_msg);
   return (-1);
 }
 
