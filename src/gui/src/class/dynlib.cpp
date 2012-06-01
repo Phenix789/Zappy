@@ -1,7 +1,7 @@
+#include "IGui.hpp"
 #include "sfml.hpp"
-#include "gui.hpp"
 
-extern "C" Igui	*create(const game::map &map)
+extern "C" Igui	*create(game::data &data)
 {
-  return (new sfml(map));
+  return (new sfml(data));
 }

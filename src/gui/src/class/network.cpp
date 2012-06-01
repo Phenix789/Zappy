@@ -1,3 +1,4 @@
+#include <iostream>
 #include <sstream>
 #include <arpa/inet.h>
 #include <sys/select.h>
@@ -7,7 +8,7 @@
 #include <cstring>
 #include "network.hpp"
 
-network::network(const std::string &host, const std::string &port) : sockfd(-1)
+Network::Network(const std::string &host, const std::string &port) : sockfd(-1)
 {
   struct in_addr	addr;
   struct sockaddr_in	sockaddr;
@@ -25,13 +26,13 @@ network::network(const std::string &host, const std::string &port) : sockfd(-1)
     }
 }
 
-network::~network()
+Network::~Network()
 {
   if (this->sockfd != -1)
     this->disconnect();
 }
 
-ssize_t	network::read(std::string &output)
+ssize_t	Network::read(std::string &output)
 {
   ssize_t	ret;
 
@@ -44,7 +45,7 @@ ssize_t	network::read(std::string &output)
   return (ret);
 }
 
-ssize_t	network::write(const std::string &input)
+ssize_t	Network::write(const std::string &input)
 {
   if (this->sockfd == -1)
     return (-1);
@@ -53,14 +54,14 @@ ssize_t	network::write(const std::string &input)
   return (send(this->sockfd, input.c_str(), input.size(), MSG_NOSIGNAL));
 }
 
-bool	network::is_connect()
+bool	Network::is_connect()
 {
   if (this->sockfd == -1)
     return (false);
   return (true);
 }
 
-bool	network::read_ready()
+bool	Network::read_ready()
 {
   fd_set                fd;
 
@@ -83,7 +84,7 @@ bool	network::read_ready()
   return (false);
 }
 
-bool	network::write_ready()
+bool	Network::write_ready()
 {
   fd_set                fd;
 
@@ -98,7 +99,7 @@ bool	network::write_ready()
   return (false);
 }
 
-int	network::disconnect()
+int	Network::disconnect()
 {
   int	ret;
 
@@ -109,4 +110,57 @@ int	network::disconnect()
       return (ret);
     }
   return (0);
+}
+
+Network		&operator<<(Network &sock, const std::string &msg)
+{
+  std::string	copy(msg);
+  size_t	size;
+
+  while (copy.size() > 0)
+    {
+      size = (copy.size() > 511 ? 511 : copy.size());
+      if (sock.write(copy.substr(0, size)) == -1)
+	{
+	  std::cerr << "Network down" << std::endl;
+	  return (sock);
+	}
+      copy.erase(0, size);
+    }
+  return (sock);
+}
+
+Network		&operator>>(Network &sock, std::string &buffer)
+{
+  std::string	tmp;
+
+  buffer.clear();
+  while (sock.read_ready())
+    {
+      if (sock.read(tmp) == -1)
+	{
+	  std::cerr << "Network down" << std::endl;
+	  return (sock);
+	}
+      buffer += tmp;
+      tmp.clear();
+    }
+  return (sock);
+}
+
+Network		&operator>>(Network &sock, const std::list<std::string> &list)
+{
+  std::list<std::string>	copy(list);
+
+  while (copy.size() > 0)
+    {
+      if (sock.write_ready())
+        {
+          sock << copy.front();
+          copy.pop_front();
+        }
+      else
+	std::cerr << "Socket is not ready (down ?)" << std::endl;
+    }
+  return (sock);
 }

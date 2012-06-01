@@ -3,12 +3,20 @@
 
 #include <list>
 #include <string>
-#include "data_thread.hpp"
+#include "game.hpp"
 
-namespace parser
+class parser
 {
-  bool	parse_command(std::string &str, std::list<std::string> &list);
-  bool	interpret_command(std::list<std::string> &list, data_thread &data);
+public:
+  parser();
+  ~parser();
+
+public:
+  bool	parse(std::string &buffer);
+  bool	interpret(game::data &data);
+
+private:
+  std::list<std::string>	list;
 };
 
 #endif /* __PARSER_HPP_ */
