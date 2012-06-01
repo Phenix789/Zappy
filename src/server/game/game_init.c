@@ -10,6 +10,25 @@
 
 #include	"game.h"
 
+static int	_register_functions()
+{
+  if (session_register_in("avance", "%s", player_forward_start_cb) < 0 ||
+      session_register_in("droite", "%s", player_right_start_cb) < 0 ||
+      session_register_in("gauche", "%s", player_left_start_cb) < 0 ||
+      session_register_in("voir", "%s", player_look_start_cb) < 0 ||
+      session_register_in("inventaire", "%s", player_inventory_start_cb) < 0 ||
+      session_register_in("prend", "%s %s", player_take_start_cb) < 0 ||
+      session_register_in("pose", "%s %s", player_drop_start_cb) < 0 ||
+      session_register_in("expulse", "%s", player_expulse_start_cb) < 0 ||
+      session_register_in("broadcast", "%s %s", player_broadcast_start_cb) < 0 ||
+      session_register_in("incantation", "%s", player_incantation_start_cb) < 0 ||
+      session_register_in("fork", "%s", player_fork_start_cb) < 0 ||
+      session_register_in("connect_nbr", "%s", player_connect_nbr) < 0 ||
+      session_register_in("-", "%s", player_death_cb) < 0)
+    return (-1);
+  return (0);
+}
+
 static void	_generate_tile(t_tile *tile)
 {
   tile->ressources.food += rand() % 4;
@@ -32,7 +51,7 @@ int		game_init(int x, int y, int nb_per_team)
   int		idy;
 
   if (game_create(x, y, nb_per_team) == -1)
-    return (0);
+    return (-1);
   idx = 0;
   idy = 0;
   while (idy < y)
@@ -45,5 +64,7 @@ int		game_init(int x, int y, int nb_per_team)
     x = 0;
     ++idy;
   }
-  return (1);
+  if (_register_functions())
+    return (-1);
+  return (0);
 }
