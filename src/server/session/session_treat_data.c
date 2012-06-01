@@ -35,7 +35,8 @@ void session_treat_data(t_socket *socket, t_client *client)
 	  if (bf.read < BUFFER_SIZE)
 	    return;
 	  bf.read = socket_read(socket, bf.buffer, 1024);
-	  if (bf.read == -1)
+	  logger_verbose("[SESSION] Read %i data", bf.read);
+	  if (bf.read == 0)
 	    {
 	      session_close(client);
 	      return;
@@ -76,6 +77,7 @@ void session_execute(t_client *client, char *cmd)
 
 void session_close(t_client *client)
 {
+  logger_message("[SESSION] Close connection to client");
   network_del_socket(client->socket);
   socket_close(client->socket);
   client_destroy(client);
