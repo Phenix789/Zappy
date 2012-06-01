@@ -18,6 +18,7 @@ void		player_drop_end_cb(t_client *client, int error)
   int		*inventory;
   t_tile	*tile;
 
+  logger_debug("[GAME] ");
   if (!error)
     {
       tile = player_get_tile(client->player);

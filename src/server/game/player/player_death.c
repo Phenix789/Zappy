@@ -13,5 +13,6 @@
 void		player_death_cb(t_client *client, t_command *command)
 {
   (void)command;
+  logger_verbose("[GAME] player %ud is dead", client->player->id);
   session_send(client, REP_DEATH);
 }

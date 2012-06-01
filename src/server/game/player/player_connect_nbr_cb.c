@@ -13,5 +13,6 @@
 void		player_connect_nbr_cb(t_client *client, t_command *command)
 {
   (void)command;
+  logger_verbose("[GAME] command connect_nbr treated");
   session_send(client, REP_CONNECT_NBR, g_game_world->connect_nbr);
 }

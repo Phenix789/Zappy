@@ -13,4 +13,5 @@
 void		player_delete(t_player *retiree)
 {
   free(retiree);
+  logger_debug("[GAME] player %ud has been deleted", retiree->id);
 }

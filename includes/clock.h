@@ -5,7 +5,7 @@
 ** Login   <duval_q@epitech.net>
 ** 
 ** Started on  Tue May 29 10:04:53 2012 quentin duval
-** Last update Wed May 30 20:19:28 2012 quentin duval
+** Last update Fri Jun  1 16:56:17 2012 quentin duval
 */
 
 #ifndef __CLOCK_H__
@@ -21,8 +21,8 @@ typedef	struct	s_clock
   unsigned int		frequency;
 } t_clock;
 
-t_clock		*clock_create();
-void		clock_init(t_clock *);
+void		clock_create();
+void		clock_init();
 void		clock_destroy();
 t_clock		*get_clock();
 

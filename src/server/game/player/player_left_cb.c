@@ -14,11 +14,16 @@ void		player_left_end_cb(t_client *client, int error)
 {
   if (!error)
     {
+      logger_debug("[GAME] client pointer : %p, player pointer : %p", client, client->player);
+      logger_debug("[GAME] player position %d:%d", client->player->position.x,
+		   client->player->position.y);
       if (client->player->orientation != OR_NORTH)
 	--client->player->orientation;
       else
 	client->player->orientation = OR_WEST;
       session_send(client, REP_OK);
+      logger_debug("[GAME] new player position %d:%d",
+		   client->player->position.x, client->player->position.y);
     }
   else
     session_send(client, REP_KO);

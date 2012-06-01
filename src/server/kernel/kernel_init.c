@@ -5,7 +5,7 @@
 ** Login   <duval_q@epitech.net>
 **
 ** Started on  Thu May 31 16:30:58 2012 quentin duval
-** Last update Thu May 31 17:13:33 2012 quentin duval
+** Last update Fri Jun  1 20:52:16 2012 quentin duval
 */
 
 #include	"kernel.h"
@@ -62,7 +62,8 @@ bool kernel_clock_init(int frequence)
   if (!kernel_is_init(KN_SV_CLOCK))
     {
       logger_message("[KERNEL] Kernel clock init with frequency at %i", frequence);
-      client_manager_init(frequence);
+      clock_init();
+      clock_set_frequency(frequence);
       g_kernel->init = g_kernel->init | KN_SV_CLOCK;
       return true;
     }

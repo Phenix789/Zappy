@@ -5,7 +5,7 @@
 ** Login   <kersuz_v@epitech.net>
 ** 
 ** Started on  Tue May 29 03:43:20 2012 vincent kersuzan
-** Last update Fri Jun  1 01:56:30 2012 vincent kersuzan
+** Last update Fri Jun  1 16:42:10 2012 quentin duval
 */
 
 #ifndef		SESSION_H_
@@ -18,7 +18,7 @@
 # include	"parser.h"
 # include	"network.h"
 
-typedef void	(*t_se_execute_cb) (void *, t_command *);
+typedef void	(*t_se_execute_cb) (t_client *, t_command *);
 
 typedef struct		s_instruction_in
 {

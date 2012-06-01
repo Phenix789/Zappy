@@ -18,6 +18,7 @@ typedef struct s_player t_player;
 # include	"session.h"
 # include	"kernel.h"
 # include	"parser.h"
+# include	"logger.h"
 
 # define	REP_OK		"ok"
 # define	REP_KO		"ko"
@@ -130,7 +131,7 @@ void		player_incantation_end_cb(t_client *client, int error);
 void		player_fork_start_cb(t_client *client, t_command *command);
 void		player_fork_end_cb(t_client *client, int error);
 
-void		player_connect_nbr(t_client *client, int error);
+void            player_connect_nbr_cb(t_client *client, t_command *command);
 
 void		player_death_cb(t_client *client, t_command *command);
 
@@ -170,7 +171,7 @@ t_tile		*player_get_tile(t_player *player);
 
 void		game_turn();
 int		game_create(int x, int y, int nb_per_team);
-int		game_init(int x, int y, int nb_per_team);
+bool		game_init(int x, int y, int nb_per_team);
 void		game_destroy();
 void		game_world_dump();
 

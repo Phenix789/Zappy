@@ -1,6 +1,7 @@
 
 #include "kernel.h"
 #include "clock.h"
+#include	"logger.h"
 
 extern t_kernel *g_kernel;
 
@@ -44,7 +45,7 @@ int kernel_wakeup()
     {
       begin = wakeup->begin;
       clock_move_date(&begin, wakeup->time);
-      if (clock_compare(time, &begin) <= 0)
+      if (clock_compare(time, &begin) > 0)
 	{
 	  (*wakeup->callback)(wakeup->param, KN_ERROR_OK);
 	  free(wakeup);
