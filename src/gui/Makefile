@@ -5,7 +5,7 @@
 ## Login   <frizac_b@epitech.net>
 ##
 ## Started on  Mon Feb  6 14:18:30 2012 Alexandre Frizac
-## Last update Fri Jun  1 11:14:34 2012 Alexandre Frizac
+## Last update Fri Jun  1 15:10:39 2012 Alexandre Frizac
 ##
 
 NAME		= a.out
@@ -18,6 +18,7 @@ CC		= g++
 CXXFLAGS	+= -I include
 CXXFLAGS	+= -Wall -Wextra -Wshadow -g
 LDFLAGS		+= -l sfml-system -l sfml-window
+LDFLAGS		+= -l boost_regex
 
 SRC	= $(addprefix src/, \
 		class/dynlib.cpp \
@@ -28,6 +29,7 @@ SRC	= $(addprefix src/, \
 		gui.cpp\
 		main.cpp\
 		network.cpp\
+		parser_cmd.cpp\
 		)
 OBJ	= $(addprefix $(OBJ_DIR)/, $(SRC:$(SRC_DIR)/%.cpp=%.o))
 

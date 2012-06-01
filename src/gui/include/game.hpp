@@ -37,14 +37,21 @@ namespace game
   /* -- Map -- */
   enum  ress
     {
-      LINEMATE = 1,
-      DERAUMATRE = 2,
-      SIBUR = 4,
-      MENDIANE = 8,
-      PHIRAS = 16,
-      THYSTAME = 32,
-      FOOD = 64
+      FOOD,
+      LINEMATE,
+      DERAUMATRE,
+      SIBUR,
+      MENDIANE,
+      PHIRAS,
+      THYSTAME
     };
+
+  struct tiles
+  {
+    tiles();
+
+    int	ressources[7];
+  };
 
   class map
   {
@@ -53,18 +60,18 @@ namespace game
     ~map();
 
   public:
-    void        add_ress(unsigned int x, unsigned int y, ress type);
-    void        rm_ress(unsigned int x, unsigned int y, ress type);
+    void        set_ress(unsigned int x, unsigned int y, ress type, unsigned int nb);
     void        add_player(unsigned int x, unsigned int y, int num_pl);
     void        rm_player(int num_pl);
     void        setDim(unsigned int x, unsigned int y);
-    const std::vector<int>              getTile() const;
+    const std::vector<tiles>              getTile() const;
     const std::list<game::player>       getPlayer() const;
 
-  private:
+  public:
+    //  private:
     unsigned int                size_x;
     unsigned int                size_y;
-    std::vector<int>            _case;
+    std::vector<tiles>          _tiles;
     std::list<game::player>     _players;
   };
 
@@ -81,6 +88,7 @@ namespace game
     bool                        connection;
 
   public:
+    void	send_msg(const std::string &str);
     bool	msg_to_send();
   };
 

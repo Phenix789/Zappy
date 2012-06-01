@@ -36,7 +36,6 @@ Network		&operator>>(Network &sock, std::string &buffer);
 class parser;
 namespace network
 {
-  bool		init_data(game::data &data, Network &sock);
   void		send_list(std::list<std::string> &list, Network &sock);
   bool		iteration(game::data &data, parser &pars, Network &sock);
 };

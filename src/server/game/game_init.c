@@ -21,7 +21,7 @@ static int	_register_functions()
       session_register_in("prend", "%s %s", player_take_start_cb) < 0 ||
       session_register_in("pose", "%s %s", player_drop_start_cb) < 0 ||
       session_register_in("expulse", "%s", player_expulse_start_cb) < 0 ||
-      //      session_register_in("broadcast", "%s %s", player_broadcast_start_cb) < 0 ||
+      session_register_in("broadcast", "%s %s", player_broadcast_start_cb) < 0 ||
       session_register_in("incantation", "%s", player_incantation_start_cb) < 0 ||
       session_register_in("fork", "%s", player_fork_start_cb) < 0 ||
       session_register_in("connect_nbr", "%s", player_connect_nbr_cb) < 0 ||
