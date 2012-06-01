@@ -44,6 +44,8 @@ typedef struct s_kernel_callback
 	void* param;
 } t_kernel_callback;
 
+#define IS_FLAG(str) ((str)[0] == '-')
+
 t_kernel_callback *_kernel_create_callback(int turn, kn_wakeup_cb callback, void *param);
 
 void		kernel_init();
@@ -65,6 +67,7 @@ bool kernel_register_wakeup(unsigned int time, kn_wakeup_cb callback, void *para
 int kernel_wakeup_insert(t_kernel_callback *first, t_kernel_callback *second);
 int kernel_wakeup();
 
+int kernel_retrieve_flag_index(int argc, char **argv, char *flag);
 char *kernel_getopt(int argc, char **argv, char *flag, char *defaut);
 int kernel_getopt_int(int argc, char **argv, char *flag, int defaut);
 

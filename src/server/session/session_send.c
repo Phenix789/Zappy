@@ -1,9 +1,9 @@
 /*
 ** session_send.c for zappy in /home/kersuz_v//Zappy/src/session
-** 
+**
 ** Made by vincent kersuzan
 ** Login   <kersuz_v@epitech.net>
-** 
+**
 ** Started on  Tue May 29 04:02:23 2012 vincent kersuzan
 ** Last update Fri Jun  1 01:04:27 2012 vincent kersuzan
 */
@@ -80,6 +80,7 @@ int		session_send(t_client *client, char *mask, ...)
   int		mask_index;
   char		*buffer;
 
+  logger_verbose("[SESSION] Send data with mask '%s'", mask);
   (void)client;
   buffer = NULL;
   mask_index = 0;
@@ -92,7 +93,6 @@ int		session_send(t_client *client, char *mask, ...)
 	return (error_leaving(buffer, NULL, NULL));
     }
   va_end(ap);
-  printf("sending : '%s'\n", buffer);
   free(buffer);
   return (0);
 }

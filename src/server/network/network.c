@@ -1,9 +1,9 @@
 /*
 ** network.c for zappy in /home/duval_q//Documents/projects/zappy/src/server/net
-** 
+**
 ** Made by quentin duval
 ** Login   <duval_q@epitech.net>
-** 
+**
 ** Started on  Tue May 29 03:54:36 2012 quentin duval
 ** Last update Thu May 31 21:59:02 2012 quentin duval
 */
@@ -48,6 +48,7 @@ bool			network_destroy()
   t_network		*network;
 
   network = get_network();
+  //close les sockets
   list_free(network->listened);
   list_free(network->read);
   free(network->listened);

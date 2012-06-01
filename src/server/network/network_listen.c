@@ -59,6 +59,7 @@ static void	find_speaker(fd_set *set,
 			     SOCKET (*extract)(void *),
 			     void (*execute)(void *))
 {
+  //bug potentiel du close socket
   t_list_iterator       *it;
   int                   ret;
   void			*tmp;
@@ -73,9 +74,11 @@ static void	find_speaker(fd_set *set,
       if (FD_ISSET(extract(tmp), set))
 	{
 	  logger_verbose("[NETWORK] found speaking fd : %d", extract(tmp));
-	  execute(tmp);
+	  ret = list_iterator_next(it);
+	  (*execute)(tmp);
 	}
-      ret = list_iterator_next(it);
+      else
+	ret = list_iterator_next(it);
     }
   list_iterator_destroy(it);
 }

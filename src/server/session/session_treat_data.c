@@ -18,6 +18,7 @@ typedef struct s_buffer
   int read;
   int pos;
   int index;
+  int count;
   char buffer[BUFFER_SIZE];
   char command[BUFFER_SIZE];
 } t_buffer;
@@ -27,7 +28,7 @@ void session_treat_data(t_socket *socket, t_client *client)
   t_buffer bf;
 
   bf.read = bf.pos = BUFFER_SIZE;
-  bf.index = 0;
+  bf.index = bf.count = 0;
   while (bf.index < BUFFER_SIZE)
     {
       if (bf.read <= bf.pos)
@@ -36,11 +37,12 @@ void session_treat_data(t_socket *socket, t_client *client)
 	    return;
 	  bf.read = socket_read(socket, bf.buffer, 1024);
 	  logger_verbose("[SESSION] Read %i data", bf.read);
-	  if (bf.read == 0)
+	  if (bf.read == 0 && bf.count == 0)
 	    {
 	      session_close(client);
 	      return;
 	    }
+	  bf.count++;
 	  bf.pos = 0;
 	}
       if (bf.buffer[bf.pos] == '\n')

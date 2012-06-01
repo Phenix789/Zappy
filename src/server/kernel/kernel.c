@@ -29,15 +29,26 @@ void		kernel_init()
 
 bool		kernel_init_with_argv(int argc, char **argv)
 {
+  int index;
+  int team;
+
   kernel_init();
   if (kernel_session_init(&g_kernel->listener, kernel_getopt_int(argc, argv, "-p", 3945)) &&
       kernel_client_init() &&
       kernel_game_init(kernel_getopt_int(argc, argv, "-x", 10), kernel_getopt_int(argc, argv, "-y", 10), kernel_getopt_int(argc, argv, "-c", 10)) &&
-	  kernel_clock_init(kernel_getopt_int(argc, argv, "-t", 100)))
+      kernel_clock_init(kernel_getopt_int(argc, argv, "-t", 100)))
     {
-      logger_error("[KERNEL] Kernel game not started!!");
+      index = kernel_retrieve_flag_index(argc, argv, "-n") + 1;
+      team = 0;
+      if (index == 0)
+	return false;
+      while (!IS_FLAG(argv[index]))
+	{
+	  kernel_add_team(argv[index++]);
+	  team++;
+	}
       game_world_dump();
-      return true;
+      return team > 0;
     }
   return false;
 }

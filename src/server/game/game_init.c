@@ -10,7 +10,7 @@
 
 #include	"game.h"
 
-static int	_register_functions()
+static int _register_functions()
 {
   logger_debug("[GAME] initializing callbacks");
   if (session_register_in("avance", "%s", player_forward_start_cb) < 0 ||
@@ -26,49 +26,51 @@ static int	_register_functions()
       session_register_in("fork", "%s", player_fork_start_cb) < 0 ||
       session_register_in("connect_nbr", "%s", player_connect_nbr_cb) < 0 ||
       session_register_in("-", "%s", player_death_cb) < 0)
-    return (-1);
-  return (0);
+    return(-1);
+  return(0);
 }
 
-static void	_generate_tile(t_tile *tile)
+static void _generate_tile(t_tile *tile)
 {
   logger_debug("[GAME] initializing tile %d:%d", tile->coord.x, tile->coord.y);
-  tile->ressources.food += rand() % 4;
-  tile->ressources.linemate += rand() % 1;
+  tile->ressources.food = rand() % 4;
+  tile->ressources.linemate = rand() % 2;
   if ((rand() % 100) < 25)
-    tile->ressources.deraumere += 1;
-  else if ((rand() % 100) < 20)
-    tile->ressources.sibur += 1;
-  else if ((rand() % 100) < 15)
-    tile->ressources.mendiane += 1;
-  else if ((rand() % 100) < 10)
-    tile->ressources.phiras += 1;
-  else if ((rand() % 100) < 5)
-    tile->ressources.thystame += 1;
+    tile->ressources.deraumere = 1;
+  if ((rand() % 100) < 20)
+    tile->ressources.sibur = 1;
+  if ((rand() % 100) < 15)
+    tile->ressources.mendiane = 1;
+  if ((rand() % 100) < 10)
+    tile->ressources.phiras = 1;
+  if ((rand() % 100) < 5)
+    tile->ressources.thystame = 1;
 }
 
-bool		game_init(int x, int y, int nb_per_team)
+bool game_init(int x, int y, int nb_per_team)
 {
-  int		idx;
-  int		idy;
+  int idx;
+  int idy;
 
   logger_verbose("[GAME] starting game init");
   if (game_create(x, y, nb_per_team) == -1)
-    return (false);
+    return(false);
   idx = 0;
   idy = 0;
   while (idy < y)
-  {
-    while (idx < x)
     {
-      _generate_tile(&g_game_world->world[idx * idy]);
-      ++idx;
+      while (idx < x)
+	{
+	  g_game_world->world[idx * idy].coord.x = idx;
+	  g_game_world->world[idx * idy].coord.y = idy;
+	  _generate_tile(&g_game_world->world[idx * idy]);
+	  ++idx;
+	}
+      idx = 0;
+      ++idy;
     }
-    x = 0;
-    ++idy;
-  }
   if (_register_functions())
-    return (false);
+    return(false);
   logger_verbose("[GAME] game module correctly initialized");
-  return (true);
+  return(true);
 }

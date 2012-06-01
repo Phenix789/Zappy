@@ -5,7 +5,7 @@
 ** Login   <duval_q@epitech.net>
 **
 ** Started on  Thu May 31 16:30:58 2012 quentin duval
-** Last update Fri Jun  1 20:52:16 2012 quentin duval
+** Last update Fri Jun  1 20:57:33 2012 quentin duval
 */
 
 #include	"kernel.h"

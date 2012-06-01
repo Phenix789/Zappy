@@ -24,11 +24,11 @@ void		game_world_dump()
   {
     while (idx < g_game_world->dimensions.x)
     {
-      tile = &g_game_world->world[idx * idy];
-      assets = &g_game_world->item_count;
-      printf("{%i %i:%i:%i:%i:%i:%i:%i} ", list_size(&tile->players),
+      tile = &g_game_world->world[idx + (idy * g_game_world->dimensions.x)];
+      assets = &tile->ressources;
+      printf("{%i %i:%i:%i:%i:%i:%i:%i} ", list_size(&tile->players), assets->food,
 	     assets->linemate, assets->deraumere, assets->sibur,
-	     assets->mendiane, assets->phiras, assets->thystame, assets->food);
+	     assets->mendiane, assets->phiras, assets->thystame);
       ++idx;
     }
     printf("\n");

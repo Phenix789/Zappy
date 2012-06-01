@@ -1,9 +1,7 @@
 
 #include "kernel.h"
 
-#define IS_FLAG(str) ((str)[0] == '-')
-
-static int kernel_retrieve_flag_index(int argc, char **argv, char *flag)
+int kernel_retrieve_flag_index(int argc, char **argv, char *flag)
 {
   int i;
 

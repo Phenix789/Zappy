@@ -98,6 +98,7 @@ zappy_server_OBJ=	server/main.o \
 			server/kernel/kernel_opt.o \
 			server/kernel/kernel_run.o \
 			server/kernel/kernel_signal.o \
+			server/kernel/kernel_team.o \
 			server/kernel/kernel_wakeup.o \
 			server/client/client.o \
 			server/client/client_action.o \

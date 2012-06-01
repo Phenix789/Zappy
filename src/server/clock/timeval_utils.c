@@ -5,12 +5,13 @@
 ** Login   <duval_q@epitech.net>
 ** 
 ** Started on  Wed May 30 19:40:21 2012 quentin duval
-** Last update Fri Jun  1 17:11:19 2012 quentin duval
+** Last update Fri Jun  1 21:06:07 2012 quentin duval
 */
 
 #include	<sys/time.h>
 
 #include	"time_utils.h"
+#include	"logger.h"
 
 void		timeval_add(struct timeval *res,
 			    struct timeval *date1,
@@ -39,11 +40,19 @@ void    timeval_diff(struct timeval *res,
                      struct timeval *date1,
                      struct timeval *date2)
 {
-  if (date1->tv_sec > date2->tv_sec)
+  logger_verbose("[CLOCK] timeval diff");
+  if (date1->tv_sec >= date2->tv_sec)
     {
+      logger_verbose("[CLOCK] compute sec");
       res->tv_sec = date1->tv_sec - date2->tv_sec;
-      if (date1->tv_usec > date2->tv_usec)
+      if (date1->tv_usec >= date2->tv_usec)
 	res->tv_usec = date1->tv_usec - date2->tv_usec;
+      else
+	{
+	  logger_verbose("[CLOCK] compute usec");
+	  res->tv_sec = res->tv_sec - 1;
+	  res->tv_usec = date2->tv_usec - date1->tv_usec;
+	}
     }
 }
 
