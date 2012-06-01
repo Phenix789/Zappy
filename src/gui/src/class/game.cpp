@@ -1,3 +1,4 @@
+#include <string>
 #include <iostream>
 #include "game.hpp"
 
@@ -23,6 +24,10 @@ namespace game
     return (false);
   }
 
+  void	data::send_msg(const std::string &str)
+  {
+    this->ask.push_back(str);
+  }
 
   map::map() : size_x(-1), size_y(-1)
   {

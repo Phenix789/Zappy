@@ -36,6 +36,7 @@ bool		kernel_init_with_argv(int argc, char **argv)
 	  kernel_clock_init(kernel_getopt_int(argc, argv, "-t", 100)))
     {
       logger_error("[KERNEL] Kernel game not started!!");
+      game_world_dump();
       return true;
     }
   return false;

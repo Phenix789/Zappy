@@ -68,12 +68,14 @@ zappy_server_OBJ=	server/main.o \
 			server/game/game_autoplay_add_player.o \
 			server/game/game_autoplay_get_player.o \
 			server/game/game_create.o \
+			server/game/game_destroy.o \
 			server/game/game_globals.o \
 			server/game/game_init.o \
 			server/game/game_player_add.o \
 			server/game/game_player_remove.o \
 			server/game/game_turn.o \
 			server/game/game_init.o \
+			server/game/game_world_dump.o \
 			server/game/player/player_death.o \
 			server/game/player/player_delete.o \
 			server/game/player/player_drop_cb.o \

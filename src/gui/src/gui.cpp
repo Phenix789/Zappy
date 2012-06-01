@@ -1,21 +1,36 @@
-#include <unistd.h>
+#include <iostream>
 #include <cstdlib>
+#include <unistd.h>
 #include "game.hpp"
 #include "network.hpp"
 #include "IGui.hpp"
+#include "parser.hpp"
 
 int	game::run_gui(data &data, Network &sock)
 {
-  Igui	*gui;
+  parser	pars;
+  Igui		*gui;
 
+  data.send_msg("GRAPHIC\n");
+  if (network::iteration(data, pars, sock) == false)
+    {
+      std::cout << "game::run_gui : EXIT_FAILURE" << std::endl;
+      return (EXIT_FAILURE);
+    }
   gui = create(data);
   gui->init();
-  while (gui->is_running())
+  while (gui->is_running() && data.connection)
     {
+      if (network::iteration(data, pars, sock) == false)
+	{
+	  std::cerr << "game::run_gui : connection lost" << std::endl;
+	  gui->exit();
+	}
       gui->process_event();
       gui->draw_map();
-      usleep(50000);
     }
+  std::cout << "game::run_gui : EXIT_SUCCESS" << std::endl;
   gui->exit();
+  delete gui;
   return (EXIT_SUCCESS);
 }

@@ -6,13 +6,6 @@
 #include "game.hpp"
 #include "parser.hpp"
 
-bool    network::init_data(game::data &data, Network &sock)
-{
-  data.map.setDim(10, 10);
-
-  return (true);
-}
-
 void	network::send_list(std::list<std::string> &list, Network &sock)
 {
   while (list.size() > 0)
@@ -32,6 +25,7 @@ bool	network::iteration(game::data &data, parser &pars, Network &sock)
       if (str.size() > 0)
 	{
 	  pars.parse(str);
+	  pars.interpret(data);
 	}
       if (data.msg_to_send())
 	network::send_list(data.ask, sock);

@@ -81,6 +81,7 @@ namespace game
     bool                        connection;
 
   public:
+    void	send_msg(const std::string &str);
     bool	msg_to_send();
   };
 
