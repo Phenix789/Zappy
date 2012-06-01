@@ -4,7 +4,9 @@
 #include "parser.hpp"
 
 parser::parser()
-{ }
+{
+  this->func["msz"] = &pfunc::fpmsz;
+}
 
 parser::~parser()
 { }

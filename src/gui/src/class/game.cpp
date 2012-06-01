@@ -29,24 +29,21 @@ namespace game
     this->ask.push_back(str);
   }
 
-  map::map() : size_x(-1), size_y(-1)
+  tiles::tiles()
   {
+    for (int i = 0; i < 7; i++)
+      this->ressources[i] = 0;
   }
+
+  map::map() : size_x(-1), size_y(-1)
+  { }
 
   map::~map()
-  {
-  }
+  { }
 
-  void  map::add_ress(unsigned int x, unsigned int y, ress type)
+#warning "a refaire (plusieures même pierres par cases)"
+  void  map::set_ress(unsigned int x, unsigned int y, ress type, unsigned int nb)
   {
-    this->_case.at(x*y) |= type;
-  }
-
-  void  map::rm_ress(unsigned int x, unsigned int y, ress type)
-  {
-    if ((this->_case.at(x*y) & type) == 0)
-      std::cerr << "Suppression d'element inexistants" << std::endl;
-    this->_case.at(x*y) &= ~type;
   }
 
   void  map::add_player(unsigned int x, unsigned int y, int num_pl)
@@ -85,12 +82,12 @@ namespace game
   {
     this->size_x = x;
     this->size_y = y;
-    this->_case.resize(x * y);
+    this->_tiles.resize(x * y);
   }
 
-  const std::vector<int>        map::getTile() const
+  const std::vector<tiles>        map::getTile() const
   {
-    return (this->_case);
+    return (this->_tiles);
   }
 
   const std::list<game::player> map::getPlayer() const
