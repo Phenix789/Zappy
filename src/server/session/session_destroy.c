@@ -8,9 +8,7 @@
 ** Last update Tue May 29 05:28:59 2012 vincent kersuzan
 */
 
-#include	<stdlib.h>
-
-#include	"session.h"
+#include "session.h"
 #include "logger.h"
 
 static void		delete_instruction_in(void *data)

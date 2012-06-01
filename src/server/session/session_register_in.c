@@ -8,10 +8,6 @@
 ** Last update Tue May 29 05:06:15 2012 vincent kersuzan
 */
 
-#include	<stdlib.h>
-#include	<string.h>
-#include	<stdio.h>
-
 #include	"session.h"
 
 int session_register_in(char *instruction,

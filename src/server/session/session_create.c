@@ -8,10 +8,6 @@
 ** Last update Fri Jun  1 01:54:47 2012 vincent kersuzan
 */
 
-#include	<stdlib.h>
-#include	<stdio.h>
-#include	<stdbool.h>
-
 #include	"session.h"
 #include	"network.h"
 #include	"logger.h"

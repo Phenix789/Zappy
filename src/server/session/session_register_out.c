@@ -8,10 +8,6 @@
 ** Last update Tue May 29 05:06:35 2012 vincent kersuzan
 */
 
-#include	<stdlib.h>
-#include	<string.h>
-#include	<stdio.h>
-
 #include	"session.h"
 
 int session_register_out(int instruction, char *mask)
