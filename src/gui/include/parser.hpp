@@ -12,7 +12,7 @@ public:
   ~parser();
 
 public:
-  bool	parse(std::string &buffer);
+  void	parse(std::string &buffer);
   bool	interpret(game::data &data);
 
 private:

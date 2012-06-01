@@ -25,6 +25,7 @@ bool	network::iteration(game::data &data, parser &pars, Network &sock)
       if (str.size() > 0)
 	{
 	  pars.parse(str);
+	  pars.interpret(data);
 	}
       if (data.msg_to_send())
 	network::send_list(data.ask, sock);

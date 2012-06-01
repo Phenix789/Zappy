@@ -11,6 +11,7 @@ int	game::run_gui(data &data, Network &sock)
   parser	pars;
   Igui		*gui;
 
+  data.send_msg("GRAPHIC\n");
   if (network::iteration(data, pars, sock) == false)
     {
       std::cout << "game::run_gui : EXIT_FAILURE" << std::endl;

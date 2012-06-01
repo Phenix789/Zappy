@@ -21,5 +21,6 @@ int     main(int __attribute__((unused))ac, char __attribute__((unused))**av)
   if (ac == 3)
     return (main_gui(av[1], av[2]));
   std::cout << "Usage : " << av[0] << " [host] [port]" << std::endl;
+  return (main_gui("127.0.0.1", "4242"));
   return (EXIT_FAILURE);
 }
