@@ -17,6 +17,7 @@ obj
 .deps
 *~
 *.log
+timestamp
 
 # Netbeans files
 nbproject

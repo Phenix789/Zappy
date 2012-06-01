@@ -5,7 +5,7 @@
 ** Login   <duval_q@epitech.net>
 **
 ** Started on  Thu May 31 16:27:37 2012 quentin duval
-** Last update Thu May 31 17:26:39 2012 quentin duval
+** Last update Fri Jun  1 02:20:29 2012 quentin duval
 */
 
 #include	"kernel.h"
@@ -31,8 +31,8 @@ bool		kernel_init_with_argv(int argc, char **argv)
 {
   kernel_init();
   if (kernel_session_init(&g_kernel->listener, kernel_getopt_int(argc, argv, "-p", 3945)) &&
-	  kernel_client_init() &&
-	  //kernel_game_init(kernel_getopt_int(argc, argv, "-x", 10), kernel_getopt_int(argc, argv, "-y", 10), kernel_getopt_int(argc, argv, "-c", 10)) &&
+      kernel_client_init() &&
+      kernel_game_init(kernel_getopt_int(argc, argv, "-x", 10), kernel_getopt_int(argc, argv, "-y", 10), kernel_getopt_int(argc, argv, "-c", 10)) &&
 	  kernel_clock_init(kernel_getopt_int(argc, argv, "-t", 100)))
     {
       logger_error("[KERNEL] Kernel game not started!!");
