@@ -5,10 +5,11 @@
 ** Login   <duval_q@epitech.net>
 **
 ** Started on  Tue May 29 08:03:53 2012 quentin duval
-** Last update Thu May 31 18:51:04 2012 quentin duval
+** Last update Thu May 31 23:25:45 2012 quentin duval
 */
 
 #include	"in_network.h"
+#include	"logger.h"
 
 void		execute_from_socket(void *data)
 {
@@ -23,12 +24,15 @@ void			execute_from_listener(void *data)
   t_listener            *listener;
   t_socket		*sock;
 
+  logger_message("[NETWORK] new connection detected");
   if (!(sock = malloc(sizeof(*sock))))
     return;
   sock->length = sizeof(sock->addr);
   listener = (t_listener*)data;
-  if ((sock->fd = accept(listener->socket->fd, (SOCKADDR *) &sock->addr, &sock->length) < 0))
+  if ((sock->fd = accept(listener->socket->fd, (SOCKADDR *) &sock->addr, &sock->length)) < 0)
       return;
+  logger_debug("[NETWORK] give fd %d for new client", sock->fd);
+  logger_debug("[NETWORK] calling creation callback");
   (*listener->create)(sock);
 }
 

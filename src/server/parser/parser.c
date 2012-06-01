@@ -5,7 +5,7 @@
 ** Login   <kersuz_v@epitech.net>
 ** 
 ** Started on  Tue May 29 05:47:12 2012 vincent kersuzan
-** Last update Thu May 31 02:59:45 2012 vincent kersuzan
+** Last update Thu May 31 17:15:36 2012 vincent kersuzan
 */
 
 #include	<string.h>
@@ -30,11 +30,41 @@ static t_command	*parser_error_leaving(t_command *command,
   return (NULL);
 }
 
+static int	parser_set_type(int *type_int,
+				char *mask, int *mask_index)
+{
+  char		*type_str;
+
+  if ((*type_int = parser_find_elem_type(&mask[*mask_index])) < 0)
+    return (-1);
+  if ((type_str = parser_get_type_str(*type_int)))
+    *mask_index += strlen(type_str);
+  else
+    return (-1);
+  return (0);
+}
+
+static char	*parser_get_new_elem(char *mask, char *data,
+				     int *mask_index, int *data_index)
+{
+  char		*elem;
+  char		*split_str;
+
+  if ((split_str = parser_find_key(&mask[*mask_index])))
+    *mask_index += strlen(split_str);
+  if ((elem = parser_extract_elem(&data[*data_index], false, split_str)))
+    *data_index += strlen(elem);
+  else
+    return ((char *)parser_error_leaving(NULL, split_str, NULL, NULL));
+  if (split_str)
+    *data_index += strlen(split_str);
+  free(split_str);
+  return (elem);
+}
+
 t_command	*parser_parse(char *data, char *mask)
 {
   int		type_int;
-  char		*type_str;
-  char		*split_str;
   char		*elem;
   int		mask_index;
   int		data_index;
@@ -48,24 +78,13 @@ t_command	*parser_parse(char *data, char *mask)
     return (NULL);
   while (data[data_index] && mask[mask_index])
     {
-      if ((type_int = parser_find_elem_type(&mask[mask_index])) < 0)
+      if (parser_set_type(&type_int, mask, &mask_index) < 0)
 	return (parser_error_leaving(command, NULL, NULL, NULL));
-      if ((type_str = parser_get_type_str(type_int)))
-	mask_index += strlen(type_str);
-      else
+      if (!(elem = parser_get_new_elem(mask, data, &mask_index, &data_index)))
 	return (parser_error_leaving(command, NULL, NULL, NULL));
-      if ((split_str = parser_find_key(&mask[mask_index])))
-	mask_index += strlen(split_str);
-      if ((elem = parser_extract_elem(&data[data_index], false, split_str)))
-	data_index += strlen(elem);
-      else
-        return (parser_error_leaving(command, split_str, NULL, NULL));
-      if (split_str)
-	data_index += strlen(split_str);
       if (parser_save_data(command, elem, type_int) < 0)
-	return (parser_error_leaving(command, elem, split_str, NULL));
+	return (parser_error_leaving(command, elem, NULL, NULL));
       free(elem);
-      free(split_str);
     }
   if (data[data_index] || mask[mask_index])
     return (parser_error_leaving(command, NULL, NULL, NULL));

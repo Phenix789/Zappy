@@ -12,7 +12,7 @@
 #########################
 
 ##binary name
-NAME =		zappy_server zappy_client zappy_gui
+NAME =		zappy_server #zappy_client zappy_gui
 
 SUBMAKEPATH= ext
 
@@ -45,6 +45,9 @@ zappy_server_OBJ=	server/main.o \
 			server/session/session_create.o \
 			server/session/session_destroy.o \
 			server/session/session_get_session.o \
+			server/session/session_retrieve.o \
+			server/session/session_send.o \
+			server/session/session_conv_arg_to_str.o \
 			server/network/network.o \
 			server/network/network_listen.o \
 			server/network/network_listen_to.o \
@@ -92,6 +95,7 @@ zappy_server_OBJ=	server/main.o \
 			server/kernel/kernel_init.o \
 			server/kernel/kernel_opt.o \
 			server/kernel/kernel_run.o \
+			server/kernel/kernel_signal.o \
 			server/kernel/kernel_wakeup.o \
 			server/client/client.o \
 			server/client/client_action.o \
@@ -154,15 +158,18 @@ ifeq ($(DEBUG),"yes")
 CXXFLAGS += -g
 endif
 
+TIMESTAMP= timestamp
+
 LDFLAGS +=	-L $(LIB_DIR)
 ########compilation flags end
 
 ########build all project
-all:		$(SUBMAKEPATH)	$(NAME)
+all:		$(SUBMAKEPATH)/$(TIMESTAMP)	$(NAME)
 
 
-$(SUBMAKEPATH):
-	@make -C $@
+$(SUBMAKEPATH)/$(TIMESTAMP):
+	@make -C $(@D)
+	touch $@
 
 ########multi-cible template
 define PROGRAM_template =
@@ -193,7 +200,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.$(EXT)
 	@$(CC) -o $@ -c $< $(CXXFLAGS)
 
 $(DEP_DIR)/%.d: $(SRC_DIR)/%.$(EXT)
-	@echo generate dependencies at : $(DEP_DIR)/$*.d
+#	@echo generating dependancies $(@F) in folder $(@D)
 	@mkdir -p $(DEP_DIR)/$(*D)
 	@$(CC) -MM $< $(CXXFLAGS) -o $@
 	@echo -n $(OBJ_DIR)/$(*D)/ > $@.tmp;
@@ -214,7 +221,7 @@ clean:
 ########clean all build files
 fclean:		clean
 	@echo cleaning all
-	@$(RM) $(DEP)
+	@$(RM) $(SUBMAKEPATH)/$(TIMESTAMP)
 	@$(RM) $(NAME)
 	@make fclean -C $(SUBMAKEPATH)
 

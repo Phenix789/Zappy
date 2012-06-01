@@ -5,7 +5,7 @@
 ** Login   <duval_q@epitech.net>
 ** 
 ** Started on  Tue May 29 04:30:59 2012 quentin duval
-** Last update Thu May 31 22:05:07 2012 quentin duval
+** Last update Thu May 31 23:27:50 2012 quentin duval
 */
 
 #include	<stdio.h>
@@ -25,12 +25,13 @@ bool		network_listen_to(t_socket *socket,
   socket->length = (sizeof(socket->addr));
   if (bind(socket->fd,
 	   (SOCKADDR *)&socket->addr,
-	   socket->length) == SOCKET_ERROR)
-    return (false);
-  if (listen(socket->fd, MAX_CO) == SOCKET_ERROR)
-    return (false);
-  if (!(listener = malloc(sizeof(*listener))))
-    return (false);
+	   socket->length) == SOCKET_ERROR
+      || listen(socket->fd, MAX_CO) == SOCKET_ERROR
+      || !(listener = malloc(sizeof(*listener))))
+    {
+      logger_error("[NETWORK] impossible to listen to port %d", port);
+      return (false);
+    }
   listener->socket = socket;
   listener->create = create;
   if (socket->fd > get_network()->nfds)

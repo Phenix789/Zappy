@@ -57,7 +57,8 @@ ERRORS_SRC = \
 LOGGER_DIR = logger
 LOGGER_SRC = \
 	logger.c \
-	logger_msg.c
+	logger_msg.c \
+	logger_vrb.c
 
 ASRC += $(addprefix $(LIST_DIR)/, $(LIST_SRC))
 ASRC += $(addprefix $(MAP_DIR)/, $(MAP_SRC))

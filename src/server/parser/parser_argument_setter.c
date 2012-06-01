@@ -5,7 +5,7 @@
 ** Login   <kersuz_v@epitech.net>
 ** 
 ** Started on  Wed May 30 20:30:59 2012 vincent kersuzan
-** Last update Thu May 31 01:33:28 2012 vincent kersuzan
+** Last update Thu May 31 17:15:49 2012 vincent kersuzan
 */
 
 #include	<string.h>
@@ -46,7 +46,6 @@ int		parser_argument_setter(int type, char *buffer,
 {
   t_f_arg_set	argument_setter;
 
-  printf("argument setter\n");
   if ((argument_setter = parser_get_argument_setter_int(type)))
     return (argument_setter(type, buffer, argument));
   return (-1);
