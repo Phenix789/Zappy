@@ -1,9 +1,9 @@
 /*
 ** network_listen.c for zappy in /home/duval_q//Documents/projects/zappy/src/server/net
-** 
+**
 ** Made by quentin duval
 ** Login   <duval_q@epitech.net>
-** 
+**
 ** Started on  Tue May 29 04:54:49 2012 quentin duval
 ** Last update Thu May 31 23:21:19 2012 quentin duval
 */
@@ -89,11 +89,11 @@ int			network_listen(struct timeval *timeout)
   network = get_network();
   setfd(&set);
   if (timeout)
-    logger_debug("[NETWORK] waiting for next action in %lu:%lu\n",
+    logger_debug("[NETWORK] waiting for next action in %lu:%lu",
 	   timeout->tv_sec,
 	   timeout->tv_usec);
   else
-    logger_debug("[NETWORK] waiting for extern action. nothing planified\n");
+    logger_debug("[NETWORK] waiting for extern action. nothing planified");
   if ((ret = (select(network->nfds, &set, NULL, NULL, timeout))) > 0)
     {
       find_speaker(&set,
