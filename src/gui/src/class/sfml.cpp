@@ -1,7 +1,7 @@
 #include <SFML/Window.hpp>
 #include "sfml.hpp"
 
-sfml::sfml(const game::map &omap) : run(false), map(omap)
+sfml::sfml(game::data &edata) : run(false), data(edata)
 { }
 
 sfml::~sfml()

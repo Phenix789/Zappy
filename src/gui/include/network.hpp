@@ -2,14 +2,16 @@
 #define __NETWORK_HPP_
 
 #include <cstddef>
+#include <list>
 #include <string>
 #include <sys/time.h>
+#include "game.hpp"
 
-class network
+class Network
 {
 public:
-  network(const std::string &host, const std::string &port);
-  ~network();
+  Network(const std::string &host, const std::string &port);
+  ~Network();
 
 public:
   ssize_t	read(std::string &buffer);
@@ -25,16 +27,18 @@ private:
   int			sockfd;
 
 private:
-  network();
+  Network();
 };
 
-class data_thread;
-namespace game
+Network		&operator<<(Network &sock, const std::string &msg);
+Network		&operator>>(Network &sock, std::string &buffer);
+
+class parser;
+namespace network
 {
-  bool		network_init_data(data_thread &data, network &sock);
-  int		network_loop(data_thread &data, network &sock);
-  void		network_fill_buffer(std::string &str, network &sock);
-  void		send_to_server(data_thread &data, network &sock);
+  bool		init_data(game::data &data, Network &sock);
+  void		send_list(std::list<std::string> &list, Network &sock);
+  bool		iteration(game::data &data, parser &pars, Network &sock);
 };
 
 #endif /* __NETWORK_HPP_ */

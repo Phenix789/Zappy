@@ -1,7 +1,7 @@
 #ifndef __IGUI_HPP_
 #define __IGUI_HPP_
 
-#include "map.hpp"
+#include "game.hpp"
 
 class Igui
 {
@@ -16,5 +16,7 @@ public:
   virtual void	end() = 0;
   virtual void  exit() = 0;
 };
+
+extern "C" Igui	*create(game::data &data);
 
 #endif /* __IGUI_HPP_ */

@@ -5,7 +5,7 @@
 ## Login   <frizac_b@epitech.net>
 ##
 ## Started on  Mon Feb  6 14:18:30 2012 Alexandre Frizac
-## Last update Fri Jun  1 00:52:21 2012 Alexandre Frizac
+## Last update Fri Jun  1 11:14:34 2012 Alexandre Frizac
 ##
 
 NAME		= a.out
@@ -17,21 +17,17 @@ SRC_DIR		= src
 CC		= g++
 CXXFLAGS	+= -I include
 CXXFLAGS	+= -Wall -Wextra -Wshadow -g
-LDFLAGS		+= -l boost_system -l boost_thread
 LDFLAGS		+= -l sfml-system -l sfml-window
 
 SRC	= $(addprefix src/, \
-		class/data_thread.cpp\
 		class/dynlib.cpp \
-		class/map.cpp \
+		class/game.cpp \
 		class/network.cpp\
-		class/player.cpp \
+		class/parser.cpp \
 		class/sfml.cpp \
 		gui.cpp\
-		launcher.cpp\
 		main.cpp\
-		network_loop.cpp\
-		parser.cpp\
+		network.cpp\
 		)
 OBJ	= $(addprefix $(OBJ_DIR)/, $(SRC:$(SRC_DIR)/%.cpp=%.o))
 

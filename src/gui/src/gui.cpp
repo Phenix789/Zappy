@@ -1,19 +1,21 @@
-#include <boost/thread.hpp>
-#include "gui.hpp"
+#include <unistd.h>
+#include <cstdlib>
+#include "game.hpp"
+#include "network.hpp"
+#include "IGui.hpp"
 
-void	game::run_gui(data_thread &data)
+int	game::run_gui(data &data, Network &sock)
 {
   Igui	*gui;
 
-  gui = create(data.map);
+  gui = create(data);
   gui->init();
   while (gui->is_running())
     {
-      data.lock();
       gui->process_event();
       gui->draw_map();
-      data.unlock();
-      boost::this_thread::sleep(boost::posix_time::milliseconds(50));
+      usleep(50000);
     }
   gui->exit();
+  return (EXIT_SUCCESS);
 }

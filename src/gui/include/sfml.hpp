@@ -2,13 +2,13 @@
 #define __SFML_HPP_
 
 #include <SFML/Window.hpp>
-#include "map.hpp"
-#include "Igui.hpp"
+#include "game.hpp"
+#include "IGui.hpp"
 
 class sfml : public Igui
 {
 public:
-  sfml(const game::map &map);
+  sfml(game::data &data);
   ~sfml();
 
 public:
@@ -24,7 +24,7 @@ private:
   bool			run;
   sf::Window		App;
   sf::Event		event;
-  const game::map	&map;
+  game::data		&data;
 
 private:
   void        draw_background();
