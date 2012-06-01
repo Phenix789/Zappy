@@ -13,8 +13,6 @@ int	main_gui(const std::string host, const std::string port)
       std::cout << "Erreur Network : Impossible de se connecter" << std::endl;
       return (EXIT_FAILURE);
     }
-  if (network::init_data(data, sock) == false)
-    return (EXIT_FAILURE);
   return (game::run_gui(data, sock));
 }
 
