@@ -5,7 +5,7 @@
 ** Login   <kersuz_v@epitech.net>
 **
 ** Started on  Tue May 29 04:07:25 2012 vincent kersuzan
-** Last update Thu May 31 22:01:08 2012 quentin duval
+** Last update Fri Jun  1 01:54:47 2012 vincent kersuzan
 */
 
 #include	<stdlib.h>

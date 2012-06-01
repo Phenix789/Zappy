@@ -5,7 +5,7 @@
 ** Login   <kersuz_v@epitech.net>
 ** 
 ** Started on  Wed May 30 18:43:45 2012 vincent kersuzan
-** Last update Thu May 31 01:50:19 2012 vincent kersuzan
+** Last update Thu May 31 18:54:41 2012 vincent kersuzan
 */
 
 #include	<string.h>
@@ -38,6 +38,8 @@ t_known_type    *parser_find_known_type_from_str(char *type_str)
   int		i;
 
   i = 0;
+  if (!type_str)
+    return (NULL);
   while (g_known_type[i].type_str)
     {
       if (!(strcmp(type_str, g_known_type[i].type_str)))
@@ -52,6 +54,8 @@ int	parser_find_elem_type(char *mask)
   int	i;
 
   i = 0;
+  if (!mask)
+    return (-1);
   while (g_known_type[i].type_str)
     {
       if (!(strncmp(mask, g_known_type[i].type_str,

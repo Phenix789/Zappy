@@ -5,7 +5,7 @@
 ** Login   <kersuz_v@epitech.net>
 ** 
 ** Started on  Wed May 30 21:17:23 2012 vincent kersuzan
-** Last update Thu May 31 01:43:48 2012 vincent kersuzan
+** Last update Thu May 31 17:28:11 2012 vincent kersuzan
 */
 
 #include	<string.h>
@@ -13,31 +13,39 @@
 
 #include	"parser.h"
 
+static int	error_leaving_int(void *buf1, void *buf2,
+				  char *errno_msg, char *error_msg)
+{
+  if (buf1)
+    free(buf1);
+  if (buf2)
+    free(buf2);
+  if (errno_msg)
+    perror(errno_msg);
+  if (error_msg)
+    fprintf(stderr, error_msg);
+  return (-1);
+}
+
 int		parser_save_data(t_command *command, char *buffer,
 				 int type)
 {
   t_argument	*argument;
 
-  printf("save data \n");
   if (!(command->instruction))
     {
       if (type != PARSER_STRING_VALUE)
-	{
-	  printf("instruction should be a string\n");
-	  return (-1);
-	}
+	return (error_leaving_int(NULL, NULL, NULL,
+				  "instruction should be a string\n"));
       if (!(command->instruction = strdup(buffer)))
-	return (-1);
+	return (error_leaving_int(NULL, NULL, "strdup", NULL));
     }
   else
     {
       if (!(argument = malloc(sizeof(*argument))))
-	return (-1);
+	return (error_leaving_int(NULL, NULL, "malloc", NULL));
       if (parser_argument_setter(type, buffer, argument) < 0)
-	{
-	  free(argument);
-	  return (-1);
-	}
+	return (error_leaving_int(argument, NULL, NULL, NULL));
       list_add_end(&(command->arguments), argument);
     }
   return (0);
