@@ -18,6 +18,7 @@ obj
 *~
 *.log
 timestamp
+a.out
 
 # Netbeans files
 nbproject
