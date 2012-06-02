@@ -8,6 +8,7 @@
 ** Last update Fri Jun  1 20:57:33 2012 quentin duval
 */
 
+#include <string.h>
 #include "kernel.h"
 
 int kernel_retrieve_flag_index(int argc, char **argv, char *flag)

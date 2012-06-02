@@ -16,11 +16,8 @@ static int g_length = 0;
 static int session_cmp(t_instruction_in *in)
 {
   if (in->length < g_length)
-    {
-      if (strncmp(in->instruction, g_command, in->length) == 0)
-	if (g_command[in->length] == ' ')
-	  return 0;
-    }
+    if (strncmp(in->instruction, g_command, in->length) == 0)
+      return 0;
   return -1;
 }
 

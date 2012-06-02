@@ -5,7 +5,7 @@
 ** Login   <duval_q@epitech.net>
 **
 ** Started on  Tue May 29 04:54:49 2012 quentin duval
-** Last update Thu May 31 23:21:19 2012 quentin duval
+** Last update Sat Jun  2 10:51:02 2012 quentin duval
 */
 
 #include	<stdio.h>
@@ -29,6 +29,8 @@ static void		setfd_list(t_list *list,
   void			*tmp;
   t_network		*network;
 
+  if (!list || !set || !extract)
+    return;
   network = get_network();
   it = list_iterator_begin(list);
   ret = (list_empty(list))?EXIT_FAILURE:EXIT_SUCCESS;
@@ -48,6 +50,8 @@ static void   		setfd(fd_set *set)
 {
   t_network		*network;
 
+  if (!set)
+    return;
   network = get_network();
   FD_ZERO(set);
   setfd_list(network->read, set, &extract_from_socket);
@@ -64,16 +68,16 @@ static void	find_speaker(fd_set *set,
   int                   ret;
   void			*tmp;
 
+  if (!set || !list || !extract || !execute)
+    return;
   it = list_iterator_begin(list);
   ret = (list_empty(list))?EXIT_FAILURE:EXIT_SUCCESS;
-  logger_verbose("[NETWORK] begin search %d", ret);
   while (ret != EXIT_FAILURE)
     {
       tmp = list_iterator_get(it);
-      logger_verbose("[NETWORK] search for fd %d messages", extract(tmp));
-      if (FD_ISSET(extract(tmp), set))
+      if (FD_ISSET(extract(tmp), set) && tmp)
 	{
-	  logger_verbose("[NETWORK] found speaking fd : %d", extract(tmp));
+	  logger_verbose("[NETWORK] messqge from fd : %d", extract(tmp));
 	  ret = list_iterator_next(it);
 	  (*execute)(tmp);
 	}
@@ -104,9 +108,9 @@ int			network_listen(struct timeval *timeout)
 		   &extract_from_socket,
 		   &execute_from_socket);
       find_speaker(&set,
-                   network->listened,
-                   &extract_from_listener,
-                   &execute_from_listener);
+		   network->listened,
+		   &extract_from_listener,
+		   &execute_from_listener);
     }
   network->nfds = 0;
   return (ret);

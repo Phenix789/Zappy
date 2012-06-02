@@ -16,6 +16,9 @@ bool kernel_add_team(char* team)
 {
   logger_message("[KERNEL] Add team %s", team);
   if (kernel_is_init(KN_SV_GAME))
-    return team_new(team) != NULL;
+    {
+      game_create_team(team);
+      return true;
+    }
   return false;
 }

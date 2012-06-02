@@ -22,32 +22,6 @@ SUBMAKEPATH= ext
 ## where xxx is the binary name
 ##
 zappy_server_OBJ=	server/main.o \
-			server/parser/parser.o \
-                        server/parser/parser_get_int.o \
-                        server/parser/parser_get_string.o \
-                        server/parser/parser_is_match.o \
-                        server/parser/parser_command_destroy.o \
-                        server/parser/parser_count_arguments.o \
-                        server/parser/parser_str_check_contain.o \
-                        server/parser/parser_find_key.o \
-                        server/parser/parser_type_map.o \
-                        server/parser/parser_get_from_map.o \
-                        server/parser/parser_extract_elem.o \
-                        server/parser/parser_command_create.o \
-                        server/parser/parser_argument_setter.o \
-                        server/parser/parser_save_data.o \
-			server/session/session_connect.o \
-			server/session/session_send.o \
-			server/session/session_register_in.o \
-			server/session/session_register_out.o \
-			server/session/session_treat_data.o \
-			server/session/session_create.o \
-			server/session/session_create.o \
-			server/session/session_destroy.o \
-			server/session/session_get_session.o \
-			server/session/session_retrieve.o \
-			server/session/session_send.o \
-			server/session/session_conv_arg_to_str.o \
 			server/network/network.o \
 			server/network/network_listen.o \
 			server/network/network_listen_to.o \
@@ -65,34 +39,28 @@ zappy_server_OBJ=	server/main.o \
 			server/clock/clock_timeval_unit_convert.o \
 			server/clock/timeval_utils.o \
 			server/clock/clock_get_remaining_time.o \
-			server/game/game_autoplay_add_player.o \
-			server/game/game_autoplay_get_player.o \
-			server/game/game_create.o \
-			server/game/game_destroy.o \
-			server/game/game_globals.o \
-			server/game/game_init.o \
-			server/game/game_player_add.o \
-			server/game/game_player_remove.o \
-			server/game/game_turn.o \
-			server/game/game_init.o \
-			server/game/game_world_dump.o \
+			server/game/game.o \
+			server/game/game_dump.o \
+			server/game/game_get.o \
+			server/game/game_slot.o \
+			server/game/game_slot_action.o \
+			server/game/game_start.o \
+			server/game/game_team.o \
+			server/game/player/player.o \
+			server/game/player/player_connect_nbr_cb.o \
 			server/game/player/player_death.o \
-			server/game/player/player_delete.o \
 			server/game/player/player_drop_cb.o \
 			server/game/player/player_expulse_cb.o \
 			server/game/player/player_fork_cb.o \
 			server/game/player/player_forward_cb.o \
-			server/game/player/player_get_tile.o \
 			server/game/player/player_incantation_cb.o \
 			server/game/player/player_inventory_cb.o \
 			server/game/player/player_left_cb.o \
 			server/game/player/player_look_cb.o \
-			server/game/player/player_new.o \
 			server/game/player/player_right_cb.o \
 			server/game/player/player_take_cb.o \
-			server/game/player/player_connect_nbr_cb.o \
-			server/game/team/team_delete.o \
-			server/game/team/team_new.o \
+			server/game/team/team.o \
+			server/game/world/world.o \
 			server/kernel/kernel.o \
 			server/kernel/kernel_init.o \
 			server/kernel/kernel_opt.o \
@@ -102,10 +70,16 @@ zappy_server_OBJ=	server/main.o \
 			server/kernel/kernel_wakeup.o \
 			server/client/client.o \
 			server/client/client_action.o \
+			server/client/client_connect.o \
 			server/client/client_get_set.o \
 			server/client/client_manager.o \
+			server/client/client_manager_command.o \
 			server/client/client_manager_handle.o \
-			server/client/client_manager_retrieve.o
+			server/client/client_manager_retrieve.o \
+			server/client/client_player.o \
+			server/client/client_receive.o \
+			server/client/client_send.o \
+			server/client/client_food.o
 
 zappy_gui_OBJ=		gui/main.o
 

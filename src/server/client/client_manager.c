@@ -1,16 +1,19 @@
 
 #include "client.h"
-#include "logger.h"
 
 t_client_manager *g_client_manager = NULL;
 
-void client_manager_init()
+bool client_manager_init(t_socket *listen, int port)
 {
   logger_message("[CLIENT] Manager starting ...");
   if (!(g_client_manager = malloc(sizeof(t_client_manager))))
-    return;
+    return false;
   list_init(&g_client_manager->clients);
+  list_init(&g_client_manager->commands);
+  if (!network_init() || !network_listen_to(listen, port, &client_connect))
+    return false;
   logger_message("[CLIENT] Manager started");
+  return true;
 }
 
 void client_manager_destroy()

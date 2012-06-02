@@ -1,9 +1,9 @@
 /*
 ** player_incantation_cb.c for zappy in /home/lukior/Zappy/src/server/game
-** 
+**
 ** Made by damien vezant
 ** Login   <vezant_d@epitech.net>
-** 
+**
 ** Started on  Wed May 30 17:55:25 2012 damien vezant
 ** Last update Wed May 30 22:04:39 2012 damien vezant
 */
@@ -58,24 +58,24 @@ static bool	_check_prerequisite(t_client *client, t_tile *tile)
 void		player_incantation_end_cb(t_client *client, int error)
 {
   if (error)
-    session_send(client, REP_KO);
+    client_send(client, REP_KO);
   else
     {
-      session_send(client, REP_OK);
+      client_send(client, REP_OK);
       client->player->level += 1;
     }
 }
 
-void		player_incantation_start_cb(t_client *client, t_command *command)
+void		player_incantation_start_cb(t_client *client, char *command)
 {
   t_tile	*tile;
 
   (void)command;
-  tile = player_get_tile(client->player);
+  tile = client->player->tile;
   if (_check_prerequisite(client, tile))
     {
-      session_send(client, REP_INCANTATION,
+      client_send(client, REP_INCANTATION,
 		   client->player->level);
-      kernel_register_wakeup(DELAY_INCANT, player_incantation_end_cb, client);
+      kernel_register_wakeup(DELAY_INCANT, (kn_wakeup_cb) player_incantation_end_cb, client);
     }
 }

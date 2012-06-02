@@ -8,40 +8,26 @@
 ** Last update Fri Jun  1 20:57:33 2012 quentin duval
 */
 
-#include "kernel.h"
 #include "client.h"
-#include "session.h"
-#include "game.h"
+#include "kernel.h"
 #include "clock.h"
 #include "logger.h"
 
 extern t_kernel *g_kernel;
 
-#define KN_SESSION_MSG "[KERNEL] Kernel session init on port : %i"
-bool kernel_session_init(t_socket *listener, int port)
-{
-  if (!kernel_is_init(KN_SV_SESSION))
-    {
-      logger_message(KN_SESSION_MSG, port);
-      if (session_init(listener, port))
-	{
-	  g_kernel->init = g_kernel->init | KN_SV_SESSION;
-	  return(true);
-	}
-    }
-  return(false);
-}
-
-#define KN_CLIENT_MSG "[KERNEL] Kernel client init"
-bool kernel_client_init()
+#define KN_CLIENT_MSG "[KERNEL] Kernel client init on port : %i"
+bool kernel_client_init(t_socket *listener, int port)
 {
   if (!kernel_is_init(KN_SV_CLIENT))
     {
-      logger_message(KN_CLIENT_MSG);
-      client_manager_init();
-      g_kernel->init = g_kernel->init | KN_SV_CLIENT;
-      return true;
+      logger_message(KN_CLIENT_MSG, port);
+      if (client_manager_init(listener, port))
+	{
+	  g_kernel->init = g_kernel->init | KN_SV_CLIENT;
+	  return true;
+	}
     }
+  logger_error("[KERNEL] Kernel client error!!");
   return false;
 }
 
@@ -57,6 +43,7 @@ bool kernel_game_init(int x, int y, int nb_per_team)
 	  return true;
 	}
     }
+  logger_error("[KERNEL] Kernel game error!!");
   return(false);
 }
 
@@ -71,6 +58,7 @@ bool kernel_clock_init(int frequence)
       g_kernel->init = g_kernel->init | KN_SV_CLOCK;
       return true;
     }
+  logger_error("[KERNEL] Kernel clock error!!");
   return false;
 }
 

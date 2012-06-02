@@ -1,24 +1,64 @@
 
+#include <string.h>
 #include "client.h"
 
-int client_count_action(t_client *client)
+int client_action_count(t_client *client)
 {
   return list_size(&client->actions);
 }
 
-t_command *client_next_action(t_client *client)
+bool client_action_save(t_client *client, char *action)
 {
-  t_command *command;
-
-  command = list_get_begin(&client->actions);
-  list_pop_begin(&client->actions);
-  return command;
+  if (!client->player)
+    {
+      logger_verbose("[CLIENT] Client search player");
+      return client_player_search(client, action);
+    }
+  if (clm_command_retrieve(action))
+    {
+      if (!client->busy)
+	{
+	  client_execute(client, action);
+	  client->busy = true;
+	}
+      else if (list_size(&client->actions) >= CLIENT_MAX_ACTIONS)
+	{
+	  logger_verbose("[CLIENT] Client %i save action '%s'", CLP_ID(client), action);
+	  list_add_end(&client->actions, strdup(action));
+	}
+      else
+	return false;
+      return true;
+    }
+  logger_warning("[CLIENT] Client %i try to save unknown command '%s'", CLP_ID(client), action);
+  return false;
 }
 
-bool client_save_action(t_client *client, t_command *command)
+void client_action_finish(t_client *client)
 {
-  if (list_size(&client->actions) >= CLIENT_MAX_ACTIONS)
-    return false;
-  list_add_end(&client->actions, command);
-  return true;
+  char *action;
+
+  logger_verbose("[CLIENT] Client %i has finish action", CLP_ID(client));
+  if (list_size(&client->actions))
+    {
+      logger_verbose("[CLIENT] Client %i have action in stack", CLP_ID(client));
+      action = list_get_begin(&client->actions);
+      list_pop_begin(&client->actions);
+      client_execute(client, action);
+      free(action);
+    }
+  else
+    client->busy = false;
+}
+
+void client_execute(t_client *client, char *action)
+{
+  t_command_callback *command;
+
+  command = clm_command_retrieve(action);
+  if (command)
+    {
+      logger_verbose("[CLIENT] Client %i execute action '%s'", CLP_ID(client), action);
+      (*command->callback)(client, action);
+    }
 }

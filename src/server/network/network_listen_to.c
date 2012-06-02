@@ -5,7 +5,7 @@
 ** Login   <duval_q@epitech.net>
 ** 
 ** Started on  Tue May 29 04:30:59 2012 quentin duval
-** Last update Thu May 31 23:27:50 2012 quentin duval
+** Last update Sat Jun  2 10:52:23 2012 quentin duval
 */
 
 #include	<stdio.h>
@@ -13,16 +13,23 @@
 #include	"network.h"
 #include	"logger.h"
 
+static void	configure_socket(t_socket *socket, int port)
+{
+  socket->addr.sin_port = htons(port);
+  socket->addr.sin_family = AF_INET;
+  socket->addr.sin_addr.s_addr = INADDR_ANY;
+  socket->length = (sizeof(socket->addr));
+}
+
 bool		network_listen_to(t_socket *socket,
 				  int port,
 				  t_nt_create_cb create)
 {
   t_listener	*listener;
 
-  socket->addr.sin_port = htons(port);
-  socket->addr.sin_family = AF_INET;
-  socket->addr.sin_addr.s_addr = INADDR_ANY;
-  socket->length = (sizeof(socket->addr));
+  if (!socket || !port)
+    return (false);
+  configure_socket(socket, port);
   if (bind(socket->fd,
 	   (SOCKADDR *)&socket->addr,
 	   socket->length) == SOCKET_ERROR

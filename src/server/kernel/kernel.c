@@ -5,7 +5,7 @@
 ** Login   <duval_q@epitech.net>
 **
 ** Started on  Thu May 31 16:27:37 2012 quentin duval
-** Last update Fri Jun  1 02:20:29 2012 quentin duval
+** Last update Fri Jun  1 23:50:55 2012 quentin duval
 */
 
 #include "kernel.h"
@@ -35,8 +35,7 @@ bool kernel_init_with_argv(int argc, char **argv)
   int team;
 
   kernel_init();
-  if (kernel_session_init(&g_kernel->listener, kopti(argc, argv, "-p", 3945)) &&
-      kernel_client_init() &&
+  if (kernel_client_init(&g_kernel->listener, kopti(argc, argv, "-p", 3945)) &&
       kernel_game_init(kopti(argc, argv, "-x", 10),
 		       kopti(argc, argv, "-y", 10),
 		       kopti(argc, argv, "-c", 10)) &&
@@ -46,7 +45,7 @@ bool kernel_init_with_argv(int argc, char **argv)
       if (index == 0)
 	return false;
       team = 0;
-      while (!IS_FLAG(argv[index]))
+      while (index < argc && (!IS_FLAG(argv[index])))
 	{
 	  kernel_add_team(argv[index++]);
 	  team++;

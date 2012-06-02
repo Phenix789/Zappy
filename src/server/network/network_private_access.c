@@ -5,7 +5,7 @@
 ** Login   <duval_q@epitech.net>
 **
 ** Started on  Tue May 29 08:03:53 2012 quentin duval
-** Last update Thu May 31 23:25:45 2012 quentin duval
+** Last update Sat Jun  2 10:53:25 2012 quentin duval
 */
 
 #include	"in_network.h"
@@ -16,7 +16,8 @@ void		execute_from_socket(void *data)
   t_socket              *socket;
 
   socket = (t_socket*)data;
-  socket->read(socket, socket->param);
+  if (socket->read)
+    (socket->read(socket, socket->param));
 }
 
 void			execute_from_listener(void *data)
@@ -30,10 +31,11 @@ void			execute_from_listener(void *data)
   sock->length = sizeof(sock->addr);
   listener = (t_listener*)data;
   if ((sock->fd = accept(listener->socket->fd, (SOCKADDR *) &sock->addr, &sock->length)) < 0)
-      return;
+    return;
   logger_debug("[NETWORK] give fd %d for new client", sock->fd);
   logger_debug("[NETWORK] calling creation callback");
-  (*listener->create)(sock);
+  if (listener->create)
+    (*listener->create)(sock);
 }
 
 SOCKET		extract_from_socket(void *data)

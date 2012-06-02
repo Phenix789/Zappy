@@ -4,181 +4,76 @@
  *
  */
 
-#ifndef		__GAME_H__
-# define	__GAME_H__
+#ifndef __GAME_H__
+#define	__GAME_H__
 
-typedef struct s_player t_player;
+#include "game_info.h"
+#include "logger.h"
+#include "client.h"
+#include "kernel.h"
 
-# include	<stdbool.h>
-# include	<stdlib.h>
-# include	<stdio.h>
-# include	<string.h>
-# include	<time.h>
-# include	"map.h"
-# include	"session.h"
-# include	"kernel.h"
-# include	"parser.h"
-# include	"logger.h"
+/*player*/
+t_player *player_create(t_team *team, int x, int y);
+void player_free(t_player *player);
 
-# define	REP_OK		"ok"
-# define	REP_KO		"ko"
-# define	REP_VOIR	"%s"
-# define	REP_INVENTORY	"linemate %d, deraumere %d, sibur %d, mendiane %d, phiras %d, thystame %d, nourriture %d"
-# define	REP_INCANTATION	"elevation en cours niveau actuel : %d"
-# define	REP_CONNECT_NBR	"%d"
-# define	REP_DEATH	"-"
+/*team*/
+t_team *team_create(char *name, int slots);
+void team_free(t_team *team);
+bool team_add_player(t_team *team, t_player *player);
+void team_remove_player(t_team *team, t_player *player);
 
-# define	TEAM_NAME_SIZE	32
+/*world*/
+void world_add_player(t_player *player, int x, int y);
+void world_remove_player(t_player *player);
+bool world_move_player(t_player *player);
+bool world_move_to(t_player *player, t_orientation direction);
+t_tile *world_get_tile(int x, int y);
 
-# define	DELAY_STANDARD	7
-# define	DELAY_INCANT	300
-# define	DELAY_FORK	42
+/*game*/
+bool game_init(int x, int y, int nb_slots);
+int game_width();
+int game_height();
 
-typedef enum
-  {
-    IT_LINEMATE,
-    IT_DERAUMERE,
-    IT_SIBUR,
-    IT_MENDIANE,
-    IT_PHIRAS,
-    IT_THYSTAME,
-    IT_FOOD
-  }		t_item;
+bool game_start();
+void game_play_free_player();
 
-typedef struct
-{
-  int		nb_players;
-  int		linemate;
-  int		deraumere;
-  int		sibur;
-  int		mendiane;
-  int		phiras;
-  int		thystame;
-}		t_leveler;
+void game_create_team(char *team);
+void game_add_team(t_team *team);
+t_team *game_get_team(char *name);
 
-typedef enum
-  {
-    OR_NORTH,
-    OR_EAST,
-    OR_SOUTH,
-    OR_WEST
-  }		t_orientation;
+void game_add_free_player(t_player *player);
+void game_remove_free_player(t_player *player);
+t_player *game_get_slot(char *team);
 
-typedef struct
-{
-  int		linemate;
-  int		deraumere;
-  int		sibur;
-  int		mendiane;
-  int		phiras;
-  int		thystame;
-  int		food;
-}		t_inventory;
+void game_action_choose(t_player *player);
+void game_action_move(t_player *player);
+void game_action_left(t_player *player);
+void game_action_right(t_player *player);
 
-typedef struct
-{
-  int		x;
-  int		y;
-}		t_pos;
+void game_world_dump();
 
-struct	s_player
-{
-  char		team[TEAM_NAME_SIZE + 1];
-  t_orientation	orientation;
-  t_pos		position;
-  t_inventory	inventory;
-  unsigned int	id;
-  int		level;
-  int		life;
-};
-
-t_player	*player_new();
-void		player_delete(t_player *retiree);
-
-void		player_forward_start_cb(t_client *client, t_command *command);
-void		player_forward_end_cb(t_client *client, int error);
-
-void		player_right_start_cb(t_client *client, t_command *command);
-void		player_right_end_cb(t_client *client, int error);
-
-void		player_left_start_cb(t_client *client, t_command *command);
-void		player_left_end_cb(t_client *client, int error);
-
-/* TODO */
-void		player_look_start_cb(t_client *client, t_command *command);
-void		player_look_end_cb(t_client *client, int error);
-
-void		player_inventory_start_cb(t_client *client, t_command *command);
-void		player_inventory_end_cb(t_client *client, int error);
-
-void		player_take_start_cb(t_client *client, t_command *command);
-void		player_take_end_cb(t_client *client, int error);
-
-void		player_drop_start_cb(t_client *client, t_command *command);
+/*callback*/
+void		player_connect_nbr_cb(t_client *client, char *command);
+void		player_death_cb(t_client *client, char *command);
 void		player_drop_end_cb(t_client *client, int error);
-
-void		player_expulse_start_cb(t_client *client, t_command *command);
+void		player_drop_start_cb(t_client *client, char *command);
 void		player_expulse_end_cb(t_client *client, int error);
-
-/* TODO */
-void		player_broadcast_start_cb(t_client *client, t_command *command);
-void		player_broadcast_end_cb(t_client *client, int error);
-
-void		player_incantation_start_cb(t_client *client, t_command *command);
-void		player_incantation_end_cb(t_client *client, int error);
-
-/* TODO */
-void		player_fork_start_cb(t_client *client, t_command *command);
+void		player_expulse_start_cb(t_client *client, char *command);
 void		player_fork_end_cb(t_client *client, int error);
-
-void            player_connect_nbr_cb(t_client *client, t_command *command);
-
-void		player_death_cb(t_client *client, t_command *command);
-
-typedef struct
-{
-  char		name[TEAM_NAME_SIZE + 1];
-  t_map		player_map;
-  int		nb_players;
-}		t_team;
-
-t_team		*team_new(char *name);
-t_team		*team_get(char *name);
-void		team_delete(char *name);
-
-typedef t_pos t_dim;
-
-typedef struct	s_tile
-{
-  t_list	players;
-  t_pos		coord;
-  t_inventory	ressources;
-}		t_tile;
-
-typedef struct
-{
-  t_tile	*world;
-  t_dim		dimensions;
-  int		connect_nbr;
-  t_inventory	item_count;
-}		t_world;
-
-extern t_map	g_team_map;
-extern t_map	g_autoplay_team;
-extern t_world	*g_game_world;
-
-t_tile		*player_get_tile(t_player *player);
-
-void		game_turn();
-int		game_create(int x, int y, int nb_per_team);
-bool		game_init(int x, int y, int nb_per_team);
-void		game_destroy();
-void		game_world_dump();
-
-void		game_player_add(char *team, t_player *player);
-void		game_player_remove(char *team, t_player *player);
-
-void		game_autoplay_add_player(t_player *player);
-t_player	*game_autoplay_get_player(t_player *player);
+void		player_fork_start_cb(t_client *client, char *command);
+void		player_forward_end_cb(t_client *client, int error);
+void		player_forward_start_cb(t_client *client, char *command);
+void		player_incantation_end_cb(t_client *client, int error);
+void		player_incantation_start_cb(t_client *client, char *command);
+void		player_inventory_end_cb(t_client *client, int error);
+void		player_inventory_start_cb(t_client *client, char *command);
+void		player_left_end_cb(t_client *client, int error);
+void		player_left_start_cb(t_client *client, char *command);
+void		player_look_end_cb(t_client *client, int error);
+void		player_look_start_cb(t_client *client, char *command);
+void		player_right_end_cb(t_client *client, int error);
+void		player_right_start_cb(t_client *client, char *command);
+void		player_take_end_cb(t_client *client, int error);
+void		player_take_start_cb(t_client *client, char *command);
 
 #endif

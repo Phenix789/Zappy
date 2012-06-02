@@ -5,7 +5,7 @@
 ** Login   <duval_q@epitech.net>
 **
 ** Started on  Tue May 29 03:54:36 2012 quentin duval
-** Last update Thu May 31 21:59:02 2012 quentin duval
+** Last update Sat Jun  2 10:36:17 2012 quentin duval
 */
 
 #include		"network.h"
@@ -29,6 +29,8 @@ bool			network_init()
 
 bool			network_create()
 {
+  if (g_network)
+    return (true);
   logger_debug("[NETWORK] beginning allocation");
   if (!(g_network = malloc(sizeof(*g_network))))
     return (false);

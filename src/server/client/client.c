@@ -16,6 +16,7 @@ t_client *client_init(t_client *client, t_socket *socket)
 {
   client->socket = socket;
   client->player = NULL;
+  client->busy = false;
   list_init(&client->actions);
   _client_manager_add(client);
   return client;
