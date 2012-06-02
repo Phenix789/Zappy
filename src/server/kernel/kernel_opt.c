@@ -1,4 +1,14 @@
+/*
+** kernel_opt.c for zappy in /home/duval_q//Documents/projects/zappy/src/server/kernel
+**
+** Made by quentin duval
+** Login   <duval_q@epitech.net>
+**
+** Started on  Thu May 31 16:30:58 2012 quentin duval
+** Last update Fri Jun  1 20:57:33 2012 quentin duval
+*/
 
+#include <string.h>
 #include "kernel.h"
 
 int kernel_retrieve_flag_index(int argc, char **argv, char *flag)

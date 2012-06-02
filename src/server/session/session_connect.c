@@ -8,8 +8,8 @@
 ** Last update Thu May 31 18:39:10 2012 quentin duval
 */
 
-#include	"session.h"
-#include	"client.h"
+#include "session.h"
+#include "client.h"
 #include "logger.h"
 
 void		session_connect(t_socket *new_sock)

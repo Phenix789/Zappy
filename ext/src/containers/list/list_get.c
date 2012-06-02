@@ -47,3 +47,15 @@ void *list_get_to(t_list *list, fpred pred)
     return current->data;
   return NULL;
 }
+
+void *list_get_to_param(t_list *list, fpredp pred, void *param)
+{
+  t_list_node *current;
+
+  current = list->head;
+  while (current && (*pred)(current->data, param))
+    current = current->next;
+  if (current)
+    return current->data;
+  return NULL;
+}

@@ -12,15 +12,13 @@
 #include <sys/time.h>
 #include "list.h"
 #include "clock.h"
-#include "session.h"
 #include "network.h"
 #include "client.h"
 
-#define KN_SV_SESSION 0x01
-#define KN_SV_CLIENT 0x2
-#define KN_SV_GAME 0x4
-#define KN_SV_CLOCK 0x8
-#define KN_SV_INIT (KN_SV_SESSION | KN_SV_CLIENT | KN_SV_GAME | KN_SV_CLOCK)
+#define KN_SV_CLIENT 0x1
+#define KN_SV_GAME 0x2
+#define KN_SV_CLOCK 0x4
+#define KN_SV_INIT (KN_SV_CLIENT | KN_SV_GAME | KN_SV_CLOCK)
 
 #define KN_ERROR_OK 0
 
@@ -34,7 +32,7 @@ typedef struct s_kernel
 	t_socket listener;
 } t_kernel;
 
-typedef void (*kn_wakeup_cb)(t_client *, int);
+typedef void (*kn_wakeup_cb)(void *, int);
 
 typedef struct s_kernel_callback
 {

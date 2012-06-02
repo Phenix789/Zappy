@@ -10,18 +10,6 @@
 
 #include "list.h"
 
-t_list_node *list_create_node(void *data)
-{
-  t_list_node *node;
-
-  if ((node = malloc(sizeof(t_list_node))) == 0)
-    return NULL;
-  node->data = data;
-  node->prev = NULL;
-  node->next = NULL;
-  return node;
-}
-
 t_list *list_create()
 {
   t_list *list;

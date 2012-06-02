@@ -5,7 +5,7 @@
 ** Login   <duval_q@epitech.net>
 ** 
 ** Started on  Tue May 29 04:18:53 2012 quentin duval
-** Last update Wed May 30 18:36:44 2012 quentin duval
+** Last update Sat Jun  2 10:54:46 2012 quentin duval
 */
 
 #include	"network.h"
@@ -16,6 +16,8 @@ bool    network_add_socket(t_socket *socket,
 {
   t_network     *network;
 
+  if (!socket || !callback)
+    return (false);
   network = get_network();
   socket->read = callback;
   socket->param = param;
@@ -27,6 +29,8 @@ bool	network_del_socket(t_socket *socket)
 {
   t_network	*network;
 
+  if (!socket)
+    return (true);
   network = get_network();
   list_pop(network->read, (void *)socket);
   return (true);

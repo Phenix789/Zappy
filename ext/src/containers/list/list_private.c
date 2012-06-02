@@ -40,7 +40,7 @@ void _list_pop_node(t_list *list, t_list_node *node)
       node->next->prev = node->prev;
       node->prev->next = node->next;
       list->size--;
-      free(node);
+      list_pool_node(node);
     }
 }
 

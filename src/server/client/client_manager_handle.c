@@ -6,7 +6,6 @@ extern t_client_manager *g_client_manager;
 void _client_manager_add(t_client *client)
 {
   logger_message("[CLIENT] New client added");
-  logger_verbose("%p : %p : %p\n", g_client_manager, &g_client_manager->clients, client);
   list_add_end(&g_client_manager->clients, client);
 }
 

@@ -40,7 +40,7 @@ void list_pop_begin(t_list *list)
       list->size--;
       if (list->size == 0)
         list->tail = NULL;
-      free(node);
+      list_pool_node(node);
     }
 }
 
@@ -57,7 +57,7 @@ void list_pop_end(t_list *list)
         list->head = NULL;
       else
         list->tail->next = NULL;
-      free(node);
+      list_pool_node(node);
     }
 }
 
@@ -80,6 +80,22 @@ void list_pop_at(t_list *list, unsigned int index)
 
 void list_pop_to(t_list *list, fpred pred)
 {
-  (void) list;
-  (void) pred;
+  t_list_node *current;
+
+  current = list->head;
+  while (current && (*pred)(current->data))
+    current = current->next;
+  if (current)
+    _list_pop_node(list, current);
+}
+
+void list_pop_to_param(t_list *list, fpredp pred, void *param)
+{
+  t_list_node *current;
+
+  current = list->head;
+  while (current && (*pred)(current->data, param))
+    current = current->next;
+  if (current)
+    _list_pop_node(list, current);
 }

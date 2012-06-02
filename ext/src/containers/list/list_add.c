@@ -79,3 +79,28 @@ void list_add_to(t_list *list, fcmp cmp, void *data)
 	list_add_begin(list, data);
     }
 }
+
+void list_add_to_param(t_list *list, fcmpp cmp, void *data, void *param)
+{
+  t_list_node *current;
+
+  current = list->head;
+  if (!current)
+    list_add_begin(list, data);
+  else
+    {
+      while ((*cmp)(data, current->data, param) <= 0)
+        {
+          current = current->next;
+          if (!current)
+            {
+              list_add_end(list, data);
+              return;
+            }
+        }
+      if (current->prev)
+        _list_add_node(list, current->prev, data);
+      else
+	list_add_begin(list, data);
+    }
+}
