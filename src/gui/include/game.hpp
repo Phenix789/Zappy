@@ -9,25 +9,28 @@ class Network;
 namespace game
 {
   /* -- Player -- */
-  enum  state
+  enum	orientation
     {
-      DEAD,
-      ALIVE,
+      NORD,
+      EST,
+      SUD,
+      OUEST
     };
 
   class player
   {
   public:
-    player(int x, int y, int number);
+    player(int x, int y, int number, orientation ori);
     ~player();
 
   public:
+    orientation		orient;
     int                 number;
     int                 pos_x;
     int                 pos_y;
-    // TODO LATER
-    //  int                     level;
-    //  std::list<ress> inventory;
+
+  public:
+    void	set(int x, int y, orientation ori);
 
   private:
     player();
@@ -37,7 +40,7 @@ namespace game
   /* -- Map -- */
   enum  ress
     {
-      FOOD,
+      NOURRITURE,
       LINEMATE,
       DERAUMATRE,
       SIBUR,
@@ -48,9 +51,11 @@ namespace game
 
   struct tiles
   {
+  public:
     tiles();
+    void	set(ress type, int nb);
 
-    int	ressources[7];
+    int ressources[7];
   };
 
   class map
@@ -60,19 +65,25 @@ namespace game
     ~map();
 
   public:
-    void        set_ress(unsigned int x, unsigned int y, ress type, unsigned int nb);
-    void        add_player(unsigned int x, unsigned int y, int num_pl);
+    void        set_ress(int x, int y, ress type, int nb);
+    void        add_player(int x, int y, int num_pl, orientation orient);
     void        rm_player(int num_pl);
-    void        setDim(unsigned int x, unsigned int y);
+    void        setDim(int x, int y);
     const std::vector<tiles>              getTile() const;
     const std::list<game::player>       getPlayer() const;
 
+  private:
+    void	set_tile(tiles _tile, ress type, unsigned int nb);
+
   public:
     //  private:
-    unsigned int                size_x;
-    unsigned int                size_y;
+    int		                size_x;
+    int			        size_y;
     std::vector<tiles>          _tiles;
     std::list<game::player>     _players;
+
+  private:
+    map(const map &other);
   };
 
   /* -- data -- */
@@ -90,6 +101,9 @@ namespace game
   public:
     void	send_msg(const std::string &str);
     bool	msg_to_send();
+
+  private:
+    data(const data &other);
   };
 
   int	run_gui(game::data &data, Network &sock);

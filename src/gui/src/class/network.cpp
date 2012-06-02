@@ -8,6 +8,7 @@
 #include <cstring>
 #include "network.hpp"
 
+#warning "Le socket arrive a se co alors qu'il ne devrait pas"
 Network::Network(const std::string &host, const std::string &port) : sockfd(-1)
 {
   struct in_addr	addr;

@@ -9,12 +9,21 @@ namespace game
   map::~map()
   { }
 
-#warning "a refaire (plusieures même pierres par cases)"
-  void  map::set_ress(unsigned int x, unsigned int y, ress type, unsigned int nb)
+  void  map::set_ress(int x, int y, ress type, int nb)
   {
+    unsigned int	pos;
+
+    pos = x * this->size_x * y;
+    if (pos > this->_tiles.size())
+      {
+	std::cerr << "game::map::set_ress : Taille invalide (" << pos << ") - " ;
+	std::cerr << x << "/" << y << std::endl;
+      }
+    else
+      this->_tiles.at(pos).set(type, nb);
   }
 
-  void  map::add_player(unsigned int x, unsigned int y, int num_pl)
+  void  map::add_player(int x, int y, int num_pl, orientation orient)
   {
     std::list<game::player>::iterator   it;
 
@@ -27,7 +36,7 @@ namespace game
 	    return ;
 	  }
       }
-    this->_players.push_back(player(x, y, num_pl));
+    this->_players.push_back(player(x, y, num_pl, orient));
   }
 
   void  map::rm_player(int num_pl)
@@ -46,7 +55,7 @@ namespace game
     std::cerr << "game::map::rm_player : Player " << num_pl << " existe déja" << std::endl;
   }
 
-  void  map::setDim(unsigned int x, unsigned int y)
+  void  map::setDim(int x, int y)
   {
     this->size_x = x;
     this->size_y = y;
