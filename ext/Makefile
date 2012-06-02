@@ -34,12 +34,14 @@ LDFLAGS = -shared
 LIST_DIR = containers/list
 LIST_SRC = \
 	list.c \
+	list_node.c \
 	list_private.c \
 	list_add.c \
 	list_get.c \
 	list_pop.c \
 	list_utils.c \
 	list_algorithm.c \
+	list_param.c \
 	list_iter_base.c \
 	list_iter_modif.c
 
