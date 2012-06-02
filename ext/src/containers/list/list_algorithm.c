@@ -65,3 +65,22 @@ t_list *list_filter(t_list *list, fpred pred)
     }
   return filter;
 }
+
+void **list_flatten(t_list *list)
+{
+  void **flatten;
+  t_list_node *node;
+  int i;
+
+  if (!(flatten = malloc((list->size + 1) * sizeof(void *))))
+    return NULL;
+  node = list->head;
+  i = 0;
+  while (node)
+    {
+      flatten[i++] = node->data;
+      node = node->next;
+    }
+  flatten[i] = NULL;
+  return flatten;
+}

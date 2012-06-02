@@ -9,7 +9,7 @@
 */
 
 #include <string.h>
-#include	"game.h"
+#include "game.h"
 
 t_team		*team_create(char *name, int slots)
 {

@@ -18,11 +18,8 @@ bool client_manager_init(t_socket *listen, int port)
 
 void client_manager_destroy()
 {
-  t_client *client;
-
   logger_message("[CLIENT] Manager stopped");
-  while ((client = list_get_begin(&g_client_manager->clients)))
-    client_destroy(client);
+  list_foreach(&g_client_manager->clients, &client_destroy);
   free(g_client_manager);
 }
 

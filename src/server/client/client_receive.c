@@ -20,7 +20,7 @@ static bool client_read(t_client *client, struct s_buffer *bf)
     {
       bf->read = socket_read(client->socket, bf->buffer, BUFFER_SIZE);
       logger_verbose("[CLIENT] Client %i read %i data on socket", CLP_ID(client), bf->read);
-      if (bf->read != 0 && bf->count != 0)
+      if (!(bf->read == 0 && bf->count == 0))
 	{
 	  bf->count++;
 	  bf->pos = 0;
