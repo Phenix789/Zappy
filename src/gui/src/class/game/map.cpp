@@ -1,40 +1,8 @@
-#include <string>
 #include <iostream>
 #include "game.hpp"
 
 namespace game
 {
-  player::player(int x, int y, int num) : number(num), pos_x(x), pos_y(y)
-  { }
-
-  player::~player()
-  { }
-
-
-  data::data() : connection(false)
-  { }
-
-  data::~data()
-  { }
-
-  bool	data::msg_to_send()
-  {
-    if (this->ask.size() > 0)
-      return (true);
-    return (false);
-  }
-
-  void	data::send_msg(const std::string &str)
-  {
-    this->ask.push_back(str);
-  }
-
-  tiles::tiles()
-  {
-    for (int i = 0; i < 7; i++)
-      this->ressources[i] = 0;
-  }
-
   map::map() : size_x(-1), size_y(-1)
   { }
 
@@ -84,7 +52,6 @@ namespace game
     this->size_y = y;
     this->_tiles.resize(x * y);
   }
-
   const std::vector<tiles>        map::getTile() const
   {
     return (this->_tiles);
@@ -94,4 +61,4 @@ namespace game
   {
     return (this->_players);
   }
-};
+}

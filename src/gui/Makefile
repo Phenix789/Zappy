@@ -5,7 +5,7 @@
 ## Login   <frizac_b@epitech.net>
 ##
 ## Started on  Mon Feb  6 14:18:30 2012 Alexandre Frizac
-## Last update Fri Jun  1 15:10:39 2012 Alexandre Frizac
+## Last update Sat Jun  2 13:48:33 2012 Alexandre Frizac
 ##
 
 NAME		= a.out
@@ -22,7 +22,10 @@ LDFLAGS		+= -l boost_regex
 
 SRC	= $(addprefix src/, \
 		class/dynlib.cpp \
-		class/game.cpp \
+		class/game/data.cpp \
+		class/game/map.cpp \
+		class/game/player.cpp \
+		class/game/tiles.cpp \
 		class/network.cpp\
 		class/parser.cpp \
 		class/sfml.cpp \
