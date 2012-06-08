@@ -8,6 +8,28 @@
 
 int	game::run_gui(data &data, Network &sock)
 {
+  data.connection = true;
+
+  {
+    Igui	*gui;
+
+    gui = create(data);
+    gui->init();
+    while (gui->is_running() && data.connection)
+      {
+	gui->process_event();
+	gui->draw_map();
+	usleep(5000);
+      }
+    gui->exit();
+    delete gui;
+  }
+  return (EXIT_SUCCESS);
+}
+
+/*
+int	game::run_gui(data &data, Network &sock)
+{
   parser	pars;
   Igui		*gui;
 
@@ -34,3 +56,4 @@ int	game::run_gui(data &data, Network &sock)
   delete gui;
   return (EXIT_SUCCESS);
 }
+*/

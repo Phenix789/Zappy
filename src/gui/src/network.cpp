@@ -6,6 +6,10 @@
 #include "game.hpp"
 #include "parser.hpp"
 
+#warning "Repasser sur boost/asio !"
+/*
+** Asio : Appelle une fonction quand la lecture/l'écriture est finie
+*/
 void	network::send_list(std::list<std::string> &list, Network &sock)
 {
   while (list.size() > 0)

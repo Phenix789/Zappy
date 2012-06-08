@@ -7,6 +7,13 @@
 #include <string>
 #include "game.hpp"
 
+namespace color
+{
+  extern const char *red;
+  extern const char *orange;
+  extern const char *white;
+};
+
 namespace pfunc
 {
   void	fpmsz(game::data &data, const std::string &cmd);
