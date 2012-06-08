@@ -41,16 +41,20 @@ bool kernel_init_with_argv(int argc, char **argv)
 		       kopti(argc, argv, "-c", 10)) &&
       kernel_clock_init(kopti(argc, argv, "-t", 100)))
     {
+      logger_verbose("[KERNEL] Search team definition");
       index = kernel_retrieve_flag_index(argc, argv, "-n") + 1;
-      if (index == 0)
-	return false;
-      team = 0;
-      while (index < argc && (!IS_FLAG(argv[index])))
+      if (index != 0)
 	{
-	  kernel_add_team(argv[index++]);
-	  team++;
+	  team = 0;
+	  while (index < argc && (!IS_FLAG(argv[index])))
+	    {
+	      kernel_add_team(argv[index++]);
+	      team++;
+	    }
+	  if (team > 0)
+	    return true;
 	}
-      return team > 0;
+      logger_error("[KERNEL] No team has created");
     }
   return false;
 }

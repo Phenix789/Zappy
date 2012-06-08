@@ -15,9 +15,7 @@ extern t_game *g_game;
 
 static int _game_team_name_cmp(t_team *team, char *name)
 {
-  if (strcmp(team->name, name) == 0)
-    return 1;
-  return 0;
+  return strcmp(team->name, name);
 }
 
 void game_create_team(char *name)

@@ -5,7 +5,7 @@
 ## Login   <frizac_b@epitech.net>
 ##
 ## Started on  Mon Feb  6 14:18:30 2012 Alexandre Frizac
-## Last update Sat Jun  2 13:48:33 2012 Alexandre Frizac
+## Last update Sat Jun  2 17:52:42 2012 Alexandre Frizac
 ##
 
 NAME		= a.out
@@ -17,7 +17,7 @@ SRC_DIR		= src
 CC		= g++
 CXXFLAGS	+= -I include
 CXXFLAGS	+= -Wall -Wextra -Wshadow -g
-LDFLAGS		+= -l sfml-system -l sfml-window
+LDFLAGS		+= -l sfml-system -l sfml-graphics
 LDFLAGS		+= -l boost_regex
 
 SRC	= $(addprefix src/, \

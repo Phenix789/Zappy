@@ -1,7 +1,7 @@
 #ifndef __SFML_HPP_
 #define __SFML_HPP_
 
-#include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
 #include "game.hpp"
 #include "IGui.hpp"
 
@@ -22,7 +22,7 @@ public:
 
 private:
   bool			run;
-  sf::Window		App;
+  sf::RenderWindow	App;
   sf::Event		event;
   game::data		&data;
 

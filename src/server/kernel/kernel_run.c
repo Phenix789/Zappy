@@ -24,6 +24,7 @@ void kernel_run()
       logger_warning("[KERNEL] Kernel is not initialised");
       return;
     }
+  game_start();
   g_kernel->run = true;
   logger_message("[KERNEL] Kernel start");
   while (g_kernel->run)

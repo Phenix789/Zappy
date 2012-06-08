@@ -26,5 +26,7 @@ void client_destroy(t_client *client)
 {
   list_free(&client->actions);
   _client_manager_remove(client);
-  socket_close(client->socket);
+  if (client->socket)
+    socket_close(client->socket);
+  free(client);
 }

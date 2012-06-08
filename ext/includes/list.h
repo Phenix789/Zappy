@@ -80,6 +80,7 @@ int list_count(t_list *list, fpred pred);
 void list_foreach(t_list *list, feach each);
 void list_transform(t_list *list, ftrans trans);
 t_list *list_filter(t_list *list, fpred pred);
+void **list_flatten(t_list *list);
 
 int list_count_param(t_list *list, fpredp pred, void *param);
 void list_foreach_param(t_list *list, feachp each, void *param);
