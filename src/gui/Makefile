@@ -5,7 +5,7 @@
 ## Login   <frizac_b@epitech.net>
 ##
 ## Started on  Mon Feb  6 14:18:30 2012 Alexandre Frizac
-## Last update Fri Jun  8 15:04:59 2012 Alexandre Frizac
+## Last update Fri Jun  8 17:35:42 2012 Alexandre Frizac
 ##
 
 NAME		= a.out
@@ -18,7 +18,7 @@ CC		= g++
 CXXFLAGS	+= -I include
 CXXFLAGS	+= -Wall -Wextra -Wshadow -g
 LDFLAGS		+= -l sfml-system -l sfml-graphics -l sfml-window
-LDFLAGS		+= -l boost_regex
+LDFLAGS		+= -l boost_regex -l boost_thread
 
 SRC	= $(addprefix src/, \
 		class/dynlib.cpp \

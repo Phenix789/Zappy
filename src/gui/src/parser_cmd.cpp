@@ -5,13 +5,13 @@
 #include <cstdlib>
 #include "parser.hpp"
 
-static boost::smatch                         match;
-static boost::regex                          expre;
-
 #define	atom(num) std::atoi(std::string(match[num].first, match[num].second).c_str())
 
 namespace pfunc
 {
+  static boost::smatch                         match;
+  static boost::regex                          expre;
+
   static inline void cerr_invalid(const std::string &cmd)
   { std::cerr << color::red << "Commande invalide : " << color::white << cmd << std::endl; }
 

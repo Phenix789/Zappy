@@ -1,6 +1,6 @@
+#include <boost/thread.hpp>
 #include <iostream>
 #include <cstdlib>
-#include <unistd.h>
 #include "game.hpp"
 #include "network.hpp"
 #include "IGui.hpp"
@@ -15,12 +15,14 @@ int	game::run_gui(data &data, Network &sock)
 
     gui = create(data);
     gui->init();
+    gui->intro();
     while (gui->is_running() && data.connection)
       {
 	gui->process_event();
 	gui->draw_map();
-	usleep(5000);
+	boost::this_thread::sleep(boost::posix_time::milliseconds(50));
       }
+    gui->end();
     gui->exit();
     delete gui;
   }

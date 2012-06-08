@@ -1,3 +1,4 @@
+#include <iostream>
 #include "sfml.hpp"
 
 sfml::sfml(game::data &edata) : run(false), data(edata)
@@ -37,11 +38,12 @@ void	sfml::process_event()
     }
 }
 
-void	sfml::intro() {}
+void	sfml::intro()
+{ std::cout << "Beginning graph loop" << std::endl; }
+void	sfml::end()
+{ std::cout << "Ending graph loop" << std::endl; }
+
 void	sfml::draw_map() {}
-void	sfml::end() {}
-
-
 void	sfml::draw_background() { }
 void	sfml::draw_gui() { }
 void	sfml::draw_info() { }
