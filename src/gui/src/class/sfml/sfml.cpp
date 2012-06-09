@@ -2,7 +2,9 @@
 #include "sfml.hpp"
 
 sfml::sfml(game::data &edata) : run(false), data(edata)
-{ }
+{
+  this->App.SetFramerateLimit(60);
+}
 
 sfml::~sfml()
 {

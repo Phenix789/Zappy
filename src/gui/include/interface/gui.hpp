@@ -5,6 +5,7 @@
 ** Interface Igui pour charger une bibliothèque graphique dynamiquement (si possible)
 ** Peut lancer des ex_exit (exception avec un msg pour quitter)
 ** void	wait(int millisecond) : Attend x ms, et gère les inputs / rafraichit l'écran pendant ce temps
+** le booleen permet de ne PAS dessiner l'interface
 */
 #include <exception>
 #include "interface/network.hpp"
@@ -20,7 +21,7 @@ public:
   virtual void	process_event() = 0;
   virtual bool	is_running() const = 0;
   virtual void  draw_map() = 0;
-  virtual void  wait(int millisecond) = 0;
+  virtual void  wait(int millisecond, bool draw) = 0;
   virtual void	end() = 0;
   virtual void  exit() = 0;
 };

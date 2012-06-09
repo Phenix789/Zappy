@@ -43,7 +43,10 @@ int     gui::main(const std::string __attribute__((unused))host,
 {
   game::data    data;
   INetwork	*sock = network_create();
+  int		res;
 
-  return (gui::run(data, *sock));
+  res = gui::run(data, *sock);
+  delete sock;
+  return (res);
 }
 #endif

@@ -26,11 +26,11 @@ namespace game
   public:
     orientation		orient;
     int                 number;
-    int                 pos_x;
-    int                 pos_y;
+    double              pos_x;
+    double              pos_y;
 
   public:
-    void	set(int x, int y, orientation ori);
+    void	set(double x, double y, orientation ori);
 
   private:
     player();
