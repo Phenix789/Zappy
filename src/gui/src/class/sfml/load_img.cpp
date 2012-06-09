@@ -2,8 +2,8 @@
 
 static const char	*img_name[] =
   {
-    "ressources/intro.bmp",
-    "ressources/score.bmp",
+    "ressources/intro.jpg",
+    "ressources/score.jpg",
     "ressources/character.bmp",
     "ressources/stones.bmp",
     "ressources/egg.bmp",
@@ -21,8 +21,8 @@ void	sfml::load_img(void)
   this->img.resize(max);
   while (i < max)
     {
-      if (!this->img[i].LoadFromFile(img_name[i]))
-	throw gui::ex_exit("Phase de chargement des images");
+      if (!this->img[i].LoadFromFile(img_name[i]));
+      //	throw gui::ex_exit("Phase de chargement des images");
       i++;
     }
 }
