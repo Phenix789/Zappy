@@ -2,6 +2,7 @@
 #define __SFML_HPP_
 
 #include <SFML/Graphics.hpp>
+#include <vector>
 #include "interface/gui.hpp"
 #include "game.hpp"
 
@@ -17,16 +18,19 @@ public:
   bool	is_running() const;
   void	process_event();
   void	draw_map();
+  void	wait(int millisecond);
   void	end();
   void	exit();
 
 private:
-  bool			run;
-  sf::RenderWindow	App;
-  sf::Event		event;
-  game::data		&data;
+  bool				run;
+  std::vector<sf::Image>	img;
+  sf::RenderWindow		App;
+  sf::Event			event;
+  game::data			&data;
 
 private:
+  void	      load_img();
   void	      close();
   void	      clear();
   void        draw_background();
@@ -37,6 +41,7 @@ private:
 
 private:
   sfml();
+  sfml(const sfml &other);
 };
 
 #endif /* __SFML_HPP_ */

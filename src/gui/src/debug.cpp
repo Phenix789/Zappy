@@ -5,6 +5,7 @@
 #include "game.hpp"
 #include "network.hpp"
 #include "parser.hpp"
+#include "utils.hpp"
 
 #ifdef DEBUG
 #warning "!! MODE DEBUG !! -- NO NETWORK !"
@@ -20,22 +21,26 @@ int	game::debug_gui(data &data)
 {
   data.connection = true;
 
-  {
-    Igui        *gui;
+  try
+    {
+      Igui        *gui;
 
-    gui = create(data);
-    gui->init();
-    gui->intro();
-    while (gui->is_running() && data.connection)
-      {
-        gui->process_event();
-        gui->draw_map();
-	boost::this_thread::sleep(boost::posix_time::milliseconds(50));
-      }
-    gui->end();
-    gui->exit();
-    delete gui;
-  }
+      gui = gui::create(data);
+      gui->init();
+      gui->intro();
+      while (gui->is_running() && data.connection)
+	{
+	  gui->process_event();
+	  gui->draw_map();
+	}
+      gui->end();
+      gui->exit();
+      delete gui;
+    }
+  catch (const gui::ex_exit &ex)
+    {
+      std::cout << "Fermeture de l'interface graphique - " << ex.what() << std::endl;
+    }
   return (EXIT_SUCCESS);
 }
 
