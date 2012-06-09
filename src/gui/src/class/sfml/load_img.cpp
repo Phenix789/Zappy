@@ -21,8 +21,10 @@ void	sfml::load_img(void)
   this->img.resize(max);
   while (i < max)
     {
-      if (!this->img[i].LoadFromFile(img_name[i]));
-      //	throw gui::ex_exit("Phase de chargement des images");
+      if (!this->img[i].LoadFromFile(img_name[i]))
+	{
+	  //	throw gui::ex_exit("Phase de chargement des images");
+	}
       i++;
     }
 }

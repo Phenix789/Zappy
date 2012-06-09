@@ -13,9 +13,9 @@ namespace gui
   {
     return (this->msg.c_str());
   }
-
-  extern "C" Igui	*create(game::data &data)
-  {
-    return (new sfml(data));
-  }
 };
+
+extern "C" Igui	*gui_create(game::data &data)
+{
+  return (new sfml(data));
+}

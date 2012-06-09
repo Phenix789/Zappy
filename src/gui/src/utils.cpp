@@ -1,10 +1,11 @@
-#include <boost/thread/thread.hpp>
+#include <string>
+#include <cstdlib>
 #include "utils.hpp"
 
 namespace utils
 {
-  void	sleep(int millisec)
+  unsigned short	atos(const std::string &str)
   {
-    boost::this_thread::sleep(boost::posix_time::milliseconds(millisec));
+    return ((unsigned short)(std::atoi(str.c_str())));
   }
 };

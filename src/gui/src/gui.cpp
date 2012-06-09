@@ -1,14 +1,12 @@
-#include <boost/thread.hpp>
-#include <iostream>
-#include <cstdlib>
-#include "interface/gui.hpp"
-#include "game.hpp"
-#include "network.hpp"
-#include "parser.hpp"
-
 #ifndef DEBUG
 
-int	game::run_gui(data &data, Network &sock)
+#include <iostream>
+#include <cstdlib>
+#include "interface/network.hpp"
+#include "interface/gui.hpp"
+#include "parser.hpp"
+
+int	gui::run(game::data &data, INetwork &sock)
 {
   parser	pars;
   Igui		*gui;
@@ -35,6 +33,20 @@ int	game::run_gui(data &data, Network &sock)
   gui->exit();
   delete gui;
   return (EXIT_SUCCESS);
+}
+
+int	gui::main(const std::string host, const std::string port)
+{
+  game::data	data;
+  INetwork	*sock;
+  int		res;
+
+  sock.setIp(host);
+  sock.setPort(port);
+
+  res = gui::run(data, *sock);
+  delete sock;
+  return (res);
 }
 
 #endif

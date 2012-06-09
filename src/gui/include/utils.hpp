@@ -3,7 +3,7 @@
 
 namespace utils
 {
-  void	sleep(int millisec);
+  unsigned short	atos(const std::string &str);
 };
 
 #endif /* __UTILS_HPP_ */

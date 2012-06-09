@@ -1,23 +1,15 @@
-#include <boost/thread.hpp>
+#ifdef DEBUG
+
 #include <iostream>
 #include <cstdlib>
 #include "interface/gui.hpp"
-#include "game.hpp"
-#include "network.hpp"
-#include "parser.hpp"
-#include "utils.hpp"
+#include "interface/network.hpp"
 
-#ifdef DEBUG
 #warning "!! MODE DEBUG !! -- NO NETWORK !"
-
-namespace game
-{ // should have been declared inside ‘game’ otherwise ...
-  int	debug_gui(data &data);
-};
 
 /* ----------------- LOOP ------------------- */
 
-int	game::debug_gui(data &data)
+int	gui::run(game::data &data, __attribute__((unused))INetwork &sock)
 {
   data.connection = true;
 
@@ -25,7 +17,7 @@ int	game::debug_gui(data &data)
     {
       Igui        *gui;
 
-      gui = gui::create(data);
+      gui = gui_create(data);
       gui->init();
       gui->intro();
       while (gui->is_running() && data.connection)
@@ -46,10 +38,12 @@ int	game::debug_gui(data &data)
 
 /* ------------------------------------------- */
 
-int     main_gui(const std::string __attribute__((unused))host,
-		 const std::string __attribute__((unused))port)
+int     gui::main(const std::string __attribute__((unused))host,
+		  const std::string __attribute__((unused))port)
 {
   game::data    data;
-  return (game::debug_gui(data));
+  INetwork	*sock = network_create();
+
+  return (gui::run(data, *sock));
 }
 #endif

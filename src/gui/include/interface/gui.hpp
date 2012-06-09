@@ -7,6 +7,7 @@
 ** void	wait(int millisecond) : Attend x ms, et gère les inputs / rafraichit l'écran pendant ce temps
 */
 #include <exception>
+#include "interface/network.hpp"
 #include "game.hpp"
 
 class Igui
@@ -40,7 +41,10 @@ namespace gui
     ex_exit();
   };
 
-  extern "C" Igui	*create(game::data &data);
+  int			run(game::data &data, INetwork &sock);
+  int			main(const std::string addr, const std::string port);
 };
+
+extern "C" Igui	*gui_create(game::data &data);
 
 #endif /* __IGUI_HPP_ */

@@ -5,8 +5,6 @@
 #include <vector>
 #include <string>
 
-int	main_gui(const std::string host, const std::string port);
-
 class Network;
 namespace game
 {
@@ -107,8 +105,6 @@ namespace game
   private:
     data(const data &other);
   };
-
-  int	run_gui(game::data &data, Network &sock);
 };
 
 #endif /* __GAME_HPP_ */

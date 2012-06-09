@@ -5,7 +5,7 @@
 ## Login   <frizac_b@epitech.net>
 ##
 ## Started on  Mon Feb  6 14:18:30 2012 Alexandre Frizac
-## Last update Sat Jun  9 16:00:27 2012 Alexandre Frizac
+## Last update Sat Jun  9 18:54:57 2012 Alexandre Frizac
 ##
 
 NAME		= a.out
@@ -14,13 +14,14 @@ INC_DIR		= include
 OBJ_DIR		= obj
 SRC_DIR		= src
 
-DEBUG_FLAGS	= -g -DDEBUG
+DEBUG_FLAGS	+= -g
+DEBUG_FLAGS	+= -DDEBUG
 
 CC		= g++
 CXXFLAGS	+= -I include
 CXXFLAGS	+= -Wall -Wextra -Wshadow -O2
-LDFLAGS		+= -l sfml-system -l sfml-graphics -l sfml-window
-LDFLAGS		+= -l boost_regex -l boost_thread
+LDFLAGS		+= -l sfml-system -l sfml-graphics -l sfml-window -l sfml-network
+LDFLAGS		+= -l boost_regex
 
 SRC	= $(addprefix src/, \
 		class/game/data.cpp \
@@ -28,19 +29,19 @@ SRC	= $(addprefix src/, \
 		class/game/player.cpp \
 		class/game/tiles.cpp \
 		class/gui/gui.cpp \
-		class/network.cpp\
+		class/network/network.cpp\
+		class/network/sfml_network.cpp\
 		class/parser.cpp \
 		class/sfml/draw.cpp \
 		class/sfml/event.cpp \
 		class/sfml/load_img.cpp \
 		class/sfml/sfml.cpp \
 		class/sfml/wait.cpp \
-		utils.cpp\
+		debug_gui.cpp\
 		gui.cpp\
 		main.cpp\
-		network.cpp\
 		parser_cmd.cpp\
-		debug.cpp\
+		utils.cpp\
 		)
 OBJ	= $(addprefix $(OBJ_DIR)/, $(SRC:$(SRC_DIR)/%.cpp=%.o))
 
