@@ -1,4 +1,4 @@
-#include "IGui.hpp"
+#include "interface/gui.hpp"
 #include "sfml.hpp"
 
 extern "C" Igui	*create(game::data &data)

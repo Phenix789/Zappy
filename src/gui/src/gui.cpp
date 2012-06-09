@@ -1,9 +1,9 @@
 #include <boost/thread.hpp>
 #include <iostream>
 #include <cstdlib>
+#include "interface/gui.hpp"
 #include "game.hpp"
 #include "network.hpp"
-#include "IGui.hpp"
 #include "parser.hpp"
 
 int	game::run_gui(data &data, Network &sock)

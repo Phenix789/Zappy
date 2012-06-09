@@ -2,8 +2,8 @@
 #define __SFML_HPP_
 
 #include <SFML/Graphics.hpp>
+#include "interface/gui.hpp"
 #include "game.hpp"
-#include "IGui.hpp"
 
 class sfml : public Igui
 {
