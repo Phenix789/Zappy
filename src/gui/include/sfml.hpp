@@ -14,7 +14,7 @@ public:
 public:
   bool	init();
   void	intro();
-  bool	is_running();
+  bool	is_running() const;
   void	process_event();
   void	draw_map();
   void	end();
@@ -27,6 +27,8 @@ private:
   game::data		&data;
 
 private:
+  void	      close();
+  void	      clear();
   void        draw_background();
   void        draw_gui();
   void        draw_info();
