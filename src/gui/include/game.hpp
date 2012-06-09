@@ -5,6 +5,8 @@
 #include <vector>
 #include <string>
 
+int	main_gui(const std::string host, const std::string port);
+
 class Network;
 namespace game
 {

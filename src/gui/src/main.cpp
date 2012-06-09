@@ -3,6 +3,7 @@
 #include "network.hpp"
 #include "game.hpp"
 
+#ifndef DEBUG
 int	main_gui(const std::string host, const std::string port)
 {
   game::data	data;
@@ -15,6 +16,7 @@ int	main_gui(const std::string host, const std::string port)
     }
   return (game::run_gui(data, sock));
 }
+#endif
 
 int     main(int __attribute__((unused))ac, char __attribute__((unused))**av)
 {

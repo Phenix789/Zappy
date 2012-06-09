@@ -6,30 +6,8 @@
 #include "network.hpp"
 #include "parser.hpp"
 
-int	game::run_gui(data &data, Network &sock)
-{
-  data.connection = true;
+#ifndef DEBUG
 
-  {
-    Igui	*gui;
-
-    gui = create(data);
-    gui->init();
-    gui->intro();
-    while (gui->is_running() && data.connection)
-      {
-	gui->process_event();
-	gui->draw_map();
-	boost::this_thread::sleep(boost::posix_time::milliseconds(50));
-      }
-    gui->end();
-    gui->exit();
-    delete gui;
-  }
-  return (EXIT_SUCCESS);
-}
-
-/*
 int	game::run_gui(data &data, Network &sock)
 {
   parser	pars;
@@ -58,4 +36,5 @@ int	game::run_gui(data &data, Network &sock)
   delete gui;
   return (EXIT_SUCCESS);
 }
-*/
+
+#endif
