@@ -39,12 +39,18 @@ int	gui::main(const std::string host, const std::string port)
 {
   game::data	data;
   INetwork	*sock;
-  int		res;
 
   sock.setIp(host);
   sock.setPort(port);
+  sock.connect();
 
-  res = gui::run(data, *sock);
+  if (!sock)
+    res = gui::run(data, *sock);
+  else
+    {
+      std::cout << "Erreur : Impossible de se connecter à un server" << std::endl;
+      return (EXIT_FAILURE);
+    }
   delete sock;
   return (res);
 }

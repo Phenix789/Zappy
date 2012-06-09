@@ -11,15 +11,15 @@ sfNetwork::~sfNetwork()
     sock.Close();
 }
 
-bool  sfNetwork::send(const std::string &msg)
+void  sfNetwork::send(const std::string &msg)
 {
   sf::Packet	packet;
 
   packet.Append(msg.c_str(), msg.size());
-  return (this->sendPacket(packet));
+  this->sendPacket(packet);
 }
 
-bool  sfNetwork::send(const std::list<std::string> &list)
+void  sfNetwork::send(const std::list<std::string> &list)
 {
   sf::Packet	packet;
   std::list<std::string>::const_iterator	cit;
@@ -30,18 +30,16 @@ bool  sfNetwork::send(const std::list<std::string> &list)
       packet.Append(cit->c_str(), cit->size());
       cit++;
     }
-  return (this->sendPacket(packet));
+  this->sendPacket(packet);
 }
 
-bool  sfNetwork::receive(std::string &buffer)
+void  sfNetwork::receive(std::string &buffer)
 {
   sf::Packet	packet;
 
   buffer.clear();
-  if (sock.Receive(packet) == false)
-    return (false);
+  sock.Receive(packet);
   packet >> buffer;
-  return (true);
 }
 
 bool  sfNetwork::connect()
@@ -61,18 +59,17 @@ bool  sfNetwork::disconnect()
   return (true);
 }
 
-bool  sfNetwork::setIp(const std::string &host)
+void  sfNetwork::setIp(const std::string &host)
 {
   this->addr = host;
-  return (this->addr.IsValid());
+  this->addr.IsValid();
 }
-bool  sfNetwork::setPort(const std::string &_port)
+void  sfNetwork::setPort(const std::string &_port)
 {
   this->port = utils::atos(_port);
-  return (true);
 }
 
-bool  sfNetwork::isWaiting(type __attribute__((unused))which)
+bool  sfNetwork::isReady(type __attribute__((unused))which)
 {
   return (false);
 }

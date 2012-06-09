@@ -5,7 +5,6 @@
 #include <vector>
 #include <string>
 
-class Network;
 namespace game
 {
   /* -- Player -- */
@@ -105,6 +104,12 @@ namespace game
   private:
     data(const data &other);
   };
+};
+
+class INetwork;
+namespace network
+{
+  bool	iteration(game::data &data, INetwork &sock);
 };
 
 #endif /* __GAME_HPP_ */

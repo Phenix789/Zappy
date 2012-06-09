@@ -1,4 +1,5 @@
 #include <SFML/Network.hpp>
+#include <exception>
 #include "interface/network.hpp"
 
 class sfNetwork : public INetwork
@@ -8,18 +9,18 @@ public:
   ~sfNetwork();
 
 public:
-  bool  send(const std::string &msg);
-  bool	send(const std::list<std::string> &list);
-  bool  receive(std::string &buffer);
+  void  send(const std::string &msg);
+  void	send(const std::list<std::string> &list);
+  void  receive(std::string &buffer);
 
   bool	connect();
   bool  connect(const std::string &host, const std::string &port);
   bool  disconnect();
 
-  bool  setIp(const std::string&host);
-  bool  setPort(const std::string &port);
+  void  setIp(const std::string&host);
+  void  setPort(const std::string &port);
 
-  bool	isWaiting(type which);
+  bool	isReady(type which);
   bool  isBlocking(void);
   bool  isValid(void);
   bool  operator!();
@@ -35,3 +36,4 @@ private:
 private:
   sfNetwork(const sfNetwork &other);
 };
+
