@@ -5,7 +5,7 @@
 ## Login   <frizac_b@epitech.net>
 ##
 ## Started on  Mon Feb  6 14:18:30 2012 Alexandre Frizac
-## Last update Sun Jun 10 11:57:06 2012 Alexandre Frizac
+## Last update Sun Jun 10 14:58:11 2012 Alexandre Frizac
 ##
 
 NAME		= a.out
@@ -14,7 +14,7 @@ INC_DIR		= include
 OBJ_DIR		= obj
 SRC_DIR		= src
 
-DEBUG_FLAGS	+= -g
+DEBUG_FLAGS	+= -ggdb3
 DEBUG_FLAGS	+= -DDEBUG
 
 CC		= g++
