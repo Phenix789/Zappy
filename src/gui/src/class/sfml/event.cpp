@@ -12,14 +12,31 @@ void    sfml::process_event()
             {
             case sf::Key::Escape:
               this->run = false;
-              return ;
+              return;
 
             case sf::Key::F1:
-              {
+	      {
 		sf::Image Screen = App.Capture();
 		Screen.SaveToFile("screenshot.jpg");
-              }
+		break;
+	      }
 
+	    case sf::Key::Up:
+	      this->addPosy(0.10);
+	      break;
+	      
+	    case sf::Key::Down:
+	      this->addPosy(-0.10);
+	      break;
+	      
+	    case sf::Key::Left:
+	      this->addPosx(-0.10);
+	      break;
+	      
+	    case sf::Key::Right:
+	      this->addPosx(0.10);
+	      break;
+	      
             default:
               break;
             }

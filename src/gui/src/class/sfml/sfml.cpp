@@ -4,6 +4,8 @@
 sfml::sfml(game::data &edata) : run(false), data(edata)
 {
   this->App.SetFramerateLimit(60);
+  pos[0] = 0;
+  pos[1] = 0;
 }
 
 sfml::~sfml()
@@ -31,8 +33,6 @@ bool	sfml::is_running() const
 
 void	sfml::intro()
 {
-  sf::Image	Image;
-
   this->clear();
   this->App.Display();
   std::cout << "Beginning graph loop" << std::endl;

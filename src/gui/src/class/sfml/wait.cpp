@@ -7,6 +7,6 @@ void	sfml::wait(int tps, bool draw)
       this->process_event();
       if (draw)
 	this->draw_map();
-
+    
     }
 }

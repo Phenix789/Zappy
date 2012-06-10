@@ -5,7 +5,7 @@
 ## Login   <frizac_b@epitech.net>
 ##
 ## Started on  Mon Feb  6 14:18:30 2012 Alexandre Frizac
-## Last update Sat Jun  9 18:54:57 2012 Alexandre Frizac
+## Last update Sun Jun 10 11:22:27 2012 Alexandre Frizac
 ##
 
 NAME		= a.out
@@ -35,11 +35,13 @@ SRC	= $(addprefix src/, \
 		class/sfml/draw.cpp \
 		class/sfml/event.cpp \
 		class/sfml/load_img.cpp \
+		class/sfml/position.cpp \
 		class/sfml/sfml.cpp \
 		class/sfml/wait.cpp \
 		debug_gui.cpp\
 		gui.cpp\
 		main.cpp\
+		network_iteration.cpp \
 		parser_cmd.cpp\
 		utils.cpp\
 		)
@@ -48,7 +50,6 @@ OBJ	= $(addprefix $(OBJ_DIR)/, $(SRC:$(SRC_DIR)/%.cpp=%.o))
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	echo $(LDFLAGS)
 	$(CC) -o $(NAME) $(OBJ) $(LDFLAGS) $(DEBUG_FLAGS)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp

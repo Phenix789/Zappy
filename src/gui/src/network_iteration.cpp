@@ -1,5 +1,6 @@
-#include <interface/network.hpp"
+#include "interface/network.hpp"
 #include "game.hpp"
+#include "parser.hpp"
 
 namespace network
 {
@@ -9,9 +10,9 @@ namespace network
 
     if (!sock == false)
       return (false);
-    if (sock.isReady(WRITE))
+    if (sock.isReady(INetwork::WRITE))
       sock.send(data.ask);
-    if (sock.isReady(READ))
+    if (sock.isReady(INetwork::READ))
       sock.receive(buffer);
     pars.parse(buffer);
     pars.interpret(data);

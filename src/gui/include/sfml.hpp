@@ -28,8 +28,13 @@ private:
   sf::RenderWindow		App;
   sf::Event			event;
   game::data			&data;
+  double			pos[2];
 
 private:
+  void		addPosx(float value);
+  void		addPosy(float value);
+  float		getPosx(void);
+  float		getPosy(void);
   void	      load_img();
   void	      close();
   void	      clear();

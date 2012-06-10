@@ -11,6 +11,10 @@ static const char	*img_name[] =
     NULL
   };
 
+#ifndef DEBUG
+#warning "Devrait lancer des exceptions"
+#endif
+  
 void	sfml::load_img(void)
 {
   int	i = 0;
@@ -28,3 +32,4 @@ void	sfml::load_img(void)
       i++;
     }
 }
+
