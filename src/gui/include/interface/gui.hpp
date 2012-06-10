@@ -3,7 +3,7 @@
 
 /*
 ** Interface Igui pour charger une bibliothèque graphique dynamiquement (si possible)
-** Peut lancer des ex_exit (exception avec un msg pour quitter)
+** Peut lancer des except (exception avec un msg pour quitter)
 ** void	wait(int millisecond) : Attend x ms, et gère les inputs / rafraichit l'écran pendant ce temps
 ** le booleen permet de ne PAS dessiner l'interface
 */
@@ -28,18 +28,18 @@ public:
 
 namespace gui
 {
-  class ex_exit : public std::exception
+  class except : public std::exception
   {
   public:
-    ex_exit(const std::string &str) throw();
-    ~ex_exit() throw();
+    except(const std::string &str) throw();
+    ~except() throw();
     const char *what() const throw();
 
   private:
     const std::string msg;
 
   private:
-    ex_exit();
+    except();
   };
 
   int			run(game::data &data, INetwork &sock);

@@ -27,7 +27,7 @@ void	sfml::load_img(void)
     {
       if (!this->img[i].LoadFromFile(img_name[i]))
 	{
-	  //	throw gui::ex_exit("Phase de chargement des images");
+	  //	throw gui::except("Phase de chargement des images");
 	}
       i++;
     }

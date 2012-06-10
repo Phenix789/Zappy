@@ -5,7 +5,7 @@
 ## Login   <frizac_b@epitech.net>
 ##
 ## Started on  Mon Feb  6 14:18:30 2012 Alexandre Frizac
-## Last update Sun Jun 10 11:22:27 2012 Alexandre Frizac
+## Last update Sun Jun 10 11:57:06 2012 Alexandre Frizac
 ##
 
 NAME		= a.out
@@ -31,6 +31,7 @@ SRC	= $(addprefix src/, \
 		class/gui/gui.cpp \
 		class/network/network.cpp\
 		class/network/sfml_network.cpp\
+		class/position/position.cpp \
 		class/parser.cpp \
 		class/sfml/draw.cpp \
 		class/sfml/event.cpp \

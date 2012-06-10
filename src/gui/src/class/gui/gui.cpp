@@ -3,13 +3,13 @@
 
 namespace gui
 {
-  ex_exit::ex_exit(const std::string &str)  throw() : msg(str)
+  except::except(const std::string &str)  throw() : msg(str)
   {}
 
-  ex_exit::~ex_exit() throw()
+  except::~except() throw()
   {}
 
-  const char *ex_exit::what() const throw()
+  const char *except::what() const throw()
   {
     return (this->msg.c_str());
   }

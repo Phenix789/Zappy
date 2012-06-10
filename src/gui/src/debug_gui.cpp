@@ -29,7 +29,7 @@ int	gui::run(game::data &data, __attribute__((unused))INetwork &sock)
       gui->exit();
       delete gui;
     }
-  catch (const gui::ex_exit &ex)
+  catch (const gui::except &ex)
     {
       std::cout << "Fermeture de l'interface graphique - " << ex.what() << std::endl;
     }

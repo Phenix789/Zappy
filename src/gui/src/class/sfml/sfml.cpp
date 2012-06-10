@@ -4,8 +4,6 @@
 sfml::sfml(game::data &edata) : run(false), data(edata)
 {
   this->App.SetFramerateLimit(60);
-  pos[0] = 0;
-  pos[1] = 0;
 }
 
 sfml::~sfml()
