@@ -5,6 +5,7 @@
 #include <vector>
 #include "interface/gui.hpp"
 #include "game.hpp"
+#include "position.hpp"
 
 class sfml : public Igui
 {
@@ -28,21 +29,18 @@ private:
   sf::RenderWindow		App;
   sf::Event			event;
   game::data			&data;
-  double			pos[2];
+  gui::position			pos;
 
 private:
-  void		addPosx(float value);
-  void		addPosy(float value);
-  float		getPosx(void);
-  float		getPosy(void);
-  void	      load_img();
-  void	      close();
-  void	      clear();
-  void        draw_background();
-  void        draw_gui();
-  void        draw_info();
-  void        draw_case();
-  void        draw_player();
+  gui::position	&getPos();
+  void	      	load_img();
+  void	      	close();
+  void	      	clear();
+  void        	draw_background();
+  void        	draw_gui();
+  void        	draw_info();
+  void        	draw_case();
+  void        	draw_player();
 
 private:
   sfml();

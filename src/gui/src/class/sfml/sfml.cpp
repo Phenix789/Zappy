@@ -49,3 +49,8 @@ void	sfml::close()
     this->App.Close();
   this->run = false;
 }
+
+gui::position	&sfml::getPos()
+{
+  return (this->pos);
+}
