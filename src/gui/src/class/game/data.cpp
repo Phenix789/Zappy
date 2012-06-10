@@ -9,15 +9,30 @@ namespace game
   data::~data()
   { }
 
-  bool  data::msg_to_send()
+  bool  data::msgInWaitList()
   {
     if (this->ask.size() > 0)
       return (true);
     return (false);
   }
 
-  void  data::send_msg(const std::string &str)
+  void  data::putInWaitList(const std::string &str)
   {
     this->ask.push_back(str);
+  }
+
+  void	data::closeConnection()
+  {
+    this->connection = false;
+  }
+
+  void	data::allowConnection()
+  {
+    this->connection = true;
+  }
+
+  bool	data::operator!()
+  {
+    return (this->connection);
   }
 }

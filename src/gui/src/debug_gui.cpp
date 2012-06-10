@@ -11,16 +11,15 @@
 
 int	gui::run(game::data &data, __attribute__((unused))INetwork &sock)
 {
-  data.connection = true;
+  Igui		*gui = NULL;
 
+  data.allowConnection();
   try
     {
-      Igui        *gui;
-
       gui = gui_create(data);
       gui->init();
       gui->intro();
-      while (gui->is_running() && data.connection)
+      while (gui->is_running() && !data)
 	{
 	  gui->process_event();
 	  gui->draw_map();
@@ -33,20 +32,28 @@ int	gui::run(game::data &data, __attribute__((unused))INetwork &sock)
     {
       std::cout << "Fermeture de l'interface graphique - " << ex.what() << std::endl;
     }
+
+  catch (const network::except &ex)
+    {
+      if (gui)
+	delete gui;
+      std::cout << "Perte de la connexion - " << ex.what() << std::endl;
+      return (EXIT_FAILURE);
+    }
   return (EXIT_SUCCESS);
 }
 
-/* ------------------------------------------- */
+  /* ------------------------------------------- */
 
-int     gui::main(const std::string __attribute__((unused))host,
-		  const std::string __attribute__((unused))port)
-{
-  game::data    data;
-  INetwork	*sock = network_create();
-  int		res;
+  int     gui::main(const std::string __attribute__((unused))host,
+		    const std::string __attribute__((unused))port)
+  {
+    game::data    data;
+    INetwork	*sock = network_create();
+    int		res;
 
-  res = gui::run(data, *sock);
-  delete sock;
-  return (res);
-}
+    res = gui::run(data, *sock);
+    delete sock;
+    return (res);
+  }
 #endif

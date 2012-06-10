@@ -35,7 +35,7 @@ bool    parser::interpret(game::data &data)
 
   if (this->list.front().compare("BIENVENUE") == 0)
     {
-      data.connection = true;
+      data.allowConnection();
       this->list.pop_front();
     }
   if (this->list.size() == 0)

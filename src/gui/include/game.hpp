@@ -95,11 +95,16 @@ namespace game
   public:
     game::map                   map;
     std::list<std::string>      ask;
+
+  private:
     bool                        connection;
 
   public:
-    void	send_msg(const std::string &str);
-    bool	msg_to_send();
+    void	closeConnection();
+    void	allowConnection();
+    void	putInWaitList(const std::string &str);
+    bool	msgInWaitList();
+    bool	operator!();
 
   private:
     data(const data &other);
