@@ -109,7 +109,7 @@ namespace game
 class INetwork;
 namespace network
 {
-  bool	iteration(game::data &data, INetwork &sock);
+  void	iteration(game::data &data, INetwork &sock);
 };
 
 #endif /* __GAME_HPP_ */

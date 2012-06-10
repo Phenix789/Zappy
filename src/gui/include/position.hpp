@@ -11,10 +11,10 @@ namespace gui
   public:
     position();
     ~position();
-    
+
   private:
     double	pos[2];
-    
+
   public:
     void	set(double x, double y);
     void	addX(double value);
@@ -22,5 +22,5 @@ namespace gui
     double	getX(void);
     double	getY(void);
     void	setToMiddle(int x, int y);
-    
-  public:
+  };
+};
