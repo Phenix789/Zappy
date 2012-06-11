@@ -5,10 +5,10 @@ void    sfml::draw_map()
   if (this->App.IsOpened())
   {
     this->draw_background();
-    this->draw_gui();
     this->draw_info();
     this->draw_case();
     this->draw_player();
+    this->draw_gui();
     this->App.Display();
   }
   else
