@@ -5,7 +5,7 @@
 ** Login   <duval_q@epitech.net>
 **
 ** Started on  Tue May 29 04:54:49 2012 quentin duval
-** Last update Sat Jun  2 10:51:02 2012 quentin duval
+** Last update Mon Jun  4 09:04:24 2012 quentin duval
 */
 
 #include	<stdio.h>
@@ -19,6 +19,21 @@
 #elif defined (linux)
 # include	<sys/select.h>
 #endif
+
+static void		flush_list()
+{
+  t_network		*network;
+  t_socket		*socket;
+
+  network = get_network();
+  while ((!list_empty(network->destroy)))
+    {
+      socket =  list_get_begin(network->destroy);
+      closesocket(socket->fd);
+      list_pop(network->read, socket);
+      list_pop_begin(network->destroy);
+    }
+}
 
 static void		setfd_list(t_list *list,
 				   fd_set *set,
@@ -63,7 +78,6 @@ static void	find_speaker(fd_set *set,
 			     SOCKET (*extract)(void *),
 			     void (*execute)(void *))
 {
-  //bug potentiel du close socket
   t_list_iterator       *it;
   int                   ret;
   void			*tmp;
@@ -77,13 +91,14 @@ static void	find_speaker(fd_set *set,
       tmp = list_iterator_get(it);
       if (FD_ISSET(extract(tmp), set) && tmp)
 	{
-	  logger_verbose("[NETWORK] messqge from fd : %d", extract(tmp));
+	  logger_verbose("[NETWORK] message from fd : %d", extract(tmp));
 	  ret = list_iterator_next(it);
 	  (*execute)(tmp);
 	}
       else
 	ret = list_iterator_next(it);
     }
+  flush_list();
   list_iterator_destroy(it);
 }
 

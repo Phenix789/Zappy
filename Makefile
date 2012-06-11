@@ -30,6 +30,7 @@ zappy_server_OBJ=	server/main.o \
 			server/network/network_socket_connect.o \
 			server/network/network_socket_rw.o \
 			server/network/network_private_access.o \
+			server/network/network_socket_destroy.o \
 			server/clock/clock.o \
 			server/clock/clock_compare.o \
 			server/clock/clock_get_time.o \

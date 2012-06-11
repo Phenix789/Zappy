@@ -5,7 +5,7 @@
 ** Login   <duval_q@epitech.net>
 **
 ** Started on  Tue May 29 03:54:36 2012 quentin duval
-** Last update Sat Jun  2 10:36:17 2012 quentin duval
+** Last update Mon Jun  4 07:47:53 2012 quentin duval
 */
 
 #include		"network.h"
@@ -18,6 +18,8 @@ bool			network_init()
   t_network		*network;
 
   logger_message("[NETWORK] starting network service");
+  if (g_network)
+    return (true);
   if (network_create() == false)
     return (false);
   network = get_network();
@@ -36,6 +38,8 @@ bool			network_create()
     return (false);
   logger_debug("[NETWORK] allocation of main object... ok");
   if (!(g_network->listened = list_create()))
+    return (false);
+  if (!(g_network->destroy = list_create()))
     return (false);
   logger_debug("[NETWORK] allocation of listening list... ok");
   if (!(g_network->read = list_create()))
