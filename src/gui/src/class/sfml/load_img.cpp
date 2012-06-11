@@ -11,10 +11,6 @@ static const char	*img_name[] =
     NULL
   };
 
-#ifndef DEBUG
-#warning "Devrait lancer des exceptions"
-#endif
-  
 void	sfml::load_img(void)
 {
   int	i = 0;
@@ -23,15 +19,18 @@ void	sfml::load_img(void)
   while (img_name[i] != NULL)
     i++;
   this->img.resize(i);
+  i = 0;
   while (img_name[i] != NULL)
     {
-      if (!this->img[i].LoadFromFile(img_name[i]))
+      if (!(this->img.at(i).LoadFromFile(img_name[i])))
 	error = true;
       i++;
     }
   if (error)
   {
-    //throw gui::except("Phase de chargement des images"); 
+#ifndef DEBUG
+    throw gui::except("Phase de chargement des images");
+#endif
   }
 }
 

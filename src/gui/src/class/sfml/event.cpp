@@ -11,7 +11,7 @@ void    sfml::process_event()
           switch (this->event.Key.Code)
             {
             case sf::Key::Escape:
-              this->run = false;
+              this->close();
               return;
 
             case sf::Key::F1:

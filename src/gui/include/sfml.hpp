@@ -29,7 +29,7 @@ public:
   bool	is_running() const;
   void	process_event();
   void	draw_map();
-  void	wait(int millisecond, bool draw);
+  void	wait(int millisecond, bool draw = false);
   void	end();
   void	exit();
 
