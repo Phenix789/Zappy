@@ -5,7 +5,7 @@
 ## Login   <frizac_b@epitech.net>
 ##
 ## Started on  Mon Feb  6 14:18:30 2012 Alexandre Frizac
-## Last update Mon Jun 11 14:37:02 2012 Alexandre Frizac
+## Last update Mon Jun 11 16:08:35 2012 Alexandre Frizac
 ##
 
 NAME		= a.out
@@ -50,6 +50,10 @@ OBJ	= $(addprefix $(OBJ_DIR)/, $(SRC:$(SRC_DIR)/%.cpp=%.o))
 
 all: $(NAME)
 
+m:
+	make fclean
+	make all -j 4
+
 $(NAME): $(OBJ)
 	$(CC) -o $(NAME) $(OBJ) $(LDFLAGS) $(DEBUG_FLAGS)
 
@@ -66,4 +70,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re m

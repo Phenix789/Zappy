@@ -11,7 +11,7 @@ sfml::~sfml()
 
 bool	sfml::init()
 {
-  this->load_img();
+  this->LoadImage();
   this->App.Create(sf::VideoMode(800, 800, 32), "Zappy - GUI");
   this->App.SetFramerateLimit(60);
   this->run = true;

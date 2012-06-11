@@ -44,7 +44,7 @@ private:
 private:
   gui::position		&getPos();
   const sf::Image 	&getImg(imtype image);
-  void	      		load_img();
+  void	      		LoadImage();
 
 private:
   void        	draw_background();
