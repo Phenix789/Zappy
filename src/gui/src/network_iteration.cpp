@@ -11,7 +11,7 @@ namespace network
     if (!sock == false)
       throw network::except("Connection lost");
     if (sock.isReady(INetwork::WRITE))
-      sock.send(data.ask);
+      sock.send(data.waitList);
     if (sock.isReady(INetwork::READ))
       sock.receive(buffer);
     pars.parse(buffer);

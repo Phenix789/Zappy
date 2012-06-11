@@ -94,7 +94,7 @@ namespace game
 
   public:
     game::map                   map;
-    std::list<std::string>      ask;
+    std::list<std::string>      waitList;
 
   private:
     bool                        connection;

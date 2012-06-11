@@ -11,14 +11,14 @@ namespace game
 
   bool  data::msgInWaitList()
   {
-    if (this->ask.size() > 0)
+    if (this->waitList.size() > 0)
       return (true);
     return (false);
   }
 
   void  data::putInWaitList(const std::string &str)
   {
-    this->ask.push_back(str);
+    this->waitList.push_back(str);
   }
 
   void	data::closeConnection()
