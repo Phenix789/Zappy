@@ -9,6 +9,16 @@
 
 class sfml : public Igui
 {
+  enum imtype
+  {
+      INTRO,
+      SCORE,
+      CHARACTER,
+      STONES,
+      EGG,
+      BACKGROUND    
+  };
+  
 public:
   sfml(game::data &data);
   ~sfml();
@@ -32,15 +42,18 @@ private:
   gui::position			pos;
 
 private:
-  gui::position	&getPos();
-  void	      	load_img();
-  void	      	close();
-  void	      	clear();
+  gui::position		&getPos();
+  const sf::Image 	&getImg(imtype image);
+  void	      		load_img();
+
+private:
   void        	draw_background();
   void        	draw_gui();
   void        	draw_info();
   void        	draw_case();
   void        	draw_player();
+  void		clear();
+  void		close();
 
 private:
   sfml();

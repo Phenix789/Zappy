@@ -18,18 +18,20 @@ static const char	*img_name[] =
 void	sfml::load_img(void)
 {
   int	i = 0;
-  int	max = 0;
+  bool	error = false;
 
-  while (img_name[max] != NULL)
-    max++;
-  this->img.resize(max);
-  while (i < max)
+  while (img_name[i] != NULL)
+    i++;
+  this->img.resize(i);
+  while (img_name[i] != NULL)
     {
       if (!this->img[i].LoadFromFile(img_name[i]))
-	{
-	  //	throw gui::except("Phase de chargement des images");
-	}
+	error = true;
       i++;
     }
+  if (error)
+  {
+    //throw gui::except("Phase de chargement des images"); 
+  }
 }
 

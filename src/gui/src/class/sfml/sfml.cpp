@@ -54,3 +54,8 @@ gui::position	&sfml::getPos()
 {
   return (this->pos);
 }
+
+const sf::Image		&sfml::getImg(imtype image)
+{
+  return (this->img[image]);
+}

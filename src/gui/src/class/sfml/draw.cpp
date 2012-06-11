@@ -16,7 +16,10 @@ void    sfml::draw_map()
 }
 
 void    sfml::draw_background()
-{ }
+{
+  
+}
+
 void    sfml::draw_gui() { }
 void    sfml::draw_info() { }
 void    sfml::draw_case() { }
