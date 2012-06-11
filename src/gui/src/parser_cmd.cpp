@@ -12,7 +12,7 @@ namespace pfunc
   static boost::smatch                         match;
   static boost::regex                          expre;
 
-  static inline void cerr_invalid(const std::string &cmd)
+  static inline void PrintError(const std::string &cmd)
   { std::cerr << color::red << "Commande invalide : " << color::white << cmd << std::endl; }
 
   void	fpmsz(game::data __attribute__((unused))&data, const std::string &cmd)
@@ -29,7 +29,7 @@ namespace pfunc
 	data.map.setDim(x, y);
       }
     else
-      cerr_invalid(cmd);
+      PrintError(cmd);
   }
 
   void	fpbct(game::data __attribute__((unused))&data, const std::string &cmd)
@@ -52,7 +52,7 @@ namespace pfunc
 	data.map.set_ress(x, y, game::THYSTAME, atom(9));
       }
     else
-      cerr_invalid(cmd);
+      PrintError(cmd);
   }
 
   void	fptna(game::data __attribute__((unused))&data, const std::string &cmd)
@@ -60,7 +60,7 @@ namespace pfunc
 # warning "todo"
     if (1);
     else
-      cerr_invalid(cmd);
+      PrintError(cmd);
   }
 
   void	fppnw(game::data __attribute__((unused))&data, const std::string &cmd)
@@ -72,7 +72,7 @@ namespace pfunc
 	data.map.add_player(atom(1), atom(2), atom(3), (game::orientation)(atom(4)));
       }
     else
-      cerr_invalid(cmd);
+      PrintError(cmd);
   }
 
   void	fpppo(game::data __attribute__((unused))&data, const std::string &cmd)
@@ -93,7 +93,7 @@ namespace pfunc
 	std::cout << " et est orienté vers " << orientation << std::endl;
       }
     else
-      cerr_invalid(cmd);
+      PrintError(cmd);
   }
 
   void	fpplv(game::data __attribute__((unused))&data, const std::string &cmd)
@@ -110,7 +110,7 @@ namespace pfunc
 	std::cout << "Le joueur #" << joueur << " est niveau " << level << "." << std::endl;
       }
     else
-      cerr_invalid(cmd);
+      PrintError(cmd);
   }
 
   void	fppin(game::data __attribute__((unused))&data, const std::string &cmd)
@@ -122,7 +122,7 @@ namespace pfunc
 #warning "todo (O'really ?)"
       }
     else
-      cerr_invalid(cmd);
+      PrintError(cmd);
   }
 
   void	fppex(game::data __attribute__((unused))&data, const std::string &cmd)
@@ -136,7 +136,7 @@ namespace pfunc
 	std::cout << "Le joueur #" << joueur << " expulse." << std::endl;
       }
     else
-      cerr_invalid(cmd);
+      PrintError(cmd);
   }
 
   void	fppbc(game::data __attribute__((unused))&data, const std::string &cmd)
@@ -152,7 +152,7 @@ namespace pfunc
 	std::cout << "Le joueur #" << joueur << " broadcast ce message : " << msg << std::endl;
       }
     else
-      cerr_invalid(cmd);
+      PrintError(cmd);
   }
 
   void	fppic(game::data __attribute__((unused))&data, const std::string &cmd)
@@ -173,7 +173,7 @@ namespace pfunc
 	std::cout << " sur la case " << x << "/" << y << std::endl;
       }
     else
-      cerr_invalid(cmd);
+      PrintError(cmd);
   }
 
   void	fppie(game::data __attribute__((unused))&data, const std::string &cmd)
@@ -193,7 +193,7 @@ namespace pfunc
 #warning "Changement sur la map"
       }
     else
-      cerr_invalid(cmd);
+      PrintError(cmd);
   }
 
   void	fppfk(game::data __attribute__((unused))&data, const std::string &cmd)
@@ -207,7 +207,7 @@ namespace pfunc
 	std::cout << "Le joueur #" << joueur << "pond un oeuf." << std::endl;
       }
     else
-      cerr_invalid(cmd);
+      PrintError(cmd);
   }
 
   void	fppdr(game::data __attribute__((unused))&data, const std::string &cmd)
@@ -225,7 +225,7 @@ namespace pfunc
 # warning "Changement sur la map"
       }
     else
-      cerr_invalid(cmd);
+      PrintError(cmd);
   }
 
   void	fppgt(game::data __attribute__((unused))&data, const std::string &cmd)
@@ -243,7 +243,7 @@ namespace pfunc
 #warning "Changement sur la map"
       }
     else
-      cerr_invalid(cmd);
+      PrintError(cmd);
   }
 
   void	fppdi(game::data __attribute__((unused))&data, const std::string &cmd)
@@ -257,7 +257,7 @@ namespace pfunc
 	std::cout << "Le joueur #" << joueur << " est mort de faim." << std::endl;
       }
     else
-      cerr_invalid(cmd);
+      PrintError(cmd);
   }
 
   void	fpenw(game::data __attribute__((unused))&data, const std::string &cmd)
@@ -278,7 +278,7 @@ namespace pfunc
 	std::cout << " par le joueur #" << joueur << std::endl;
       }
     else
-      cerr_invalid(cmd);
+      PrintError(cmd);
   }
 
   void	fpeht(game::data __attribute__((unused))&data, const std::string &cmd)
@@ -292,7 +292,7 @@ namespace pfunc
 	std::cout << "L'oeuf #" << oeuf << " a éclot." << std::endl;
       }
     else
-      cerr_invalid(cmd);
+      PrintError(cmd);
   }
 
   void	fpebo(game::data __attribute__((unused))&data, const std::string &cmd)
@@ -306,7 +306,7 @@ namespace pfunc
 	std::cout << "Un joueur s'est connecté pour l'oeuf #" << oeuf << "." << std::endl;
       }
     else
-      cerr_invalid(cmd);
+      PrintError(cmd);
   }
 
   void	fpedi(game::data __attribute__((unused))&data, const std::string &cmd)
@@ -321,7 +321,7 @@ namespace pfunc
 	std::cout << "L'oeuf éclos #" << oeuf << " est mort de faim." << std::endl;
       }
     else
-      cerr_invalid(cmd);
+      PrintError(cmd);
   }
 
   void	fpsgt(game::data __attribute__((unused))&data, const std::string &cmd)
@@ -336,7 +336,7 @@ namespace pfunc
 	std::cout << "L'unité de temps courante est " << tps << std::endl;
       }
     else
-      cerr_invalid(cmd);
+      PrintError(cmd);
   }
 
   void	fpseg(game::data __attribute__((unused))&data, const std::string &cmd)
@@ -348,7 +348,7 @@ namespace pfunc
 	std::cout << "Fin du jeu. Victoire de l'équipe : " << cmd.substr(3) << std::endl;
       }
     else
-      cerr_invalid(cmd);
+      PrintError(cmd);
   }
 
   void	fpsmg(game::data __attribute__((unused))&data, const std::string &cmd)
@@ -360,7 +360,7 @@ namespace pfunc
 	std::cout << "Message du server : " << cmd.substr(3) << std::endl;
       }
     else
-      cerr_invalid(cmd);
+      PrintError(cmd);
   }
 
   void	fpsuc(game::data __attribute__((unused))&data, const std::string &cmd)
@@ -372,7 +372,7 @@ namespace pfunc
 	std::cerr << "Le server à reçu une commande inconnue" << std::endl;
       }
     else
-      cerr_invalid(cmd);
+      PrintError(cmd);
   }
 
   void	fpsbp(game::data __attribute__((unused))&data, const std::string &cmd)
@@ -384,7 +384,7 @@ namespace pfunc
 	std::cerr << cmd.substr(3) << std::endl;
       }
     else
-      cerr_invalid(cmd);
+      PrintError(cmd);
   }
 };
 

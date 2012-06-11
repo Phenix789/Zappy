@@ -4,8 +4,9 @@
 
 void	sfml::intro()
 {
-  sf::Sprite	sprite(this->getImg(INTRO));
-  
+  sf::Sprite		sprite(this->getImg(INTRO));
+
+  sprite.Resize(800, 800);
   this->App.Draw(sprite);
   this->App.Display();
   this->wait(2000, false);
