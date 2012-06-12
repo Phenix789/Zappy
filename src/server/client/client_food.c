@@ -15,6 +15,7 @@ void client_consume_food(t_client *client)
 
 void client_food_dead(t_client *client)
 {
+  logger_message("[CLIENT] Client %i starved ... dead!", CLP_ID(client));
   client_send(client, "mort");
   client_unconnect(client);
 }

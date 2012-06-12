@@ -18,6 +18,7 @@ bool kernel_register_wakeup(unsigned int time, kn_wakeup_cb callback, void* para
 {
   t_kernel_callback *wakeup;
 
+  logger_debug("[KERNEL] Register wakeup for %i time, %i in standby", time, list_size(&g_kernel->callbacks));
   if (!(wakeup = malloc(sizeof(t_kernel_callback))))
     return false;
   clock_set_time_to_current(&wakeup->begin);
@@ -50,20 +51,22 @@ int kernel_wakeup()
   count = 0;
   wakeup = list_get_begin(&g_kernel->callbacks);
   time = clock_get_time();
+  logger_debug("[KERNEL] Start wakeup");
   while (wakeup)
     {
       begin = wakeup->begin;
       clock_move_date(&begin, wakeup->time);
       if (clock_compare(time, &begin) > 0)
 	{
+	  list_pop_begin(&g_kernel->callbacks);
 	  (*wakeup->callback)(wakeup->param, KN_ERROR_OK);
 	  free(wakeup);
-	  list_pop_begin(&g_kernel->callbacks);
 	  count++;
 	}
       else
 	return count;
       wakeup = list_get_begin(&g_kernel->callbacks);
     }
+  logger_debug("[KERNEL] End wakeup");
   return count;
 }

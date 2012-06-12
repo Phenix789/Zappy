@@ -5,11 +5,13 @@
 ** Login   <duval_q@epitech.net>
 **
 ** Started on  Tue May 29 08:03:53 2012 quentin duval
-** Last update Sat Jun  2 10:53:25 2012 quentin duval
+** Last update Tue Jun 12 18:22:31 2012 quentin duval
 */
 
 #include	"in_network.h"
 #include	"logger.h"
+
+extern t_network	*g_network;
 
 void		execute_from_socket(void *data)
 {
@@ -34,6 +36,7 @@ void			execute_from_listener(void *data)
     return;
   logger_debug("[NETWORK] give fd %d for new client", sock->fd);
   logger_debug("[NETWORK] calling creation callback");
+  g_network->opened_socket++;
   if (listener->create)
     (*listener->create)(sock);
 }

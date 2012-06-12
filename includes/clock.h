@@ -5,13 +5,14 @@
 ** Login   <duval_q@epitech.net>
 ** 
 ** Started on  Tue May 29 10:04:53 2012 quentin duval
-** Last update Fri Jun  1 16:56:17 2012 quentin duval
+** Last update Mon Jun 11 19:17:13 2012 quentin duval
 */
 
 #ifndef __CLOCK_H__
 #define	__CLOCK_H__
 
 #include	<sys/time.h>
+#include	<stdbool.h>
 
 typedef	struct	s_clock
 {
@@ -21,12 +22,11 @@ typedef	struct	s_clock
   unsigned int		frequency;
 } t_clock;
 
-void		clock_create();
-void		clock_init();
+bool		clock_init();
 void		clock_destroy();
 t_clock		*get_clock();
 
-void		clock_set_frequency(unsigned int freq);
+bool		clock_set_frequency(unsigned int freq);
 void		clock_move_date(struct timeval *time, unsigned int next);
 struct timeval	*clock_get_timeout(struct timeval *start, unsigned int time);
 int		clock_compare(struct timeval *time1, struct timeval *time2);

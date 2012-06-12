@@ -5,7 +5,7 @@
 ** Login   <duval_q@epitech.net>
 **
 ** Started on  Tue May 29 04:54:49 2012 quentin duval
-** Last update Mon Jun  4 09:04:24 2012 quentin duval
+** Last update Tue Jun 12 18:19:45 2012 quentin duval
 */
 
 #include	<stdio.h>
@@ -20,18 +20,18 @@
 # include	<sys/select.h>
 #endif
 
+extern t_network	*g_network;
+
 static void		flush_list()
 {
-  t_network		*network;
   t_socket		*socket;
 
-  network = get_network();
-  while ((!list_empty(network->destroy)))
+  while ((!list_empty(g_network->destroy)))
     {
-      socket =  list_get_begin(network->destroy);
-      closesocket(socket->fd);
-      list_pop(network->read, socket);
-      list_pop_begin(network->destroy);
+      socket =  list_get_begin(g_network->destroy);
+      socket_close(socket);
+      network_del_socket(socket);
+      list_pop_begin(g_network->destroy);
     }
 }
 
@@ -42,18 +42,16 @@ static void		setfd_list(t_list *list,
   t_list_iterator       *it;
   int			ret;
   void			*tmp;
-  t_network		*network;
 
-  if (!list || !set || !extract)
+  if (!list || !set || !extract || !g_network)
     return;
-  network = get_network();
   it = list_iterator_begin(list);
   ret = (list_empty(list))?EXIT_FAILURE:EXIT_SUCCESS;
   while (ret != EXIT_FAILURE)
     {
       tmp = list_iterator_get(it);
-      if (extract(tmp) >= network->nfds)
-	network->nfds = extract(tmp) + 1;
+      if (extract(tmp) >= g_network->nfds)
+	g_network->nfds = extract(tmp) + 1;
       logger_verbose("[NETWORK] adding fd %d", extract(tmp));
       FD_SET(extract(tmp), set);
       ret = list_iterator_next(it);
@@ -63,14 +61,11 @@ static void		setfd_list(t_list *list,
 
 static void   		setfd(fd_set *set)
 {
-  t_network		*network;
-
-  if (!set)
+  if (!set || !g_network)
     return;
-  network = get_network();
   FD_ZERO(set);
-  setfd_list(network->read, set, &extract_from_socket);
-  setfd_list(network->listened, set, &extract_from_listener);
+  setfd_list(g_network->read, set, &extract_from_socket);
+  setfd_list(g_network->listened, set, &extract_from_listener);
 }
 
 static void	find_speaker(fd_set *set,
@@ -105,10 +100,9 @@ static void	find_speaker(fd_set *set,
 int			network_listen(struct timeval *timeout)
 {
   fd_set		set;
-  t_network		*network;
   int			ret;
 
-  network = get_network();
+  flush_list();
   setfd(&set);
   if (timeout)
     logger_debug("[NETWORK] waiting for next action in %lu:%lu",
@@ -116,17 +110,17 @@ int			network_listen(struct timeval *timeout)
 	   timeout->tv_usec);
   else
     logger_debug("[NETWORK] waiting for extern action. nothing planified");
-  if ((ret = (select(network->nfds, &set, NULL, NULL, timeout))) > 0)
+  if ((ret = (select(g_network->nfds, &set, NULL, NULL, timeout))) > 0)
     {
       find_speaker(&set,
-		   network->read,
+		   g_network->read,
 		   &extract_from_socket,
 		   &execute_from_socket);
       find_speaker(&set,
-		   network->listened,
+		   g_network->listened,
 		   &extract_from_listener,
 		   &execute_from_listener);
     }
-  network->nfds = 0;
+  g_network->nfds = 0;
   return (ret);
 }

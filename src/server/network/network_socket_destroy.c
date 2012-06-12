@@ -5,16 +5,19 @@
 ** Login   <duval_q@epitech.net>
 ** 
 ** Started on  Mon Jun  4 07:51:20 2012 quentin duval
-** Last update Mon Jun  4 09:03:15 2012 quentin duval
+** Last update Tue Jun 12 18:15:00 2012 quentin duval
 */
 
 #include	"network.h"
 #include	"list.h"
+#include	"logger.h"
+
+extern t_network	*g_network;
 
 void		network_close_socket_async(t_socket *socket)
 {
-  t_network	*network;
-
-  network = get_network();
-  list_add_begin(network->destroy, socket);
+  if (!g_network)
+    return;
+  logger_debug("[NETWORK] required to die : %d", socket->fd);
+  list_add_begin(g_network->destroy, socket);
 }

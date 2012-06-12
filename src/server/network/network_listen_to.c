@@ -1,17 +1,19 @@
 /*
 ** network_listen.c for zappy in /home/duval_q//Documents/projects/zappy/src/server/net
-** 
+**
 ** Made by quentin duval
 ** Login   <duval_q@epitech.net>
-** 
+**
 ** Started on  Tue May 29 04:30:59 2012 quentin duval
-** Last update Sat Jun  2 10:52:23 2012 quentin duval
+** Last update Tue Jun 12 17:52:06 2012 quentin duval
 */
 
 #include	<stdio.h>
 
 #include	"network.h"
 #include	"logger.h"
+
+extern t_network	*g_network;
 
 static void	configure_socket(t_socket *socket, int port)
 {
@@ -27,6 +29,8 @@ bool		network_listen_to(t_socket *socket,
 {
   t_listener	*listener;
 
+  if (!g_network)
+    return (false);
   if (!socket || !port)
     return (false);
   configure_socket(socket, port);
@@ -36,14 +40,14 @@ bool		network_listen_to(t_socket *socket,
       || listen(socket->fd, MAX_CO) == SOCKET_ERROR
       || !(listener = malloc(sizeof(*listener))))
     {
-      logger_error("[NETWORK] impossible to listen to port %d", port);
+      logger_error("[NETWORK] Impossible to listen to port %d", port);
       return (false);
     }
   listener->socket = socket;
   listener->create = create;
-  if (socket->fd > get_network()->nfds)
-    get_network()->nfds = socket->fd;
-  list_add_begin(get_network()->listened, listener);
+  if (socket->fd > g_network->nfds)
+    g_network->nfds = socket->fd;
+  list_add_begin(g_network->listened, listener);
   logger_message("[NETWORK] server listening at port : %d", port);
   return (true);
 }
