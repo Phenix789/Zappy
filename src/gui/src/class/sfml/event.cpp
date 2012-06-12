@@ -5,7 +5,10 @@ void    sfml::process_event()
   while (App.GetEvent(this->event))
     {
       if (this->event.Type == sf::Event::Closed)
-	this->close();
+	{
+	  this->close();
+	  return;
+	}
       else if (this->event.Type == sf::Event::KeyPressed)
 	{
           switch (this->event.Key.Code)

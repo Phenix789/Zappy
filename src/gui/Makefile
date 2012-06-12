@@ -5,7 +5,7 @@
 ## Login   <frizac_b@epitech.net>
 ##
 ## Started on  Mon Feb  6 14:18:30 2012 Alexandre Frizac
-## Last update Tue Jun 12 18:08:55 2012 Alexandre Frizac
+## Last update Tue Jun 12 18:49:56 2012 Alexandre Frizac
 ##
 
 NAME		= a.out
@@ -14,17 +14,19 @@ INC_DIR		= include
 OBJ_DIR		= obj
 SRC_DIR		= src
 
-DEBUG_FLAGS	+= -ggdb3
+#DEBUG_FLAGS	+= -ggdb3
 DEBUG_FLAGS	+= -DDEBUG
 DEBUG_FLAGS	+= -DDEBUG_GRAPH
 
 CC		= g++
 CXXFLAGS	+= -I include
-CXXFLAGS	+= -Wall -Wextra -Wshadow
+CXXFLAGS	+= -Wall -Wextra -Wshadow -O2
+LDFLAGS		+= -O2
 LDFLAGS		+= -l sfml-system -l sfml-graphics -l sfml-window -l sfml-network
 LDFLAGS		+= -l boost_regex
 
 SRC	= $(addprefix src/, \
+		parser_cmd.cpp\
 		class/game/data.cpp \
 		class/game/map.cpp \
 		class/game/player.cpp \
@@ -46,7 +48,6 @@ SRC	= $(addprefix src/, \
 		gui.cpp\
 		main.cpp\
 		network_iteration.cpp \
-		parser_cmd.cpp\
 		utils.cpp\
 		)
 OBJ	= $(addprefix $(OBJ_DIR)/, $(SRC:$(SRC_DIR)/%.cpp=%.o))

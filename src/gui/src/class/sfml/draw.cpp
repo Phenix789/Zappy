@@ -25,18 +25,16 @@ void    sfml::draw_background()
 void    sfml::draw_gui() { }
 void    sfml::draw_case()
 { 
-  sf::Sprite	grass(this->getImg(GRASS));
+  static sf::Sprite	grass(this->getImg(GRASS));
+  int	posx = this->pos.getX();
+  int	posy = this->pos.getY();
   
-  for (int y = 0; y < this->data.map.size_x; y++)
-    for (int x = 0; x < this->data.map.size_y; x++)
-      {
-	if ((x >= (this->pos.getX() - 1)) && (x <= (1 + this->pos.getX() + (WIDTH / 64))))
-	  if ((y >= (this->pos.getY() - 1)) && (y <= (1 + this->pos.getY() + (HEIGHT / 64))))
-	    {
-	      grass.SetPosition((x - pos.getX()) * 64 , (y - pos.getY()) * 64);
-	      App.Draw(grass);
-	    }
-      }
+    for (int y = (posy > 0 ? posy : 0); y < 1 + posy + (HEIGHT / 64) && y < this->data.map.size_y; y++)
+      for (int x = (posx > 0 ? posx : 0); x < 1 + posx + (WIDTH / 64) && x < this->data.map.size_x; x++)
+	{
+	  grass.SetPosition((x - pos.getX()) * 64 , (y - pos.getY()) * 64);
+	  App.Draw(grass);
+	}
 }
 
 void    sfml::draw_player()

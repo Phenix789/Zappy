@@ -14,7 +14,7 @@ int	gui::run(game::data &data, __attribute__((unused))INetwork &sock)
   Igui		*gui = NULL;
 
   data.allowConnection();
-  data.map.setDim(3000, 1400);
+  data.map.setDim(16, 16);
   try
     {
       gui = gui_create(data);
@@ -32,6 +32,8 @@ int	gui::run(game::data &data, __attribute__((unused))INetwork &sock)
   catch (const gui::except &ex)
     {
       std::cout << "Fermeture de l'interface graphique - " << ex.what() << std::endl;
+      if (gui)
+	delete gui;
     }
 
   catch (const network::except &ex)
