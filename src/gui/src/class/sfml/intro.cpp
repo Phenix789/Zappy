@@ -10,7 +10,7 @@ void	sfml::intro()
   this->App.Draw(sprite);
   this->App.Display();
   this->wait(2000, false);
-  this->App.Close();
+  this->App.Clear();
   std::cout << "Beginning graph loop" << std::endl;
 }
 
