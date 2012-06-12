@@ -22,19 +22,19 @@ void    sfml::process_event()
 	      }
 
 	    case sf::Key::Up:
-	      getPos().addY(0.10);
+	      getPos().addY(-0.5);
 	      break;
 	      
 	    case sf::Key::Down:
-	      getPos().addY(-0.10);
+	      getPos().addY(0.5);
 	      break;
 	      
 	    case sf::Key::Left:
-	      getPos().addX(-0.10);
+	      getPos().addX(-0.5);
 	      break;
 	      
 	    case sf::Key::Right:
-	      getPos().addX(0.10);
+	      getPos().addX(0.5);
 	      break;
 	      
             default:

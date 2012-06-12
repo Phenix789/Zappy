@@ -5,7 +5,7 @@
 ## Login   <frizac_b@epitech.net>
 ##
 ## Started on  Mon Feb  6 14:18:30 2012 Alexandre Frizac
-## Last update Mon Jun 11 19:22:05 2012 Alexandre Frizac
+## Last update Tue Jun 12 18:08:55 2012 Alexandre Frizac
 ##
 
 NAME		= a.out
@@ -16,10 +16,11 @@ SRC_DIR		= src
 
 DEBUG_FLAGS	+= -ggdb3
 DEBUG_FLAGS	+= -DDEBUG
+DEBUG_FLAGS	+= -DDEBUG_GRAPH
 
 CC		= g++
 CXXFLAGS	+= -I include
-CXXFLAGS	+= -Wall -Wextra -Wshadow -O2
+CXXFLAGS	+= -Wall -Wextra -Wshadow
 LDFLAGS		+= -l sfml-system -l sfml-graphics -l sfml-window -l sfml-network
 LDFLAGS		+= -l boost_regex
 
@@ -36,6 +37,7 @@ SRC	= $(addprefix src/, \
 		class/sfml/draw.cpp \
 		class/sfml/end.cpp \
 		class/sfml/event.cpp \
+		class/sfml/init.cpp \
 		class/sfml/intro.cpp \
 		class/sfml/LoadImage.cpp \
 		class/sfml/sfml.cpp \
@@ -53,7 +55,7 @@ all: $(NAME)
 
 m:
 	make fclean
-	make all -j 4
+	make all -j 5
 
 $(NAME): $(OBJ)
 	$(CC) -o $(NAME) $(OBJ) $(LDFLAGS) $(DEBUG_FLAGS)

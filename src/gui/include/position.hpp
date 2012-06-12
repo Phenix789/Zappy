@@ -21,6 +21,6 @@ namespace gui
     void	addY(double value);
     double	getX(void);
     double	getY(void);
-    void	setToMiddle(int x, int y);
+    void	dump(void);
   };
 };

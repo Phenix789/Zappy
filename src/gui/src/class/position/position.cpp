@@ -1,3 +1,4 @@
+#include <iostream>
 #include "position.hpp"
 
 namespace gui
@@ -36,9 +37,9 @@ namespace gui
   {
     return (this->pos[1]);
   }
-
-  void position::setToMiddle(int x, int y)
+  
+  void	position::dump(void)
   {
-    this->set(x/2, y/2);
+    std::cout << pos[0] << "/" << pos[1] <<std::endl;
   }
 };

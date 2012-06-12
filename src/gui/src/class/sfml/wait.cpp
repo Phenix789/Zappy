@@ -1,3 +1,4 @@
+#include <unistd.h>
 #include "sfml.hpp"
 
 void	sfml::wait(int tps, bool draw)
@@ -11,5 +12,6 @@ void	sfml::wait(int tps, bool draw)
 	this->draw_map();
       else
 	this->App.Display();
+      usleep(10000);
     }
 }

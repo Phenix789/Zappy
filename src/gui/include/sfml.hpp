@@ -16,7 +16,15 @@ class sfml : public Igui
       CHARACTER,
       STONES,
       EGG,
-      BACKGROUND    
+      GRASS,
+      BACKGROUND
+  };
+
+  enum config
+  {
+    WIDTH	= 640,
+    HEIGHT	= 640,
+    LIMFPS	= 30
   };
   
 public:
@@ -48,10 +56,9 @@ private:
 
 private:
   void        	draw_background();
-  void        	draw_gui();
-  void        	draw_info();
   void        	draw_case();
   void        	draw_player();
+  void        	draw_gui();
   void		clear();
   void		close();
 

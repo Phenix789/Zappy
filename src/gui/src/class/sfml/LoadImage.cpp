@@ -7,7 +7,7 @@ static const char	*img_name[] =
     "ressources/character.bmp",
     "ressources/stones.bmp",
     "ressources/egg.bmp",
-    "ressources/background.bmp",
+    "ressources/tiles.png",
     NULL
   };
 

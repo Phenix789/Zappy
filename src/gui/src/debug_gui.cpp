@@ -14,7 +14,7 @@ int	gui::run(game::data &data, __attribute__((unused))INetwork &sock)
   Igui		*gui = NULL;
 
   data.allowConnection();
-  data.map.setDim(10, 10);
+  data.map.setDim(3000, 1400);
   try
     {
       gui = gui_create(data);

@@ -4,13 +4,15 @@
 
 void	sfml::intro()
 {
+#ifndef DEBUG_GRAPH
   sf::Sprite		sprite(this->getImg(INTRO));
 
-  sprite.Resize(800, 800);
+  sprite.Resize(WIDTH, HEIGHT);
   this->App.Draw(sprite);
   this->App.Display();
   this->wait(2000, false);
   this->App.Clear();
+#endif
   std::cout << "Beginning graph loop" << std::endl;
 }
 
