@@ -1,10 +1,9 @@
-#ifdef DEBUG
-
 #include <iostream>
 #include <cstdlib>
 #include "interface/gui.hpp"
 #include "interface/network.hpp"
 
+#ifdef DEBUG
 #warning "!! MODE DEBUG !! -- NO NETWORK !"
 
 /* ----------------- LOOP ------------------- */
