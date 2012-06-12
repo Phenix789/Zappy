@@ -11,11 +11,27 @@
 #include	"kernel.h"
 #include "logger.h"
 
+void server_usage()
+{
+  printf("Zappy Server\nUsage:\n");
+  printf("-p numero du port (default 3945)\n");
+  printf("-x largeur du Monde (default 10)\n");
+  printf("-y hauteur du Monde (default 10)\n");
+  printf("-n nom equipe 1 [nom equipe 2 [nom equipe n]]\n");
+  printf("-c nombre de client par equipe (default 10)\n");
+  printf("-t delai temporel d'execution des actions (default 100)\n");
+}
+
 int	main(int argc, char **argv)
 {
-  logger_init(LG_ALLLOG, "zappy.log", LG_VERBOSE);
-  if (kernel_init_with_argv(argc, argv))
-    kernel_run();
-  kernel_destroy();
+  if (argc == 1)
+    server_usage();
+  else
+    {
+      logger_init(LG_ALLLOG, "zappy.log", LG_VERBOSE);
+      if (kernel_init_with_argv(argc, argv))
+	kernel_run();
+      kernel_destroy();
+    }
   return (0);
 }

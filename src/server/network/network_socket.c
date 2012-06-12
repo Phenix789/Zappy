@@ -5,10 +5,13 @@
 ** Login   <duval_q@epitech.net>
 ** 
 ** Started on  Tue May 29 07:15:26 2012 quentin duval
-** Last update Sat Jun  2 10:55:47 2012 quentin duval
+** Last update Tue Jun 12 18:14:37 2012 quentin duval
 */
 
 #include	"network.h"
+#include	"logger.h"
+
+extern t_network	*g_network;
 
 t_socket	*socket_create()
 {
@@ -22,8 +25,9 @@ t_socket	*socket_create()
 
 t_socket	*socket_init(t_socket *sock)
 {
-  if (!sock)
+  if (!g_network || !sock)
     return (NULL);
+  g_network->opened_socket++;
   if ((sock->fd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) == SOCKET_ERROR)
     {
       free(sock);
@@ -33,8 +37,20 @@ t_socket	*socket_init(t_socket *sock)
   return (sock);
 }
 
-void	socket_close(t_socket *socket)
+void		listener_close(t_listener *listener)
 {
+  if (!listener || !g_network)
+    return;
+  if (listener)
+    socket_close(listener->socket);
+}
+
+void		socket_close(t_socket *socket)
+{
+  if (!socket || !g_network)
+    return;
+  logger_verbose("[NETWORK] close socket %d", socket->fd);
+  g_network->closed_socket++;
   if (socket)
     closesocket(socket->fd);
 }

@@ -5,26 +5,28 @@
 ** Login   <duval_q@epitech.net>
 **
 ** Started on  Tue May 29 03:54:36 2012 quentin duval
-** Last update Mon Jun  4 07:47:53 2012 quentin duval
+** Last update Tue Jun 12 18:47:03 2012 quentin duval
 */
 
 #include		"network.h"
 #include		"logger.h"
 
-static t_network	*g_network = NULL;
+t_network	*g_network = NULL;
 
 bool			network_init()
 {
-  t_network		*network;
-
   logger_message("[NETWORK] starting network service");
   if (g_network)
     return (true);
   if (network_create() == false)
-    return (false);
-  network = get_network();
-  network->nfds = 0;
-  network->usec_timeout = 0;
+    {
+      logger_error("[NETWORK] critical fail on allocation");
+      return (false);
+    }
+  g_network->nfds = 0;
+  g_network->usec_timeout = 0;
+  g_network->opened_socket = 0;
+  g_network->closed_socket = 0;
   logger_message("[NETWORK] service started");
   return (true);
 }
@@ -33,38 +35,30 @@ bool			network_create()
 {
   if (g_network)
     return (true);
-  logger_debug("[NETWORK] beginning allocation");
   if (!(g_network = malloc(sizeof(*g_network))))
     return (false);
-  logger_debug("[NETWORK] allocation of main object... ok");
   if (!(g_network->listened = list_create()))
     return (false);
   if (!(g_network->destroy = list_create()))
     return (false);
-  logger_debug("[NETWORK] allocation of listening list... ok");
   if (!(g_network->read = list_create()))
     return (false);
-  logger_debug("[NETWORK] allocation of reading list... ok");
-  logger_debug("[NETWORK] allocation complete");
+  logger_debug("[NETWORK] allocation ...ok");
   return (true);
 }
 
 bool			network_destroy()
 {
-  t_network		*network;
-
-  network = get_network();
-  //close les sockets
-  list_free(network->listened);
-  list_free(network->read);
-  free(network->listened);
-  free(network->read);
-  return (true);
-}
-
-t_network		*get_network()
-{
   if (!g_network)
-    logger_error("[NETWORK] network not initialised");
-  return (g_network);
+    return (true);
+  list_foreach(g_network->listened, (feach)listener_close);
+  list_foreach(g_network->read, (feach)socket_close);
+  list_free(g_network->listened);
+  list_free(g_network->read);
+  logger_message("[NETWORK] destroyed : %lu socket not closed",
+		 g_network->opened_socket - g_network->closed_socket);
+  free(g_network->listened);
+  free(g_network->read);
+  free(g_network);
+  return (true);
 }
