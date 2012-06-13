@@ -21,13 +21,16 @@ bool client_action_save(t_client *client, char *action)
 	  client_execute(client, action);
 	  client->busy = true;
 	}
-      else if (list_size(&client->actions) >= CLIENT_MAX_ACTIONS)
+      else if (list_size(&client->actions) <= CLIENT_MAX_ACTIONS)
 	{
 	  logger_verbose("[CLIENT] Client %i save action '%s'", CLP_ID(client), action);
 	  list_add_end(&client->actions, strdup(action));
 	}
       else
-	return false;
+	{
+	  logger_warning("[CLIENT] Client %i action '%s' ignored", CLP_ID(client), action);
+	  return false;
+	}
       return true;
     }
   logger_warning("[CLIENT] Client %i try to save unknown command '%s'", CLP_ID(client), action);

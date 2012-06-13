@@ -51,6 +51,7 @@ bool			network_destroy()
 {
   if (!g_network)
     return (true);
+  logger_message("[NETWORK] Network destroy");
   list_foreach(g_network->listened, (feach) listener_close);
   list_foreach(g_network->read, (feach) socket_close);
   list_free(g_network->listened);
