@@ -35,6 +35,7 @@ namespace game
 	    std::cerr << "game::map::addPlayer : Player " << num_pl << " existe déja" << std::endl;
 	    return ;
 	  }
+	  it++;
       }
     this->_players.push_back(player(x, y, num_pl, orient));
   }

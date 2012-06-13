@@ -106,6 +106,8 @@ void	sfml::drawRessources(int x, int y)
     }
 }
 
+#include <stdio.h>
+
 void    sfml::drawPlayer(int x, int y)
 {
   std::list<game::player>::iterator	it;
@@ -114,12 +116,12 @@ void    sfml::drawPlayer(int x, int y)
   while (it != this->data.map._players.end())
     {
       if (it->isHere(x, y))
-      {
-        sf::Sprite      &chara(getSprite(convertOrientToSpr(it->orient)));
+	{
+	  sf::Sprite      &chara(getSprite(convertOrientToSpr(it->orient)));
 
-        chara.SetPosition((x - pos.getX()) * 64 + 16, (y - pos.getY()) * 64 + 8);
-        App.Draw(chara);
-      }
-      it++;
+	  chara.SetPosition((x - pos.getX()) * 64 + 16, (y - pos.getY()) * 64 + 8);
+	  App.Draw(chara);
+	}
+    it++;
     }
 }
