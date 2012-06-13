@@ -11,6 +11,7 @@
 #include "kernel.h"
 #include "clock.h"
 #include "logger.h"
+#include "debug.h"
 
 extern t_kernel *g_kernel;
 
@@ -74,20 +75,14 @@ int kernel_wakeup()
   while (wakeup)
     {
       end = wakeup->begin;
-      logger_debug("[KERNEL] Flotting point 1");
       clock_move_date(&end, wakeup->time);
-      logger_debug("[KERNEL] Flotting point 2");
       if (clock_compare(time, &end) > 0)
 	{
-          logger_debug("[KERNEL] Flotting point 3");
 	  list_pop_begin(&g_kernel->callbacks);
-          logger_debug("[KERNEL] Flotting point 4");
+	  logger_debug("[KERNEL] Wakeup call '%s' callback", debug_get_callback_name(wakeup->callback));
 	  (*wakeup->callback)(wakeup->param, KN_ERROR_OK);
-          logger_debug("[KERNEL] Flotting point 5");
 	  free(wakeup);
-          logger_debug("[KERNEL] Flotting point 6");
 	  count++;
-          logger_debug("[KERNEL] Flotting point 7");
 	}
       else
 	return count;

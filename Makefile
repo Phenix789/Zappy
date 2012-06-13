@@ -80,7 +80,8 @@ zappy_server_OBJ=	server/main.o \
 			server/client/client_player.o \
 			server/client/client_receive.o \
 			server/client/client_send.o \
-			server/client/client_food.o
+			server/client/client_food.o \
+			server/debug/debug.o
 
 zappy_gui_OBJ=		gui/main.o
 
