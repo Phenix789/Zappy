@@ -68,4 +68,5 @@ void kernel_destroy()
   game_destroy();
   clock_destroy();
   free(g_kernel);
+  logger_destroy();
 }

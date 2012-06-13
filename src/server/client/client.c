@@ -26,7 +26,12 @@ void client_destroy(t_client *client)
 {
   list_free(&client->actions);
   _client_manager_remove(client);
+  if (client->player)
+    game_add_free_player(client->player);
   if (client->socket)
-    socket_close(client->socket);
+    {
+      network_del_socket(client->socket);
+      socket_close(client->socket);
+    }
   free(client);
 }

@@ -29,9 +29,9 @@ static void		flush_list()
   while ((!list_empty(g_network->destroy)))
     {
       socket =  list_get_begin(g_network->destroy);
+      list_pop_begin(g_network->destroy);
       socket_close(socket);
       network_del_socket(socket);
-      list_pop_begin(g_network->destroy);
     }
 }
 

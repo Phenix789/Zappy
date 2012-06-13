@@ -18,13 +18,14 @@ void kernel_signal()
   signal(SIGSEGV, &kernel_signal_handle);
   signal(SIGTERM, &kernel_signal_handle);
   signal(SIGINT, &kernel_signal_handle);
+  signal(SIGFPE, &kernel_signal_handle);
 }
 
 void kernel_signal_handle(int sig)
 {
   logger_error("[KERNEL] Signal catched %i", sig);
+  signal(sig, NULL);
   kernel_destroy();
   logger_destroy();
-  signal(sig, NULL);
   kill(getpid(), sig);
 }
