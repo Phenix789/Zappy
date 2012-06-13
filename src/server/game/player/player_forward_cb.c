@@ -14,6 +14,7 @@ void		player_forward_end_cb(t_client *client, int error)
 {
   if (!error)
     {
+      logger_message("[PLAYER] Player %i finish action 'avance'", CLP_ID(client));
       world_move_player(client->player);
       client_send(client, REP_OK);
     }
@@ -25,6 +26,6 @@ void		player_forward_end_cb(t_client *client, int error)
 void		player_forward_start_cb(t_client *client, char *command)
 {
   (void)command;
-  logger_message("[PLAYER] Player %i avance", CLP_ID(client));
+  logger_message("[PLAYER] Player %i begin action 'avance'", CLP_ID(client));
   kernel_register_wakeup(DELAY_STANDARD, (kn_wakeup_cb) player_forward_end_cb, client);
 }
