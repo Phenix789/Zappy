@@ -85,7 +85,7 @@ bool client_player_search(t_client *client, char *team);
 void client_receive(t_socket *socket, t_client *client);
 int client_send(t_client *client, char *mask, ...);
 
-void client_consume_food(t_client *client);
+void client_consume_food(t_client *client, int error);
 void client_food_dead(t_client *client);
 
 #endif

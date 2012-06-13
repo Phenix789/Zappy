@@ -51,13 +51,14 @@ bool			network_destroy()
 {
   if (!g_network)
     return (true);
-  list_foreach(g_network->listened, (feach)listener_close);
-  list_foreach(g_network->read, (feach)socket_close);
+  list_foreach(g_network->listened, (feach) listener_close);
+  list_foreach(g_network->read, (feach) socket_close);
   list_free(g_network->listened);
   list_free(g_network->read);
   logger_message("[NETWORK] destroyed : %lu socket not closed",
 		 g_network->opened_socket - g_network->closed_socket);
   free(g_network->listened);
+  free(g_network->destroy);
   free(g_network->read);
   free(g_network);
   return (true);

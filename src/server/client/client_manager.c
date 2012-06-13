@@ -20,8 +20,12 @@ bool client_manager_init(int port)
 
 void client_manager_destroy()
 {
-  logger_message("[CLIENT] Manager stopped");
+  if (!g_client_manager)
+    return;
+  logger_message("[CLIENT] Manager destroy");
   list_foreach(&g_client_manager->clients, (feach) &client_destroy);
+  list_clear(&g_client_manager->clients);
+  list_free(&g_client_manager->commands);
   network_destroy();
   free(g_client_manager);
 }

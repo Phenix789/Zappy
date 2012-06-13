@@ -33,6 +33,7 @@ t_tile *world_get_tile(int x, int y);
 bool game_init(int x, int y, int nb_slots);
 int game_width();
 int game_height();
+void game_destroy();
 
 bool game_start();
 void game_play_free_player();
