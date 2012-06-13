@@ -50,7 +50,7 @@ void    sfml::process_event()
 	{
 	case sf::Event::KeyPressed:
 	  this->process_keyboard(event);
-	  return;
+	  break;
 
 	case sf::Event::Resized:
 	  this->data.needRedraw(true);
