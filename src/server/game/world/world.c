@@ -55,8 +55,8 @@ t_tile *world_get_tile(int x, int y)
   int w;
   int h;
 
-  w = x > g_game->world.w_width;
-  h = x > g_game->world.w_height;
+  w = g_game->world.w_width;
+  h = g_game->world.w_height;
   if (x < 0 || x > w)
     x = ((x % w) + w) % w;
   if (y < 0 || y > h)
