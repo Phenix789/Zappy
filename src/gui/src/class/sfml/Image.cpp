@@ -39,6 +39,7 @@ void	sfml::LoadImage(void)
  }
 
 // Sprite Character : 31 pixels de large && 49 de haut
+// En fait non, pas trop. Ou alors la source est daubée
 void	sfml::LoadSprite(void)
 {
   this->sprite.resize(SP_LAST);
@@ -52,8 +53,8 @@ void	sfml::LoadSprite(void)
   Load_ASprite(SP_THYSTAME, 96, 0, 112, 16);
   Load_ASprite(SP_CHAR_DOWN, 	93, 0, 	    31 * 4, 49 * 1);
   Load_ASprite(SP_CHAR_LEFT, 	93, 49 * 1, 31 * 4, 49 * 2);
-  Load_ASprite(SP_CHAR_RIGHT, 	93, 49 * 2, 31 * 4, 49 * 3);
-  Load_ASprite(SP_CHAR_UP, 	93, 49 * 3, 31 * 4, 49 * 4);
+  Load_ASprite(SP_CHAR_RIGHT, 	93 + 1, 49 * 2, 31 * 4, 49 * 3);
+  Load_ASprite(SP_CHAR_UP, 	93, 49 * 3, 31 * 4, 49 * 4 - 3);
 }
 
 const sf::Image	&sfml::getImage(sprtype type) const

@@ -15,14 +15,17 @@ int	gui::run(game::data &data, __attribute__((unused))INetwork &sock)
 
   data.allowConnection();
   data.map.setDim(14, 14);
-  data.map.setRess(1, 1, game::FOOD, 12);
-  data.map.setRess(1, 1, game::DERAUMATRE, 1);
-  data.map.setRess(1, 1, game::LINEMATE, 1);
-  data.map.setRess(1, 1, game::PHIRAS, 8);
-  data.map.setRess(1, 1, game::THYSTAME, 4);
-  data.map.setRess(1, 1, game::SIBUR, 1);
-  data.map.setRess(1, 1, game::MENDIANE, 1);
-  data.map.addPlayer(1, 1, 1, game::NORD);
+  for (int i = 0; i < 50; i++)
+  {
+    data.map.setRess(rand() % 14, rand() % 14, game::FOOD, rand() % 14);
+    data.map.setRess(rand() % 14, rand() % 14, game::DERAUMATRE, rand() % 14);
+    data.map.setRess(rand() % 14, rand() % 14, game::LINEMATE, rand() % 14);
+    data.map.setRess(rand() % 14, rand() % 14, game::PHIRAS, rand() % 14);
+    data.map.setRess(rand() % 14, rand() % 14, game::THYSTAME, rand() % 14);
+    data.map.setRess(rand() % 14, rand() % 14, game::SIBUR, rand() % 14);
+    data.map.setRess(rand() % 14, rand() % 14, game::MENDIANE, rand() % 14);
+    data.map.addPlayer(rand() % 14, rand() % 14, i, (game::orientation)(rand() % 4));
+  }
   try
     {
       gui = gui_create(data);

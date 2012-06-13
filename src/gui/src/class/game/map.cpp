@@ -47,7 +47,7 @@ namespace game
     it = this->_players.begin();
     while (it != this->_players.end())
       {
-	if ((it)->number == num_pl)
+	if (it->number == num_pl)
 	  {
 	    this->_players.erase(it);
 	    return ;
