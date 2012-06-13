@@ -39,7 +39,7 @@ namespace game
   /* -- Map -- */
   enum  ress
     {
-      NOURRITURE,
+      FOOD,
       LINEMATE,
       DERAUMATRE,
       SIBUR,
@@ -64,9 +64,9 @@ namespace game
     ~map();
 
   public:
-    void        set_ress(int x, int y, ress type, int nb);
-    void        add_player(int x, int y, int num_pl, orientation orient);
-    void        rm_player(int num_pl);
+    void        setRess(int x, int y, ress type, int nb);
+    void        addPlayer(int x, int y, int num_pl, orientation orient);
+    void        rmPlayer(int num_pl);
     void        setDim(int x, int y);
     const std::vector<tiles>              getTile() const;
     const std::list<game::player>       getPlayer() const;

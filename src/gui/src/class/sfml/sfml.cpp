@@ -20,7 +20,7 @@ void	sfml::exit()
 
 bool	sfml::gameloop() const
 {
-  return (this->run & this->App.IsOpened() & !(this->data));
+  return (this->run & !(this->data));
 }
 
 void	sfml::close()
@@ -38,5 +38,10 @@ gui::position	&sfml::getPos()
 
 const sf::Image		&sfml::getImg(imtype image)
 {
-  return (this->img[image]);
+  return (this->img.at(image));
+}
+
+sf::Sprite		&sfml::getSpr(sprtype sprit)
+{
+  return (this->sprite.at(sprit));
 }

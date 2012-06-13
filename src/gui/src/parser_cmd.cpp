@@ -43,13 +43,13 @@ namespace pfunc
 	x = atom(1);
 	y = atom(2);
 	std::cout << cmd << std::endl;
-	data.map.set_ress(x, y, game::NOURRITURE, atom(3));
-	data.map.set_ress(x, y, game::LINEMATE, atom(4));
-	data.map.set_ress(x, y, game::DERAUMATRE, atom(5));
-	data.map.set_ress(x, y, game::SIBUR, atom(6));
-	data.map.set_ress(x, y, game::MENDIANE, atom(7));
-	data.map.set_ress(x, y, game::PHIRAS, atom(8));
-	data.map.set_ress(x, y, game::THYSTAME, atom(9));
+	data.map.setRess(x, y, game::FOOD, atom(3));
+	data.map.setRess(x, y, game::LINEMATE, atom(4));
+	data.map.setRess(x, y, game::DERAUMATRE, atom(5));
+	data.map.setRess(x, y, game::SIBUR, atom(6));
+	data.map.setRess(x, y, game::MENDIANE, atom(7));
+	data.map.setRess(x, y, game::PHIRAS, atom(8));
+	data.map.setRess(x, y, game::THYSTAME, atom(9));
       }
     else
       PrintError(cmd);
@@ -69,7 +69,7 @@ namespace pfunc
     if (boost::regex_search(cmd, match, expre))
       {
 	std::cout << cmd << std::endl;
-	data.map.add_player(atom(1), atom(2), atom(3), (game::orientation)(atom(4)));
+	data.map.addPlayer(atom(1), atom(2), atom(3), (game::orientation)(atom(4)));
       }
     else
       PrintError(cmd);

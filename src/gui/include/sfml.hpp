@@ -9,24 +9,36 @@
 
 class sfml : public Igui
 {
-  enum imtype
-  {
-      INTRO,
-      SCORE,
-      CHARACTER,
-      STONES,
-      EGG,
-      GRASS,
-      BACKGROUND
-  };
-
   enum config
-  {
-    WIDTH	= 640,
-    HEIGHT	= 640,
-    LIMFPS	= 30
-  };
-  
+    {
+      WIDTH	= 640,
+      HEIGHT	= 640,
+      LIMFPS	= 30
+    };
+
+  enum imtype
+    {
+      IM_INTRO,
+      IM_SCORE,
+      IM_CHARACTER,
+      IM_STONES,
+      IM_EGG,
+      IM_GRASS,
+      IM_BACKGROUND
+    };
+
+  enum sprtype
+    {
+      GRASS,
+      FOOD,
+      LINEMATE,
+      DERAUMATRE,
+      SIBUR,
+      MENDIANE,
+      PHIRAS,
+      THYSTAME
+    };
+
 public:
   sfml(game::data &data);
   ~sfml();
@@ -44,6 +56,7 @@ public:
 private:
   bool				run;
   std::vector<sf::Image>	img;
+  std::vector<sf::Sprite>	sprite;
   sf::RenderWindow		App;
   game::data			&data;
   gui::position			pos;
@@ -51,15 +64,17 @@ private:
 private:
   gui::position		&getPos();
   const sf::Image 	&getImg(imtype image);
+  sf::Sprite		&getSpr(sprtype sprite);
   void	      		LoadImage();
+  void			LoadSprite();
   void			close();
-  
+
 private:
+  inline void	process_keyboard(sf::Event &event);
   void        	draw_background();
   void        	draw_case();
   void        	draw_player();
   void        	draw_gui();
-  inline void	process_keyboard(sf::Event &event);
 
 private:
   sfml();

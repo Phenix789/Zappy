@@ -21,9 +21,10 @@ void    sfml::draw_background()
 }
 
 void    sfml::draw_gui() { }
+
 void    sfml::draw_case()
 {
-  static sf::Sprite	grass(this->getImg(GRASS));
+  sf::Sprite	&grass(getSpr(GRASS));
   int	posx = this->pos.getX();
   int	posy = this->pos.getY();
 

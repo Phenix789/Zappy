@@ -9,7 +9,7 @@ game::tiles::tiles()
 
 void	game::tiles::set(ress type, int nb)
 {
-  if (type < NOURRITURE || type > THYSTAME)
+  if (type < FOOD || type > THYSTAME)
     std::cerr << "game::tiles::set : ressource inconnue (" << type << ")" << std::endl;
   else
     {

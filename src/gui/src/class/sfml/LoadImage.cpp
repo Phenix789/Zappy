@@ -33,3 +33,11 @@ void	sfml::LoadImage(void)
     }
 }
 
+void	sfml::LoadSprite(void)
+{
+  this->sprite.resize(8);
+  this->sprite[0].SetImage(this->getImg(IM_GRASS));
+  this->sprite[1].SetImage(this->getImg(IM_STONES));
+  this->sprite[1].SetSubRect(sf::Rect<int>(0, 0, 64, 64));
+  
+}

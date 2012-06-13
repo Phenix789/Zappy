@@ -9,6 +9,7 @@ bool	sfml::init()
       throw gui::except("La map est trop petite");
     }
   this->LoadImage();
+  this->LoadSprite();
   this->App.Create(sf::VideoMode(WIDTH, HEIGHT, 32), "Zappy - GUI");
   this->App.SetFramerateLimit(LIMFPS);
   this->App.UseVerticalSync(true);

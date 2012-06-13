@@ -14,7 +14,12 @@ int	gui::run(game::data &data, __attribute__((unused))INetwork &sock)
   Igui		*gui = NULL;
 
   data.allowConnection();
-  data.map.setDim(80, 20);
+  data.map.setDim(10, 10);
+  data.map.setRess(0, 0, game::FOOD, 12);
+  data.map.setRess(0, 0, game::LINEMATE, 1);
+  data.map.setRess(0, 0, game::PHIRAS, 8);
+  data.map.setRess(0, 0, game::THYSTAME, 4);
+  data.map.setRess(0, 0, game::SIBUR, 1);
   try
     {
       gui = gui_create(data);
