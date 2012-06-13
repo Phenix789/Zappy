@@ -3,7 +3,7 @@
 
 void	sfml::end()
 {
-  this->clear();
+  this->App.Clear();
   this->App.Display();
   std::cout << "Ending graph loop" << std::endl;
 }

@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include "interface/gui.hpp"
 #include "interface/network.hpp"
+#include "sfml.hpp"
 
 #ifdef DEBUG
 #warning "!! MODE DEBUG !! -- NO NETWORK !"
@@ -13,13 +14,13 @@ int	gui::run(game::data &data, __attribute__((unused))INetwork &sock)
   Igui		*gui = NULL;
 
   data.allowConnection();
-  data.map.setDim(16, 16);
+  data.map.setDim(80, 20);
   try
     {
       gui = gui_create(data);
       gui->init();
       gui->intro();
-      while (gui->is_running() && !data)
+      while (gui->gameloop())
 	{
 	  gui->process_event();
 	  gui->draw_map();

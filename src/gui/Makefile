@@ -5,7 +5,7 @@
 ## Login   <frizac_b@epitech.net>
 ##
 ## Started on  Mon Feb  6 14:18:30 2012 Alexandre Frizac
-## Last update Tue Jun 12 18:49:56 2012 Alexandre Frizac
+## Last update Wed Jun 13 14:48:19 2012 Alexandre Frizac
 ##
 
 NAME		= a.out
@@ -14,13 +14,13 @@ INC_DIR		= include
 OBJ_DIR		= obj
 SRC_DIR		= src
 
-#DEBUG_FLAGS	+= -ggdb3
+DEBUG_FLAGS	+= -ggdb3
 DEBUG_FLAGS	+= -DDEBUG
 DEBUG_FLAGS	+= -DDEBUG_GRAPH
 
 CC		= g++
 CXXFLAGS	+= -I include
-CXXFLAGS	+= -Wall -Wextra -Wshadow -O2
+CXXFLAGS	+= -Wall -Wextra -Wshadow
 LDFLAGS		+= -O2
 LDFLAGS		+= -l sfml-system -l sfml-graphics -l sfml-window -l sfml-network
 LDFLAGS		+= -l boost_regex

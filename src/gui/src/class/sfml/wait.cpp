@@ -1,17 +1,13 @@
-#include <unistd.h>
 #include "sfml.hpp"
 
-void	sfml::wait(int tps, bool draw)
+void	sfml::wait(int tps)
 {
   sf::Clock	clock;
+  double	time = tps / 1000;
   
-  while (clock.GetElapsedTime() < (tps / 1000 ) && this->is_running())
+  while ((clock.GetElapsedTime() < time) && this->gameloop())
     {
       this->process_event();
-      if (draw)
-	this->draw_map();
-      else
-	this->App.Display();
-      usleep(10000);
+      this->App.Display();
     }
 }

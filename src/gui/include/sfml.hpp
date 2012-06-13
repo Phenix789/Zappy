@@ -34,10 +34,10 @@ public:
 public:
   bool	init();
   void	intro();
-  bool	is_running() const;
+  bool	gameloop() const;
   void	process_event();
   void	draw_map();
-  void	wait(int millisecond, bool draw = false);
+  void	wait(int millisecond);
   void	end();
   void	exit();
 
@@ -45,7 +45,6 @@ private:
   bool				run;
   std::vector<sf::Image>	img;
   sf::RenderWindow		App;
-  sf::Event			event;
   game::data			&data;
   gui::position			pos;
 
@@ -53,14 +52,14 @@ private:
   gui::position		&getPos();
   const sf::Image 	&getImg(imtype image);
   void	      		LoadImage();
-
+  void			close();
+  
 private:
   void        	draw_background();
   void        	draw_case();
   void        	draw_player();
   void        	draw_gui();
-  void		clear();
-  void		close();
+  inline void	process_keyboard(sf::Event &event);
 
 private:
   sfml();

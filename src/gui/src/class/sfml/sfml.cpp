@@ -2,6 +2,10 @@
 
 sfml::sfml(game::data &edata) : run(false), data(edata)
 {
+    double	maxX = edata.map.size_x - (WIDTH / 64);
+    double	maxY = edata.map.size_y - (HEIGHT / 64);
+  
+    this->pos.set(-1, -1, (maxX < -1 ? -1 : maxX + 1), (maxY < -1 ? -1 : maxY + 1));
 }
 
 sfml::~sfml()
@@ -14,9 +18,9 @@ void	sfml::exit()
   this->run = false;
 }
 
-bool	sfml::is_running() const
+bool	sfml::gameloop() const
 {
-  return (this->run && this->App.IsOpened());
+  return (this->run & this->App.IsOpened() & !(this->data));
 }
 
 void	sfml::close()
@@ -34,7 +38,5 @@ gui::position	&sfml::getPos()
 
 const sf::Image		&sfml::getImg(imtype image)
 {
-  if (image < INTRO || image > BACKGROUND)
-    throw gui::except("getImg : Bad number");
   return (this->img[image]);
 }
