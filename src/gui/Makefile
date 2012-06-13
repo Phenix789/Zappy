@@ -5,7 +5,7 @@
 ## Login   <frizac_b@epitech.net>
 ##
 ## Started on  Mon Feb  6 14:18:30 2012 Alexandre Frizac
-## Last update Wed Jun 13 18:34:40 2012 Alexandre Frizac
+## Last update Wed Jun 13 21:46:37 2012 Alexandre Frizac
 ##
 
 NAME		= a.out
@@ -34,6 +34,7 @@ SRC	= $(addprefix src/, \
                 class/sfml/Image.cpp \
                 class/sfml/sfml.cpp \
                 class/sfml/wait.cpp \
+		class/sfml/isInWindows.cpp \
 		parser_cmd.cpp\
 		class/game/data.cpp \
 		class/game/map.cpp \

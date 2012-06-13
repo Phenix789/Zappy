@@ -4,7 +4,7 @@ static const char	*img_name[] =
   {
     "ressources/intro.jpg",
     "ressources/score.jpg",
-    "ressources/character.bmp",
+    "ressources/Characters.png",
     "ressources/stones.png",
     "ressources/egg.bmp",
     "ressources/tiles.png",
@@ -31,23 +31,29 @@ void	sfml::LoadImage(void)
     }
 }
 
- void	sfml::Load_ARess(sprtype type, int a, int b)
+// Gauche, Haut, Droite, Bas
+ void	sfml::Load_ASprite(sprtype type, int a, int b, int c, int d)
  {
    this->sprite[type].SetImage(getImage(type));
-   this->sprite[type].SetSubRect(sf::Rect<int>(a, 0, b, 16));
+   this->sprite[type].SetSubRect(sf::Rect<int>(a, b, c, d));
  }
 
+// Sprite Character : 31 pixels de large && 49 de haut
 void	sfml::LoadSprite(void)
 {
   this->sprite.resize(SP_LAST);
   this->sprite[SP_GRASS].SetImage(getImage(SP_GRASS));
-  Load_ARess(SP_FOOD, 0, 16);
-  Load_ARess(SP_LINEMATE, 16, 32);
-  Load_ARess(SP_DERAUMATRE, 32, 48);
-  Load_ARess(SP_SIBUR, 48, 64);
-  Load_ARess(SP_MENDIANE, 64, 80);
-  Load_ARess(SP_PHIRAS, 80, 96);
-  Load_ARess(SP_THYSTAME, 96, 112);
+  Load_ASprite(SP_FOOD, 0, 0, 16, 16);
+  Load_ASprite(SP_LINEMATE, 16, 0, 32, 16);
+  Load_ASprite(SP_DERAUMATRE, 32, 0, 48, 16);
+  Load_ASprite(SP_SIBUR, 48, 0, 64, 16);
+  Load_ASprite(SP_MENDIANE, 64, 0, 80, 16);
+  Load_ASprite(SP_PHIRAS, 80, 0, 96, 16);
+  Load_ASprite(SP_THYSTAME, 96, 0, 112, 16);
+  Load_ASprite(SP_CHAR_DOWN, 	93, 0, 	    31 * 4, 49 * 1);
+  Load_ASprite(SP_CHAR_LEFT, 	93, 49 * 1, 31 * 4, 49 * 2);
+  Load_ASprite(SP_CHAR_RIGHT, 	93, 49 * 2, 31 * 4, 49 * 3);
+  Load_ASprite(SP_CHAR_UP, 	93, 49 * 3, 31 * 4, 49 * 4);
 }
 
 const sf::Image	&sfml::getImage(sprtype type) const

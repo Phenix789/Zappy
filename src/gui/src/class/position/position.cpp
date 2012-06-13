@@ -19,13 +19,13 @@ namespace gui
     this->pos[0] = x;
     this->pos[1] = y;
     this->limit[0] = limx;
-    this->limit[1] = limy; 
+    this->limit[1] = limy;
   }
 
   void position::addX(double value)
   {
     double res;
-    
+
     res = pos[0] + value;
     if (res < -1)
       pos[0] = -1;
@@ -38,7 +38,7 @@ namespace gui
   void position::addY(double value)
   {
     double res;
-    
+
     res = pos[1] + value;
     if (res < -1)
       pos[1] = -1;
@@ -48,16 +48,16 @@ namespace gui
       pos[1] = res;
   }
 
-  double position::getX(void)
+  double position::getX(void) const
   {
     return (this->pos[0]);
   }
 
-  double position::getY(void)
+  double position::getY(void) const
   {
     return (this->pos[1]);
   }
-  
+
   void	position::dump(void)
   {
     std::cout << pos[0] << "/" << pos[1] <<std::endl;

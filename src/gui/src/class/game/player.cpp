@@ -9,7 +9,7 @@ namespace game
   player::~player()
   { }
 
-  void	player::set(double x, double y, orientation ori)
+  void	player::set(int x, int y, orientation ori)
   {
     if (ori < NORD || ori > OUEST)
       std::cerr << "game::player::set : orientation invalide " << ori << std::endl;
@@ -20,4 +20,11 @@ namespace game
 	this->orient = ori;
       }
   }
+
+   bool player::isHere(int x, int y) const
+   {
+      if (this->pos_x == x && this->pos_y == y)
+        return (true);
+      return (false);
+   }
 };

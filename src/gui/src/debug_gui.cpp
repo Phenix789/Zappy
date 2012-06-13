@@ -22,6 +22,7 @@ int	gui::run(game::data &data, __attribute__((unused))INetwork &sock)
   data.map.setRess(1, 1, game::THYSTAME, 4);
   data.map.setRess(1, 1, game::SIBUR, 1);
   data.map.setRess(1, 1, game::MENDIANE, 1);
+  data.map.addPlayer(1, 1, 1, game::NORD);
   try
     {
       gui = gui_create(data);

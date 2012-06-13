@@ -20,8 +20,8 @@ namespace gui
     void	set(double x, double y, double limx, double limy);
     void	addX(double value);
     void	addY(double value);
-    double	getX(void);
-    double	getY(void);
+    double	getX(void) const;
+    double	getY(void) const;
     void	dump(void);
   };
 };

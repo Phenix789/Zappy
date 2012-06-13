@@ -1,5 +1,5 @@
-#ifndef __IGUI_HPP_
-#define __IGUI_HPP_
+#ifndef __INTERFACE_GUI_HPP_
+#define __INTERFACE_GUI_HPP_
 
 /*
 ** Interface Igui pour charger une bibliothèque graphique dynamiquement (si possible)
@@ -48,4 +48,4 @@ namespace gui
 
 extern "C" Igui	*gui_create(game::data &data);
 
-#endif /* __IGUI_HPP_ */
+#endif /* __INTERFACE_GUI_HPP_ */
