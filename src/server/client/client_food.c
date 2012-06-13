@@ -2,8 +2,9 @@
 #include "client.h"
 #include "kernel.h"
 
-void client_consume_food(t_client *client)
+void client_consume_food(t_client *client, int error)
 {
+  (void) error;
   if (client->player->inv_food > 0)
     {
       client->player->inv_food--;

@@ -89,3 +89,15 @@ bool game_init(int x, int y, int nb_slots)
     }
   return false;
 }
+
+void game_destroy()
+{
+  if (!g_game)
+    return;
+  logger_message("[GAME] Game destroy");
+  list_foreach(&g_game->slots, (feach) &player_free);
+  list_clear(&g_game->slots);
+  list_free(&g_game->teams);
+  free(g_game->world.tiles);
+  free(g_game);
+}

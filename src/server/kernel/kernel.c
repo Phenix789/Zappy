@@ -60,8 +60,12 @@ bool kernel_init_with_argv(int argc, char **argv)
 
 void kernel_destroy()
 {
-  //@todo destroy multiple service
+  logger_message("[KERNEL] Kernel destroy");
+  if (!g_kernel)
+    return;
   list_free(&g_kernel->callbacks);
   client_manager_destroy();
-  logger_message("[KERNEL] Kernel destroy");
+  game_destroy();
+  clock_destroy();
+  free(g_kernel);
 }

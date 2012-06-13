@@ -1,9 +1,9 @@
 /*
 ** clock.c for zappy in /home/duval_q//Documents/projects/zappy/src/server/clock
-** 
+**
 ** Made by quentin duval
 ** Login   <duval_q@epitech.net>
-** 
+**
 ** Started on  Tue May 29 10:03:10 2012 quentin duval
 ** Last update Tue Jun 12 16:27:57 2012 quentin duval
 */
@@ -37,7 +37,7 @@ bool	clock_init()
   return (true);
 }
 
-void	destroy_clock()
+void	clock_destroy()
 {
   free(g_clock);
 }
