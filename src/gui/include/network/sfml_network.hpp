@@ -1,3 +1,6 @@
+#ifndef __NETWORK_SFML_NETWORK_HPP_
+#define __NETWORK_SFML_NETWORK_HPP_
+
 #include <SFML/Network.hpp>
 #include <exception>
 #include "interface/network.hpp"
@@ -37,3 +40,4 @@ private:
   sfNetwork(const sfNetwork &other);
 };
 
+#endif /* __NETWORK_SFML_NETWORK_HPP_ */
