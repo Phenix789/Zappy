@@ -1,6 +1,7 @@
 
 #include <string.h>
 #include "client.h"
+#include "debug.h"
 
 int client_action_count(t_client *client)
 {
@@ -16,11 +17,8 @@ bool client_action_save(t_client *client, char *action)
     }
   if (clm_command_retrieve(action))
     {
-      if (!client->busy)
-	{
-	  client_execute(client, action);
-	  client->busy = true;
-	}
+      if (client->busy == false)
+	client_execute(client, action);
       else if (list_size(&client->actions) <= CLIENT_MAX_ACTIONS)
 	{
 	  logger_verbose("[CLIENT] Client %i save action '%s'", CLP_ID(client), action);
@@ -41,7 +39,8 @@ void client_action_finish(t_client *client)
 {
   char *action;
 
-  logger_verbose("[CLIENT] Client %i has finish action", CLP_ID(client));
+  logger_verbose("[CLIENT] Client %i has finish action, %i pending", CLP_ID(client), list_size(&client->actions));
+  client->busy = false;
   if (list_size(&client->actions))
     {
       logger_verbose("[CLIENT] Client %i have action in stack", CLP_ID(client));
@@ -50,18 +49,17 @@ void client_action_finish(t_client *client)
       client_execute(client, action);
       free(action);
     }
-  else
-    client->busy = false;
 }
 
 void client_execute(t_client *client, char *action)
 {
   t_command_callback *command;
 
+  client->busy = true;
   command = clm_command_retrieve(action);
   if (command)
     {
-      logger_verbose("[CLIENT] Client %i execute action '%s'", CLP_ID(client), action);
+      logger_verbose("[CLIENT] Client %i execute action '%s' on call '%s'", CLP_ID(client), action, debug_get_callback_name(command->callback));
       (*command->callback)(client, action);
     }
 }
