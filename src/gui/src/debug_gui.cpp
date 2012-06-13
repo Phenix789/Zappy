@@ -4,7 +4,7 @@
 #include "interface/network.hpp"
 #include "sfml.hpp"
 
-#ifdef DEBUG
+//#ifdef DEBUG
 #warning "!! MODE DEBUG !! -- NO NETWORK !"
 
 /* ----------------- LOOP ------------------- */
@@ -14,12 +14,14 @@ int	gui::run(game::data &data, __attribute__((unused))INetwork &sock)
   Igui		*gui = NULL;
 
   data.allowConnection();
-  data.map.setDim(10, 10);
-  data.map.setRess(0, 0, game::FOOD, 12);
-  data.map.setRess(0, 0, game::LINEMATE, 1);
-  data.map.setRess(0, 0, game::PHIRAS, 8);
-  data.map.setRess(0, 0, game::THYSTAME, 4);
-  data.map.setRess(0, 0, game::SIBUR, 1);
+  data.map.setDim(14, 14);
+  data.map.setRess(1, 1, game::FOOD, 12);
+  data.map.setRess(1, 1, game::DERAUMATRE, 1);
+  data.map.setRess(1, 1, game::LINEMATE, 1);
+  data.map.setRess(1, 1, game::PHIRAS, 8);
+  data.map.setRess(1, 1, game::THYSTAME, 4);
+  data.map.setRess(1, 1, game::SIBUR, 1);
+  data.map.setRess(1, 1, game::MENDIANE, 1);
   try
     {
       gui = gui_create(data);
@@ -64,4 +66,4 @@ int	gui::run(game::data &data, __attribute__((unused))INetwork &sock)
     delete sock;
     return (res);
   }
-#endif
+//#endif

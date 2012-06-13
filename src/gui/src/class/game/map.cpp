@@ -13,7 +13,7 @@ namespace game
   {
     unsigned int	pos;
 
-    pos = x * this->size_x * y;
+    pos = x + this->size_x * y;
     if (pos > this->_tiles.size())
       {
 	std::cerr << "game::map::setRess : Taille invalide (" << pos << ") - " ;
@@ -61,9 +61,10 @@ namespace game
     this->size_y = y;
     this->_tiles.resize(x * y);
   }
-  const std::vector<tiles>        map::getTile() const
-  {
-    return (this->_tiles);
+  
+  const tiles       &map::getTile(int x, int y) const
+  {    
+    return (this->_tiles.at(x + y * size_x));
   }
 
   const std::list<game::player> map::getPlayer() const

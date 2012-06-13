@@ -53,7 +53,8 @@ namespace game
   public:
     tiles();
     void	set(ress type, int nb);
-
+    int		get(ress type) const;
+    
     int ressources[7];
   };
 
@@ -68,7 +69,7 @@ namespace game
     void        addPlayer(int x, int y, int num_pl, orientation orient);
     void        rmPlayer(int num_pl);
     void        setDim(int x, int y);
-    const std::vector<tiles>              getTile() const;
+    const tiles 	&getTile(int x, int y) const;
     const std::list<game::player>       getPlayer() const;
 
   private:

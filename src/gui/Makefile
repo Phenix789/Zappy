@@ -5,7 +5,7 @@
 ## Login   <frizac_b@epitech.net>
 ##
 ## Started on  Mon Feb  6 14:18:30 2012 Alexandre Frizac
-## Last update Wed Jun 13 14:48:19 2012 Alexandre Frizac
+## Last update Wed Jun 13 18:34:40 2012 Alexandre Frizac
 ##
 
 NAME		= a.out
@@ -26,6 +26,14 @@ LDFLAGS		+= -l sfml-system -l sfml-graphics -l sfml-window -l sfml-network
 LDFLAGS		+= -l boost_regex
 
 SRC	= $(addprefix src/, \
+                class/sfml/draw.cpp \
+                class/sfml/end.cpp \
+                class/sfml/event.cpp \
+                class/sfml/init.cpp \
+                class/sfml/intro.cpp \
+                class/sfml/Image.cpp \
+                class/sfml/sfml.cpp \
+                class/sfml/wait.cpp \
 		parser_cmd.cpp\
 		class/game/data.cpp \
 		class/game/map.cpp \
@@ -36,14 +44,6 @@ SRC	= $(addprefix src/, \
 		class/network/sfml_network.cpp\
 		class/parser.cpp \
 		class/position/position.cpp \
-		class/sfml/draw.cpp \
-		class/sfml/end.cpp \
-		class/sfml/event.cpp \
-		class/sfml/init.cpp \
-		class/sfml/intro.cpp \
-		class/sfml/LoadImage.cpp \
-		class/sfml/sfml.cpp \
-		class/sfml/wait.cpp \
 		debug_gui.cpp\
 		gui.cpp\
 		main.cpp\

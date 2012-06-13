@@ -2,6 +2,7 @@
 #define __SFML_HPP_
 
 #include <SFML/Graphics.hpp>
+#include <string>
 #include <vector>
 #include "interface/gui.hpp"
 #include "game.hpp"
@@ -9,6 +10,7 @@
 
 class sfml : public Igui
 {
+private:
   enum config
     {
       WIDTH	= 640,
@@ -16,27 +18,23 @@ class sfml : public Igui
       LIMFPS	= 30
     };
 
-  enum imtype
-    {
-      IM_INTRO,
-      IM_SCORE,
-      IM_CHARACTER,
-      IM_STONES,
-      IM_EGG,
-      IM_GRASS,
-      IM_BACKGROUND
-    };
-
+public:
   enum sprtype
     {
-      GRASS,
-      FOOD,
-      LINEMATE,
-      DERAUMATRE,
-      SIBUR,
-      MENDIANE,
-      PHIRAS,
-      THYSTAME
+      SP_GRASS,
+      SP_FOOD,
+      SP_LINEMATE,
+      SP_DERAUMATRE,
+      SP_SIBUR,
+      SP_MENDIANE,
+      SP_PHIRAS,
+      SP_THYSTAME,
+      SP_CHAR_UP,
+      SP_CHAR_LEFT,
+      SP_CHAR_DOWN,
+      SP_CHAR_RIGHT,
+      SP_EGG,
+      SP_LAST
     };
 
 public:
@@ -54,27 +52,29 @@ public:
   void	exit();
 
 private:
-  bool				run;
-  std::vector<sf::Image>	img;
-  std::vector<sf::Sprite>	sprite;
   sf::RenderWindow		App;
   game::data			&data;
   gui::position			pos;
-
+  std::vector<sf::Image>	image;
+  std::vector<sf::Sprite>	sprite;
+  bool				run;
+  
 private:
   gui::position		&getPos();
-  const sf::Image 	&getImg(imtype image);
-  sf::Sprite		&getSpr(sprtype sprite);
+  sf::Sprite		&getSprite(sprtype type);
+  const sf::Image 	&getImage(sprtype type) const;
   void	      		LoadImage();
   void			LoadSprite();
+  void			Load_ARess(sprtype type, int a, int b);
   void			close();
 
 private:
   inline void	process_keyboard(sf::Event &event);
-  void        	draw_background();
-  void        	draw_case();
-  void        	draw_player();
-  void        	draw_gui();
+  void        	drawBackground();
+  void        	drawTiles();
+  void		drawRessources(int x, int y);
+  void        	drawPlayer(int x, int y);
+  void        	drawGui();
 
 private:
   sfml();

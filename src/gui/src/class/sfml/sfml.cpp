@@ -1,6 +1,6 @@
 #include "sfml.hpp"
 
-sfml::sfml(game::data &edata) : run(false), data(edata)
+sfml::sfml(game::data &edata) : data(edata), run(false)
 {
     double	maxX = edata.map.size_x - (WIDTH / 64);
     double	maxY = edata.map.size_y - (HEIGHT / 64);
@@ -34,14 +34,4 @@ void	sfml::close()
 gui::position	&sfml::getPos()
 {
   return (this->pos);
-}
-
-const sf::Image		&sfml::getImg(imtype image)
-{
-  return (this->img.at(image));
-}
-
-sf::Sprite		&sfml::getSpr(sprtype sprit)
-{
-  return (this->sprite.at(sprit));
 }
