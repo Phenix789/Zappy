@@ -1,3 +1,4 @@
+#include <iostream>
 #include <list>
 #include "sfml.hpp"
 
@@ -52,17 +53,17 @@ static  sfml::sprtype     convertOrientToSpr(game::orientation type)
   }
 }
 
+
 void    sfml::draw_map()
 {
-  if (this->data.needRedraw())
-    {
       this->App.Clear();
       this->drawBackground();
       this->drawTiles();
       this->drawGui();
-      this->data.needRedraw(false);
-    }
   this->App.Display();
+#ifdef SHOW_FPS
+  std::cout << 1.f / App.GetFrameTime() << std::endl;
+#endif
 }
 
 
@@ -75,7 +76,7 @@ void    sfml::drawGui() { }
 
 void    sfml::drawTiles()
 {
-  sf::Sprite	&grass(getSprite(SP_GRASS));
+  sf::Sprite	& grass(getSprite(SP_GRASS));
   int	posx = this->pos.getX();
   int	posy = this->pos.getY();
 
@@ -87,7 +88,6 @@ void    sfml::drawTiles()
 	drawRessources(x, y);
 	drawPlayer(x, y);
       }
-
 }
 
 void	sfml::drawRessources(int x, int y)
@@ -105,8 +105,6 @@ void	sfml::drawRessources(int x, int y)
       i = (sprtype)((int)(i) + 1); // On peut faire pire, je suis sur
     }
 }
-
-#include <stdio.h>
 
 void    sfml::drawPlayer(int x, int y)
 {

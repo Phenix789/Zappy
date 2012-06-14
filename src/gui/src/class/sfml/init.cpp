@@ -11,8 +11,7 @@ bool	sfml::init()
   this->LoadImage();
   this->LoadSprite();
   this->App.Create(sf::VideoMode(WIDTH, HEIGHT, 32), "Zappy - GUI");
-  this->App.SetFramerateLimit(LIMFPS);
-  this->App.UseVerticalSync(true);
+  this->App.SetFramerateLimit(60);//LIMFPS);
   this->run = true;
   return (true);
 }
