@@ -17,22 +17,18 @@ inline void	sfml::process_keyboard(sf::Event &event)
 
     case sf::Key::Up:
       getPos().addY(-0.5);
-      this->data.needRedraw(true);
       break;
 
     case sf::Key::Down:
       getPos().addY(0.5);
-      this->data.needRedraw(true);
       break;
 
     case sf::Key::Left:
       getPos().addX(-0.5);
-      this->data.needRedraw(true);
       break;
 
     case sf::Key::Right:
       getPos().addX(0.5);
-      this->data.needRedraw(true);
       break;
 
     default:
@@ -53,7 +49,6 @@ void    sfml::process_event()
 	  break;
 
 	case sf::Event::Resized:
-	  this->data.needRedraw(true);
 	  return;
 
 	case sf::Event::Closed:

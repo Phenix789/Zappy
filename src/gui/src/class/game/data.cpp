@@ -3,7 +3,7 @@
 
 namespace game
 {
-  data::data() : connection(false), upped(true)
+  data::data() : connection(false)
   { }
 
   data::~data()
@@ -34,15 +34,5 @@ namespace game
   bool	data::operator!()
   {
     return (this->connection);
-  }
-  
-  bool	data::needRedraw()
-  {
-    return (this->upped);
-  }
-  
-  void	data::needRedraw(bool need)
-  {
-    this->upped = need; 
   }
 }

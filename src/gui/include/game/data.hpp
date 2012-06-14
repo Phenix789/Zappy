@@ -17,7 +17,6 @@ namespace game
 
   private:
     bool                        connection;
-    bool                        upped;
 
   public:
     void        closeConnection();
@@ -25,8 +24,6 @@ namespace game
     void        putInWaitList(const std::string &str);
     bool        msgInWaitList();
     bool        operator!();
-    bool        needRedraw();
-    void        needRedraw(bool need);
 
   private:
     data(const data &other);
