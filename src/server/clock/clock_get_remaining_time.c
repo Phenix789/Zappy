@@ -5,7 +5,7 @@
 ** Login   <duval_q@epitech.net>
 ** 
 ** Started on  Wed May 30 20:15:11 2012 quentin duval
-** Last update Sat Jun  2 10:22:36 2012 quentin duval
+** Last update Thu Jun 14 13:51:46 2012 quentin duval
 */
 
 #include	"clock.h"

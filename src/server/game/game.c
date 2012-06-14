@@ -100,4 +100,5 @@ void game_destroy()
   list_free(&g_game->teams);
   free(g_game->world.tiles);
   free(g_game);
+  g_game = NULL;
 }

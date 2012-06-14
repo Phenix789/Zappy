@@ -62,5 +62,6 @@ bool			network_destroy()
   free(g_network->destroy);
   free(g_network->read);
   free(g_network);
+  g_network = NULL;
   return (true);
 }

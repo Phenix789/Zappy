@@ -28,6 +28,7 @@ void client_manager_destroy()
   list_free(&g_client_manager->commands);
   network_destroy();
   free(g_client_manager);
+  g_client_manager = NULL;
 }
 
 int client_manager_count()

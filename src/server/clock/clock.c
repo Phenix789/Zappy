@@ -40,6 +40,7 @@ bool	clock_init()
 void	clock_destroy()
 {
   free(g_clock);
+  g_clock = NULL;
 }
 
 t_clock	*get_clock()
