@@ -5,7 +5,7 @@
 ** Login   <duval_q@epitech.net>
 **
 ** Started on  Thu May 31 16:30:58 2012 quentin duval
-** Last update Fri Jun  1 20:57:33 2012 quentin duval
+** Last update Thu Jun 14 21:01:39 2012 quentin duval
 */
 
 #include "kernel.h"
@@ -84,7 +84,7 @@ int kernel_wakeup()
     {
       end = wakeup->begin;
       clock_move_date(&end, wakeup->time);
-      if (clock_compare(time, &end) > 0)
+      if (clock_compare(time, &end) >= 0)
 	{
 	  list_pop_begin(&g_kernel->callbacks);
 	  logger_debug("[KERNEL] Wakeup call '%s' callback", debug_get_callback_name(wakeup->callback));

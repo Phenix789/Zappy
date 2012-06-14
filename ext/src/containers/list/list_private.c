@@ -16,7 +16,7 @@ void _list_add_node(t_list *list, t_list_node *current, void *data)
 
   if (!current)
     list_add_begin(list, data);
-  if (current->next == NULL)
+  else if (current->next == NULL)
     list_add_end(list, data);
   else
     {

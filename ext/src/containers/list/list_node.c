@@ -5,7 +5,7 @@
 ** Login   <ramsey_c@epitech.net>
 **
 ** Started on  Mon Feb 27 10:00:00 2011 claude ramseyer
-** Last update Mon Feb 27 10:00:01 2011 claude ramseyer
+** Last update Thu Jun 14 20:15:58 2012 quentin duval
 */
 
 #include "list.h"
@@ -40,6 +40,9 @@ t_list_node *list_create_node(void *data)
 
 void list_pool_node(t_list_node *node)
 {
+  node->data = NULL;
+  node->next = NULL;
+  node->prev = NULL;
 #ifdef __LIST_POOL_NODE
   if (g_node_pool->size < LIST_POOL_SIZE)
     {

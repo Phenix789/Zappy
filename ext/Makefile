@@ -70,6 +70,15 @@ ASRC += $(addprefix $(LOGGER_DIR)/, $(LOGGER_SRC))
 SRC = $(addprefix $(SRC_DIR)/, $(ASRC))
 OBJ = $(addprefix $(OBJ_DIR)/, $(ASRC:.c=.o))
 
+TEST_BIN = test.bin
+TEST_DIR = test
+ATEST_SRC = \
+	test.c \
+	test_list.c
+
+TEST_SRC = $(addprefix $(TEST_DIR)/, $(ATEST_SRC))
+TEST_OBJ = $(addprefix $(OBJ_DIR)/, $(ATEST_SRC:.c=.o))
+
 all: $(DYNAMIC_LIB) $(STATIC_LIB) install
 
 $(DYNAMIC_LIB):	$(OBJ)
@@ -90,6 +99,7 @@ fclean:	clean
 	$(RM) $(LIB_DIR)/$(DYNAMIC_LIB)
 	$(RM) $(LIB_DIR)/$(STATIC_LIB)
 	$(RM) $(OBJ_DIR)
+	$(RM) $(TEST_BIN)
 
 install:
 	@mkdir -p $(INSTALL_DIR)
@@ -102,4 +112,12 @@ uninstall:
 	$(RM) $(INSTALL_DIR)/$(STATIC_LIB)
 	$(RM) $(addprefix $(HEADER_DIR)/, $(HEADERS))
 
-re: fclean all
+$(TEST_BIN): $(OBJ) $(TEST_OBJ)
+	echo $(TEST_OBJ)
+	$(CC) -o $(TEST_BIN) $(OBJ) $(TEST_OBJ)
+
+$(OBJ_DIR)/%.o: $(TEST_DIR)/%.c
+	@mkdir -p $(@D)
+	$(CC) -o $@ -c $< $(CFLAGS)
+
+re: fclean all test

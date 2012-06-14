@@ -30,8 +30,8 @@ void client_destroy(t_client *client)
     game_add_free_player(client->player);
   if (client->socket)
     {
-      network_del_socket(client->socket);
       socket_close(client->socket);
+      network_del_socket(client->socket);
     }
   free(client);
 }
