@@ -15,11 +15,19 @@
 
 extern t_kernel *g_kernel;
 
+void kernel_wakeup_dump(t_kernel_callback *callback)
+{
+  logger_verbose("[DUMP] Callback at %u (%i) from client %i call '%s'",
+		 callback->begin.tv_sec, callback->time,
+		 CLP_ID((t_client *) callback->param),
+		 debug_get_callback_name(callback->callback));
+}
+
 bool kernel_register_wakeup(unsigned int time, kn_wakeup_cb callback, void* param)
 {
   t_kernel_callback *wakeup;
 
-  logger_debug("[KERNEL] Register wakeup for %i time, %i in standby", time, list_size(&g_kernel->callbacks));
+  logger_debug("[KERNEL] Register wakeup '%s' in %i time, %i in standby", debug_get_callback_name(callback), time, list_size(&g_kernel->callbacks));
   if (!(wakeup = malloc(sizeof(t_kernel_callback))))
     return false;
   clock_set_time_to_current(&wakeup->begin);
@@ -27,6 +35,8 @@ bool kernel_register_wakeup(unsigned int time, kn_wakeup_cb callback, void* para
   wakeup->callback = callback;
   wakeup->param = param;
   list_add_to(&g_kernel->callbacks, (fcmp) &kernel_wakeup_insert, wakeup);
+  logger_verbose("[DUMP] %i callback in standby", list_size(&g_kernel->callbacks));
+  list_foreach(&g_kernel->callbacks, (feach) &kernel_wakeup_dump);
   return true;
 }
 
@@ -57,8 +67,7 @@ int kernel_wakeup_insert(t_kernel_callback *first, t_kernel_callback *second)
   clock_move_date(&first_end, first->time);
   second_end = second->begin;
   clock_move_date(&second_end, second->time);
-  logger_debug("[KERNEL] Insert %u : %u", first_end.tv_sec, second_end.tv_sec);
-  return clock_compare(&first_end, &second_end);
+  return clock_compare(&first_end, &second_end) * -1;
 }
 
 int kernel_wakeup()
@@ -71,7 +80,6 @@ int kernel_wakeup()
   count = 0;
   wakeup = list_get_begin(&g_kernel->callbacks);
   time = clock_get_time();
-  logger_debug("[KERNEL] Start wakeup");
   while (wakeup)
     {
       end = wakeup->begin;
@@ -88,6 +96,5 @@ int kernel_wakeup()
 	return count;
       wakeup = list_get_begin(&g_kernel->callbacks);
     }
-  logger_debug("[KERNEL] End wakeup");
   return count;
 }
