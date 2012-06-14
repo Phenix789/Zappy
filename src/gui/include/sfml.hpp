@@ -36,6 +36,7 @@ public:
       SP_CHAR_RIGHT,
       SP_EGG,
       SP_GUI,
+      SP_INTRO,
       SP_LAST
     };
 

@@ -57,12 +57,17 @@ void	sfml::LoadSprite(void)
   Load_ASprite(SP_CHAR_UP, 	93, 49 * 3, 31 * 4, 49 * 4 - 3);
   sprite[SP_GUI].SetImage(getImage(SP_GUI));
   sprite[SP_GUI].SetPosition(WIDTH, 0);
+  sprite[SP_INTRO].SetImage(getImage(SP_INTRO));
+  sprite[SP_INTRO].Resize(WIDTH + GUI_WIDTH, HEIGHT);
 }
 
 const sf::Image	&sfml::getImage(sprtype type) const
 {
   switch (type)
   {
+    case SP_INTRO:
+      return (image[0]);
+    
     case SP_GRASS:
       return (image[5]);
       

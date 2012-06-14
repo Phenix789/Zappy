@@ -5,10 +5,9 @@
 void	sfml::intro()
 {
 #ifndef DEBUG_GRAPH
-  sf::Sprite		sprite(this->getImg(INTRO));
+  sf::Sprite		&var(getSprite(SP_INTRO));
 
-  sprite.Resize(WIDTH, HEIGHT);
-  this->App.Draw(sprite);
+   this->App.Draw(var);
   this->App.Display();
   this->wait(5000);
   this->App.Clear();

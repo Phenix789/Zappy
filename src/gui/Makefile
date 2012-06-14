@@ -5,7 +5,7 @@
 ## Login   <frizac_b@epitech.net>
 ##
 ## Started on  Mon Feb  6 14:18:30 2012 Alexandre Frizac
-## Last update Thu Jun 14 13:06:10 2012 Alexandre Frizac
+## Last update Thu Jun 14 15:24:10 2012 Alexandre Frizac
 ##
 
 NAME		= a.out
@@ -16,7 +16,7 @@ SRC_DIR		= src
 
 DEBUG_FLAGS	+= -ggdb3
 DEBUG_FLAGS	+= -DDEBUG
-DEBUG_FLAGS	+= -DDEBUG_GRAPH
+#DEBUG_FLAGS	+= -DDEBUG_GRAPH
 #DEBUG_FLAGS	+= -DSHOW_FPS
 
 CC		= g++

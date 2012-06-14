@@ -56,7 +56,6 @@ static  sfml::sprtype     convertOrientToSpr(game::orientation type)
 
 void    sfml::draw_map()
 {
-  this->App.Clear();
   this->drawBackground();
   this->drawTiles();
   this->drawGui();
@@ -69,12 +68,20 @@ void    sfml::draw_map()
 
 void    sfml::drawBackground()
 {
-
+  App.Clear();
 }
 
 void    sfml::drawGui()
 {
+  int     i = 0;
+  
   App.Draw(getSprite(SP_GUI));
+  while (i < 7)
+    {
+      getSprite(static_cast<sprtype>(i + SP_FOOD)).SetPosition(WIDTH + 16, 377 + i * 41);
+      App.Draw(getSprite(static_cast<sprtype>(i + SP_FOOD)));
+      i++;
+    }
 }
 
 void    sfml::drawTiles()
