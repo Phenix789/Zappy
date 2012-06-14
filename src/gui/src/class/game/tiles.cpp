@@ -1,5 +1,6 @@
 #include <iostream>
 #include "game.hpp"
+#include <interface/gui.hpp>
 
 game::tiles::tiles()
 {
@@ -9,10 +10,18 @@ game::tiles::tiles()
 
 void	game::tiles::set(ress type, int nb)
 {
-  if (type < NOURRITURE || type > THYSTAME)
+  if (type < FOOD || type > THYSTAME)
     std::cerr << "game::tiles::set : ressource inconnue (" << type << ")" << std::endl;
   else
-    {
-      this->ressources[type] = nb;
-    }
+    this->ressources[type] = nb;
+}
+
+int	game::tiles::get(ress type) const
+{
+  if (type < FOOD || type > THYSTAME)
+  {
+    std::cerr << "game::tiles::set : ressource inconnue (" << type << ")" << std::endl;
+    throw gui::except("game::tiles::get exception");
+  }
+  return (this->ressources[type]);
 }

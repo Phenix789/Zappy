@@ -26,7 +26,7 @@ static int logger_write(int level, char *message, va_list *varg)
       snprintf(buffer1, 1024, "{%s} %s", LG_GET_MSGLVL(level), message);
       vsnprintf(buffer2, 1024, buffer1, *varg);
       if (g_logger->verbose)
-	printf("%s\n", buffer2);
+	printf("\033[%sm%s\033[0m\n", LG_GET_COLOR(level), buffer2);
       return fprintf(g_logger->file, "%s\n", buffer2);
     }
   return -1;

@@ -19,6 +19,7 @@ obj
 *.log
 timestamp
 a.out
+valerr
 
 # Netbeans files
 nbproject
@@ -28,6 +29,7 @@ nbproject
 zappy_client
 zappy_gui
 zappy_server
+zappy-gfx-linux64
 
 #svn dir
 .svn

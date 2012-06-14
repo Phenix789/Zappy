@@ -5,7 +5,7 @@
 ** Login   <duval_q@epitech.net>
 **
 ** Started on  Wed May 30 21:54:04 2012 quentin duval
-** Last update Wed May 30 22:19:24 2012 damien vezant
+** Last update Tue Jun 12 16:23:58 2012 quentin duval
 */
 
 #ifndef __CLIENT_H__
@@ -37,8 +37,9 @@ struct s_command_callback
 
 struct s_client_manager
 {
-	t_list clients;
-	t_list commands;
+  t_list	clients;
+  t_list	commands;
+  t_socket	listen;
 };
 
 struct s_client
@@ -51,7 +52,7 @@ struct s_client
 #define CLP_ID(client) ((client)->player ? (client)->player->id : -1)
 
 /*client manager*/
-bool client_manager_init();
+bool client_manager_init(int port);
 void client_manager_destroy();
 int client_manager_count();
 void _client_manager_add(t_client *client);
@@ -84,7 +85,7 @@ bool client_player_search(t_client *client, char *team);
 void client_receive(t_socket *socket, t_client *client);
 int client_send(t_client *client, char *mask, ...);
 
-void client_consume_food(t_client *client);
+void client_consume_food(t_client *client, int error);
 void client_food_dead(t_client *client);
 
 #endif

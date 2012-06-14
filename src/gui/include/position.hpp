@@ -14,13 +14,14 @@ namespace gui
 
   private:
     double	pos[2];
-
+    double	limit[2];
+    
   public:
-    void	set(double x, double y);
+    void	set(double x, double y, double limx, double limy);
     void	addX(double value);
     void	addY(double value);
-    double	getX(void);
-    double	getY(void);
-    void	setToMiddle(int x, int y);
+    double	getX(void) const;
+    double	getY(void) const;
+    void	dump(void);
   };
 };

@@ -1,5 +1,5 @@
-#ifndef __NETWORK_HPP_
-#define __NETWORK_HPP_
+#ifndef __INTERFACE_NETWORK_HPP_
+#define __INTERFACE_NETWORK_HPP_
 
 /*
 ** Interface INetwork pour simplifier le bordel
@@ -58,4 +58,4 @@ namespace network
 }
 extern "C" INetwork       *network_create();
 
-#endif /* __NETWORK_HPP_ */
+#endif /* __INTERFACE_NETWORK_HPP_ */

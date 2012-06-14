@@ -5,7 +5,7 @@
 ** Login   <duval_q@epitech.net>
 **
 ** Started on  Thu May 31 16:27:37 2012 quentin duval
-** Last update Fri Jun  1 23:50:55 2012 quentin duval
+** Last update Tue Jun 12 16:35:12 2012 quentin duval
 */
 
 #include "kernel.h"
@@ -20,7 +20,6 @@ void kernel_init()
   if ((g_kernel = malloc(sizeof(t_kernel))) == NULL)
     return;
   list_init(&g_kernel->callbacks);
-  socket_init(&g_kernel->listener);
   g_kernel->init = 0;
   g_kernel->run = false;
   kernel_signal();
@@ -35,7 +34,7 @@ bool kernel_init_with_argv(int argc, char **argv)
   int team;
 
   kernel_init();
-  if (kernel_client_init(&g_kernel->listener, kopti(argc, argv, "-p", 3945)) &&
+  if (kernel_client_init(kopti(argc, argv, "-p", 3945)) &&
       kernel_game_init(kopti(argc, argv, "-x", 10),
 		       kopti(argc, argv, "-y", 10),
 		       kopti(argc, argv, "-c", 10)) &&
@@ -56,12 +55,18 @@ bool kernel_init_with_argv(int argc, char **argv)
 	}
       logger_error("[KERNEL] No team has created");
     }
-  return false;
+  return (false);
 }
 
 void kernel_destroy()
 {
-  //@todo destroy multiple service
-  list_free(&g_kernel->callbacks);
   logger_message("[KERNEL] Kernel destroy");
+  if (!g_kernel)
+    return;
+  list_free(&g_kernel->callbacks);
+  client_manager_destroy();
+  game_destroy();
+  clock_destroy();
+  free(g_kernel);
+  logger_destroy();
 }

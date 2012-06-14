@@ -5,7 +5,7 @@
 ** Login   <duval_q@epitech.net>
 **
 ** Started on  Tue May 29 04:02:57 2012 quentin duval
-** Last update Fri Jun  1 23:02:37 2012 quentin duval
+** Last update Tue Jun 12 17:46:15 2012 quentin duval
 */
 
 #ifndef		NETWORK_H_
@@ -58,16 +58,16 @@ typedef struct s_network
 {
   t_list	*listened;
   t_list	*read;
+  t_list	*destroy;
   int		nfds;
   int		usec_timeout;
+  unsigned long	opened_socket;
+  unsigned long	closed_socket;
 } t_network;
 
 bool		network_create();
 bool		network_init();
 bool		network_destroy();
-
-t_network	*get_network();
-
 bool		network_add_socket(t_socket *socket,
 				   t_nt_read_cb callback,
 				   void *param);
@@ -77,18 +77,17 @@ bool		network_listen_to(t_socket *socket,
 				  int port,
 				  t_nt_create_cb new_entry);
 
-void		network_set_sock_error_cb();
-
 t_socket	*socket_create();
 t_socket	*socket_init(t_socket *socket);
 void		free_socket(t_socket *socket);
 void		socket_close(t_socket *socket);
+void            listener_close(t_listener *listener);
 
 bool		socket_connect(t_socket *socket, char *ip, int port);
 
 int		socket_read(t_socket *soket, void *buffer, int size);
 int		socket_write(t_socket *socket, void *buffer, int size);
 
-void		socket_set_pleindetrucs();
+void            network_close_socket_async(t_socket *socket);
 
 #endif	/*	NETWORK_H_	*/

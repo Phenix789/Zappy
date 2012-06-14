@@ -1,3 +1,4 @@
+#include <iostream>
 #include "position.hpp"
 
 namespace gui
@@ -6,39 +7,59 @@ namespace gui
   {
     this->pos[0] = 0;
     this->pos[1] = 0;
+    this->limit[0] = 0;
+    this->limit[1] = 0;
   }
 
   position::~position()
   { }
 
-  void position::set(double x, double y)
+  void position::set(double x, double y, double limx, double limy)
   {
     this->pos[0] = x;
     this->pos[1] = y;
+    this->limit[0] = limx;
+    this->limit[1] = limy;
   }
 
   void position::addX(double value)
   {
-    this->pos[0] += value;
+    double res;
+
+    res = pos[0] + value;
+    if (res < -1)
+      pos[0] = -1;
+    else if (res > limit[0])
+      pos[0] = limit[0];
+    else
+      pos[0] = res;
   }
 
   void position::addY(double value)
   {
-    this->pos[1] += value;
+    double res;
+
+    res = pos[1] + value;
+    if (res < -1)
+      pos[1] = -1;
+    else if (res > limit[1])
+      pos[1] = limit[1];
+    else
+      pos[1] = res;
   }
 
-  double position::getX(void)
+  double position::getX(void) const
   {
     return (this->pos[0]);
   }
 
-  double position::getY(void)
+  double position::getY(void) const
   {
     return (this->pos[1]);
   }
 
-  void position::setToMiddle(int x, int y)
+  void	position::dump(void)
   {
-    this->set(x/2, y/2);
+    std::cout << pos[0] << "/" << pos[1] <<std::endl;
   }
 };

@@ -2,6 +2,7 @@
 #define __SFML_HPP_
 
 #include <SFML/Graphics.hpp>
+#include <string>
 #include <vector>
 #include "interface/gui.hpp"
 #include "game.hpp"
@@ -9,6 +10,35 @@
 
 class sfml : public Igui
 {
+private:
+  enum config
+    {
+      GUI_HEIGHT        = 200,
+      WIDTH             = 640,
+      HEIGHT            = 640 + GUI_HEIGHT,
+      TILE_BY_WINDOWS	= 12,
+      LIMFPS		= 30
+    };
+
+public:
+  enum sprtype
+    {
+      SP_GRASS,
+      SP_FOOD,
+      SP_LINEMATE,
+      SP_DERAUMATRE,
+      SP_SIBUR,
+      SP_MENDIANE,
+      SP_PHIRAS,
+      SP_THYSTAME,
+      SP_CHAR_UP,
+      SP_CHAR_LEFT,
+      SP_CHAR_DOWN,
+      SP_CHAR_RIGHT,
+      SP_EGG,
+      SP_LAST
+    };
+
 public:
   sfml(game::data &data);
   ~sfml();
@@ -16,31 +46,38 @@ public:
 public:
   bool	init();
   void	intro();
-  bool	is_running() const;
+  bool	gameloop() const;
   void	process_event();
   void	draw_map();
-  void	wait(int millisecond, bool draw);
+  void	wait(int millisecond);
   void	end();
   void	exit();
 
 private:
-  bool				run;
-  std::vector<sf::Image>	img;
   sf::RenderWindow		App;
-  sf::Event			event;
   game::data			&data;
   gui::position			pos;
+  std::vector<sf::Image>	image;
+  std::vector<sf::Sprite>	sprite;
+  bool				run;
+  
+private:
+  gui::position		&getPos();
+  sf::Sprite		&getSprite(sprtype type);
+  const sf::Image 	&getImage(sprtype type) const;
+  bool			isInWindows(int x, int y) const;
+  void	      		LoadImage();
+  void			LoadSprite();
+  void			Load_ASprite(sprtype type, int a, int b, int c, int d);
+  void			close();
 
 private:
-  gui::position	&getPos();
-  void	      	load_img();
-  void	      	close();
-  void	      	clear();
-  void        	draw_background();
-  void        	draw_gui();
-  void        	draw_info();
-  void        	draw_case();
-  void        	draw_player();
+  inline void	process_keyboard(sf::Event &event);
+  void        	drawBackground();
+  void        	drawTiles();
+  void		drawRessources(int x, int y);
+  void        	drawPlayer(int x, int y);
+  void        	drawGui();
 
 private:
   sfml();

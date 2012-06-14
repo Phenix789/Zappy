@@ -1,5 +1,5 @@
-#ifndef __IGUI_HPP_
-#define __IGUI_HPP_
+#ifndef __INTERFACE_GUI_HPP_
+#define __INTERFACE_GUI_HPP_
 
 /*
 ** Interface Igui pour charger une bibliothèque graphique dynamiquement (si possible)
@@ -19,9 +19,9 @@ public:
   virtual bool  init() = 0;
   virtual void	intro() = 0;
   virtual void	process_event() = 0;
-  virtual bool	is_running() const = 0;
+  virtual bool	gameloop() const = 0;
   virtual void  draw_map() = 0;
-  virtual void  wait(int millisecond, bool draw) = 0;
+  virtual void  wait(int millisecond) = 0;
   virtual void	end() = 0;
   virtual void  exit() = 0;
 };
@@ -48,4 +48,4 @@ namespace gui
 
 extern "C" Igui	*gui_create(game::data &data);
 
-#endif /* __IGUI_HPP_ */
+#endif /* __INTERFACE_GUI_HPP_ */

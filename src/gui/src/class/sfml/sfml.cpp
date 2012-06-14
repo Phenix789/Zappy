@@ -1,21 +1,15 @@
-#include <iostream>
 #include "sfml.hpp"
 
-sfml::sfml(game::data &edata) : run(false), data(edata)
+sfml::sfml(game::data &edata) : data(edata), run(false)
 {
-  this->App.SetFramerateLimit(60);
+    double	maxX = edata.map.size_x - (WIDTH / 64);
+    double	maxY = edata.map.size_y - (HEIGHT / 64);
+  
+    this->pos.set(-1, -1, (maxX < -1 ? -1 : maxX + 1), (maxY < -1 ? -1 : maxY + 1));
 }
 
 sfml::~sfml()
 {
-}
-
-bool	sfml::init()
-{
-  this->load_img();
-  this->App.Create(sf::VideoMode(800, 800, 32), "Zappy - GUI");
-  this->run = true;
-  return (true);
 }
 
 void	sfml::exit()
@@ -24,23 +18,9 @@ void	sfml::exit()
   this->run = false;
 }
 
-bool	sfml::is_running() const
+bool	sfml::gameloop() const
 {
-  return (this->run && this->App.IsOpened());
-}
-
-void	sfml::intro()
-{
-  this->clear();
-  this->App.Display();
-  std::cout << "Beginning graph loop" << std::endl;
-}
-
-void	sfml::end()
-{
-  this->clear();
-  this->App.Display();
-  std::cout << "Ending graph loop" << std::endl;
+  return (this->run & !(this->data));
 }
 
 void	sfml::close()
@@ -48,6 +28,7 @@ void	sfml::close()
   if (this->App.IsOpened())
     this->App.Close();
   this->run = false;
+  throw gui::except("Fermeture par l'utilisateur");
 }
 
 gui::position	&sfml::getPos()

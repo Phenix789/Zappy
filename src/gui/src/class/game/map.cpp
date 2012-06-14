@@ -9,21 +9,21 @@ namespace game
   map::~map()
   { }
 
-  void  map::set_ress(int x, int y, ress type, int nb)
+  void  map::setRess(int x, int y, ress type, int nb)
   {
     unsigned int	pos;
 
-    pos = x * this->size_x * y;
+    pos = x + this->size_x * y;
     if (pos > this->_tiles.size())
       {
-	std::cerr << "game::map::set_ress : Taille invalide (" << pos << ") - " ;
+	std::cerr << "game::map::setRess : Taille invalide (" << pos << ") - " ;
 	std::cerr << x << "/" << y << std::endl;
       }
     else
       this->_tiles.at(pos).set(type, nb);
   }
 
-  void  map::add_player(int x, int y, int num_pl, orientation orient)
+  void  map::addPlayer(int x, int y, int num_pl, orientation orient)
   {
     std::list<game::player>::iterator   it;
 
@@ -32,27 +32,28 @@ namespace game
       {
 	if ((it)->number == num_pl)
 	  {
-	    std::cerr << "game::map::add_player : Player " << num_pl << " existe déja" << std::endl;
+	    std::cerr << "game::map::addPlayer : Player " << num_pl << " existe déja" << std::endl;
 	    return ;
 	  }
+	  it++;
       }
     this->_players.push_back(player(x, y, num_pl, orient));
   }
 
-  void  map::rm_player(int num_pl)
+  void  map::rmPlayer(int num_pl)
   {
     std::list<game::player>::iterator   it;
 
     it = this->_players.begin();
     while (it != this->_players.end())
       {
-	if ((it)->number == num_pl)
+	if (it->number == num_pl)
 	  {
 	    this->_players.erase(it);
 	    return ;
 	  }
       }
-    std::cerr << "game::map::rm_player : Player " << num_pl << " existe déja" << std::endl;
+    std::cerr << "game::map::rmPlayer : Player " << num_pl << " existe déja" << std::endl;
   }
 
   void  map::setDim(int x, int y)
@@ -61,9 +62,10 @@ namespace game
     this->size_y = y;
     this->_tiles.resize(x * y);
   }
-  const std::vector<tiles>        map::getTile() const
-  {
-    return (this->_tiles);
+  
+  const tiles       &map::getTile(int x, int y) const
+  {    
+    return (this->_tiles.at(x + y * size_x));
   }
 
   const std::list<game::player> map::getPlayer() const

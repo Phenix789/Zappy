@@ -9,6 +9,7 @@
 */
 
 #include "client.h"
+#include "kernel.h"
 
 void		client_connect(t_socket *new_sock)
 {
@@ -22,11 +23,8 @@ void		client_connect(t_socket *new_sock)
 
 void client_unconnect(t_client *client)
 {
-  //@todo deconnection d'un client
-  logger_error("[CLIENT] Client unconnect not implemented");
+  kernel_unregister_wakeup(client);
   network_close_socket_async(client->socket);
   client->socket = NULL;
-  if (client->player)
-    game_add_free_player(client->player);
   client_destroy(client);
 }

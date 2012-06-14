@@ -15,4 +15,5 @@ void		player_connect_nbr_cb(t_client *client, char *command)
   (void)command;
   logger_verbose("[GAME] command connect_nbr treated");
   client_send(client, REP_CONNECT_NBR, client->player->team->free_slots);
+  client_action_finish(client);
 }

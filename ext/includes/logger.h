@@ -28,6 +28,7 @@
 #define LG_VERBOSE 1
 
 #define LG_GET_MSGLVL(lvl) (lvl & LG_MESSAGE ? "message" : (lvl  & LG_WARNING ? "warning" : (lvl & LG_ERROR ? "error" : "debug")))
+#define LG_GET_COLOR(lvl) (lvl & LG_MESSAGE ? "32" : (lvl  & LG_WARNING ? "33" : (lvl & LG_ERROR ? "1;31" : "36")))
 
 typedef struct s_logger
 {

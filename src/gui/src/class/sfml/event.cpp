@@ -1,45 +1,62 @@
 #include "sfml.hpp"
 
+inline void	sfml::process_keyboard(sf::Event &event)
+{
+  switch (event.Key.Code)
+    {
+    case sf::Key::Escape:
+      this->close();
+      return;
+
+    case sf::Key::F1:
+      {
+	sf::Image Screen = App.Capture();
+	Screen.SaveToFile("screenshot.jpg");
+	break;
+      }
+
+    case sf::Key::Up:
+      getPos().addY(-0.5);
+      break;
+
+    case sf::Key::Down:
+      getPos().addY(0.5);
+      break;
+
+    case sf::Key::Left:
+      getPos().addX(-0.5);
+      break;
+
+    case sf::Key::Right:
+      getPos().addX(0.5);
+      break;
+
+    default:
+      break;
+    }
+}
+
 void    sfml::process_event()
 {
-  while (App.GetEvent(this->event))
+  static sf::Event		event;
+
+  while (App.GetEvent(event))
     {
-      if (this->event.Type == sf::Event::Closed)
-	this->close();
-      else if (this->event.Type == sf::Event::KeyPressed)
+      switch (event.Type)
 	{
-          switch (this->event.Key.Code)
-            {
-            case sf::Key::Escape:
-              this->run = false;
-              return;
+	case sf::Event::KeyPressed:
+	  this->process_keyboard(event);
+	  break;
 
-            case sf::Key::F1:
-	      {
-		sf::Image Screen = App.Capture();
-		Screen.SaveToFile("screenshot.jpg");
-		break;
-	      }
+	case sf::Event::Resized:
+	  return;
 
-	    case sf::Key::Up:
-	      getPos().addY(0.10);
-	      break;
-	      
-	    case sf::Key::Down:
-	      getPos().addY(-0.10);
-	      break;
-	      
-	    case sf::Key::Left:
-	      getPos().addX(-0.10);
-	      break;
-	      
-	    case sf::Key::Right:
-	      getPos().addX(0.10);
-	      break;
-	      
-            default:
-              break;
-            }
+	case sf::Event::Closed:
+	  this->close();
+	  return;
+
+	default:
+	  return;
 	}
     }
 }

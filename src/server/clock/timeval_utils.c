@@ -5,7 +5,7 @@
 ** Login   <duval_q@epitech.net>
 ** 
 ** Started on  Wed May 30 19:40:21 2012 quentin duval
-** Last update Fri Jun  1 21:06:07 2012 quentin duval
+** Last update Wed Jun 13 20:28:35 2012 quentin duval
 */
 
 #include	<sys/time.h>
@@ -41,6 +41,8 @@ void    timeval_diff(struct timeval *res,
                      struct timeval *date2)
 {
   logger_verbose("[CLOCK] timeval diff");
+  res->tv_sec = 0;
+  res->tv_usec = 0;
   if (date1->tv_sec >= date2->tv_sec)
     {
       logger_verbose("[CLOCK] compute sec");

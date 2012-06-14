@@ -1,12 +1,13 @@
 #include "sfml.hpp"
 
-void	sfml::wait(int tps, bool draw)
+void	sfml::wait(int tps)
 {
-  while (tps > 0 && is_running())
+  sf::Clock	clock;
+  double	time = tps / 1000;
+  
+  while ((clock.GetElapsedTime() < time) && this->gameloop())
     {
       this->process_event();
-      if (draw)
-	this->draw_map();
-    
+      this->App.Display();
     }
 }
