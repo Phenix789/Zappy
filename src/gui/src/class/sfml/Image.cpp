@@ -8,6 +8,7 @@ static const char	*img_name[] =
     "ressources/stones.png",
     "ressources/egg.bmp",
     "ressources/tiles.png",
+    "ressources/gui.png",
     NULL
   };
 
@@ -16,7 +17,7 @@ void	sfml::LoadImage(void)
   int	i = 0;
   bool	error = false;
 
-  this->image.resize(6);
+  this->image.resize(7);
   while (img_name[i] != NULL)
     {      
       if (this->image[i].LoadFromFile(img_name[i]) == false)
@@ -31,11 +32,10 @@ void	sfml::LoadImage(void)
     }
 }
 
-// Gauche, Haut, Droite, Bas
- void	sfml::Load_ASprite(sprtype type, int a, int b, int c, int d)
+void	sfml::Load_ASprite(sprtype type, int left, int up, int right, int down)
  {
    this->sprite[type].SetImage(getImage(type));
-   this->sprite[type].SetSubRect(sf::Rect<int>(a, b, c, d));
+   this->sprite[type].SetSubRect(sf::Rect<int>(left, up, right, down));
  }
 
 // Sprite Character : 31 pixels de large && 49 de haut
@@ -55,6 +55,8 @@ void	sfml::LoadSprite(void)
   Load_ASprite(SP_CHAR_LEFT, 	93, 49 * 1, 31 * 4, 49 * 2);
   Load_ASprite(SP_CHAR_RIGHT, 	93 + 1, 49 * 2, 31 * 4, 49 * 3);
   Load_ASprite(SP_CHAR_UP, 	93, 49 * 3, 31 * 4, 49 * 4 - 3);
+  sprite[SP_GUI].SetImage(getImage(SP_GUI));
+  sprite[SP_GUI].SetPosition(WIDTH, 0);
 }
 
 const sf::Image	&sfml::getImage(sprtype type) const
@@ -81,7 +83,10 @@ const sf::Image	&sfml::getImage(sprtype type) const
       
     case SP_EGG:
       return (image[4]);
-    
+
+    case SP_GUI:
+      return (image[6]);
+      
     default:
       throw gui::except("sfml::getImage - Bad number");
   } 

@@ -13,11 +13,10 @@ class sfml : public Igui
 private:
   enum config
     {
-      GUI_HEIGHT        = 200,
-      WIDTH             = 640,
-      HEIGHT            = 640 + GUI_HEIGHT,
+      GUI_WIDTH         = 200,
+      WIDTH             = 800,
+      HEIGHT            = 800,
       TILE_BY_WINDOWS	= 12,
-      LIMFPS		= 30
     };
 
 public:
@@ -36,6 +35,7 @@ public:
       SP_CHAR_DOWN,
       SP_CHAR_RIGHT,
       SP_EGG,
+      SP_GUI,
       SP_LAST
     };
 
@@ -60,7 +60,7 @@ private:
   std::vector<sf::Image>	image;
   std::vector<sf::Sprite>	sprite;
   bool				run;
-  
+
 private:
   gui::position		&getPos();
   sf::Sprite		&getSprite(sprtype type);
@@ -68,7 +68,7 @@ private:
   bool			isInWindows(int x, int y) const;
   void	      		LoadImage();
   void			LoadSprite();
-  void			Load_ASprite(sprtype type, int a, int b, int c, int d);
+  void			Load_ASprite(sprtype type, int left, int up, int right, int down);
   void			close();
 
 private:

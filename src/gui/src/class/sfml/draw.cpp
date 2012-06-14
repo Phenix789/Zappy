@@ -56,10 +56,10 @@ static  sfml::sprtype     convertOrientToSpr(game::orientation type)
 
 void    sfml::draw_map()
 {
-      this->App.Clear();
-      this->drawBackground();
-      this->drawTiles();
-      this->drawGui();
+  this->App.Clear();
+  this->drawBackground();
+  this->drawTiles();
+  this->drawGui();
   this->App.Display();
 #ifdef SHOW_FPS
   std::cout << 1.f / App.GetFrameTime() << std::endl;
@@ -72,16 +72,19 @@ void    sfml::drawBackground()
 
 }
 
-void    sfml::drawGui() { }
+void    sfml::drawGui()
+{
+  App.Draw(getSprite(SP_GUI));
+}
 
 void    sfml::drawTiles()
 {
-  sf::Sprite	& grass(getSprite(SP_GRASS));
-  int	posx = this->pos.getX();
-  int	posy = this->pos.getY();
+  sf::Sprite	&grass(getSprite(SP_GRASS));
+  int	posx = (this->pos.getX() > 0 ? this->pos.getX() : 0);
+  int	posy = (this->pos.getY() > 0 ? this->pos.getY() : 0);
 
-  for (int y = (posy > 0 ? posy : 0); y < 1 + posy + (HEIGHT / 64) && y < this->data.map.size_y; y++)
-    for (int x = (posx > 0 ? posx : 0); x < 1 + posx + (WIDTH / 64) && x < this->data.map.size_x; x++)
+  for (int y = posy; y < 1 + posy + (HEIGHT / 64) && y < this->data.map.size_y; y++)
+    for (int x = posx; x < 1 + posx + (WIDTH / 64) && x < this->data.map.size_x; x++)
       {
 	grass.SetPosition((x - pos.getX()) * 64 , (y - pos.getY()) * 64);
 	App.Draw(grass);
@@ -120,6 +123,6 @@ void    sfml::drawPlayer(int x, int y)
 	  chara.SetPosition((x - pos.getX()) * 64 + 16, (y - pos.getY()) * 64 + 8);
 	  App.Draw(chara);
 	}
-    it++;
+      it++;
     }
 }
