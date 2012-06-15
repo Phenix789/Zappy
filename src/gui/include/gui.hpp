@@ -1,5 +1,5 @@
-#ifndef __INTERFACE_GUI_HPP_
-#define __INTERFACE_GUI_HPP_
+#ifndef _GUI_HPP_
+#define _GUI_HPP_
 
 /*
 ** Interface Igui pour charger une bibliothèque graphique dynamiquement (si possible)
@@ -8,23 +8,8 @@
 ** le booleen permet de ne PAS dessiner l'interface
 */
 #include <exception>
-#include "interface/network.hpp"
+#include "interface/Inetwork.hpp"
 #include "game.hpp"
-
-class Igui
-{
-public:
-  virtual ~Igui() {};
-
-  virtual bool  init() = 0;
-  virtual void	intro() = 0;
-  virtual void	process_event() = 0;
-  virtual bool	gameloop() const = 0;
-  virtual void  draw_map() = 0;
-  virtual void  wait(int millisecond) = 0;
-  virtual void	end() = 0;
-  virtual void  exit() = 0;
-};
 
 namespace gui
 {
@@ -42,10 +27,9 @@ namespace gui
     except();
   };
 
-  int			run(game::data &data, INetwork &sock);
-  int			main(const std::string addr, const std::string port);
+  int   run(game::data &data, INetwork &sock);
+  int   main(const std::string addr, const std::string port);
 };
 
-extern "C" Igui	*gui_create(game::data &data);
+#endif /* _GUI_HPP_ */
 
-#endif /* __INTERFACE_GUI_HPP_ */

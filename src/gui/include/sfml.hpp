@@ -4,11 +4,11 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 #include <vector>
-#include "interface/gui.hpp"
 #include "game.hpp"
 #include "position.hpp"
+#include "gui.hpp"
 
-class sfml : public Igui
+class sfml
 {
 private:
   enum config

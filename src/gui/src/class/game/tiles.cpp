@@ -1,6 +1,6 @@
 #include <iostream>
 #include "game.hpp"
-#include <interface/gui.hpp>
+#include "gui.hpp"
 
 game::tiles::tiles()
 {

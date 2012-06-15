@@ -1,4 +1,5 @@
-
+#ifndef __GUI_HPP_
+#define __GUI_HPP_
 /*
 ** Class pour la gui, afin de faciliter la gestion de la position de la gui
 ** (pour afficher des maps plus grandes que la fenêtre)
@@ -15,7 +16,7 @@ namespace gui
   private:
     double	pos[2];
     double	limit[2];
-    
+
   public:
     void	set(double x, double y, double limx, double limy);
     void	addX(double value);
@@ -25,3 +26,5 @@ namespace gui
     void	dump(void);
   };
 };
+
+#endif /* __GUI_HPP_ */

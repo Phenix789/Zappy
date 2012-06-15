@@ -7,9 +7,12 @@
 ** Ne devrait pas être chargé dynamiquement (normalement)
 */
 
+#include <SFML/Network.hpp>
 #include <exception>
 #include <string>
 #include <list>
+#include "game.hpp"
+#include "parser.hpp"
 
 class INetwork
 {
@@ -33,7 +36,8 @@ public:
 
   virtual void	setIp(const std::string&host) = 0;
   virtual void	setPort(const std::string &port) = 0;
-
+  virtual void  setBlocking(bool value) = 0;
+  
   virtual bool	isReady(type which) = 0;
   virtual bool	isBlocking(void) = 0;
   virtual bool	isValid(void) = 0;
@@ -42,6 +46,10 @@ public:
 
 namespace network
 {
+  void                  init(INetwork &sock, game::data &data, parser &parse);
+  void                  iteration(INetwork &sock, game::data &data, parser &parse);
+  extern "C" INetwork   *create();
+  
   class except : public std::exception
   {
   public:
@@ -55,7 +63,6 @@ namespace network
   private:
     except();
   };
-}
-extern "C" INetwork       *network_create();
+};
 
 #endif /* __INTERFACE_NETWORK_HPP_ */

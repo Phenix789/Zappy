@@ -3,7 +3,7 @@
 
 #include <SFML/Network.hpp>
 #include <exception>
-#include "interface/network.hpp"
+#include "interface/Inetwork.hpp"
 
 class sfNetwork : public INetwork
 {
@@ -17,12 +17,12 @@ public:
   void  receive(std::string &buffer);
 
   bool	connect();
-  bool  connect(const std::string &host, const std::string &port);
   bool  disconnect();
 
   void  setIp(const std::string&host);
   void  setPort(const std::string &port);
-
+  void  setBlocking(bool value);
+  
   bool	isReady(type which);
   bool  isBlocking(void);
   bool  isValid(void);
@@ -32,9 +32,6 @@ private:
   sf::IPAddress		addr;
   unsigned short 	port;
   sf::SocketTCP		sock;
-
-private:
-  bool	sendPacket(sf::Packet &packet);
 
 private:
   sfNetwork(const sfNetwork &other);

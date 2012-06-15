@@ -1,7 +1,6 @@
-#include "interface/network.hpp"
-#include "game.hpp"
+#ifndef __NETWORK_HPP_
+#define __NETWORK_HPP_
 
-namespace network
-{
-  void  iteration(game::data &data, INetwork &sock);
-};
+#include "interface/Inetwork.hpp"
+
+#endif /* __NETWORK_HPP_ */

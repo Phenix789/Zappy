@@ -53,7 +53,9 @@ public:
 public:
   void	parse(std::string &buffer);
   bool	interpret(game::data &data);
-
+  const std::string &getFirstString() const;
+  void  delFirstString();
+  
 private:
   std::list<std::string>		list;
   std::map<std::string, funcpar>	func;

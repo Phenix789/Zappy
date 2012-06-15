@@ -1,5 +1,4 @@
 #include "network/sfml_network.hpp"
-#include "utils.hpp"
 
 sfNetwork::sfNetwork() : addr("localhost"), port(4242)
 {
@@ -13,43 +12,43 @@ sfNetwork::~sfNetwork()
 
 void  sfNetwork::send(const std::string &msg)
 {
-  sf::Packet	packet;
-
-  packet.Append(msg.c_str(), msg.size());
-  this->sendPacket(packet);
+  if (sock.Send(msg.c_str(), msg.size()) != sf::Socket::Done)
+   throw network::except("sfNetwork::send");
 }
 
 void  sfNetwork::send(const std::list<std::string> &list)
 {
-  sf::Packet	packet;
   std::list<std::string>::const_iterator	cit;
 
   cit = list.begin();
   while (cit != list.end())
     {
-      packet.Append(cit->c_str(), cit->size());
+      if (sock.Send(cit->c_str(), cit->size()) != sf::Socket::Done)
+        throw network::except("sfNetwork::send(list)");
       cit++;
     }
-  this->sendPacket(packet);
 }
 
 void  sfNetwork::receive(std::string &buffer)
 {
-  sf::Packet	packet;
-
+  char          tmp[513];
+  std::size_t   value = 512;
+  
   buffer.clear();
-  sock.Receive(packet);
-  packet >> buffer;
+  while (value == 512)
+    {
+      std::memset(tmp, '\0', 513);
+      if (sock.Receive(tmp, 512, value) != sf::Socket::Done)
+        throw network::except("sfNetwork::receive");
+      buffer += tmp;
+    }  
 }
 
 bool  sfNetwork::connect()
 {
-  return (sock.Connect(port, addr));
-}
-
-bool  sfNetwork::connect(const std::string &host, const std::string &_port)
-{
-  return (sock.Connect(utils::atos(_port), sf::IPAddress(host)));
+  if (sock.Connect(port, addr) == sf::Socket::Done)
+    return (true);
+  return (false);  
 }
 
 bool  sfNetwork::disconnect()
@@ -62,16 +61,18 @@ bool  sfNetwork::disconnect()
 void  sfNetwork::setIp(const std::string &host)
 {
   this->addr = host;
-  this->addr.IsValid();
+  if(this->addr.IsValid() == false)
+    std::cerr << "L'adresse '" << host << "' est invalide" << std::endl;
 }
+
 void  sfNetwork::setPort(const std::string &_port)
 {
-  this->port = utils::atos(_port);
+  this->port = static_cast<unsigned short>(atoi(_port.c_str()));
 }
 
 bool  sfNetwork::isReady(type __attribute__((unused))which)
 {
-  return (false);
+  return (true);
 }
 bool  sfNetwork::isBlocking(void)
 {
@@ -87,7 +88,7 @@ bool  sfNetwork::operator!()
   return (sock.IsValid());
 }
 
-bool	sfNetwork::sendPacket(sf::Packet &packet)
+void    sfNetwork::setBlocking(bool value) 
 {
-  return (sock.Send(packet));
+  sock.SetBlocking(value);
 }

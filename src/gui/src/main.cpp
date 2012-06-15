@@ -1,5 +1,5 @@
 #include <iostream>
-#include "interface/gui.hpp"
+#include "gui.hpp"
 
 int     main(int argc, char **argv)
 {

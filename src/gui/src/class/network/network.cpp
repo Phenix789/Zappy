@@ -1,4 +1,4 @@
-#include "interface/network.hpp"
+#include "interface/Inetwork.hpp"
 #include "network/sfml_network.hpp"
 
 namespace network
@@ -15,7 +15,7 @@ namespace network
   }
 };
 
-extern "C" INetwork	*network_create()
+extern "C" INetwork	*network::create()
 {
   return (new sfNetwork);
 }

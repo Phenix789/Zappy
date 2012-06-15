@@ -5,7 +5,7 @@
 ## Login   <frizac_b@epitech.net>
 ##
 ## Started on  Mon Feb  6 14:18:30 2012 Alexandre Frizac
-## Last update Thu Jun 14 15:24:10 2012 Alexandre Frizac
+## Last update Fri Jun 15 16:32:04 2012 Alexandre Frizac
 ##
 
 NAME		= a.out
@@ -15,14 +15,14 @@ OBJ_DIR		= obj
 SRC_DIR		= src
 
 DEBUG_FLAGS	+= -ggdb3
-DEBUG_FLAGS	+= -DDEBUG
-#DEBUG_FLAGS	+= -DDEBUG_GRAPH
+#DEBUG_FLAGS	+= -DDEBUG
+#DEBUG_FLAGS	+= -DDEBUG_NETWORK
+DEBUG_FLAGS	+= -DDEBUG_GRAPH
 #DEBUG_FLAGS	+= -DSHOW_FPS
 
 CC		= g++
 CXXFLAGS	+= -I include
 CXXFLAGS	+= -Wall -Wextra -Wshadow
-LDFLAGS		+= -O2
 LDFLAGS		+= -l sfml-system -l sfml-graphics -l sfml-window -l sfml-network
 LDFLAGS		+= -l boost_regex
 
@@ -36,6 +36,9 @@ SRC	= $(addprefix src/, \
                 class/sfml/sfml.cpp \
                 class/sfml/wait.cpp \
 		class/sfml/isInWindows.cpp \
+                gui.cpp\
+                main.cpp\
+                network.cpp \
 		parser_cmd.cpp\
 		class/game/data.cpp \
 		class/game/map.cpp \
@@ -46,11 +49,6 @@ SRC	= $(addprefix src/, \
 		class/network/sfml_network.cpp\
 		class/parser.cpp \
 		class/position/position.cpp \
-		debug_gui.cpp\
-		gui.cpp\
-		main.cpp\
-		network_iteration.cpp \
-		utils.cpp\
 		)
 OBJ	= $(addprefix $(OBJ_DIR)/, $(SRC:$(SRC_DIR)/%.cpp=%.o))
 

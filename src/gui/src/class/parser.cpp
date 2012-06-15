@@ -1,11 +1,35 @@
-#include <boost/regex.hpp>
 #include <iostream>
 #include <sstream>
+#include <string>
+#include <list>
 #include "parser.hpp"
 
 parser::parser()
 {
   this->func["msz"] = &pfunc::fpmsz;
+  this->func["bct"] = &pfunc::fpbct;
+  this->func["tna"] = &pfunc::fptna;
+  this->func["pnw"] = &pfunc::fppnw;
+  this->func["ppo"] = &pfunc::fpppo;
+  this->func["plv"] = &pfunc::fpplv;
+  this->func["pin"] = &pfunc::fppin;
+  this->func["pex"] = &pfunc::fppex;
+  this->func["pbc"] = &pfunc::fppbc;
+  this->func["pic"] = &pfunc::fppic;
+  this->func["pie"] = &pfunc::fppie;
+  this->func["pfk"] = &pfunc::fppfk;
+  this->func["pdr"] = &pfunc::fppdr;
+  this->func["pgt"] = &pfunc::fppgt;
+  this->func["pdi"] = &pfunc::fppdi;
+  this->func["enw"] = &pfunc::fpenw;
+  this->func["eht"] = &pfunc::fpeht;
+  this->func["ebo"] = &pfunc::fpebo;
+  this->func["edi"] = &pfunc::fpedi;
+  this->func["sgt"] = &pfunc::fpsgt;
+  this->func["seg"] = &pfunc::fpseg;
+  this->func["smg"] = &pfunc::fpsmg;
+  this->func["suc"] = &pfunc::fpsuc;
+  this->func["sbp"] = &pfunc::fpsbp;
 }
 
 parser::~parser()
@@ -30,18 +54,25 @@ void	parser::parse(std::string &str)
 
 bool    parser::interpret(game::data &data)
 {
-  boost::regex	msz("msz [0-9]* [0-9]*");
-  boost::cmatch	what;
-
-  if (this->list.front().compare("BIENVENUE") == 0)
-    {
-      data.allowConnection();
-      this->list.pop_front();
-    }
+  std::list<std::string>::iterator      it;
+  
   if (this->list.size() == 0)
     return (true);
-  std::cout << "\tparser::interpret : " << this->list.front() << std::endl;
-  if (boost::regex_match(this->list.front().c_str(), what, msz))
-    std::cout << "\t" << what[1] << std::endl;
+  for (it = list.begin(); it != list.end(); it++)
+  {
+    std::cout << "\tparser::interpret : " << this->list.front() << std::endl;
+    this->func[it->substr(0, 3)](data, *it);
+  }
+  list.clear();
   return (true);
+}
+
+const std::string &parser::getFirstString() const
+{
+  return (this->list.front());
+}
+
+void parser::delFirstString()
+{
+  this->list.pop_front();
 }
