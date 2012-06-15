@@ -5,7 +5,7 @@
 ## Login   <frizac_b@epitech.net>
 ##
 ## Started on  Mon Feb  6 14:18:30 2012 Alexandre Frizac
-## Last update Fri Jun 15 16:32:04 2012 Alexandre Frizac
+## Last update Fri Jun 15 17:04:51 2012 Alexandre Frizac
 ##
 
 NAME		= a.out
@@ -27,28 +27,26 @@ LDFLAGS		+= -l sfml-system -l sfml-graphics -l sfml-window -l sfml-network
 LDFLAGS		+= -l boost_regex
 
 SRC	= $(addprefix src/, \
-                class/sfml/draw.cpp \
-                class/sfml/end.cpp \
-                class/sfml/event.cpp \
-                class/sfml/init.cpp \
-                class/sfml/intro.cpp \
-                class/sfml/Image.cpp \
-                class/sfml/sfml.cpp \
-                class/sfml/wait.cpp \
-		class/sfml/isInWindows.cpp \
-                gui.cpp\
-                main.cpp\
-                network.cpp \
-		parser_cmd.cpp\
-		class/game/data.cpp \
-		class/game/map.cpp \
-		class/game/player.cpp \
-		class/game/tiles.cpp \
-		class/gui/gui.cpp \
-		class/network/network.cpp\
-		class/network/sfml_network.cpp\
-		class/parser.cpp \
-		class/position/position.cpp \
+		exception.cpp \
+		Game/data.cpp \
+		Game/map.cpp \
+		Game/player.cpp \
+		Game/tiles.cpp \
+		gui.cpp \
+		main.cpp \
+		Network/network.cpp \
+		Network/sfml_network.cpp \
+		Parser/cmd.cpp \
+		Parser/parser.cpp \
+		Position/position.cpp \
+		Sfml/draw.cpp \
+		Sfml/end.cpp \
+		Sfml/event.cpp \
+		Sfml/Image.cpp \
+		Sfml/init.cpp \
+		Sfml/intro.cpp \
+		Sfml/sfml.cpp \
+		Sfml/wait.cpp \
 		)
 OBJ	= $(addprefix $(OBJ_DIR)/, $(SRC:$(SRC_DIR)/%.cpp=%.o))
 

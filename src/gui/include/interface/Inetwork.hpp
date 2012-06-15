@@ -7,7 +7,6 @@
 ** Ne devrait pas être chargé dynamiquement (normalement)
 */
 
-#include <SFML/Network.hpp>
 #include <exception>
 #include <string>
 #include <list>
