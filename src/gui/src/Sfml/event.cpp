@@ -16,19 +16,19 @@ inline void	sfml::process_keyboard(sf::Event &event)
       }
 
     case sf::Key::Up:
-      getPos().addY(-0.5);
+      PosAddY(-0.5);
       break;
 
     case sf::Key::Down:
-      getPos().addY(0.5);
+      PosAddY(0.5);
       break;
 
     case sf::Key::Left:
-      getPos().addX(-0.5);
+      PosAddX(-0.5);
       break;
 
     case sf::Key::Right:
-      getPos().addX(0.5);
+      PosAddX(0.5);
       break;
 
     default:
@@ -49,14 +49,18 @@ void    sfml::process_event()
 	  break;
 
 	case sf::Event::Resized:
-	  return;
+          break;
 
 	case sf::Event::Closed:
 	  this->close();
-	  return;
+          break;
 
+        case sf::Event::MouseButtonPressed:
+          std::cout << "KeyPressed : " << event.MouseButton.X << "/" << event.MouseButton.Y << std::endl;
+          break;
+          
 	default:
-	  return;
+	  break;
 	}
     }
 }

@@ -3,7 +3,7 @@
 void	sfml::wait(int tps)
 {
   sf::Clock	clock;
-  double	time = tps / 1000;
+  float	time = tps / 1000;
   
   while ((clock.GetElapsedTime() < time) && this->gameloop())
     {

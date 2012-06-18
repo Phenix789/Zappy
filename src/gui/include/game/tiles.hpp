@@ -15,14 +15,15 @@ namespace game
     };
 
   struct tiles
-  {
-  public:
-    tiles();
-    void        set(ress type, int nb);
-    int         get(ress type) const;
-
-    int ressources[7];
-  };
+    {
+    public:
+      tiles();
+      void        set(ress type, int nb);
+      int         get(ress type) const;
+      void        dump() const;
+      
+      int ressources[7];
+    };
 };
 
 #endif /* __GAME_TILES_HPP_ */

@@ -1,32 +1,40 @@
 #include <iostream>
 #include "position.hpp"
+#include "game.hpp"
+#include <sfml.hpp>
 
 namespace gui
 {
   position::position()
   {
-    this->pos[0] = 0;
-    this->pos[1] = 0;
-    this->limit[0] = 0;
-    this->limit[1] = 0;
+    this->pos[0] = -1;
+    this->pos[1] = -1;
+    this->limit[0] = -1;
+    this->limit[1] = -1;
   }
 
   position::~position()
   { }
 
-  void position::set(double x, double y, double limx, double limy)
+  void position::setLimit(int x, int y)
   {
-    this->pos[0] = x;
-    this->pos[1] = y;
-    this->limit[0] = limx;
-    this->limit[1] = limy;
+    this->pos[0] = -1;
+    this->pos[1] = -1;
+    this->limit[0] = x;
+    this->limit[1] = y;
+
   }
 
-  void position::addX(double value)
+  void  position::setLimit(game::data &data)
   {
-    double res;
+    this->setLimit(data.map.size_x, data.map.size_y);
+  }
+  
+  void position::setX(float value)
+  {
+    float res;
 
-    res = pos[0] + value;
+    res = value;
     if (res < -1)
       pos[0] = -1;
     else if (res > limit[0])
@@ -35,11 +43,11 @@ namespace gui
       pos[0] = res;
   }
 
-  void position::addY(double value)
+  void position::setY(float value)
   {
-    double res;
+    float res;
 
-    res = pos[1] + value;
+    res = value;
     if (res < -1)
       pos[1] = -1;
     else if (res > limit[1])
@@ -48,18 +56,28 @@ namespace gui
       pos[1] = res;
   }
 
-  double position::getX(void) const
+  float position::getX(void) const
   {
     return (this->pos[0]);
   }
 
-  double position::getY(void) const
+  float position::getY(void) const
   {
     return (this->pos[1]);
   }
 
   void	position::dump(void)
   {
-    std::cout << pos[0] << "/" << pos[1] <<std::endl;
+    std::cout << pos[0] << "/" << pos[1] << " | " << limit[0] << "/" << limit[1] << std::endl;
+  }
+
+  float   position::getLimitX(void) const
+  {
+    return (this->limit[0]);
+  }
+
+  float   position::getLimitY(void) const
+  {
+    return (this->limit[1]);
   }
 };

@@ -25,3 +25,9 @@ int	game::tiles::get(ress type) const
   }
   return (this->ressources[type]);
 }
+
+void    game::tiles::dump() const
+{
+  std::cout << "Tiles : " << ressources[0] << "/" << ressources[1] << "/" << ressources[2] << "/" << ressources[3] << "/" << ressources[4] << "/" << ressources[5] << "/";
+  std::cout << ressources[6] << std::endl;
+}

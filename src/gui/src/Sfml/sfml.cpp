@@ -1,11 +1,9 @@
+#include "game/data.hpp"
 #include "sfml.hpp"
 
 sfml::sfml(game::data &edata) : data(edata), run(false)
 {
-    double	maxX = edata.map.size_x - (WIDTH / 64);
-    double	maxY = edata.map.size_y - (HEIGHT / 64);
-  
-    this->pos.set(-1, -1, (maxX < -1 ? -1 : maxX + 1), (maxY < -1 ? -1 : maxY + 1));
+  this->data.pos.setLimit(edata);
 }
 
 sfml::~sfml()
@@ -31,7 +29,18 @@ void	sfml::close()
   throw gui::except("Fermeture par l'utilisateur");
 }
 
-gui::position	&sfml::getPos()
+void    sfml::PosAddX(float value)
 {
-  return (this->pos);
+  float x = data.pos.getX() + value;
+  float lim = data.pos.getLimitX() - (sfml::WIDTH / 64.0) + 1;
+  
+  data.pos.setX(x > lim ? lim : x);
+}
+
+void    sfml::PosAddY(float value)
+{
+  float y = data.pos.getY() + value;
+  float lim = data.pos.getLimitY() - (sfml::HEIGHT / 64.0) + 1;
+
+  data.pos.setY(y > lim ? lim : y);
 }

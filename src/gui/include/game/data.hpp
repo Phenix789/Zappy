@@ -1,7 +1,10 @@
 #ifndef __GAME_DATA_HPP_
 #define __GAME_DATA_HPP_
 
+#include <string>
+#include <list>
 #include "map.hpp"
+#include "position.hpp"
 
 namespace game
 {
@@ -14,6 +17,7 @@ namespace game
   public:
     game::map                   map;
     std::list<std::string>      waitList;
+    gui::position               pos;
 
   private:
     bool                        connection;

@@ -15,8 +15,7 @@ private:
     {
       GUI_WIDTH         = 200,
       WIDTH             = 800,
-      HEIGHT            = 800,
-      TILE_BY_WINDOWS	= 12,
+      HEIGHT            = 800
     };
 
 public:
@@ -57,13 +56,13 @@ public:
 private:
   sf::RenderWindow		App;
   game::data			&data;
-  gui::position			pos;
   std::vector<sf::Image>	image;
   std::vector<sf::Sprite>	sprite;
   bool				run;
 
 private:
-  gui::position		&getPos();
+  void                  PosAddX(float value);
+  void                  PosAddY(float value);
   sf::Sprite		&getSprite(sprtype type);
   const sf::Image 	&getImage(sprtype type) const;
   bool			isInWindows(int x, int y) const;

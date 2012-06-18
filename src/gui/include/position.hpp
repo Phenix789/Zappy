@@ -5,6 +5,11 @@
 ** (pour afficher des maps plus grandes que la fenêtre)
 */
 
+namespace game
+{
+  class data;
+};
+
 namespace gui
 {
   class position
@@ -14,16 +19,19 @@ namespace gui
     ~position();
 
   private:
-    double	pos[2];
-    double	limit[2];
+    float	pos[2];
+    float	limit[2];
 
   public:
-    void	set(double x, double y, double limx, double limy);
-    void	addX(double value);
-    void	addY(double value);
-    double	getX(void) const;
-    double	getY(void) const;
-    void	dump(void);
+    void         setLimit(int x, int y);
+    void         setLimit(game::data &data);
+    void	 setX(float value);
+    void	 setY(float value);
+    float	 getX(void) const;
+    float	 getY(void) const;
+    float        getLimitX(void) const;
+    float        getLimitY(void) const;
+    void	 dump(void);
   };
 };
 

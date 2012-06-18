@@ -87,13 +87,13 @@ void    sfml::drawGui()
 void    sfml::drawTiles()
 {
   sf::Sprite	&grass(getSprite(SP_GRASS));
-  int	posx = (this->pos.getX() > 0 ? this->pos.getX() : 0);
-  int	posy = (this->pos.getY() > 0 ? this->pos.getY() : 0);
+  int	posx = (data.pos.getX() > 0 ? data.pos.getX() : 0);
+  int	posy = (data.pos.getY() > 0 ? data.pos.getY() : 0);
 
   for (int y = posy; y < 1 + posy + (HEIGHT / 64) && y < this->data.map.size_y; y++)
     for (int x = posx; x < 1 + posx + (WIDTH / 64) && x < this->data.map.size_x; x++)
       {
-	grass.SetPosition((x - pos.getX()) * 64 , (y - pos.getY()) * 64);
+	grass.SetPosition((x - data.pos.getX()) * 64 , (y - data.pos.getY()) * 64);
 	App.Draw(grass);
 	drawRessources(x, y);
 	drawPlayer(x, y);
@@ -109,7 +109,7 @@ void	sfml::drawRessources(int x, int y)
     {
       if (tile.get(convertToGame(i)) > 0)
 	{
-	  getSprite(i).SetPosition((x - pos.getX()) * 64 + i * 6, (y - pos.getY()) * 64 + i * 6);
+	  getSprite(i).SetPosition((x - data.pos.getX()) * 64 + i * 6, (y - data.pos.getY()) * 64 + i * 6);
 	  App.Draw(getSprite(i));
 	}
       i = (sprtype)((int)(i) + 1); // On peut faire pire, je suis sur
@@ -127,7 +127,7 @@ void    sfml::drawPlayer(int x, int y)
 	{
 	  sf::Sprite      &chara(getSprite(convertOrientToSpr(it->orient)));
 
-	  chara.SetPosition((x - pos.getX()) * 64 + 16, (y - pos.getY()) * 64 + 8);
+	  chara.SetPosition((x - data.pos.getX()) * 64 + 16, (y - data.pos.getY()) * 64 + 8);
 	  App.Draw(chara);
 	}
       it++;
