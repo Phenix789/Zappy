@@ -51,9 +51,6 @@ void    sfml::process_mouse(sf::Event &event)
     
   gui_focus.first = trunc(xclick);
   gui_focus.second = trunc(yclick);
-  std::cout.precision(3);
-  std::cout << "Coord : " << gui_focus.first << "/" << gui_focus.second << " | ";
-  this->data.map.getTile(gui_focus.first, gui_focus.second).dump();
 }
 
 void    sfml::process_event()

@@ -80,6 +80,7 @@ private:
   void		drawRessources(int x, int y);
   void        	drawPlayer(int x, int y);
   void        	drawGui();
+  void          drawGuiText(int i);
 
 private:
   sfml();

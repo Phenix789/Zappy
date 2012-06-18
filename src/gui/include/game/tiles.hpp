@@ -18,11 +18,11 @@ namespace game
     {
     public:
       tiles();
-      void        set(ress type, int nb);
-      int         get(ress type) const;
-      void        dump() const;
+      void      set(ress type, int nb);
+      int       get(ress type) const;
+      void      dump() const;
       
-      int ressources[7];
+      int       ressources[7];
     };
 };
 
