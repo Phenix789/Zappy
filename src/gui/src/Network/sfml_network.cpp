@@ -2,6 +2,7 @@
 
 sfNetwork::sfNetwork() : addr("localhost"), port(4242)
 {
+  sock.SetBlocking(true);
   selector.Add(this->sock);
 }
 
@@ -32,17 +33,17 @@ void  sfNetwork::send(const std::list<std::string> &list)
 
 void  sfNetwork::receive(std::string &buffer)
 {
-  char          tmp[513];
-  std::size_t   value = 512;
+  char          receive_buffer[513];
+  std::size_t   howmany = 512;
   
   buffer.clear();
-  while (value == 512)
+  while (isReady(0.010))
     {
-      std::memset(tmp, '\0', 513);
-      if (sock.Receive(tmp, 512, value) != sf::Socket::Done)
+      std::memset(receive_buffer, '\0', 512);
+      if (sock.Receive(receive_buffer, 512, howmany) != sf::Socket::Done)
         throw network::except("sfNetwork::receive");
-      buffer += tmp;
-    }  
+      buffer += receive_buffer;
+    }
 }
 
 bool  sfNetwork::connect()
@@ -53,7 +54,7 @@ bool  sfNetwork::connect()
   res = sock.Connect(port, addr);
   if (res == sf::Socket::Done)
     {
-      std::cout << "Réussite!" << std::endl;
+      std::cout << "Réussie" << std::endl;
       return (true);
     }
   else
@@ -82,14 +83,13 @@ void  sfNetwork::setPort(const std::string &_port)
   this->port = static_cast<unsigned short>(atoi(_port.c_str()));
 }
 
-bool  sfNetwork::isReady(type __attribute__((unused))which)
+bool  sfNetwork::isReady(float timeout)
 {
-  return (true);
-}
-bool  sfNetwork::isBlocking(void)
-{
+  if (selector.Wait(timeout) > 0)
+    return (true);
   return (false);
 }
+
 bool  sfNetwork::isValid(void)
 {
   return (sock.IsValid());
@@ -98,9 +98,4 @@ bool  sfNetwork::isValid(void)
 bool  sfNetwork::operator!()
 {
   return (sock.IsValid());
-}
-
-void    sfNetwork::setBlocking(bool value) 
-{
-  sock.SetBlocking(value);
 }

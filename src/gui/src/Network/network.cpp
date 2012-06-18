@@ -12,13 +12,11 @@ void  network::iteration(__attribute__((unused))INetwork &sock,
 
   if (!sock == false)
     throw network::except("Connection lost");
-  if (sock.isReady(INetwork::WRITE))
-    sock.send(data.waitList);
-  if (sock.isReady(INetwork::READ))
+  sock.send(data.waitList);
+  if (sock.isReady())
     sock.receive(buffer);
   pars.parse(buffer);
   pars.interpret(data);
-
   #endif
 }
 
@@ -26,11 +24,11 @@ void  network::init(__attribute__((unused))INetwork &sock,
                     __attribute__((unused))game::data &data,
                     __attribute__((unused))parser &pars)
 {
+#ifndef DEBUG_NETWORK
   std::string buffer;
   int         essay = 1;
   bool        status = false;
   
-  sock.setBlocking(true);
   status = sock.connect();
   while (status != true)
     {
@@ -48,12 +46,13 @@ void  network::init(__attribute__((unused))INetwork &sock,
       sock.send("GRAPHIC\n");
       data.allowConnection();
       pars.delFirstString();
-      sock.receive(buffer);
       iteration(sock, data, pars);
-      sock.setBlocking(false);
     }
   else
     throw network::except("Mauvais server");
+#else
+    data.allowConnection();
+#endif
 }
 
 extern "C" INetwork     *network::create()

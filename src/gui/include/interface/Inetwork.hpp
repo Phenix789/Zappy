@@ -5,6 +5,7 @@
 ** Interface INetwork pour simplifier le bordel
 ** Balance des exceptions quand la connexion est perdue (catchée)
 ** Ne devrait pas être chargé dynamiquement (normalement)
+** est bloquant - utiliser isReady
 */
 
 #include <exception>
@@ -15,13 +16,6 @@
 
 class INetwork
 {
-public:
-  enum	type
-    {
-      READ,
-      WRITE
-    };
-
 public:
   ~INetwork() {};
 
@@ -35,10 +29,8 @@ public:
 
   virtual void	setIp(const std::string&host) = 0;
   virtual void	setPort(const std::string &port) = 0;
-  virtual void  setBlocking(bool value) = 0;
   
-  virtual bool	isReady(type which) = 0;
-  virtual bool	isBlocking(void) = 0;
+  virtual bool	isReady(float timeout = 0.050) = 0;
   virtual bool	isValid(void) = 0;
   virtual bool	operator!() = 0;
 };

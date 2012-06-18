@@ -67,12 +67,15 @@ bool    parser::interpret(game::data &data)
   return (true);
 }
 
-const std::string &parser::getFirstString() const
+const std::string       parser::getFirstString() const
 {
+  if (this->list.size() == 0)
+    return ("");
   return (this->list.front());
 }
 
 void parser::delFirstString()
 {
-  this->list.pop_front();
+  if (this->list.size() > 0)
+    this->list.pop_front();       
 }

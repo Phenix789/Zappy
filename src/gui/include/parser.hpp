@@ -53,7 +53,7 @@ public:
 public:
   void	parse(std::string &buffer);
   bool	interpret(game::data &data);
-  const std::string &getFirstString() const;
+  const std::string     getFirstString() const;
   void  delFirstString();
   
 private:
