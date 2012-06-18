@@ -60,7 +60,6 @@ bool    parser::interpret(game::data &data)
     return (true);
   for (it = list.begin(); it != list.end(); it++)
   {
-    std::cout << "\tparser::interpret : " << this->list.front() << std::endl;
     this->func[it->substr(0, 3)](data, *it);
   }
   list.clear();

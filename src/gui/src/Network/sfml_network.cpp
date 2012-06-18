@@ -33,14 +33,14 @@ void  sfNetwork::send(const std::list<std::string> &list)
 
 void  sfNetwork::receive(std::string &buffer)
 {
-  char          receive_buffer[513];
+  char          receive_buffer[512];
   std::size_t   howmany = 512;
   
   buffer.clear();
   while (isReady(0.010))
     {
       std::memset(receive_buffer, '\0', 512);
-      if (sock.Receive(receive_buffer, 512, howmany) != sf::Socket::Done)
+      if (sock.Receive(receive_buffer, 256, howmany) != sf::Socket::Done)
         throw network::except("sfNetwork::receive");
       buffer += receive_buffer;
     }
