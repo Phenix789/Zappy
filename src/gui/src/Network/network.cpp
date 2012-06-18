@@ -27,16 +27,19 @@ void  network::init(__attribute__((unused))INetwork &sock,
                     __attribute__((unused))parser &pars)
 {
   std::string buffer;
-  int         essay = 0;
-
+  int         essay = 1;
+  bool        status = false;
+  
   sock.setBlocking(true);
-  while (sock.connect() != sf::Socket::Done)
+  status = sock.connect();
+  while (status != true)
     {
-    if (essay > 0)
-      throw network::except("Impossible de se connecter au server distant");
-    essay++;
-    sf::Sleep(4);
-    std::cout << "Tentative de connection numéro " << essay << " ..." << std::endl;
+      essay++;
+      if (essay > 5)
+        throw network::except("Impossible de se connecter au server distant");
+      sf::Sleep(2);
+      std::cout << essay << " essai - ";
+      status = sock.connect();
     }
   sock.receive(buffer);
   pars.parse(buffer);

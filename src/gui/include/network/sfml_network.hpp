@@ -22,16 +22,17 @@ public:
   void  setIp(const std::string&host);
   void  setPort(const std::string &port);
   void  setBlocking(bool value);
-  
+
   bool	isReady(type which);
   bool  isBlocking(void);
   bool  isValid(void);
   bool  operator!();
 
 private:
-  sf::IPAddress		addr;
-  unsigned short 	port;
-  sf::SocketTCP		sock;
+  sf::IPAddress		        addr;
+  unsigned short 	        port;
+  sf::SocketTCP		        sock;
+  sf::Selector< sf::SocketTCP > selector;
 
 private:
   sfNetwork(const sfNetwork &other);

@@ -2,6 +2,7 @@
 
 sfNetwork::sfNetwork() : addr("localhost"), port(4242)
 {
+  selector.Add(this->sock);
 }
 
 sfNetwork::~sfNetwork()
@@ -46,9 +47,20 @@ void  sfNetwork::receive(std::string &buffer)
 
 bool  sfNetwork::connect()
 {
-  if (sock.Connect(port, addr) == sf::Socket::Done)
-    return (true);
-  return (false);  
+  sf::Socket::Status  res;
+  
+  std::cout << "Tentative de connection ... " << std::flush;
+  res = sock.Connect(port, addr);
+  if (res == sf::Socket::Done)
+    {
+      std::cout << "Réussite!" << std::endl;
+      return (true);
+    }
+  else
+    {
+      std::cout << "Echec." << std::endl;
+      return (false);
+    }
 }
 
 bool  sfNetwork::disconnect()

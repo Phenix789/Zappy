@@ -5,7 +5,7 @@
 ## Login   <frizac_b@epitech.net>
 ##
 ## Started on  Mon Feb  6 14:18:30 2012 Alexandre Frizac
-## Last update Fri Jun 15 17:04:51 2012 Alexandre Frizac
+## Last update Sun Jun 17 01:23:38 2012 Alexandre Frizac
 ##
 
 NAME		= a.out
@@ -54,7 +54,7 @@ all: $(NAME)
 
 m:
 	make fclean
-	make all -j 5
+	make all -j 4
 
 $(NAME): $(OBJ)
 	$(CC) -o $(NAME) $(OBJ) $(LDFLAGS) $(DEBUG_FLAGS)
