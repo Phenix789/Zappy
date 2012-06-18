@@ -10,7 +10,7 @@ bool	sfml::init()
     }
   this->LoadImage();
   this->LoadSprite();
-  this->App.Create(sf::VideoMode(WIDTH + GUI_WIDTH, HEIGHT, 32), "Zappy - GUI");
+  this->App.Create(sf::VideoMode(WIDTH + GUI_WIDTH, HEIGHT, 32), "Zappy - GUI", sf::Style::Close);
   this->App.SetFramerateLimit(60);
   this->run = true;
   return (true);

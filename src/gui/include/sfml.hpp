@@ -59,7 +59,8 @@ private:
   std::vector<sf::Image>	image;
   std::vector<sf::Sprite>	sprite;
   bool				run;
-
+  std::pair<int, int>           gui_focus;
+  
 private:
   void                  PosAddX(float value);
   void                  PosAddY(float value);
@@ -72,7 +73,8 @@ private:
   void			close();
 
 private:
-  inline void	process_keyboard(sf::Event &event);
+  void	        process_keyboard(sf::Event &event);
+  void          process_mouse(sf::Event &event);
   void        	drawBackground();
   void        	drawTiles();
   void		drawRessources(int x, int y);
