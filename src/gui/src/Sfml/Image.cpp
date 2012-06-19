@@ -9,6 +9,7 @@ static const char	*img_name[] =
     "ressources/egg.bmp",
     "ressources/tiles.png",
     "ressources/gui.png",
+    "ressources/White_square.png",
     NULL
   };
 
@@ -17,7 +18,7 @@ void	sfml::LoadImage(void)
   int	i = 0;
   bool	error = false;
 
-  this->image.resize(7);
+  this->image.resize(8);
   while (img_name[i] != NULL)
     {      
       if (this->image[i].LoadFromFile(img_name[i]) == false)
@@ -55,6 +56,8 @@ void	sfml::LoadSprite(void)
   Load_ASprite(SP_CHAR_LEFT, 	93, 49 * 1, 31 * 4, 49 * 2);
   Load_ASprite(SP_CHAR_RIGHT, 	93 + 1, 49 * 2, 31 * 4, 49 * 3);
   Load_ASprite(SP_CHAR_UP, 	93, 49 * 3, 31 * 4, 49 * 4 - 3);
+  sprite[SP_WHITE_SQUARE].SetImage(getImage(SP_WHITE_SQUARE));
+  sprite[SP_WHITE_SQUARE].SetCenter(2, 2);
   sprite[SP_GUI].SetImage(getImage(SP_GUI));
   sprite[SP_GUI].SetPosition(WIDTH, 0);
   sprite[SP_INTRO].SetImage(getImage(SP_INTRO));
@@ -65,6 +68,9 @@ const sf::Image	&sfml::getImage(sprtype type) const
 {
   switch (type)
   {
+    case SP_WHITE_SQUARE:
+      return (image[7]);
+    
     case SP_INTRO:
       return (image[0]);
     
