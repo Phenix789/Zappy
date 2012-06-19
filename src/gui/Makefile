@@ -5,7 +5,7 @@
 ## Login   <frizac_b@epitech.net>
 ##
 ## Started on  Mon Feb  6 14:18:30 2012 Alexandre Frizac
-## Last update Sun Jun 17 01:23:38 2012 Alexandre Frizac
+## Last update Tue Jun 19 02:12:24 2012 Alexandre Frizac
 ##
 
 NAME		= a.out
@@ -36,15 +36,19 @@ SRC	= $(addprefix src/, \
 		main.cpp \
 		Network/network.cpp \
 		Network/sfml_network.cpp \
-		Parser/cmd.cpp \
+		Parser/command.cpp \
 		Parser/parser.cpp \
 		Position/position.cpp \
+		Sfml/close.cpp \
 		Sfml/draw.cpp \
 		Sfml/end.cpp \
 		Sfml/event.cpp \
+		Sfml/exit.cpp \
+		Sfml/gameloop.cpp \
 		Sfml/Image.cpp \
 		Sfml/init.cpp \
 		Sfml/intro.cpp \
+		Sfml/PosAdd.cpp \
 		Sfml/sfml.cpp \
 		Sfml/wait.cpp \
 		)
