@@ -42,15 +42,17 @@ void    sfml::process_mouse(sf::Event &event)
   float   xclick = event.MouseButton.X / 64.0 + this->data.pos.getX();
   float   yclick = event.MouseButton.Y / 64.0 + this->data.pos.getY();
 
-  if (xclick < 0 || yclick < 0)
-    return;
-  if (xclick >= this->data.map.size_x || yclick >= this->data.map.size_y)
-    return;
-  if (event.MouseButton.X >= sfml::WIDTH)
-    return;
-    
-  gui_focus.first = trunc(xclick);
-  gui_focus.second = trunc(yclick);
+  if (xclick < 0 || yclick < 0);
+  else if (xclick >= this->data.map.size_x || yclick >= this->data.map.size_y);
+  else if (event.MouseButton.X >= sfml::WIDTH);
+  else
+    {
+      gui_focus.first = trunc(xclick);
+      gui_focus.second = trunc(yclick);
+      return;
+    }
+  gui_focus.first = -1;
+  gui_focus.second = -1;
 }
 
 void    sfml::process_event()

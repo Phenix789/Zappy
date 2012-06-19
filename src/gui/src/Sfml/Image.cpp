@@ -15,6 +15,45 @@ static const char	*filename[] =
     NULL
   };
 
+const sf::Image          &sfml::getImage(sprtype type) const
+{
+  switch (type)
+  {
+    case SP_WHITE_SQUARE:
+      return (image[7]);
+
+    case SP_INTRO:
+      return (image[0]);
+
+    case SP_GRASS:
+      return (image[5]);
+
+    case SP_FOOD:
+    case SP_LINEMATE:
+    case SP_DERAUMATRE:
+    case SP_SIBUR:
+    case SP_MENDIANE:
+    case SP_PHIRAS:
+    case SP_THYSTAME:
+      return (image[3]);
+
+    case SP_CHAR_UP:
+    case SP_CHAR_LEFT:
+    case SP_CHAR_DOWN:
+    case SP_CHAR_RIGHT:
+      return (image[2]);
+
+    case SP_EGG:
+      return (image[4]);
+
+    case SP_GUI:
+      return (image[6]);
+
+    default:
+      throw gui::except("sfml::getImage - Bad number");
+  }
+}
+  
 void	sfml::LoadImage(void)
 {
   int	i = 0;
@@ -62,43 +101,4 @@ void	sfml::LoadAllSprite(void)
   SpriteLoad(SP_CHAR_RIGHT,     93 + 1, 49 * 2, 31 * 4, 49 * 3);
   SpriteLoad(SP_CHAR_UP,        93, 49 * 3, 31 * 4, 49 * 4 - 3);
   
-}
-
-const sf::Image	        &sfml::getImage(sprtype type) const
-{
-  switch (type)
-  {
-    case SP_WHITE_SQUARE:
-      return (image[7]);
-    
-    case SP_INTRO:
-      return (image[0]);
-    
-    case SP_GRASS:
-      return (image[5]);
-      
-    case SP_FOOD:
-    case SP_LINEMATE:
-    case SP_DERAUMATRE:
-    case SP_SIBUR:
-    case SP_MENDIANE:
-    case SP_PHIRAS:
-    case SP_THYSTAME:
-      return (image[3]);
-      
-    case SP_CHAR_UP:
-    case SP_CHAR_LEFT:
-    case SP_CHAR_DOWN:
-    case SP_CHAR_RIGHT:
-      return (image[2]);
-      
-    case SP_EGG:
-      return (image[4]);
-
-    case SP_GUI:
-      return (image[6]);
-      
-    default:
-      throw gui::except("sfml::getImage - Bad number");
-  } 
 }

@@ -39,14 +39,19 @@ void  network::init(__attribute__((unused))INetwork &sock,
       std::cout << essay << " essai - ";
       status = sock.connect();
     }
-  sock.receive(buffer);
+  if (sock.isReady(10))
+    sock.receive(buffer);
   pars.parse(buffer);
   if (pars.getFirstString().compare("BIENVENUE") == 0)
     {
       sock.send("GRAPHIC\n");
       data.allowConnection();
       pars.delFirstString();
-      iteration(sock, data, pars);
+      sock.send(data.waitList);
+      if (sock.isReady(10))
+        sock.receive(buffer);
+      pars.parse(buffer);
+      pars.interpret(data);
     }
   else
     throw network::except("Mauvais server");
