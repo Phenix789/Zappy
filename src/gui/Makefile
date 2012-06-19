@@ -5,7 +5,7 @@
 ## Login   <frizac_b@epitech.net>
 ##
 ## Started on  Mon Feb  6 14:18:30 2012 Alexandre Frizac
-## Last update Tue Jun 19 02:12:24 2012 Alexandre Frizac
+## Last update Tue Jun 19 02:46:38 2012 Alexandre Frizac
 ##
 
 NAME		= a.out
@@ -40,6 +40,7 @@ SRC	= $(addprefix src/, \
 		Parser/parser.cpp \
 		Position/position.cpp \
 		Sfml/close.cpp \
+		Sfml/convert.cpp \
 		Sfml/draw.cpp \
 		Sfml/end.cpp \
 		Sfml/event.cpp \

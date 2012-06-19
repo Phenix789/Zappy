@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 #include <vector>
+#include <map>
 #include "game.hpp"
 #include "position.hpp"
 #include "gui.hpp"
@@ -36,6 +37,7 @@ public:
       SP_EGG,
       SP_GUI,
       SP_INTRO,
+      SP_SCORE,
       SP_WHITE_SQUARE,
       SP_LAST
     };
@@ -57,23 +59,26 @@ public:
 private:
   sf::RenderWindow		App;
   game::data			&data;
-  std::vector<sf::Image>	image;
-  std::vector<sf::Sprite>	sprite;
-  bool				run;
+  std::vector<sf::Image>        image;
+  std::map<sprtype, sf::Sprite> sprite;
   std::pair<int, int>           gui_focus;
+  bool                          run;
   
 private:
-  void                  PosAddX(float value);
-  void                  PosAddY(float value);
-  sf::Sprite		&getSprite(sprtype type);
-  const sf::Image 	&getImage(sprtype type) const;
-  bool			isInWindows(int x, int y) const;
-  void	      		LoadImage();
-  void			LoadSprite();
-  void			Load_ASprite(sprtype type, int left, int up, int right, int down);
-  void			close();
-
+  void          PosAddX(float value);
+  void          PosAddY(float value);
+  bool		isInWindows(int x, int y) const;
+  void          LoadImage(void);
+  void          LoadAllSprite(void);
+  
+  void		close();
+  game::ress    SprtypeToRess(sfml::sprtype type);
+  sfml::sprtype OrientationToSprite(game::orientation type);
+  
+  
 private:
+  const sf::Image     &getImage(sprtype type) const;
+  void          SpriteLoad(sprtype type, int left, int up, int right, int down);
   void	        process_keyboard(sf::Event &event);
   void          process_mouse(sf::Event &event);
   void        	drawBackground();

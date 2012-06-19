@@ -1,6 +1,8 @@
+#include <vector>
+#include <map>
 #include "sfml.hpp"
 
-static const char	*img_name[] =
+static const char	*filename[] =
   {
     "ressources/intro.jpg",
     "ressources/score.jpg",
@@ -18,53 +20,51 @@ void	sfml::LoadImage(void)
   int	i = 0;
   bool	error = false;
 
-  this->image.resize(8);
-  while (img_name[i] != NULL)
+  while (filename[i++] != NULL);
+  this->image.resize(i);
+  i = 0;
+  while (filename[i] != NULL)
     {      
-      if (this->image[i].LoadFromFile(img_name[i]) == false)
+      if (this->image[i].LoadFromFile(filename[i]) == false)
 	error = true;
       i++;
     }
   if (error)
-    {
-#ifndef DEBUG
-      throw gui::except("Phase de chargement des images");
-#endif
-    }
+    throw gui::except("Phase de chargement des images");
 }
 
-void	sfml::Load_ASprite(sprtype type, int left, int up, int right, int down)
+void	sfml::SpriteLoad(sprtype type, int left, int up, int right, int down)
  {
-   this->sprite[type].SetImage(getImage(type));
-   this->sprite[type].SetSubRect(sf::Rect<int>(left, up, right, down));
+   sprite[type].SetImage(getImage(type));
+   sprite[type].SetSubRect(sf::Rect<int>(left, up, right, down));
  }
 
-// Sprite Character : 31 pixels de large && 49 de haut
-// En fait non, pas trop. Ou alors la source est daubée
-void	sfml::LoadSprite(void)
+void	sfml::LoadAllSprite(void)
 {
-  this->sprite.resize(SP_LAST);
-  this->sprite[SP_GRASS].SetImage(getImage(SP_GRASS));
-  Load_ASprite(SP_FOOD, 0, 0, 16, 16);
-  Load_ASprite(SP_LINEMATE, 16, 0, 32, 16);
-  Load_ASprite(SP_DERAUMATRE, 32, 0, 48, 16);
-  Load_ASprite(SP_SIBUR, 48, 0, 64, 16);
-  Load_ASprite(SP_MENDIANE, 64, 0, 80, 16);
-  Load_ASprite(SP_PHIRAS, 80, 0, 96, 16);
-  Load_ASprite(SP_THYSTAME, 96, 0, 112, 16);
-  Load_ASprite(SP_CHAR_DOWN, 	93, 0, 	    31 * 4, 49 * 1);
-  Load_ASprite(SP_CHAR_LEFT, 	93, 49 * 1, 31 * 4, 49 * 2);
-  Load_ASprite(SP_CHAR_RIGHT, 	93 + 1, 49 * 2, 31 * 4, 49 * 3);
-  Load_ASprite(SP_CHAR_UP, 	93, 49 * 3, 31 * 4, 49 * 4 - 3);
+  sprite[SP_GRASS].SetImage(getImage(SP_GRASS));
+  SpriteLoad(SP_FOOD,           0, 0, 16, 16);
+  SpriteLoad(SP_LINEMATE,       16, 0, 32, 16);
+  SpriteLoad(SP_DERAUMATRE,     32, 0, 48, 16);
+  SpriteLoad(SP_SIBUR,          48, 0, 64, 16);
+  SpriteLoad(SP_MENDIANE,       64, 0, 80, 16);
+  SpriteLoad(SP_PHIRAS,         80, 0, 96, 16);
+  SpriteLoad(SP_THYSTAME,       96, 0, 112, 16);
   sprite[SP_WHITE_SQUARE].SetImage(getImage(SP_WHITE_SQUARE));
   sprite[SP_WHITE_SQUARE].SetCenter(2, 2);
+  SpriteLoad(SP_GUI,            0, 0, 200, 800);
   sprite[SP_GUI].SetImage(getImage(SP_GUI));
   sprite[SP_GUI].SetPosition(WIDTH, 0);
   sprite[SP_INTRO].SetImage(getImage(SP_INTRO));
   sprite[SP_INTRO].Resize(WIDTH + GUI_WIDTH, HEIGHT);
+
+  SpriteLoad(SP_CHAR_DOWN,      93, 0, 31 * 4, 49 * 1);
+  SpriteLoad(SP_CHAR_LEFT,      93, 49 * 1, 31 * 4, 49 * 2);
+  SpriteLoad(SP_CHAR_RIGHT,     93 + 1, 49 * 2, 31 * 4, 49 * 3);
+  SpriteLoad(SP_CHAR_UP,        93, 49 * 3, 31 * 4, 49 * 4 - 3);
+  
 }
 
-const sf::Image	&sfml::getImage(sprtype type) const
+const sf::Image	        &sfml::getImage(sprtype type) const
 {
   switch (type)
   {
@@ -101,9 +101,4 @@ const sf::Image	&sfml::getImage(sprtype type) const
     default:
       throw gui::except("sfml::getImage - Bad number");
   } 
-}
-
-sf::Sprite	&sfml::getSprite(sprtype type)
-{
-  return (sprite[type]);
 }

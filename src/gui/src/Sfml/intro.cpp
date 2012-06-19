@@ -5,7 +5,7 @@
 void	sfml::intro()
 {
 #ifndef DEBUG_GRAPH
-  sf::Sprite		&var(getSprite(SP_INTRO));
+  sf::Sprite		&var(Sprite[SP_INTRO));
 
    this->App.Draw(var);
   this->App.Display();

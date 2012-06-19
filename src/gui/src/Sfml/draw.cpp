@@ -3,57 +3,6 @@
 #include <list>
 #include "sfml.hpp"
 
-static  game::ress	convertToGame(sfml::sprtype type)
-{
-  switch (type)
-    {
-    case sfml::SP_FOOD:
-      return (game::FOOD);
-
-    case sfml::SP_LINEMATE:
-      return (game::LINEMATE);
-
-    case sfml::SP_DERAUMATRE:
-      return (game::DERAUMATRE);
-
-    case sfml::SP_SIBUR:
-      return (game::SIBUR);
-
-    case sfml::SP_MENDIANE:
-      return (game::MENDIANE);
-
-    case sfml::SP_PHIRAS:
-      return (game::PHIRAS);
-
-    case sfml::SP_THYSTAME:
-      return (game::THYSTAME);
-
-    default:
-      throw gui::except("convertToGame - Bad type");
-    }
-}
-
-static  sfml::sprtype     convertOrientToSpr(game::orientation type)
-{
-  switch (type)
-  {
-    case game::NORD:
-      return (sfml::SP_CHAR_UP);
-
-    case game::SUD:
-      return (sfml::SP_CHAR_DOWN);
-
-    case game::EST:
-      return (sfml::SP_CHAR_LEFT);
-
-    case game::OUEST:
-      return (sfml::SP_CHAR_RIGHT);
-
-    default:
-      throw gui::except("convertOrientToSpr");
-  }
-}
-
 void    sfml::draw_map()
 {
   this->drawBackground();
@@ -75,12 +24,12 @@ void    sfml::drawGui()
 
   int     i = 0;
   
-  App.Draw(getSprite(SP_GUI));
+  App.Draw(sprite[SP_GUI]);
 
   while (i < 7)
     {
-      getSprite(static_cast<sprtype>(i + SP_FOOD)).SetPosition(WIDTH + 16, 377 + i * 41);
-      App.Draw(getSprite(static_cast<sprtype>(i + SP_FOOD)));
+      sprite[static_cast<sprtype>(i + SP_FOOD)].SetPosition(WIDTH + 16, 377 + i * 41);
+      App.Draw(sprite[static_cast<sprtype>(i + SP_FOOD)]);
       drawGuiText(i);
       i++;
     }
@@ -104,7 +53,6 @@ void    sfml::drawGuiText(int i)
 
 void    sfml::drawTiles()
 {
-  sf::Sprite	&grass(getSprite(SP_GRASS));
   int	posx = (data.pos.getX() > 0 ? data.pos.getX() : 0);
   int	posy = (data.pos.getY() > 0 ? data.pos.getY() : 0);
   bool  print_border = false;
@@ -112,18 +60,18 @@ void    sfml::drawTiles()
   for (int y = posy; y < 1 + posy + (HEIGHT / 64) && y < this->data.map.size_y; y++)
     for (int x = posx; x < 1 + posx + (WIDTH / 64) && x < this->data.map.size_x; x++)
       {
-	grass.SetPosition((x - data.pos.getX()) * 64 , (y - data.pos.getY()) * 64);
-	App.Draw(grass);
+	sprite[SP_GRASS].SetPosition((x - data.pos.getX()) * 64 , (y - data.pos.getY()) * 64);
+	App.Draw(sprite[SP_GRASS]);
 	drawRessources(x, y);
 	drawPlayer(x, y);
         if (x == gui_focus.first && y == gui_focus.second)
           {
             print_border = true;
-            getSprite(SP_WHITE_SQUARE).SetPosition((x - data.pos.getX()) * 64 , (y - data.pos.getY()) * 64);
+            sprite[SP_WHITE_SQUARE].SetPosition((x - data.pos.getX()) * 64 , (y - data.pos.getY()) * 64);
           }
       }
   if (print_border)
-    App.Draw(getSprite(SP_WHITE_SQUARE));
+    App.Draw(sprite[SP_WHITE_SQUARE]);
 }
 
 void	sfml::drawRessources(int x, int y)
@@ -133,10 +81,10 @@ void	sfml::drawRessources(int x, int y)
 
   while (i <= SP_THYSTAME)
     {
-      if (tile.get(convertToGame(i)) > 0)
+      if (tile.get(SprtypeToRess(i)) > 0)
 	{
-	  getSprite(i).SetPosition((x - data.pos.getX()) * 64 + i * 6, (y - data.pos.getY()) * 64 + i * 6);
-	  App.Draw(getSprite(i));
+	  sprite[i].SetPosition((x - data.pos.getX()) * 64 + i * 6, (y - data.pos.getY()) * 64 + i * 6);
+	  App.Draw(sprite[i]);
 	}
       i = (sprtype)((int)(i) + 1); // On peut faire pire, je suis sur
     }
@@ -151,10 +99,8 @@ void    sfml::drawPlayer(int x, int y)
     {
       if (it->isHere(x, y))
 	{
-	  sf::Sprite      &chara(getSprite(convertOrientToSpr(it->orient)));
-
-	  chara.SetPosition((x - data.pos.getX()) * 64 + 16, (y - data.pos.getY()) * 64 + 8);
-	  App.Draw(chara);
+	  sprite[OrientationToSprite(it->orient)].SetPosition((x - data.pos.getX()) * 64 + 16, (y - data.pos.getY()) * 64 + 8);
+	  App.Draw(sprite[OrientationToSprite(it->orient)]);
 	}
       it++;
     }
