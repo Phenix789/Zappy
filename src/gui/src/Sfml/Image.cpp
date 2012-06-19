@@ -8,7 +8,7 @@ static const char	*filename[] =
     "ressources/score.jpg",
     "ressources/Characters.png",
     "ressources/stones.png",
-    "ressources/egg.bmp",
+    "ressources/egg.png",
     "ressources/tiles.png",
     "ressources/gui.png",
     "ressources/White_square.png",
@@ -18,7 +18,7 @@ static const char	*filename[] =
 const sf::Image          &sfml::getImage(sprtype type) const
 {
   switch (type)
-  {
+    {
     case SP_WHITE_SQUARE:
       return (image[7]);
 
@@ -51,9 +51,9 @@ const sf::Image          &sfml::getImage(sprtype type) const
 
     default:
       throw gui::except("sfml::getImage - Bad number");
-  }
+    }
 }
-  
+
 void	sfml::LoadImage(void)
 {
   int	i = 0;
@@ -63,7 +63,7 @@ void	sfml::LoadImage(void)
   this->image.resize(i);
   i = 0;
   while (filename[i] != NULL)
-    {      
+    {
       if (this->image[i].LoadFromFile(filename[i]) == false)
 	error = true;
       i++;
@@ -96,9 +96,10 @@ void	sfml::LoadAllSprite(void)
   sprite[SP_INTRO].SetImage(getImage(SP_INTRO));
   sprite[SP_INTRO].Resize(WIDTH + GUI_WIDTH, HEIGHT);
   sprite[SP_EGG].SetImage(getImage(SP_EGG));
+  sprite[SP_EGG].Resize(35, 35);
   SpriteLoad(SP_CHAR_DOWN,      93, 0, 31 * 4, 49 * 1);
   SpriteLoad(SP_CHAR_LEFT,      93, 49 * 1, 31 * 4, 49 * 2);
   SpriteLoad(SP_CHAR_RIGHT,     93 + 1, 49 * 2, 31 * 4, 49 * 3);
   SpriteLoad(SP_CHAR_UP,        93, 49 * 3, 31 * 4, 49 * 4 - 3);
-  
+
 }

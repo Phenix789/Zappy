@@ -5,6 +5,7 @@
 #include <list>
 #include "player.hpp"
 #include "tiles.hpp"
+#include "egg.hpp"
 
 namespace game
 {
@@ -20,6 +21,7 @@ namespace game
     int                         size_y;
     std::vector<tiles>          _tiles;
     std::list<game::player>     _players;
+    std::list<game::egg>        _egg;
 
   public:
     void                                setRess(int x, int y, ress type, int nb);
@@ -28,6 +30,7 @@ namespace game
     void                                setDim(int x, int y);
     const tiles                         &getTile(int x, int y) const;
     const std::list<game::player>       getPlayer() const;
+    void                                addEgg();
 
   private:
     void                                set_tile(tiles _tile, ress type, unsigned int nb);

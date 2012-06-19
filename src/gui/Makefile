@@ -32,6 +32,7 @@ SRC	= $(addprefix src/, \
 		Game/map.cpp \
 		Game/player.cpp \
 		Game/tiles.cpp \
+		Game/egg.cpp \
 		gui.cpp \
 		main.cpp \
 		Network/network.cpp \
