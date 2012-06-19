@@ -95,7 +95,7 @@ void	sfml::LoadAllSprite(void)
   sprite[SP_GUI].SetPosition(WIDTH, 0);
   sprite[SP_INTRO].SetImage(getImage(SP_INTRO));
   sprite[SP_INTRO].Resize(WIDTH + GUI_WIDTH, HEIGHT);
-
+  sprite[SP_EGG].SetImage(getImage(SP_EGG));
   SpriteLoad(SP_CHAR_DOWN,      93, 0, 31 * 4, 49 * 1);
   SpriteLoad(SP_CHAR_LEFT,      93, 49 * 1, 31 * 4, 49 * 2);
   SpriteLoad(SP_CHAR_RIGHT,     93 + 1, 49 * 2, 31 * 4, 49 * 3);

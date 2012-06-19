@@ -10,6 +10,7 @@
 namespace color
 {
   extern const char *red;
+  extern const char *green;
   extern const char *orange;
   extern const char *white;
 };

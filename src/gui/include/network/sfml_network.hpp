@@ -14,7 +14,7 @@ public:
 public:
   void  send(const std::string &msg);
   void	send(const std::list<std::string> &list);
-  void  receive(std::string &buffer);
+  void  receive(std::string &buffer, float timeout);
 
   bool	connect();
   bool  disconnect();
@@ -22,7 +22,6 @@ public:
   void  setIp(const std::string&host);
   void  setPort(const std::string &port);
 
-  bool	isReady(float timeout = 0.050);
   bool  isValid(void);
   bool  operator!();
   
@@ -31,6 +30,9 @@ private:
   unsigned short 	        port;
   sf::SocketTCP		        sock;
   sf::Selector< sf::SocketTCP > selector;
+
+  void receive(std::string &buffer);
+  bool isReady(float timeout);
   
 private:
   sfNetwork(const sfNetwork &other);

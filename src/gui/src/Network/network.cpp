@@ -13,8 +13,7 @@ void  network::iteration(__attribute__((unused))INetwork &sock,
   if (!sock == false)
     throw network::except("Connection lost");
   sock.send(data.waitList);
-  if (sock.isReady())
-    sock.receive(buffer);
+  sock.receive(buffer, 0.030);
   pars.parse(buffer);
   pars.interpret(data);
   #endif
@@ -39,8 +38,7 @@ void  network::init(__attribute__((unused))INetwork &sock,
       std::cout << essay << " essai - ";
       status = sock.connect();
     }
-  if (sock.isReady(10))
-    sock.receive(buffer);
+  sock.receive(buffer, 10);
   pars.parse(buffer);
   if (pars.getFirstString().compare("BIENVENUE") == 0)
     {
@@ -48,8 +46,7 @@ void  network::init(__attribute__((unused))INetwork &sock,
       data.allowConnection();
       pars.delFirstString();
       sock.send(data.waitList);
-      if (sock.isReady(10))
-        sock.receive(buffer);
+      sock.receive(buffer, 10);
       pars.parse(buffer);
       pars.interpret(data);
     }

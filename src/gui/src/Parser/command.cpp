@@ -367,9 +367,4 @@ namespace pfunc
   }
 };
 
-namespace color
-{
-  const char *red =      "\033[00;31m";
-  const char *orange =   "\033[00;33m";
-  const char *white =    "\033[00m";
-}
+

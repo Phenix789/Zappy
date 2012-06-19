@@ -22,17 +22,20 @@ public:
 public:
   virtual void	send(const std::string &msg) = 0;
   virtual void	send(const std::list<std::string> &list) = 0;
-  virtual void	receive(std::string &buffer) = 0;
-
+  virtual void  receive(std::string &buffer, float timeout) = 0;
+  
   virtual bool	connect() = 0;
   virtual bool	disconnect() = 0;
 
   virtual void	setIp(const std::string&host) = 0;
   virtual void	setPort(const std::string &port) = 0;
   
-  virtual bool	isReady(float timeout = 0.050) = 0;
   virtual bool	isValid(void) = 0;
   virtual bool	operator!() = 0;
+
+private:
+  virtual void receive(std::string &buffer) = 0;
+  virtual bool isReady(float timeout) = 0;
 };
 
 namespace network

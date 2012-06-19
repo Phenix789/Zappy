@@ -1,4 +1,5 @@
 #include "network/sfml_network.hpp"
+#include "parser.hpp"
 
 sfNetwork::sfNetwork() : addr("localhost"), port(4242)
 {
@@ -31,21 +32,6 @@ void  sfNetwork::send(const std::list<std::string> &list)
     }
 }
 
-void  sfNetwork::receive(std::string &buffer)
-{
-  char          receive_buffer[512];
-  std::size_t   howmany = 512;
-  
-  buffer.clear();
-  while (isReady(0.010))
-    {
-      std::memset(receive_buffer, '\0', 512);
-      if (sock.Receive(receive_buffer, 256, howmany) != sf::Socket::Done)
-        throw network::except("sfNetwork::receive");
-      buffer += receive_buffer;
-    }
-}
-
 bool  sfNetwork::connect()
 {
   sf::Socket::Status  res;
@@ -54,12 +40,12 @@ bool  sfNetwork::connect()
   res = sock.Connect(port, addr);
   if (res == sf::Socket::Done)
     {
-      std::cout << "Réussie" << std::endl;
+      std::cout << color::green << "Réussie!" << color::white << std::endl;
       return (true);
     }
   else
     {
-      std::cout << "Echec." << std::endl;
+      std::cout << color::red << "Echec." << color::white << std::endl;
       return (false);
     }
 }
@@ -83,13 +69,6 @@ void  sfNetwork::setPort(const std::string &_port)
   this->port = static_cast<unsigned short>(atoi(_port.c_str()));
 }
 
-bool  sfNetwork::isReady(float timeout)
-{
-  if (selector.Wait(timeout) > 0)
-    return (true);
-  return (false);
-}
-
 bool  sfNetwork::isValid(void)
 {
   return (sock.IsValid());
@@ -98,4 +77,32 @@ bool  sfNetwork::isValid(void)
 bool  sfNetwork::operator!()
 {
   return (sock.IsValid());
+}
+
+void    sfNetwork::receive(std::string &buffer, float timeout)
+{
+  if (isReady(timeout))
+    receive(buffer);
+}
+
+void  sfNetwork::receive(std::string &buffer)
+{
+  char          receive_buffer[512];
+  std::size_t   howmany = 512;
+
+  buffer.clear();
+  while (isReady(0.010))
+    {
+      std::memset(receive_buffer, '\0', 512);
+      if (sock.Receive(receive_buffer, 256, howmany) != sf::Socket::Done)
+        throw network::except("sfNetwork::receive");
+      buffer += receive_buffer;
+    }
+}
+
+bool  sfNetwork::isReady(float timeout)
+{
+  if (selector.Wait(timeout) > 0)
+    return (true);
+  return (false);
 }

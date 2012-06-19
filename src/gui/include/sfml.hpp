@@ -85,6 +85,7 @@ private:
   void        	drawTiles();
   void		drawRessources(int x, int y);
   void        	drawPlayer(int x, int y);
+  void          drawEgg(int x, int y);
   void        	drawGui();
   void          drawGuiText(int i);
 
