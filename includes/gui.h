@@ -21,13 +21,14 @@ void gui_destroy();
 
 void gui_connect(t_gui *gui);
 void gui_execute(t_gui *gui, char *command);
-void gui_send(t_gui *gui, char *msg);
+int gui_send(t_gui *gui, char *msg);
+void gui_send_all(char *msg);
 
 void gui_action_forward(t_player *player);
 void gui_action_left(t_player *player);
 void gui_action_right(t_player *player);
-void gui_action_take(t_player *player);
-void gui_action_drop(t_player *player);
+void gui_action_take(t_player *player, t_item item);
+void gui_action_drop(t_player *player, t_item item);
 
 void gui_command_msz(t_gui *gui, char *command);
 void gui_command_mct(t_gui *gui, char *command);

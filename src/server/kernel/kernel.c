@@ -10,6 +10,7 @@
 
 #include "kernel.h"
 #include "logger.h"
+#include "gui.h"
 
 t_kernel *g_kernel = NULL;
 
@@ -38,6 +39,7 @@ bool kernel_init_with_argv(int argc, char **argv)
       kernel_game_init(kopti(argc, argv, "-x", 10),
 		       kopti(argc, argv, "-y", 10),
 		       kopti(argc, argv, "-c", 10)) &&
+      kernel_gui_init() &&
       kernel_clock_init(kopti(argc, argv, "-t", 100)))
     {
       logger_verbose("[KERNEL] Search team definition");
@@ -64,6 +66,7 @@ void kernel_destroy()
   if (!g_kernel)
     return;
   list_free(&g_kernel->callbacks);
+  gui_destroy();
   client_manager_destroy();
   game_destroy();
   clock_destroy();

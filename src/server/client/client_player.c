@@ -1,6 +1,8 @@
 
+#include <string.h>
 #include "client.h"
 #include "network.h"
+#include "gui.h"
 
 bool client_player_search(t_client *client, char *team)
 {
