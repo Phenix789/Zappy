@@ -1,3 +1,4 @@
+#include <iostream>
 #include "network/sfml_network.hpp"
 #include "parser.hpp"
 

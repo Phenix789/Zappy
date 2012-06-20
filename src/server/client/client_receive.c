@@ -48,7 +48,7 @@ void client_receive(t_socket *socket, t_client *client)
 	  if (bf.index == 0)
 	    return;
 	  bf.command[bf.index] = '\0';
-	  client_action_save(client, bf.command);
+	  (*client->exec)(client, bf.command);
 	  bf.index = 0;
 	}
       else

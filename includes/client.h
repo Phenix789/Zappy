@@ -48,6 +48,7 @@ struct s_client
 	t_player *player;
 	t_list actions;
 	bool busy;
+	t_execute_cb exec;
 };
 #define CLP_ID(client) ((client)->player ? (client)->player->id : -1)
 

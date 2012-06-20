@@ -8,8 +8,10 @@
 ** Last update Thu May 31 18:39:10 2012 quentin duval
 */
 
+#include <string.h>
 #include "client.h"
 #include "kernel.h"
+#include "gui.h"
 
 void		client_connect(t_socket *new_sock)
 {

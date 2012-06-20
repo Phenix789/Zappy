@@ -10,11 +10,6 @@ int client_action_count(t_client *client)
 
 bool client_action_save(t_client *client, char *action)
 {
-  if (!client->player)
-    {
-      logger_verbose("[CLIENT] Client search player");
-      return client_player_search(client, action);
-    }
   if (clm_command_retrieve(action))
     {
       if (client->busy == false)
