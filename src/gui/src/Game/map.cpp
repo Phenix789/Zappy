@@ -52,8 +52,9 @@ namespace game
 	    this->_players.erase(it);
 	    return ;
 	  }
+	it++;
       }
-    std::cerr << "game::map::rmPlayer : Player " << num_pl << " existe déja" << std::endl;
+    std::cerr << "game::map::rmPlayer : Player " << num_pl << " n'existe pas" << std::endl;
   }
 
   void  map::setDim(int x, int y)
@@ -62,9 +63,9 @@ namespace game
     this->size_y = y;
     this->_tiles.resize(x * y);
   }
-  
+
   const tiles       &map::getTile(int x, int y) const
-  {    
+  {
     return (this->_tiles.at(x + y * size_x));
   }
 
