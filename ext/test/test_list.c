@@ -41,7 +41,7 @@ void test_list_add_begin(int count)
       count--;
     }
   logger_verbose("Dump list %i :", list_size(list));
-  list_foreach(list, (feach) &test_list_dump);
+  list_foreach(list, (feach) & test_list_dump);
   list_free(list);
   free(list);
 }
@@ -61,7 +61,7 @@ void test_list_add_end(int count)
       count--;
     }
   logger_verbose("Dump list %i :", list_size(list));
-  list_foreach(list, (feach) &test_list_dump);
+  list_foreach(list, (feach) & test_list_dump);
   list_free(list);
   free(list);
 }
@@ -78,11 +78,11 @@ void test_list_add_to(int count)
     {
       value = malloc(sizeof(int));
       *value = rand();
-      list_add_to(list, (fcmp) &test_list_add_to_fcmp, value);
+      list_add_to(list, (fcmp) & test_list_add_to_fcmp, value);
       count--;
     }
   logger_verbose("Dump list %i :", list_size(list));
-  list_foreach(list, (feach) &test_list_dump);
+  list_foreach(list, (feach) & test_list_dump);
   list_free(list);
   free(list);
 }
@@ -103,7 +103,7 @@ void test_list_random_add_pop(int count)
 	  value = malloc(sizeof(int));
 	  *value = rand();
 	  logger_verbose("Add sorted element %i", *value);
-	  list_add_to(list, (fcmp) &test_list_add_to_fcmp, value);
+	  list_add_to(list, (fcmp) & test_list_add_to_fcmp, value);
 	}
       else
 	{
@@ -112,12 +112,12 @@ void test_list_random_add_pop(int count)
 	    logger_verbose("Remove first element %i", *value);
 	  else
 	    logger_verbose("Any element to remove");
-	  list_pop_begin(list);
-	  free(value);
+	  list_pop_end(list);
+	  //free(value);
 	}
       count--;
       logger_verbose("Dump list %i (%p:%p):", list_size(list), list->head, list->tail);
-      list_foreach(list, (feach) &test_list_dump);
+      //list_foreach(list, (feach) &test_list_dump);
       logger_verbose("Check size");
       if (list_size(list) != test_list_size(list))
 	{
@@ -126,7 +126,29 @@ void test_list_random_add_pop(int count)
 	}
     }
   logger_verbose("Dump list %i (%p:%p):", list_size(list), list->head, list->tail);
-  list_foreach(list, (feach) &test_list_dump);
+  //list_foreach(list, (feach) &test_list_dump);
   list_free(list);
   free(list);
+}
+
+void test_list_foreach_define()
+{
+  t_list *list;
+  int i;
+  int *value;
+
+  list = list_create();
+  i = 0;
+  while (i < 10)
+    {
+      value = malloc(sizeof(int));
+      *value = rand();
+      list_add_end(list, value);
+      i++;
+
+    }
+  lforeach(list, value)
+  {
+    printf("Value : %i\n", *value);
+  }
 }

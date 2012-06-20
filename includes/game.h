@@ -41,6 +41,7 @@ void game_play_free_player();
 void game_create_team(char *team);
 void game_add_team(t_team *team);
 t_team *game_get_team(char *name);
+t_list *game_get_teams();
 
 void game_add_free_player(t_player *player);
 void game_remove_free_player(t_player *player);

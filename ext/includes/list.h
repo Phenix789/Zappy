@@ -96,4 +96,18 @@ void *list_iterator_get(t_list_iterator *iter);
 void list_iterator_pop(t_list_iterator *iter);
 void list_iterator_destroy(t_list_iterator *iter);
 
+#define lforeach(list, item)					\
+  t_list *__list = (list);					\
+  t_list_node *__current;					\
+  t_list_node *__next = __list->head;				\
+  while ((__current = __next) &&				\
+	 (((__next && (__next = __next->next))) || 1) &&	\
+	 (((item) = __current->data) || 1))
+
+#define lforeach_break (__next = NULL)
+
+#define list_insert_before(item) (_list_add_node(__list, __current->prev, item))
+#define list_insert_after(item) (_list_add_node(__list, __current, item))
+#define list_insert(item) (list_insert_after(item))
+
 #endif

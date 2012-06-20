@@ -81,6 +81,27 @@ zappy_server_OBJ=	server/main.o \
 			server/client/client_receive.o \
 			server/client/client_send.o \
 			server/client/client_food.o \
+			server/gui/gui.o \
+			server/gui/gui_action1.o \
+			server/gui/gui_action2.o \
+			server/gui/gui_action3.o \
+			server/gui/gui_command1.o \
+			server/gui/gui_command2.o \
+			server/gui/gui_send.o \
+			server/parser/parser.o \
+			server/parser/parser_argument_setter.o \
+			server/parser/parser_command_create.o \
+			server/parser/parser_command_destroy.o \
+			server/parser/parser_count_arguments.o \
+			server/parser/parser_extract_elem.o \
+			server/parser/parser_find_key.o \
+			server/parser/parser_get_from_map.o \
+			server/parser/parser_get_int.o \
+			server/parser/parser_get_string.o \
+			server/parser/parser_is_match.o \
+			server/parser/parser_save_data.o \
+			server/parser/parser_str_check_contain.o \
+			server/parser/parser_type_map.o \
 			server/debug/debug.o
 
 zappy_gui_OBJ=		gui/main.o

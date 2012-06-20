@@ -32,3 +32,8 @@ t_team *game_get_team(char *name)
 {
   return list_get_to_param(&g_game->teams, (fpredp) &_game_team_name_cmp, name);
 }
+
+t_list *game_get_teams()
+{
+  return &g_game->teams;
+}

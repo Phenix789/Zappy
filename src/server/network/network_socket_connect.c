@@ -1,9 +1,9 @@
 /*
 ** network_socket_connect.c for zappy in /home/duval_q//Documents/projects/zappy/src/server/net
-** 
+**
 ** Made by quentin duval
 ** Login   <duval_q@epitech.net>
-** 
+**
 ** Started on  Tue May 29 07:28:04 2012 quentin duval
 ** Last update Sat Jun  2 10:56:24 2012 quentin duval
 */
@@ -23,4 +23,9 @@ bool    socket_connect(t_socket *socket, char *ip, int port)
               socket->length) == SOCKET_ERROR)
     return (false);
   return (true);
+}
+
+void socket_set_reader(t_socket *socket, t_nt_read_cb read)
+{
+  socket->read = read;
 }

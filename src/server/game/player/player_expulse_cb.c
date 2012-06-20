@@ -17,9 +17,7 @@ void		player_expulse_end_cb(t_client *client, int error)
   t_tile	*tile;
   t_list_node *node;
   t_list_node *next;
-  unsigned int	i;
 
-  i = 0;
   if (!error)
     {
       tile = client->player->tile;

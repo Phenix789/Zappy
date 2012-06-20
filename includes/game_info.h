@@ -38,10 +38,10 @@ typedef enum {
 } t_item;
 
 typedef enum {
-	OR_NORTH,
-	OR_EAST,
-	OR_SOUTH,
-	OR_WEST
+	OR_NORTH = 0,
+	OR_EAST = 1,
+	OR_SOUTH = 2,
+	OR_WEST = 3
 } t_orientation;
 
 typedef struct s_leveler {
@@ -114,6 +114,8 @@ struct s_team {
 struct s_tile {
 	t_list players;
 	t_pos coord;
+#define pos_x coord.x
+#define pos_y coord.y
 	t_inventory ressources;
 #define rc_food ressources.food
 #define rc_linemate ressources.linemate

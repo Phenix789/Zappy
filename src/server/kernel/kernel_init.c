@@ -12,6 +12,7 @@
 #include "kernel.h"
 #include "clock.h"
 #include "logger.h"
+#include "gui.h"
 
 extern t_kernel *g_kernel;
 
@@ -45,6 +46,17 @@ bool kernel_game_init(int x, int y, int nb_per_team)
     }
   logger_error("[KERNEL] Kernel game error!!");
   return(false);
+}
+
+bool kernel_gui_init()
+{
+  logger_message("[KERNEL] Kernel start gui");
+  if (gui_init())
+    {
+      g_kernel->init = g_kernel->init | KN_SV_GUI;
+      return true;
+    }
+  return false;
 }
 
 #define KN_CLOCK_MSG "[KERNEL] Kernel clock init with frequency at %i"

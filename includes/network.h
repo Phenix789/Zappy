@@ -84,6 +84,7 @@ void		socket_close(t_socket *socket);
 void            listener_close(t_listener *listener);
 
 bool		socket_connect(t_socket *socket, char *ip, int port);
+void		socket_set_reader(t_socket *socket, t_nt_read_cb read);
 
 int		socket_read(t_socket *soket, void *buffer, int size);
 int		socket_write(t_socket *socket, void *buffer, int size);

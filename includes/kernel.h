@@ -21,8 +21,9 @@
 
 #define KN_SV_CLIENT 0x1
 #define KN_SV_GAME 0x2
-#define KN_SV_CLOCK 0x4
-#define KN_SV_INIT (KN_SV_CLIENT | KN_SV_GAME | KN_SV_CLOCK)
+#define KN_SV_GUI 0x4
+#define KN_SV_CLOCK 0x8
+#define KN_SV_INIT (KN_SV_CLIENT | KN_SV_GAME | KN_SV_GUI | KN_SV_CLOCK)
 
 #define KN_ERROR_OK 0
 
@@ -57,6 +58,7 @@ bool kernel_session_init(t_socket *listener, int port);
 bool kernel_client_init(int port);
 bool kernel_game_init(int x, int y, int nb_per_team);
 bool kernel_clock_init(int frequence);
+bool kernel_gui_init();
 bool kernel_is_init(int service);
 
 bool kernel_add_team(char *team);

@@ -33,12 +33,14 @@ void list_pop_begin(t_list *list)
 {
   t_list_node *node;
 
-  if (list->size)
+  if (list->head)
     {
       node = list->head;
       list->head = node->next;
       list->size--;
-      if (list->size == 0)
+      if (list->head)
+	list->head->prev = NULL;
+      else
         list->tail = NULL;
       list_pool_node(node);
     }
@@ -48,15 +50,15 @@ void list_pop_end(t_list *list)
 {
   t_list_node *node;
 
-  if (list->size)
+  if (list->tail)
     {
       node = list->tail;
       list->tail = node->prev;
       list->size--;
-      if (list->size == 0)
-        list->head = NULL;
-      else
+      if (list->tail)
         list->tail->next = NULL;
+      else
+        list->head = NULL;
       list_pool_node(node);
     }
 }
